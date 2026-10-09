@@ -2,6 +2,8 @@
 **Obra:** Pavilhão gimnodesportivo escolar (novo edifício com ginásio e sala de ginástica, demolição do pavilhão existente, arranjos exteriores)
 **Documento analisado:** `MQT_CUSTO-VENDA.XLS` (1 folha, 833 artigos com quantidade, 14 capítulos; último registo de gravação: 28-09-2026)
 **Data da análise:** 09-10-2026
+> **Revisão de 09-10-2026:** os achados foram depois revistos por grupo de capítulos e verificados por um segundo analista independente. O resultado está no **`MAPA_COMPARATIVO_FALHAS_ERROS.xlsx`** (202 achados confirmados e 9 rejeitados), que **substitui as estimativas da secção 9**: impacto líquido entre **+116 k€ e +400 k€**. Três pontos deste relatório foram retirados nessa verificação: a designação "Dinf" (é válida na NP EN 206), a medição de cabo de iluminação (o rácio é normal) e a duplicação 4.4.1 ↔ 11.4.2 (são circuitos diferentes).
+
 **Ficheiros que acompanham este relatório:** `MQT_CUSTO-VENDA_ANOTADO.xlsx` (o MQT original com 3 colunas novas em cada artigo: classificação, gravidade e observação/ação; inclui também as folhas RESUMO, IMPACTO ESTIMADO e VERIF. ARITMÉTICA)
 
 ---
@@ -96,7 +98,6 @@
 | **3.16.1.3/3.16.1.4 ↔ 5.3.1/5.3.2** | Sifões incluídos nos lavatórios e urinóis e medidos outra vez (e 7 sifões para 6 urinóis) | ~910 | Alta |
 | **3.11.2.19 ↔ 10.1.9** | Retentores eletromagnéticos GEZE incluídos nas portas CF (3) e medidos na SADI (2) | 155 | Alta |
 | **10.5.1 ↔ 7.10** | O texto de 10.5.1 diz que tubagens e caixas de segurança são "executadas pela empreitada de instalações elétricas", mas são valorizadas nos dois capítulos | 514–1 632 | Média |
-| **4.4.1 ↔ 11.4.2** | Bomba de recirculação de AQS (Efaflu) e bomba secundária de AQS (Wilo MAXO-D) | 0–1 410 | Média |
 | **4.3.6/4.3.8 ↔ 11.2.1/11.3.3** | Válvula antipoluição e grupos de segurança de AQS nas duas especialidades | 0–678 | Média |
 | **1.1 ↔ 1.2** | "Plano de Qualidade, Planeamento e Gestão de Obra" incluído no estaleiro e de novo em 1.2 | — | Média |
 | **2.1.1 ↔ 2.1.5** | A escavação inclui "carga e transporte" e o transporte a vazadouro volta a pagar "carga, transporte" | — | Média (clarificar) |
@@ -206,7 +207,6 @@
   - 2.3.11 VIGAS: **sem especificação do betão**.
   - 2.3.12/2.3.13: escoramento só "até 4,0 m".
   - 2.3.14: título "15 cm" contraditório com as caixas de brita de 0,22/0,15/0,17 m.
-  - "Dinf 2 mm" não é designação da NP EN 206.
   - Não há ensaios de carga das microestacas (1 680 ml no total).
 - **Estrutura metálica:**
   - 2.4.2 inclui **intumescente R60** a preços de aço simples.
@@ -260,7 +260,6 @@
 - **7.1.1**: confirmar a potência disponível no QG existente e a necessidade de **aumento de potência**.
 - **Fotovoltaico (7.5)**: 192 painéis (~85–105 kWp se forem de 450–550 Wp) e 3 inversores a 1 699,55 € (preço típico de ~10–15 kW cada) dão um **rácio DC/AC incoerente**. Faltam potências, proteções DC/AC, descarregadores, registo da UPAC e verificação estrutural da cobertura (sandwich sobre madres e asnas de madeira).
 - **Iluminação:**
-  - 1 900 m de U3G1,5 para 224 luminárias (~8,5 m por ponto) parece curto.
   - As luminárias do pavilhão não têm requisito de **resistência ao impacto de bola** nem classe EN 12193.
   - Os postes de 12 m não têm maciço.
 - 7.2.8.3: tampa de 400×400 para caixa de 600×600.
@@ -300,7 +299,7 @@
 
 | Ref. no MQT | Situação |
 |---|---|
-| "NP EN 206-1" (6.2.14), "Dinf" | Referir a **NP EN 206:2013+A2** e a designação correta Dupper/Dmax |
+| "NP EN 206-1" (6.2.14) | Referir a **NP EN 206:2013+A2** |
 | "NP EN 124/1995" | Atualizar para **EN 124-1/-2:2015** |
 | "ST 37.2" | Usar **S235JR (EN 10025-2)** |
 | "ME-1 + GL24h" | Separar: NP 4305 (madeira maciça) e **EN 14080** (lamelado colado) |
@@ -317,19 +316,19 @@
 | Bloco | Mínimo (€) | Máximo (€) |
 |---|---:|---:|
 | A. Erro de preço certo (14.4.4) | −12 954 | −12 954 |
-| B. Duplicações prováveis | −35 770 | −38 977 |
+| B. Duplicações prováveis | −35 770 | −37 567 |
 | C. Preços/quantidades subavaliados | +96 524 | +226 037 |
 | D. Omissões | +114 000 | +274 500 |
-| **Variação líquida do custo** | **+161 800 (+3,6 %)** | **+448 606 (+10,0 %)** |
-| **Custo corrigido estimado** | **≈ 4 661 000** | **≈ 4 948 000** |
+| **Variação líquida do custo** | **+161 800 (+3,6 %)** | **+450 016 (+10,0 %)** |
+| **Custo corrigido estimado** | **≈ 4 661 000** | **≈ 4 950 000** |
 
 **Preço de venda (sem IVA) = custo corrigido × K**
 
 | K | Sobre o MQT atual | Custo corrigido (mín.) | Custo corrigido (máx.) |
 |---|---:|---:|---:|
-| 1,15 | 5 174 588 | 5 360 658 | 5 690 486 |
-| 1,20 | 5 399 570 | 5 593 731 | 5 937 898 |
-| 1,25 | 5 624 553 | 5 826 803 | 6 185 310 |
+| 1,15 | 5 174 588 | 5 360 658 | 5 692 107 |
+| 1,20 | 5 399 570 | 5 593 731 | 5 939 590 |
+| 1,25 | 5 624 553 | 5 826 803 | 6 187 073 |
 
 > Valores de ordem de grandeza. O detalhe linha a linha está na folha **IMPACTO ESTIMADO** do Excel anotado, com fórmulas editáveis.
 > **Não incluídos:** escavação em rocha, rebaixamento freático e IVA.
