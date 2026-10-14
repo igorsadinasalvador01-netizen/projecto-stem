@@ -55,6 +55,7 @@ export const theme = {
     body: "Inter",
     serif: "Instrument Serif",
     mono: "JetBrains Mono",
+    hand: "Caveat",
   },
   ease: {
     out: Easing.bezier(0.16, 1, 0.3, 1), // easeOutExpo — entradas

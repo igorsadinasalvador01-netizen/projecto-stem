@@ -126,3 +126,31 @@ isso os efeitos de brilho/ding entram depois do corpo do boom (≈ +0,7 s) para 
 saturar. Para refazer só o áudio sem renderizar a imagem: renderizar com
 `--codec=wav` e juntar com `ffmpeg -c:v copy -c:a aac` (o `.aac` solto perde a
 sincronização por causa do atraso do codificador).
+
+---
+
+# Vídeo 5 — "A experiência vem depois da ação" (composição `Explicativo5`)
+
+Mesma referência de edição, com **expressão nostálgica**: papel envelhecido em vez
+de branco, turquesa desbotado, grade sépia, grão forte, pó e riscos, fugas de luz,
+cintilação e trepidação de projetor; serifa Instrument Serif + manuscrito (Caveat)
++ máquina de escrever. Cenas em `src/v5/`; áudio `public/narracao5.m4a`
+(24,06 s; voz, música e "boom" dos 20,04 s intactos).
+
+| # | Tempo | Narração | Ideia · transição |
+|---|---|---|---|
+| 1 | 0–3,3 s | quer saber um segredo sobre começar no digital? | envelope com lacre, carta datilografada · cintilação de projetor |
+| 2 | 3,3–6,6 s | você **nunca** vai se sentir ~~100%~~ pronto | mostrador analógico preso nos 99% · tira de película |
+| 3 | 6,6–9,2 s | sempre vai existir algo novo para aprender | fichas de arquivo com carimbo "novo" · virar de página |
+| 4 | 9,2–13,1 s | quem faz a **primeira venda** não sabe ~~tudo~~ | polaroide a revelar-se + enciclopédia com carimbo "não" · projetor de diapositivos |
+| 5 | 13,1–17,8 s | começam, corrigem os erros, continuam melhorando | tira de película na câmara escura · queima |
+| 6 | 17,8–20,4 s | a experiência vem depois da ação + boom | carimbos 1 · ação → 2 · experiência, queima de película no boom |
+| 7 | 20,4–24,1 s | fecho | "Comece." + polaroide "dia 1" a revelar-se, fim de bobine |
+
+**Mistura:** este original já vem limitado (~0 dBFS em muitas sílabas). Os efeitos
+usam *ducking* automático: `src/v5/mix5.json` guarda a margem livre do original
+por fotograma e cada efeito só ocupa essa margem — a voz nunca é alterada.
+
+```bash
+npx remotion render src/index.ts Explicativo5 out/video-explicativo-5.mp4 --codec h264 --crf 16
+```

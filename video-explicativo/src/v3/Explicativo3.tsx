@@ -52,9 +52,12 @@ const SFX: Sfx[] = [
   ...[0, 1, 2].map((i): Sfx => ({ file: "pop.wav", at: SCENES3.outro.from + 0.62 + i * 0.17, kind: "entrada" })),
 ];
 
+// Cada cena fica mais 0,6 s por baixo da seguinte, até a transição de entrada
+// desta (0,5–0,55 s) a cobrir por completo — nunca há fundo vazio a meio.
+const TRANSITION_HOLD = 0.6;
 const span = (from: number, to: number, fps: number) => ({
   from: Math.round(from * fps),
-  durationInFrames: Math.round(to * fps) - Math.round(from * fps),
+  durationInFrames: Math.round((to + TRANSITION_HOLD) * fps) - Math.round(from * fps),
 });
 
 export const Explicativo3: React.FC<Explicativo3Props> = ({ sfx, sfxGain }) => {

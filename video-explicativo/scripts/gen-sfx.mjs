@@ -252,6 +252,82 @@ const notes = (seq, dur) => {
 const yes = () => notes([{ f: 659.3, at: 0, decay: 7, h: 0.15 }, { f: 987.8, at: 0.09, decay: 5, h: 0.12 }], 0.7);
 const no = () => notes([{ f: 440, at: 0, decay: 9, h: 0.35 }, { f: 349.2, at: 0.11, decay: 7, h: 0.35 }], 0.6);
 
+// ——— Kit nostálgico (vídeo 5) ———
+// Tecla de máquina de escrever: clique metálico + pancada do tipo.
+const typekey = () => {
+  const n = len(0.09);
+  const o = new Float32Array(n);
+  let lp = 0;
+  for (let i = 0; i < n; i++) {
+    const t = i / SR;
+    const nz = rnd() * 2 - 1;
+    lp += 0.4 * (nz - lp);
+    const click = (nz - lp) * Math.exp(-t * 160);
+    const thunk = Math.sin(2 * Math.PI * 180 * t) * Math.exp(-t * 60) * 0.5;
+    const ring = Math.sin(2 * Math.PI * 2900 * t) * Math.exp(-t * 90) * 0.25;
+    o[i] = click + thunk + ring;
+  }
+  return o;
+};
+// Papel a deslizar (envelope, cartas, páginas).
+const paper = () => {
+  const n = len(0.45);
+  const o = new Float32Array(n);
+  let lp = 0;
+  let hp = 0;
+  for (let i = 0; i < n; i++) {
+    const t = i / n;
+    const nz = rnd() * 2 - 1;
+    lp += 0.5 * (nz - lp);
+    hp = lp - hp * 0.6;
+    const crackle = rnd() > 0.985 ? (rnd() - 0.5) * 2 : 0;
+    o[i] = (hp * 0.6 + crackle) * Math.sin(Math.PI * Math.pow(t, 0.6)) ** 1.5;
+  }
+  return o;
+};
+// Obturador de câmara instantânea: dois cliques + mola.
+const shutter = () => {
+  const n = len(0.35);
+  const o = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    const t = i / SR;
+    let s = 0;
+    for (const c of [0, 0.07]) {
+      const tc = t - c;
+      if (tc >= 0) s += ((rnd() * 2 - 1) * 0.7 + Math.sin(2 * Math.PI * 1800 * tc) * 0.4) * Math.exp(-tc * 120);
+    }
+    const spring_ = t > 0.09 ? Math.sin(2 * Math.PI * 620 * t) * Math.exp(-(t - 0.09) * 25) * 0.12 : 0;
+    o[i] = s + spring_;
+  }
+  return o;
+};
+// Projetor: zumbido de motor + cliques a 24 fps.
+const projector = () => {
+  const n = len(1.6);
+  const o = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    const t = i / SR;
+    const env = Math.min(1, t / 0.15) * Math.min(1, (1.6 - t) / 0.3);
+    const hum = Math.sin(2 * Math.PI * 98 * t) * 0.35 + Math.sin(2 * Math.PI * 196 * t) * 0.12;
+    const ph = (t * 24) % 1;
+    const clk = ph < 0.04 ? (rnd() * 2 - 1) * (1 - ph / 0.04) * 0.6 : 0;
+    o[i] = (hum + clk) * env;
+  }
+  return o;
+};
+// Carimbo: pancada abafada + estalo de papel.
+const stamp = () => {
+  const n = len(0.3);
+  const o = new Float32Array(n);
+  let ph = 0;
+  for (let i = 0; i < n; i++) {
+    const t = i / SR;
+    ph += (2 * Math.PI * (90 + 60 * Math.exp(-t * 30))) / SR;
+    o[i] = Math.sin(ph) * Math.exp(-t * 18) + (rnd() * 2 - 1) * Math.exp(-t * 70) * 0.5;
+  }
+  return o;
+};
+
 // Entradas
 writeWav("whoosh.wav", whoosh(0.55, 300, 3200), -37);
 writeWav("swish.wav", whoosh(0.28, 900, 5200), -38);
@@ -269,4 +345,10 @@ writeWav("ding.wav", ding(), -21);
 writeWav("door.wav", door(), -30);
 writeWav("yes.wav", yes(), -32);
 writeWav("no.wav", no(), -32);
+// Nostálgico (vídeo 5)
+writeWav("typekey.wav", typekey(), -36);
+writeWav("paper.wav", paper(), -37);
+writeWav("shutter.wav", shutter(), -32);
+writeWav("projector.wav", projector(), -40);
+writeWav("stamp.wav", stamp(), -32);
 console.log("SFX gerados em", out);

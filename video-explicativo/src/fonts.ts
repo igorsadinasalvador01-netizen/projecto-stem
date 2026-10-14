@@ -6,6 +6,7 @@ const faces: { family: string; file: string; weight: string; style?: string }[] 
   { family: theme.fonts.serif, file: "instrument-serif-latin-400-italic.woff2", weight: "400", style: "italic" },
   { family: theme.fonts.serif, file: "instrument-serif-latin-400-normal.woff2", weight: "400" },
   { family: theme.fonts.mono, file: "jetbrains-mono-latin-500-normal.woff2", weight: "500" },
+  { family: theme.fonts.hand, file: "caveat-latin-600-normal.woff2", weight: "600" },
   { family: theme.fonts.display, file: "inter-tight-latin-300-normal.woff2", weight: "300" },
   { family: theme.fonts.display, file: "inter-tight-latin-400-normal.woff2", weight: "400" },
   { family: theme.fonts.display, file: "inter-tight-latin-500-normal.woff2", weight: "500" },
