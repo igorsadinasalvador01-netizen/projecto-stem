@@ -2,3 +2,4 @@ node_modules/
 out/check/
 out/*.log
 .remotion/
+out/*-envio.mp4
