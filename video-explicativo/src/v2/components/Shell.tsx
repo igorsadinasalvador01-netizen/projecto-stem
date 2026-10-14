@@ -8,9 +8,12 @@ const surfaceBg: Record<Surface, string> = {
   mist: `linear-gradient(180deg, ${c2.paper} 0%, ${c2.mist} 100%)`,
   turq: `linear-gradient(160deg, ${c2.turqLight} -25%, ${c2.turq} 38%, ${c2.turqDeep} 100%)`,
   deep: `linear-gradient(170deg, ${c2.turqDeep} 0%, ${c2.turqDark} 100%)`,
+  // versões escuras (vídeo 4)
+  night: `radial-gradient(90% 55% at 50% 38%, ${c2.glowNight} 0%, ${c2.turqClear} 70%), linear-gradient(180deg, ${c2.nightTop} 0%, ${c2.nightBottom} 100%)`,
+  abyss: `radial-gradient(80% 50% at 50% 100%, ${c2.glowAbyss} 0%, ${c2.turqClear} 70%), linear-gradient(170deg, ${c2.abyssTop} 0%, ${c2.abyssBottom} 100%)`,
 };
 
-const onDark = (s: Surface) => s === "turq" || s === "deep";
+const onDark = (s: Surface) => s === "turq" || s === "deep" || s === "night" || s === "abyss";
 
 // Padrões de fundo — um por cena, a derivar devagar.
 const PatternLayer: React.FC<{ pattern: Pattern; surface: Surface }> = ({ pattern, surface }) => {
@@ -72,7 +75,7 @@ const PatternLayer: React.FC<{ pattern: Pattern; surface: Surface }> = ({ patter
               backgroundPosition: `0px ${drift}px`,
             }}
           />
-          <div style={{ position: "absolute", top: 0, bottom: 0, left: 120, width: 2, background: c2.turqMist }} />
+          <div style={{ position: "absolute", top: 0, bottom: 0, left: 120, width: 2, background: onDark(surface) ? ln : c2.turqMist }} />
         </AbsoluteFill>
       );
     case "floor":

@@ -96,3 +96,33 @@ Resultado em `out/video-explicativo-3.mp4`.
 ```bash
 npx remotion render src/index.ts Explicativo3 out/video-explicativo-3.mp4 --codec h264 --crf 16
 ```
+
+---
+
+# Vídeo 4 — "A primeira venda prova que é possível" (composição `Explicativo4`)
+
+Mesmo padrão dos vídeos 2 e 3, numa versão **um pouco dark**: superfícies "noite"
+(carvão com brilho turquesa) e "abismo" (turquesa quase preto), peças em vidro
+fumado, branco + turquesa, verde/vermelho só para sinais. Cenas em `src/v4/`;
+áudio `public/narracao4.m4a` (31,46 s; voz e "boom" dos 27,46 s intactos).
+A voz deste vídeo está ~8 dB acima das outras, por isso `sfxGain` = 2,2.
+
+| # | Tempo | Narração | Tema · padrão · transição |
+|---|---|---|---|
+| 1 | 0–3,9 s | porque a primeira venda é tão importante? | noite · pontos · "1ª" a encher-se |
+| 2 | 3,9–7,0 s | ela prova que é possível | abismo · anéis · íris · ~~im~~possível |
+| 3 | 7,0–12,8 s | ninguém começa sabendo (perfeito ✕, tudo ✕) | noite · grelha · painel |
+| 4 | 12,8–17,4 s | errando (vermelho), testando, melhorando (verde) | abismo · diagonais · íris · gráfico |
+| 5 | 17,4–22,4 s | não muda só a conta bancária — muda a mentalidade | noite · pautas · cortina · cartão + esfera |
+| 6 | 22,4–28,2 s | o esforço valeu a pena — continuar crescendo + boom | abismo · chão · zoom · barras |
+| 7 | 28,2–31,5 s | fecho "é possível." | turquesa profundo · íris |
+
+```bash
+npx remotion render src/index.ts Explicativo4 out/video-explicativo-4.mp4 --codec h264 --crf 16
+```
+
+**Nota de mistura (todos os vídeos):** o "boom" original já chega a ~0 dBFS, por
+isso os efeitos de brilho/ding entram depois do corpo do boom (≈ +0,7 s) para não
+saturar. Para refazer só o áudio sem renderizar a imagem: renderizar com
+`--codec=wav` e juntar com `ffmpeg -c:v copy -c:a aac` (o `.aac` solto perde a
+sincronização por causa do atraso do codificador).

@@ -78,8 +78,9 @@ const SFX: Sfx[] = [
   { file: "no.wav", at: W2.custando - 0.04, kind: "negativo" },
   // 10
   { file: "riser.wav", at: HITS2.boom - 1.02, kind: "destaque" },
-  { file: "shimmer.wav", at: HITS2.boom + 0.08, kind: "destaque" },
-  { file: "ding.wav", at: HITS2.boom + 0.3, kind: "positivo" },
+  // o boom original já chega a ~0 dBFS: o brilho e o ding entram depois do corpo do boom
+  { file: "shimmer.wav", at: HITS2.boom + 0.7, kind: "destaque" },
+  { file: "ding.wav", at: HITS2.boom + 0.85, kind: "positivo" },
   ...[0, 1, 2].map((i): Sfx => ({ file: "pop.wav", at: HITS2.silenceFrom + 0.4 + i * 0.17, kind: "entrada" })),
 ];
 

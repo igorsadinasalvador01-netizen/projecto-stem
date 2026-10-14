@@ -28,6 +28,15 @@ export const c2 = {
   redLight: "#F17A7E",
   redFade: "rgba(241,122,126,0)",
 
+  // superfícies escuras (vídeo 4)
+  nightTop: "#0C1113",
+  nightBottom: "#06090A",
+  abyssTop: "#06343A",
+  abyssBottom: "#031417",
+  glowNight: "rgba(18,181,186,0.20)",
+  glowAbyss: "rgba(18,181,186,0.28)",
+  turqClear: "rgba(18,181,186,0)",
+
   glassOnWhite: "rgba(255,255,255,0.78)",
   glassOnTurq: "rgba(255,255,255,0.16)",
   glassOnTurqStrong: "rgba(255,255,255,0.26)",
@@ -43,7 +52,7 @@ export const c2 = {
   glowRed: "rgba(229,72,77,0.28)",
 } as const;
 
-export type Surface = "white" | "mist" | "turq" | "deep";
+export type Surface = "white" | "mist" | "turq" | "deep" | "night" | "abyss";
 export type Pattern = "none" | "dots" | "grid" | "diagonal" | "rings" | "ledger" | "floor";
 
 // Tema por cena: fundo, padrão, cor de destaque e tinta.
