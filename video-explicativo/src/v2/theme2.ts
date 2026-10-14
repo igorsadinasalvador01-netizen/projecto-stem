@@ -50,9 +50,18 @@ export const c2 = {
   glowTurq: "rgba(18,181,186,0.35)",
   glowGreen: "rgba(15,157,88,0.30)",
   glowRed: "rgba(229,72,77,0.28)",
+
+  // superfícies cinza (vídeo 7): estúdio claro, pedra e grafite
+  fogTop: "#E3E7E9",
+  fogBottom: "#CDD4D7",
+  stoneTop: "#CDD3D6",
+  stoneBottom: "#B4BDC1",
+  graphiteTop: "#3B4447",
+  graphiteBottom: "#22292B",
+  glowGraphite: "rgba(18,181,186,0.16)",
 } as const;
 
-export type Surface = "white" | "mist" | "turq" | "deep" | "night" | "abyss";
+export type Surface = "white" | "mist" | "turq" | "deep" | "night" | "abyss" | "fog" | "stone" | "graphite";
 export type Pattern = "none" | "dots" | "grid" | "diagonal" | "rings" | "ledger" | "floor";
 
 // Tema por cena: fundo, padrão, cor de destaque e tinta.

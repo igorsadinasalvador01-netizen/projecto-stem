@@ -189,3 +189,37 @@ clímax os efeitos ficam 3–6 dB abaixo da voz para "venda" se ouvir limpo.
 ```bash
 npx remotion render src/index.ts Explicativo6 out/video-explicativo-6.mp4 --codec h264 --crf 16 --audio-bitrate 320k
 ```
+
+---
+
+# Vídeo 7 — "5 tipos de pessoas para evitar nos negócios" (composição `Explicativo7`)
+
+Mesma dinâmica do vídeo 6 (fios de ligação, batimento, luz quente/fria, entradas
+em arco), com **fundo cinza em vez de branco**: três superfícies novas partilhadas em
+`src/v2` — `fog` (cinza claro de estúdio), `stone` (cinza médio) e `graphite`
+(cinza escuro, nos dois tipos mais negativos). Cartões brancos sobressaem do cinza.
+Cenas em `src/v7/`; áudio `public/narracao7.m4a` (36,40 s; voz intacta).
+
+Motivo novo (`src/v7/Bond.tsx`): **o fio que se parte** — cada tipo de pessoa liga-se
+a você; no fim do capítulo o fio fica vermelho, treme e parte-se em duas metades
+que caem. No fecho, as "pessoas certas" ligam-se com fios verdes e luz quente.
+Progresso 1–5 no topo: os tipos já evitados ficam a vermelho.
+
+| # | Tempo | Narração | Ideia · tema · transição |
+|---|---|---|---|
+| 0 | 0–3,2 s | evite fazer negócios com esses cinco tipos de pessoas | 5 pessoas ligadas a você, números a vermelho · cinza claro · pontos |
+| 1 | 3,2–8,4 s | os desesperados: decisões rápidas, acordos ruins | coração acelerado, cronómetro, empurrão, carimbo "ruim" · grafite · diagonais · íris |
+| 2 | 8,4–13,8 s | os que discutem tudo: debate, nunca fecham | "Vamos fechar?" vs. "Mas… / Discordo. / E se…?", barra de fecho que nunca chega · cinza claro · grelha · painel |
+| 3 | 13,8–19,0 s | amigos e família: relação pessoal + dinheiro = problema | coração que aquece, moeda que cai, coração que racha · cinza médio · anéis · cortina |
+| 4 | 19,0–25,2 s | quem não te respeita: ignora limites, desvaloriza | limite tracejado atravessado, "o seu valor" de R$ 1.000 a R$ 350 · grafite · chão · íris |
+| 5 | 25,2–31,1 s | os atrasados crónicos: o seu tempo e o seu trabalho | relógio a comer tempo (+40 min), lugar vazio "?", trabalho riscado · cinza claro · pautas · painel |
+| 6 | 31,1–33,7 s | negócios certos começam com as pessoas certas | pessoas certas com visto verde ligam-se a você, coração calmo · cinza claro quente · zoom |
+| 7 | 33,7–36,4 s | siga para mais insights que te fazem vender melhor | botão Seguir → Seguindo, insights ligados ao botão, vendas a subir · cinza médio · íris |
+
+**Mistura:** `sfxGain` = 3,8 com *ducking* (`src/v7/mix7.json`). Os acentos nos
+números dos capítulos ficam ≥ 1 dB abaixo da voz; o estalido no último fotograma
+(36,35 s) faz parte do áudio original e foi mantido.
+
+```bash
+npx remotion render src/index.ts Explicativo7 out/video-explicativo-7.mp4 --codec h264 --crf 16 --audio-bitrate 320k
+```

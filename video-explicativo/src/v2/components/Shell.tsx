@@ -11,9 +11,13 @@ const surfaceBg: Record<Surface, string> = {
   // versões escuras (vídeo 4)
   night: `radial-gradient(90% 55% at 50% 38%, ${c2.glowNight} 0%, ${c2.turqClear} 70%), linear-gradient(180deg, ${c2.nightTop} 0%, ${c2.nightBottom} 100%)`,
   abyss: `radial-gradient(80% 50% at 50% 100%, ${c2.glowAbyss} 0%, ${c2.turqClear} 70%), linear-gradient(170deg, ${c2.abyssTop} 0%, ${c2.abyssBottom} 100%)`,
+  // cinzas (vídeo 7)
+  fog: `radial-gradient(110% 60% at 50% 0%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 60%), linear-gradient(180deg, ${c2.fogTop} 0%, ${c2.fogBottom} 100%)`,
+  stone: `radial-gradient(100% 55% at 50% 10%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 65%), linear-gradient(175deg, ${c2.stoneTop} 0%, ${c2.stoneBottom} 100%)`,
+  graphite: `radial-gradient(90% 55% at 50% 40%, ${c2.glowGraphite} 0%, ${c2.turqClear} 70%), linear-gradient(180deg, ${c2.graphiteTop} 0%, ${c2.graphiteBottom} 100%)`,
 };
 
-const onDark = (s: Surface) => s === "turq" || s === "deep" || s === "night" || s === "abyss";
+const onDark = (s: Surface) => s === "turq" || s === "deep" || s === "night" || s === "abyss" || s === "graphite";
 
 // Padrões de fundo — um por cena, a derivar devagar.
 const PatternLayer: React.FC<{ pattern: Pattern; surface: Surface }> = ({ pattern, surface }) => {
