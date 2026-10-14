@@ -154,3 +154,38 @@ por fotograma e cada efeito só ocupa essa margem — a voz nunca é alterada.
 ```bash
 npx remotion render src/index.ts Explicativo5 out/video-explicativo-5.mp4 --codec h264 --crf 16
 ```
+
+---
+
+# Vídeo 6 — "Prova social" (composição `Explicativo6`)
+
+Mesmos critérios dos vídeos 2–5 (branco + turquesa, verde só para positivo,
+vermelho só para negativo), com um motion **envolvente, que cria emoção e ligação**.
+Cenas em `src/v6/`; áudio `public/narracao6.m4a` (29,43 s; voz intacta, sem boom:
+o clímax é a própria frase "e é aí que a venda acontece").
+
+Linguagem emocional (`src/v6/Emotion.tsx`), com personalidade "premium emocional"
+(uma curva-assinatura, três durações, entradas sempre em arco):
+
+- **fios de ligação** que se desenham entre pessoas, com uma faísca a percorrê-los;
+- **batimento cardíaco** (escala lub-dub + som) nos momentos de confiança;
+- **luz quente vs. luz fria**: quem está sozinho fica frio; quem é acompanhado aquece;
+- ondas que se expandem, estrelas que acendem e bokeh ambiente a subir.
+
+| # | Tempo | Narração | Ideia · tema · transição |
+|---|---|---|---|
+| 1 | 0–4,6 s | o truque psicológico que faz as pessoas confiarem em você | constelação de pessoas ligada a você por fios, coração a bater · branco · pontos |
+| 2 | 4,6–6,6 s | se chama prova social | avatares que se juntam + 5 estrelas · turquesa · anéis · íris |
+| 3 | 6,6–13,8 s | o cérebro odeia ser o primeiro a arriscar… a resistência some | você frio diante da barreira vermelha "risco"; comprou/elogiou/recomendou ligam-se a você, a barreira desfaz-se · névoa · chão · painel |
+| 4 | 13,8–20,4 s | restaurante vazio vs. fila na porta; o da fila é melhor | duas fachadas (fria/quente), fila a chegar, prato tapado "?", você escolhe a fila · branco · grelha · cortina lateral |
+| 5 | 20,4–24,8 s | o seu produto: quem comprou, teve resultado, recomenda | o produto recebe as provas por fios; medidor de confiança até 100% · turquesa profundo · anéis · íris |
+| 6 | 24,8–27,7 s | não precisa falar que é bom, deixa os outros falarem por você | o seu "o meu é bom!" é riscado; o coro de recomendações liga-se a você · branco · pontos · painel |
+| 7 | 27,7–29,4 s | e é aí que a venda acontece | todos os fios convergem; selo verde da venda bate como um coração · turquesa · íris |
+
+**Mistura:** `sfxGain` = 3,8 com *ducking* automático (`src/v6/mix6.json`); cada
+efeito tem a duração do próprio som e o volume é quantizado para o ffmpeg. No
+clímax os efeitos ficam 3–6 dB abaixo da voz para "venda" se ouvir limpo.
+
+```bash
+npx remotion render src/index.ts Explicativo6 out/video-explicativo-6.mp4 --codec h264 --crf 16 --audio-bitrate 320k
+```

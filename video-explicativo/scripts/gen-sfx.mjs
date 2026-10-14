@@ -328,6 +328,39 @@ const stamp = () => {
   return o;
 };
 
+// ——— Kit emocional (vídeo 6) ———
+// Batimento cardíaco (lub-dub) suave.
+const heartbeat = () => {
+  const n = len(0.9);
+  const o = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    const t = i / SR;
+    let s = 0;
+    for (const b of [{ at: 0, f: 58, a: 1 }, { at: 0.22, f: 52, a: 0.7 }]) {
+      const tb = t - b.at;
+      if (tb >= 0) s += Math.sin(2 * Math.PI * b.f * tb * (1 + 0.6 * Math.exp(-tb * 30))) * Math.exp(-tb * 14) * b.a * Math.min(1, tb / 0.004);
+    }
+    o[i] = s;
+  }
+  return o;
+};
+// Swell: acorde suave que cresce e respira (momentos de ligação).
+const swell = () => {
+  const n = len(2.2);
+  const o = new Float32Array(n);
+  const fs = [220, 277.2, 329.6, 440];
+  for (let i = 0; i < n; i++) {
+    const t = i / n;
+    const env = Math.sin(Math.PI * Math.min(1, t * 1.15)) ** 2;
+    let s = 0;
+    fs.forEach((f, k) => {
+      s += Math.sin((2 * Math.PI * f * (1 + 0.003 * Math.sin(i / SR * (3 + k))) * i) / SR) * (1 - k * 0.15);
+    });
+    o[i] = s * env;
+  }
+  return o;
+};
+
 // Entradas
 writeWav("whoosh.wav", whoosh(0.55, 300, 3200), -37);
 writeWav("swish.wav", whoosh(0.28, 900, 5200), -38);
@@ -351,4 +384,7 @@ writeWav("paper.wav", paper(), -37);
 writeWav("shutter.wav", shutter(), -32);
 writeWav("projector.wav", projector(), -40);
 writeWav("stamp.wav", stamp(), -32);
+// Emocional (vídeo 6)
+writeWav("heartbeat.wav", heartbeat(), -31);
+writeWav("swell.wav", swell(), -40);
 console.log("SFX gerados em", out);
