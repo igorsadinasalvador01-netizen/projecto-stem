@@ -136,7 +136,7 @@ export const Badge: React.FC<{ kind: "pos" | "neg" | "turq"; size?: number; icon
 };
 
 // ——— avatar minimalista ———
-export const Avatar: React.FC<{ size?: number; tone: "white" | "glass" | "turq"; ring?: boolean }> = ({
+export const Avatar: React.FC<{ size?: number; tone: "white" | "glass" | "turq" | "mist"; ring?: boolean }> = ({
   size = 140,
   tone,
   ring = false,
@@ -149,8 +149,8 @@ export const Avatar: React.FC<{ size?: number; tone: "white" | "glass" | "turq";
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      background: tone === "white" ? c2.white : tone === "turq" ? c2.turq : c2.glassOnTurq,
-      color: tone === "white" ? c2.turqDeep : c2.white,
+      background: tone === "white" ? c2.white : tone === "turq" ? c2.turq : tone === "mist" ? c2.mist : c2.glassOnTurq,
+      color: tone === "white" ? c2.turqDeep : tone === "mist" ? c2.inkFaint : c2.white,
       border: `2px solid ${tone === "glass" ? c2.strokeOnTurq : "transparent"}`,
       boxShadow: ring
         ? `0 0 0 10px ${c2.glassOnTurqStrong}, 0 30px 60px -16px ${c2.shadowTurq}`

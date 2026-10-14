@@ -75,3 +75,24 @@ Código em `src/v2/`; resultado em `out/video-explicativo-2.mp4`.
 ```bash
 npx remotion render src/index.ts Explicativo2 out/video-explicativo-2.mp4 --codec h264 --crf 16
 ```
+
+---
+
+# Vídeo 3 — "Comece mesmo com medo" (composição `Explicativo3`)
+
+Mesma dinâmica do vídeo 2 (código partilhado em `src/v2/`, cenas em `src/v3/`)
+sobre `public/narracao3.m4a` (22,64 s; voz e "boom" dos 18,63 s intactos).
+Resultado em `out/video-explicativo-3.mp4`.
+
+| # | Tempo | Narração | Tema · padrão · transição |
+|---|---|---|---|
+| 1 | 0–4,6 s | não precisa saber ~~tudo~~ (vermelho) para a primeira venda (verde) | branco · pontos · barra de conhecimento com a 1.ª venda aos 22% |
+| 2 | 4,6–7,7 s | todo especialista já foi iniciante um dia | turquesa · anéis · íris · escada |
+| 3 | 7,7–11,1 s | alguns começaram (verde) mesmo com medo (vermelho) | branco · diagonais · painel · medidor de medo |
+| 4 | 11,1–14,9 s | aprenda, aplique e melhore todos os dias | turquesa profundo · grelha · íris · ciclo + contador |
+| 5 | 14,9–19,4 s | a primeira venda está mais perto do que imagina + boom | estúdio · chão · zoom · bandeira + notificação |
+| 6 | 19,4–22,6 s | fecho | turquesa · íris · "Comece mesmo com medo" |
+
+```bash
+npx remotion render src/index.ts Explicativo3 out/video-explicativo-3.mp4 --codec h264 --crf 16
+```

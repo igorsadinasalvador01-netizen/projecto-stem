@@ -4,6 +4,8 @@ import { Explicativo, ExplicativoProps } from "./Explicativo";
 import { AUDIO_SECONDS } from "./timeline";
 import { Explicativo2, Explicativo2Props } from "./v2/Explicativo2";
 import { AUDIO2_SECONDS } from "./v2/timeline2";
+import { Explicativo3, Explicativo3Props } from "./v3/Explicativo3";
+import { AUDIO3_SECONDS } from "./v3/timeline3";
 
 const FPS = 30;
 
@@ -26,6 +28,15 @@ export const RemotionRoot: React.FC = () => (
     width={1080}
     height={1920}
     defaultProps={{ sfx: true, sfxGain: 0.75 } satisfies Explicativo2Props}
+  />
+  <Composition
+    id="Explicativo3"
+    component={Explicativo3}
+    durationInFrames={Math.round(AUDIO3_SECONDS * FPS)}
+    fps={FPS}
+    width={1080}
+    height={1920}
+    defaultProps={{ sfx: true, sfxGain: 0.85 } satisfies Explicativo3Props}
   />
   </>
 );
