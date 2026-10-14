@@ -252,3 +252,43 @@ abaixo da voz. O estalido no último fotograma (30,60 s) vem do áudio original.
 ```bash
 npx remotion render src/index.ts Explicativo8 out/video-explicativo-8.mp4 --codec h264 --crf 16 --audio-bitrate 320k
 ```
+
+---
+
+# Vídeo 9 — "CONTEUDO A FAZER" com a estrutura do EXEMPLO (composição `Conteudo9`)
+
+Vídeo com o rosto do autor (fala real, não só narração). Primeiro estudei o vídeo de
+EXEMPLO e extraí a estrutura; depois apliquei-a ao CONTEUDO A FAZER em três modos visuais.
+
+**Estrutura extraída do EXEMPLO:**
+- gancho com o rosto e legenda palavra a palavra;
+- três layouts alternados: rosto inteiro nas frases de impacto, ecrã dividido
+  (gráfico + rosto num cartão) e gráfico inteiro com legenda em baixo;
+- etiqueta de capítulo fixa ("PASSO 1/2/3"), aqui adaptada a cada modo;
+- cortes secos sem pausas;
+- CTA final sobre o rosto e cartão escuro para fechar.
+
+**Pausas eliminadas:**
+- a voz original (69,0 s) foi limpa só de silêncio verdadeiro (< −50 dB), com os limites
+  do VAD Silero, e ficou com 62,8 s; o script está em `scripts/edit-v9-voz.py`;
+- os saltos de imagem nos cortes ficam escondidos com *punch-in* alternado (100 % ↔ 108 %),
+  e as junções entre frases levam transições e sons de entrada e saída;
+- a trilha contínua (`scripts/gen-v9-audio.py`) baixa sozinha quando a voz fala.
+
+**Voz e presença:**
+- a voz foi normalizada a −15 LUFS; o rosto aparece em cerca de 36 % do vídeo (23 s de 64 s);
+- o texto foi corrigido cruzando Parakeet v3 e Whisper-small;
+- as palavras foram alinhadas por sílabas dentro de cada frase.
+
+| Ato · modo | Tempo | Narração | Cenas |
+|---|---|---|---|
+| 1 · **Nostálgico** (VHS, papel, polaroide, lo-fi) | 0–16,4 s | o problema: falta de tempo, o processo antigo | rosto em camcorder · ideias/ampulheta/TV sem sinal · 6 cassetes (parar → publicar) · quadro de cortiça + rosto em polaroide · fita emaranhada "COMPLICADO" → ■ STOP |
+| 2 · **Cinema** (2.39:1, teal & laranja, flares, drone) | 16,4–39,3 s | a virada: IA + Remotion | rosto em cinemascope · INTELIGÊNCIA ARTIFICIAL → novo processo · conhecimento/ideias/aprendizado → IA → roteiro/prompts/vídeos · "a ideia é minha" · storyboard · código Remotion → 9 vídeos · 9 vídeos em 1 dia + rosto |
+| 3 · **Histórico** (P&B contrastado, pergaminho, carimbos, piano) | 39,3–64,2 s | a mensagem e o apelo | "ATENÇÃO" · retrato oval que não é substituído · mapa do conhecimento · câmara de fole e cadeira vazia · livro de contas "TRABALHAR MAIS" riscado · o rosto ganha cor em "mudar o seu processo" · siga/like/curte/compartilhe + cartão final |
+
+```bash
+# o rosto em 1080 px (não vai para o git)
+ffmpeg -i public/v9/conteudo_original.mp4 -an -vf "scale=1080:-2:flags=lanczos,unsharp=5:5:0.5:5:5:0.0,format=yuv420p" -c:v libx264 -crf 15 public/v9/rosto.mp4
+python scripts/gen-v9-audio.py      # trilha + efeitos novos (braam, vhs, filmburn, rec, clap)
+npx remotion render src/index.ts Conteudo9 out/video-conteudo-9.mp4 --codec h264 --crf 18 --audio-bitrate 320k
+```

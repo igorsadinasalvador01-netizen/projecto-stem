@@ -1,0 +1,2212 @@
+{
+ "fps": 30,
+ "totalFrames": 1884,
+ "cuts": [
+  {
+   "srcFrom": 0,
+   "srcTo": 73,
+   "dstFrom": 0
+  },
+  {
+   "srcFrom": 77,
+   "srcTo": 93,
+   "dstFrom": 73
+  },
+  {
+   "srcFrom": 95,
+   "srcTo": 150,
+   "dstFrom": 89
+  },
+  {
+   "srcFrom": 152,
+   "srcTo": 172,
+   "dstFrom": 144
+  },
+  {
+   "srcFrom": 184,
+   "srcTo": 309,
+   "dstFrom": 164
+  },
+  {
+   "srcFrom": 313,
+   "srcTo": 335,
+   "dstFrom": 289
+  },
+  {
+   "srcFrom": 349,
+   "srcTo": 437,
+   "dstFrom": 311
+  },
+  {
+   "srcFrom": 441,
+   "srcTo": 470,
+   "dstFrom": 399
+  },
+  {
+   "srcFrom": 472,
+   "srcTo": 535,
+   "dstFrom": 428
+  },
+  {
+   "srcFrom": 544,
+   "srcTo": 636,
+   "dstFrom": 491
+  },
+  {
+   "srcFrom": 641,
+   "srcTo": 689,
+   "dstFrom": 583
+  },
+  {
+   "srcFrom": 699,
+   "srcTo": 704,
+   "dstFrom": 631
+  },
+  {
+   "srcFrom": 707,
+   "srcTo": 748,
+   "dstFrom": 636
+  },
+  {
+   "srcFrom": 752,
+   "srcTo": 833,
+   "dstFrom": 677
+  },
+  {
+   "srcFrom": 837,
+   "srcTo": 853,
+   "dstFrom": 758
+  },
+  {
+   "srcFrom": 855,
+   "srcTo": 872,
+   "dstFrom": 774
+  },
+  {
+   "srcFrom": 878,
+   "srcTo": 894,
+   "dstFrom": 791
+  },
+  {
+   "srcFrom": 897,
+   "srcTo": 924,
+   "dstFrom": 807
+  },
+  {
+   "srcFrom": 926,
+   "srcTo": 996,
+   "dstFrom": 834
+  },
+  {
+   "srcFrom": 999,
+   "srcTo": 1033,
+   "dstFrom": 904
+  },
+  {
+   "srcFrom": 1037,
+   "srcTo": 1056,
+   "dstFrom": 938
+  },
+  {
+   "srcFrom": 1058,
+   "srcTo": 1093,
+   "dstFrom": 957
+  },
+  {
+   "srcFrom": 1104,
+   "srcTo": 1222,
+   "dstFrom": 992
+  },
+  {
+   "srcFrom": 1225,
+   "srcTo": 1294,
+   "dstFrom": 1110
+  },
+  {
+   "srcFrom": 1302,
+   "srcTo": 1323,
+   "dstFrom": 1179
+  },
+  {
+   "srcFrom": 1326,
+   "srcTo": 1418,
+   "dstFrom": 1200
+  },
+  {
+   "srcFrom": 1421,
+   "srcTo": 1539,
+   "dstFrom": 1292
+  },
+  {
+   "srcFrom": 1540,
+   "srcTo": 1584,
+   "dstFrom": 1410
+  },
+  {
+   "srcFrom": 1588,
+   "srcTo": 1627,
+   "dstFrom": 1454
+  },
+  {
+   "srcFrom": 1628,
+   "srcTo": 1657,
+   "dstFrom": 1493
+  },
+  {
+   "srcFrom": 1664,
+   "srcTo": 1709,
+   "dstFrom": 1522
+  },
+  {
+   "srcFrom": 1710,
+   "srcTo": 1741,
+   "dstFrom": 1567
+  },
+  {
+   "srcFrom": 1743,
+   "srcTo": 1888,
+   "dstFrom": 1598
+  },
+  {
+   "srcFrom": 1894,
+   "srcTo": 1909,
+   "dstFrom": 1743
+  },
+  {
+   "srcFrom": 1913,
+   "srcTo": 1938,
+   "dstFrom": 1758
+  },
+  {
+   "srcFrom": 1939,
+   "srcTo": 1995,
+   "dstFrom": 1783
+  },
+  {
+   "srcFrom": 1999,
+   "srcTo": 2016,
+   "dstFrom": 1839
+  },
+  {
+   "srcFrom": 2021,
+   "srcTo": 2031,
+   "dstFrom": 1856
+  },
+  {
+   "srcFrom": 2038,
+   "srcTo": 2053,
+   "dstFrom": 1866
+  },
+  {
+   "srcFrom": 2057,
+   "srcTo": 2060,
+   "dstFrom": 1881
+  }
+ ],
+ "words": [
+  {
+   "text": "Um",
+   "seg": 0,
+   "srcStart": 0.08,
+   "srcEnd": 0.18,
+   "start": 0.08,
+   "end": 0.18
+  },
+  {
+   "text": "dos",
+   "seg": 0,
+   "srcStart": 0.17,
+   "srcEnd": 0.26,
+   "start": 0.17,
+   "end": 0.26
+  },
+  {
+   "text": "meus",
+   "seg": 0,
+   "srcStart": 0.25,
+   "srcEnd": 0.35,
+   "start": 0.25,
+   "end": 0.35
+  },
+  {
+   "text": "maiores",
+   "seg": 0,
+   "srcStart": 0.34,
+   "srcEnd": 0.55,
+   "start": 0.34,
+   "end": 0.55
+  },
+  {
+   "text": "problemas",
+   "seg": 0,
+   "srcStart": 0.54,
+   "srcEnd": 0.96,
+   "start": 0.54,
+   "end": 0.96
+  },
+  {
+   "text": "nunca",
+   "seg": 0,
+   "srcStart": 0.95,
+   "srcEnd": 1.25,
+   "start": 0.95,
+   "end": 1.25
+  },
+  {
+   "text": "foi",
+   "seg": 0,
+   "srcStart": 1.24,
+   "srcEnd": 1.33,
+   "start": 1.24,
+   "end": 1.33
+  },
+  {
+   "text": "a",
+   "seg": 0,
+   "srcStart": 1.32,
+   "srcEnd": 1.46,
+   "start": 1.32,
+   "end": 1.46
+  },
+  {
+   "text": "falta",
+   "seg": 0,
+   "srcStart": 1.45,
+   "srcEnd": 1.83,
+   "start": 1.45,
+   "end": 1.83
+  },
+  {
+   "text": "de",
+   "seg": 0,
+   "srcStart": 1.82,
+   "srcEnd": 1.97,
+   "start": 1.82,
+   "end": 1.97
+  },
+  {
+   "text": "ideias,",
+   "seg": 0,
+   "srcStart": 1.96,
+   "srcEnd": 2.3,
+   "start": 1.96,
+   "end": 2.3
+  },
+  {
+   "text": "mas",
+   "seg": 1,
+   "srcStart": 2.67,
+   "srcEnd": 2.78,
+   "start": 2.537,
+   "end": 2.647
+  },
+  {
+   "text": "sim",
+   "seg": 1,
+   "srcStart": 2.77,
+   "srcEnd": 2.95,
+   "start": 2.637,
+   "end": 2.817
+  },
+  {
+   "text": "de",
+   "seg": 1,
+   "srcStart": 2.94,
+   "srcEnd": 3.29,
+   "start": 2.807,
+   "end": 3.09
+  },
+  {
+   "text": "tempo",
+   "seg": 1,
+   "srcStart": 3.28,
+   "srcEnd": 3.62,
+   "start": 3.08,
+   "end": 3.42
+  },
+  {
+   "text": "para",
+   "seg": 1,
+   "srcStart": 3.61,
+   "srcEnd": 4.01,
+   "start": 3.41,
+   "end": 3.81
+  },
+  {
+   "text": "transformar",
+   "seg": 1,
+   "srcStart": 4.0,
+   "srcEnd": 4.4,
+   "start": 3.8,
+   "end": 4.2
+  },
+  {
+   "text": "essas",
+   "seg": 1,
+   "srcStart": 4.39,
+   "srcEnd": 4.7,
+   "start": 4.19,
+   "end": 4.5
+  },
+  {
+   "text": "ideias",
+   "seg": 1,
+   "srcStart": 4.69,
+   "srcEnd": 4.89,
+   "start": 4.49,
+   "end": 4.69
+  },
+  {
+   "text": "em",
+   "seg": 1,
+   "srcStart": 4.88,
+   "srcEnd": 5.22,
+   "start": 4.68,
+   "end": 4.953
+  },
+  {
+   "text": "conteúdo.",
+   "seg": 1,
+   "srcStart": 5.21,
+   "srcEnd": 5.57,
+   "start": 4.943,
+   "end": 5.303
+  },
+  {
+   "text": "Tenho",
+   "seg": 2,
+   "srcStart": 6.26,
+   "srcEnd": 6.65,
+   "start": 5.593,
+   "end": 5.983
+  },
+  {
+   "text": "que",
+   "seg": 2,
+   "srcStart": 6.64,
+   "srcEnd": 6.77,
+   "start": 5.973,
+   "end": 6.103
+  },
+  {
+   "text": "parar,",
+   "seg": 2,
+   "srcStart": 6.76,
+   "srcEnd": 7.05,
+   "start": 6.093,
+   "end": 6.383
+  },
+  {
+   "text": "gravar,",
+   "seg": 2,
+   "srcStart": 7.04,
+   "srcEnd": 7.35,
+   "start": 6.373,
+   "end": 6.683
+  },
+  {
+   "text": "repetir",
+   "seg": 2,
+   "srcStart": 7.34,
+   "srcEnd": 8.02,
+   "start": 6.673,
+   "end": 7.353
+  },
+  {
+   "text": "partes,",
+   "seg": 2,
+   "srcStart": 8.01,
+   "srcEnd": 8.56,
+   "start": 7.343,
+   "end": 7.893
+  },
+  {
+   "text": "editar,",
+   "seg": 2,
+   "srcStart": 8.55,
+   "srcEnd": 9.2,
+   "start": 7.883,
+   "end": 8.533
+  },
+  {
+   "text": "colocar",
+   "seg": 2,
+   "srcStart": 9.19,
+   "srcEnd": 9.83,
+   "start": 8.523,
+   "end": 9.163
+  },
+  {
+   "text": "legendas",
+   "seg": 2,
+   "srcStart": 9.82,
+   "srcEnd": 10.23,
+   "start": 9.153,
+   "end": 9.563
+  },
+  {
+   "text": "e",
+   "seg": 3,
+   "srcStart": 10.52,
+   "srcEnd": 10.58,
+   "start": 9.72,
+   "end": 9.78
+  },
+  {
+   "text": "publicar.",
+   "seg": 3,
+   "srcStart": 10.57,
+   "srcEnd": 10.97,
+   "start": 9.77,
+   "end": 10.17
+  },
+  {
+   "text": "E",
+   "seg": 4,
+   "srcStart": 11.75,
+   "srcEnd": 11.88,
+   "start": 10.483,
+   "end": 10.613
+  },
+  {
+   "text": "quando",
+   "seg": 4,
+   "srcStart": 11.87,
+   "srcEnd": 12.13,
+   "start": 10.603,
+   "end": 10.863
+  },
+  {
+   "text": "tens",
+   "seg": 4,
+   "srcStart": 12.12,
+   "srcEnd": 12.31,
+   "start": 10.853,
+   "end": 11.043
+  },
+  {
+   "text": "trabalho,",
+   "seg": 4,
+   "srcStart": 12.3,
+   "srcEnd": 12.66,
+   "start": 11.033,
+   "end": 11.393
+  },
+  {
+   "text": "responsabilidades",
+   "seg": 4,
+   "srcStart": 12.65,
+   "srcEnd": 13.58,
+   "start": 11.383,
+   "end": 12.313
+  },
+  {
+   "text": "e",
+   "seg": 4,
+   "srcStart": 13.57,
+   "srcEnd": 13.67,
+   "start": 12.303,
+   "end": 12.403
+  },
+  {
+   "text": "outras",
+   "seg": 4,
+   "srcStart": 13.66,
+   "srcEnd": 14.03,
+   "start": 12.393,
+   "end": 12.763
+  },
+  {
+   "text": "prioridades,",
+   "seg": 4,
+   "srcStart": 14.02,
+   "srcEnd": 14.47,
+   "start": 12.753,
+   "end": 13.203
+  },
+  {
+   "text": "produzir",
+   "seg": 5,
+   "srcStart": 14.81,
+   "srcEnd": 15.18,
+   "start": 13.41,
+   "end": 13.78
+  },
+  {
+   "text": "conteúdo",
+   "seg": 5,
+   "srcStart": 15.17,
+   "srcEnd": 15.56,
+   "start": 13.77,
+   "end": 14.16
+  },
+  {
+   "text": "constantemente",
+   "seg": 6,
+   "srcStart": 15.82,
+   "srcEnd": 16.25,
+   "start": 14.353,
+   "end": 14.783
+  },
+  {
+   "text": "torna-se",
+   "seg": 6,
+   "srcStart": 16.24,
+   "srcEnd": 16.61,
+   "start": 14.773,
+   "end": 15.143
+  },
+  {
+   "text": "um",
+   "seg": 6,
+   "srcStart": 16.6,
+   "srcEnd": 16.67,
+   "start": 15.133,
+   "end": 15.203
+  },
+  {
+   "text": "pouco",
+   "seg": 6,
+   "srcStart": 16.66,
+   "srcEnd": 17.0,
+   "start": 15.193,
+   "end": 15.533
+  },
+  {
+   "text": "complicado.",
+   "seg": 6,
+   "srcStart": 16.99,
+   "srcEnd": 17.64,
+   "start": 15.523,
+   "end": 16.173
+  },
+  {
+   "text": "Até",
+   "seg": 7,
+   "srcStart": 18.22,
+   "srcEnd": 18.61,
+   "start": 16.453,
+   "end": 16.843
+  },
+  {
+   "text": "que",
+   "seg": 7,
+   "srcStart": 18.6,
+   "srcEnd": 18.81,
+   "start": 16.833,
+   "end": 17.043
+  },
+  {
+   "text": "pude",
+   "seg": 7,
+   "srcStart": 18.8,
+   "srcEnd": 19.14,
+   "start": 17.033,
+   "end": 17.373
+  },
+  {
+   "text": "perceber",
+   "seg": 7,
+   "srcStart": 19.13,
+   "srcEnd": 19.64,
+   "start": 17.363,
+   "end": 17.873
+  },
+  {
+   "text": "que",
+   "seg": 7,
+   "srcStart": 19.63,
+   "srcEnd": 19.7,
+   "start": 17.863,
+   "end": 17.933
+  },
+  {
+   "text": "podia",
+   "seg": 7,
+   "srcStart": 19.69,
+   "srcEnd": 19.9,
+   "start": 17.923,
+   "end": 18.133
+  },
+  {
+   "text": "utilizar",
+   "seg": 7,
+   "srcStart": 19.89,
+   "srcEnd": 20.17,
+   "start": 18.123,
+   "end": 18.403
+  },
+  {
+   "text": "a",
+   "seg": 7,
+   "srcStart": 20.16,
+   "srcEnd": 20.23,
+   "start": 18.393,
+   "end": 18.463
+  },
+  {
+   "text": "inteligência",
+   "seg": 7,
+   "srcStart": 20.22,
+   "srcEnd": 20.6,
+   "start": 18.453,
+   "end": 18.833
+  },
+  {
+   "text": "artificial",
+   "seg": 7,
+   "srcStart": 20.59,
+   "srcEnd": 21.12,
+   "start": 18.823,
+   "end": 19.353
+  },
+  {
+   "text": "para",
+   "seg": 8,
+   "srcStart": 21.44,
+   "srcEnd": 21.54,
+   "start": 19.507,
+   "end": 19.607
+  },
+  {
+   "text": "mudar",
+   "seg": 8,
+   "srcStart": 21.53,
+   "srcEnd": 21.62,
+   "start": 19.597,
+   "end": 19.687
+  },
+  {
+   "text": "completamente",
+   "seg": 8,
+   "srcStart": 21.61,
+   "srcEnd": 22.13,
+   "start": 19.677,
+   "end": 20.197
+  },
+  {
+   "text": "este",
+   "seg": 8,
+   "srcStart": 22.12,
+   "srcEnd": 22.29,
+   "start": 20.187,
+   "end": 20.357
+  },
+  {
+   "text": "processo.",
+   "seg": 8,
+   "srcStart": 22.28,
+   "srcEnd": 22.56,
+   "start": 20.347,
+   "end": 20.627
+  },
+  {
+   "text": "Hoje",
+   "seg": 9,
+   "srcStart": 23.67,
+   "srcEnd": 23.82,
+   "start": 21.303,
+   "end": 21.453
+  },
+  {
+   "text": "eu",
+   "seg": 9,
+   "srcStart": 23.81,
+   "srcEnd": 23.93,
+   "start": 21.443,
+   "end": 21.563
+  },
+  {
+   "text": "pego",
+   "seg": 9,
+   "srcStart": 23.92,
+   "srcEnd": 24.08,
+   "start": 21.553,
+   "end": 21.713
+  },
+  {
+   "text": "todo",
+   "seg": 9,
+   "srcStart": 24.07,
+   "srcEnd": 24.22,
+   "start": 21.703,
+   "end": 21.853
+  },
+  {
+   "text": "o",
+   "seg": 9,
+   "srcStart": 24.21,
+   "srcEnd": 24.29,
+   "start": 21.843,
+   "end": 21.923
+  },
+  {
+   "text": "meu",
+   "seg": 9,
+   "srcStart": 24.28,
+   "srcEnd": 24.43,
+   "start": 21.913,
+   "end": 22.063
+  },
+  {
+   "text": "conhecimento,",
+   "seg": 9,
+   "srcStart": 24.42,
+   "srcEnd": 24.85,
+   "start": 22.053,
+   "end": 22.483
+  },
+  {
+   "text": "ideias",
+   "seg": 10,
+   "srcStart": 25.14,
+   "srcEnd": 25.34,
+   "start": 22.64,
+   "end": 22.84
+  },
+  {
+   "text": "e",
+   "seg": 10,
+   "srcStart": 25.33,
+   "srcEnd": 25.41,
+   "start": 22.83,
+   "end": 22.91
+  },
+  {
+   "text": "tudo",
+   "seg": 10,
+   "srcStart": 25.4,
+   "srcEnd": 25.54,
+   "start": 22.9,
+   "end": 23.04
+  },
+  {
+   "text": "aquilo",
+   "seg": 10,
+   "srcStart": 25.53,
+   "srcEnd": 25.96,
+   "start": 23.03,
+   "end": 23.46
+  },
+  {
+   "text": "que",
+   "seg": 10,
+   "srcStart": 25.95,
+   "srcEnd": 26.11,
+   "start": 23.45,
+   "end": 23.61
+  },
+  {
+   "text": "eu",
+   "seg": 10,
+   "srcStart": 26.1,
+   "srcEnd": 26.18,
+   "start": 23.6,
+   "end": 23.68
+  },
+  {
+   "text": "aprendo,",
+   "seg": 10,
+   "srcStart": 26.17,
+   "srcEnd": 26.68,
+   "start": 23.67,
+   "end": 24.18
+  },
+  {
+   "text": "transformo",
+   "seg": 10,
+   "srcStart": 26.67,
+   "srcEnd": 27.0,
+   "start": 24.17,
+   "end": 24.5
+  },
+  {
+   "text": "isso",
+   "seg": 10,
+   "srcStart": 26.99,
+   "srcEnd": 27.17,
+   "start": 24.49,
+   "end": 24.67
+  },
+  {
+   "text": "em",
+   "seg": 10,
+   "srcStart": 27.16,
+   "srcEnd": 27.24,
+   "start": 24.66,
+   "end": 24.74
+  },
+  {
+   "text": "um",
+   "seg": 10,
+   "srcStart": 27.23,
+   "srcEnd": 27.3,
+   "start": 24.73,
+   "end": 24.8
+  },
+  {
+   "text": "roteiro,",
+   "seg": 10,
+   "srcStart": 27.29,
+   "srcEnd": 27.65,
+   "start": 24.79,
+   "end": 25.15
+  },
+  {
+   "text": "prompts",
+   "seg": 11,
+   "srcStart": 28.0,
+   "srcEnd": 28.15,
+   "start": 25.367,
+   "end": 25.517
+  },
+  {
+   "text": "e",
+   "seg": 11,
+   "srcStart": 28.14,
+   "srcEnd": 28.33,
+   "start": 25.507,
+   "end": 25.697
+  },
+  {
+   "text": "vídeos.",
+   "seg": 11,
+   "srcStart": 28.32,
+   "srcEnd": 28.91,
+   "start": 25.687,
+   "end": 26.21
+  },
+  {
+   "text": "A",
+   "seg": 12,
+   "srcStart": 29.38,
+   "srcEnd": 29.48,
+   "start": 26.48,
+   "end": 26.58
+  },
+  {
+   "text": "ideia",
+   "seg": 12,
+   "srcStart": 29.47,
+   "srcEnd": 29.71,
+   "start": 26.57,
+   "end": 26.81
+  },
+  {
+   "text": "continua",
+   "seg": 13,
+   "srcStart": 29.97,
+   "srcEnd": 30.25,
+   "start": 26.97,
+   "end": 27.25
+  },
+  {
+   "text": "a",
+   "seg": 13,
+   "srcStart": 30.24,
+   "srcEnd": 30.32,
+   "start": 27.24,
+   "end": 27.32
+  },
+  {
+   "text": "ser",
+   "seg": 13,
+   "srcStart": 30.31,
+   "srcEnd": 30.44,
+   "start": 27.31,
+   "end": 27.44
+  },
+  {
+   "text": "a",
+   "seg": 13,
+   "srcStart": 30.43,
+   "srcEnd": 30.5,
+   "start": 27.43,
+   "end": 27.5
+  },
+  {
+   "text": "minha.",
+   "seg": 13,
+   "srcStart": 30.49,
+   "srcEnd": 30.64,
+   "start": 27.49,
+   "end": 27.64
+  },
+  {
+   "text": "A",
+   "seg": 13,
+   "srcStart": 30.63,
+   "srcEnd": 30.95,
+   "start": 27.63,
+   "end": 27.883
+  },
+  {
+   "text": "inteligência",
+   "seg": 13,
+   "srcStart": 30.94,
+   "srcEnd": 31.41,
+   "start": 27.873,
+   "end": 28.343
+  },
+  {
+   "text": "artificial",
+   "seg": 13,
+   "srcStart": 31.4,
+   "srcEnd": 32.05,
+   "start": 28.333,
+   "end": 28.983
+  },
+  {
+   "text": "ajuda",
+   "seg": 13,
+   "srcStart": 32.04,
+   "srcEnd": 32.33,
+   "start": 28.973,
+   "end": 29.263
+  },
+  {
+   "text": "a",
+   "seg": 13,
+   "srcStart": 32.32,
+   "srcEnd": 32.47,
+   "start": 29.253,
+   "end": 29.403
+  },
+  {
+   "text": "estruturar",
+   "seg": 13,
+   "srcStart": 32.46,
+   "srcEnd": 32.77,
+   "start": 29.393,
+   "end": 29.703
+  },
+  {
+   "text": "a",
+   "seg": 13,
+   "srcStart": 32.76,
+   "srcEnd": 32.88,
+   "start": 29.693,
+   "end": 29.813
+  },
+  {
+   "text": "mensagem,",
+   "seg": 13,
+   "srcStart": 32.87,
+   "srcEnd": 33.11,
+   "start": 29.803,
+   "end": 30.043
+  },
+  {
+   "text": "a",
+   "seg": 14,
+   "srcStart": 33.4,
+   "srcEnd": 33.5,
+   "start": 30.233,
+   "end": 30.333
+  },
+  {
+   "text": "melhorar",
+   "seg": 14,
+   "srcStart": 33.49,
+   "srcEnd": 33.81,
+   "start": 30.323,
+   "end": 30.643
+  },
+  {
+   "text": "os",
+   "seg": 14,
+   "srcStart": 33.8,
+   "srcEnd": 33.89,
+   "start": 30.633,
+   "end": 30.723
+  },
+  {
+   "text": "roteiros",
+   "seg": 14,
+   "srcStart": 33.88,
+   "srcEnd": 34.32,
+   "start": 30.713,
+   "end": 31.153
+  },
+  {
+   "text": "e",
+   "seg": 15,
+   "srcStart": 34.63,
+   "srcEnd": 34.72,
+   "start": 31.33,
+   "end": 31.42
+  },
+  {
+   "text": "a",
+   "seg": 15,
+   "srcStart": 34.71,
+   "srcEnd": 34.84,
+   "start": 31.41,
+   "end": 31.54
+  },
+  {
+   "text": "construir",
+   "seg": 15,
+   "srcStart": 34.83,
+   "srcEnd": 35.1,
+   "start": 31.53,
+   "end": 31.8
+  },
+  {
+   "text": "todas",
+   "seg": 16,
+   "srcStart": 35.37,
+   "srcEnd": 35.57,
+   "start": 32.003,
+   "end": 32.203
+  },
+  {
+   "text": "as",
+   "seg": 16,
+   "srcStart": 35.56,
+   "srcEnd": 35.67,
+   "start": 32.193,
+   "end": 32.303
+  },
+  {
+   "text": "cenas",
+   "seg": 16,
+   "srcStart": 35.66,
+   "srcEnd": 35.96,
+   "start": 32.293,
+   "end": 32.593
+  },
+  {
+   "text": "visuais.",
+   "seg": 16,
+   "srcStart": 35.95,
+   "srcEnd": 36.29,
+   "start": 32.583,
+   "end": 32.923
+  },
+  {
+   "text": "E",
+   "seg": 17,
+   "srcStart": 36.94,
+   "srcEnd": 37.07,
+   "start": 33.207,
+   "end": 33.337
+  },
+  {
+   "text": "com",
+   "seg": 17,
+   "srcStart": 37.06,
+   "srcEnd": 37.18,
+   "start": 33.327,
+   "end": 33.447
+  },
+  {
+   "text": "ferramentas",
+   "seg": 17,
+   "srcStart": 37.17,
+   "srcEnd": 37.59,
+   "start": 33.437,
+   "end": 33.857
+  },
+  {
+   "text": "como",
+   "seg": 17,
+   "srcStart": 37.58,
+   "srcEnd": 37.76,
+   "start": 33.847,
+   "end": 34.027
+  },
+  {
+   "text": "o",
+   "seg": 17,
+   "srcStart": 37.75,
+   "srcEnd": 37.84,
+   "start": 34.017,
+   "end": 34.107
+  },
+  {
+   "text": "Remotion,",
+   "seg": 17,
+   "srcStart": 37.83,
+   "srcEnd": 38.22,
+   "start": 34.097,
+   "end": 34.487
+  },
+  {
+   "text": "consigo",
+   "seg": 17,
+   "srcStart": 38.21,
+   "srcEnd": 38.61,
+   "start": 34.477,
+   "end": 34.877
+  },
+  {
+   "text": "preparar",
+   "seg": 17,
+   "srcStart": 38.6,
+   "srcEnd": 38.96,
+   "start": 34.867,
+   "end": 35.227
+  },
+  {
+   "text": "este",
+   "seg": 17,
+   "srcStart": 38.95,
+   "srcEnd": 39.31,
+   "start": 35.217,
+   "end": 35.577
+  },
+  {
+   "text": "processo",
+   "seg": 17,
+   "srcStart": 39.3,
+   "srcEnd": 39.65,
+   "start": 35.567,
+   "end": 35.917
+  },
+  {
+   "text": "em",
+   "seg": 17,
+   "srcStart": 39.64,
+   "srcEnd": 39.75,
+   "start": 35.907,
+   "end": 36.017
+  },
+  {
+   "text": "vários",
+   "seg": 17,
+   "srcStart": 39.74,
+   "srcEnd": 39.95,
+   "start": 36.007,
+   "end": 36.217
+  },
+  {
+   "text": "vídeos",
+   "seg": 17,
+   "srcStart": 39.94,
+   "srcEnd": 40.11,
+   "start": 36.207,
+   "end": 36.377
+  },
+  {
+   "text": "dinâmicos",
+   "seg": 17,
+   "srcStart": 40.1,
+   "srcEnd": 40.64,
+   "start": 36.367,
+   "end": 36.907
+  },
+  {
+   "text": "e",
+   "seg": 18,
+   "srcStart": 40.91,
+   "srcEnd": 41.11,
+   "start": 37.077,
+   "end": 37.277
+  },
+  {
+   "text": "produzir",
+   "seg": 18,
+   "srcStart": 41.1,
+   "srcEnd": 41.45,
+   "start": 37.267,
+   "end": 37.617
+  },
+  {
+   "text": "vários",
+   "seg": 18,
+   "srcStart": 41.44,
+   "srcEnd": 41.68,
+   "start": 37.607,
+   "end": 37.847
+  },
+  {
+   "text": "conteúdos",
+   "seg": 18,
+   "srcStart": 41.67,
+   "srcEnd": 42.21,
+   "start": 37.837,
+   "end": 38.377
+  },
+  {
+   "text": "em",
+   "seg": 19,
+   "srcStart": 42.53,
+   "srcEnd": 42.62,
+   "start": 38.697,
+   "end": 38.787
+  },
+  {
+   "text": "um",
+   "seg": 19,
+   "srcStart": 42.61,
+   "srcEnd": 42.71,
+   "start": 38.777,
+   "end": 38.877
+  },
+  {
+   "text": "só",
+   "seg": 19,
+   "srcStart": 42.7,
+   "srcEnd": 42.9,
+   "start": 38.867,
+   "end": 39.067
+  },
+  {
+   "text": "dia.",
+   "seg": 19,
+   "srcStart": 42.89,
+   "srcEnd": 43.0,
+   "start": 39.057,
+   "end": 39.167
+  },
+  {
+   "text": "E",
+   "seg": 20,
+   "srcStart": 43.5,
+   "srcEnd": 43.59,
+   "start": 39.4,
+   "end": 39.49
+  },
+  {
+   "text": "atenção.",
+   "seg": 20,
+   "srcStart": 43.58,
+   "srcEnd": 43.94,
+   "start": 39.48,
+   "end": 39.84
+  },
+  {
+   "text": "Isso",
+   "seg": 21,
+   "srcStart": 44.29,
+   "srcEnd": 44.46,
+   "start": 40.09,
+   "end": 40.26
+  },
+  {
+   "text": "não",
+   "seg": 21,
+   "srcStart": 44.45,
+   "srcEnd": 44.54,
+   "start": 40.25,
+   "end": 40.34
+  },
+  {
+   "text": "significa",
+   "seg": 21,
+   "srcStart": 44.53,
+   "srcEnd": 45.03,
+   "start": 40.33,
+   "end": 40.83
+  },
+  {
+   "text": "substituir",
+   "seg": 21,
+   "srcStart": 45.02,
+   "srcEnd": 45.4,
+   "start": 40.82,
+   "end": 41.2
+  },
+  {
+   "text": "a",
+   "seg": 21,
+   "srcStart": 45.39,
+   "srcEnd": 45.66,
+   "start": 41.19,
+   "end": 41.46
+  },
+  {
+   "text": "sua",
+   "seg": 21,
+   "srcStart": 45.65,
+   "srcEnd": 45.74,
+   "start": 41.45,
+   "end": 41.54
+  },
+  {
+   "text": "imagem",
+   "seg": 21,
+   "srcStart": 45.73,
+   "srcEnd": 46.02,
+   "start": 41.53,
+   "end": 41.82
+  },
+  {
+   "text": "ou",
+   "seg": 21,
+   "srcStart": 46.01,
+   "srcEnd": 46.1,
+   "start": 41.81,
+   "end": 41.9
+  },
+  {
+   "text": "deixar",
+   "seg": 21,
+   "srcStart": 46.09,
+   "srcEnd": 46.26,
+   "start": 41.89,
+   "end": 42.06
+  },
+  {
+   "text": "de",
+   "seg": 21,
+   "srcStart": 46.25,
+   "srcEnd": 46.47,
+   "start": 42.05,
+   "end": 42.27
+  },
+  {
+   "text": "aparecer.",
+   "seg": 21,
+   "srcStart": 46.46,
+   "srcEnd": 47.11,
+   "start": 42.26,
+   "end": 42.91
+  },
+  {
+   "text": "Significa",
+   "seg": 22,
+   "srcStart": 47.52,
+   "srcEnd": 48.2,
+   "start": 43.22,
+   "end": 43.9
+  },
+  {
+   "text": "que",
+   "seg": 22,
+   "srcStart": 48.19,
+   "srcEnd": 48.27,
+   "start": 43.89,
+   "end": 43.97
+  },
+  {
+   "text": "vais",
+   "seg": 22,
+   "srcStart": 48.26,
+   "srcEnd": 48.42,
+   "start": 43.96,
+   "end": 44.12
+  },
+  {
+   "text": "ter",
+   "seg": 22,
+   "srcStart": 48.41,
+   "srcEnd": 48.49,
+   "start": 44.11,
+   "end": 44.19
+  },
+  {
+   "text": "uma",
+   "seg": 22,
+   "srcStart": 48.48,
+   "srcEnd": 48.75,
+   "start": 44.18,
+   "end": 44.45
+  },
+  {
+   "text": "ferramenta",
+   "seg": 22,
+   "srcStart": 48.74,
+   "srcEnd": 49.22,
+   "start": 44.44,
+   "end": 44.92
+  },
+  {
+   "text": "que",
+   "seg": 22,
+   "srcStart": 49.21,
+   "srcEnd": 49.29,
+   "start": 44.91,
+   "end": 44.99
+  },
+  {
+   "text": "vai",
+   "seg": 22,
+   "srcStart": 49.28,
+   "srcEnd": 49.37,
+   "start": 44.98,
+   "end": 45.07
+  },
+  {
+   "text": "te",
+   "seg": 22,
+   "srcStart": 49.36,
+   "srcEnd": 49.51,
+   "start": 45.06,
+   "end": 45.21
+  },
+  {
+   "text": "ajudar",
+   "seg": 22,
+   "srcStart": 49.5,
+   "srcEnd": 49.77,
+   "start": 45.2,
+   "end": 45.47
+  },
+  {
+   "text": "a",
+   "seg": 22,
+   "srcStart": 49.76,
+   "srcEnd": 50.0,
+   "start": 45.46,
+   "end": 45.7
+  },
+  {
+   "text": "partilhar",
+   "seg": 22,
+   "srcStart": 49.99,
+   "srcEnd": 50.32,
+   "start": 45.69,
+   "end": 46.02
+  },
+  {
+   "text": "o",
+   "seg": 22,
+   "srcStart": 50.31,
+   "srcEnd": 50.39,
+   "start": 46.01,
+   "end": 46.09
+  },
+  {
+   "text": "seu",
+   "seg": 22,
+   "srcStart": 50.38,
+   "srcEnd": 50.6,
+   "start": 46.08,
+   "end": 46.3
+  },
+  {
+   "text": "conhecimento,",
+   "seg": 22,
+   "srcStart": 50.59,
+   "srcEnd": 51.09,
+   "start": 46.29,
+   "end": 46.79
+  },
+  {
+   "text": "conectar",
+   "seg": 23,
+   "srcStart": 51.41,
+   "srcEnd": 51.87,
+   "start": 47.077,
+   "end": 47.537
+  },
+  {
+   "text": "e",
+   "seg": 23,
+   "srcStart": 51.86,
+   "srcEnd": 51.97,
+   "start": 47.527,
+   "end": 47.637
+  },
+  {
+   "text": "agregar",
+   "seg": 23,
+   "srcStart": 51.96,
+   "srcEnd": 52.22,
+   "start": 47.627,
+   "end": 47.887
+  },
+  {
+   "text": "as",
+   "seg": 23,
+   "srcStart": 52.21,
+   "srcEnd": 52.45,
+   "start": 47.877,
+   "end": 48.117
+  },
+  {
+   "text": "pessoas,",
+   "seg": 23,
+   "srcStart": 52.44,
+   "srcEnd": 52.65,
+   "start": 48.107,
+   "end": 48.317
+  },
+  {
+   "text": "mesmo",
+   "seg": 24,
+   "srcStart": 53.03,
+   "srcEnd": 53.22,
+   "start": 48.563,
+   "end": 48.753
+  },
+  {
+   "text": "que",
+   "seg": 25,
+   "srcStart": 53.48,
+   "srcEnd": 53.55,
+   "start": 49.013,
+   "end": 49.083
+  },
+  {
+   "text": "não",
+   "seg": 25,
+   "srcStart": 53.54,
+   "srcEnd": 53.68,
+   "start": 49.073,
+   "end": 49.213
+  },
+  {
+   "text": "tenhas",
+   "seg": 25,
+   "srcStart": 53.67,
+   "srcEnd": 53.81,
+   "start": 49.203,
+   "end": 49.343
+  },
+  {
+   "text": "tempo",
+   "seg": 25,
+   "srcStart": 53.8,
+   "srcEnd": 54.04,
+   "start": 49.333,
+   "end": 49.573
+  },
+  {
+   "text": "para",
+   "seg": 26,
+   "srcStart": 54.36,
+   "srcEnd": 54.6,
+   "start": 49.86,
+   "end": 50.1
+  },
+  {
+   "text": "estar",
+   "seg": 26,
+   "srcStart": 54.59,
+   "srcEnd": 54.72,
+   "start": 50.09,
+   "end": 50.22
+  },
+  {
+   "text": "diante",
+   "seg": 26,
+   "srcStart": 54.71,
+   "srcEnd": 54.78,
+   "start": 50.21,
+   "end": 50.28
+  },
+  {
+   "text": "das",
+   "seg": 26,
+   "srcStart": 54.77,
+   "srcEnd": 54.81,
+   "start": 50.27,
+   "end": 50.31
+  },
+  {
+   "text": "câmeras.",
+   "seg": 26,
+   "srcStart": 54.8,
+   "srcEnd": 54.98,
+   "start": 50.3,
+   "end": 50.48
+  },
+  {
+   "text": "Se",
+   "seg": 27,
+   "srcStart": 55.67,
+   "srcEnd": 55.77,
+   "start": 50.937,
+   "end": 51.037
+  },
+  {
+   "text": "tens",
+   "seg": 27,
+   "srcStart": 55.76,
+   "srcEnd": 55.83,
+   "start": 51.027,
+   "end": 51.097
+  },
+  {
+   "text": "conhecimento",
+   "seg": 27,
+   "srcStart": 55.82,
+   "srcEnd": 56.25,
+   "start": 51.087,
+   "end": 51.517
+  },
+  {
+   "text": "para",
+   "seg": 27,
+   "srcStart": 56.24,
+   "srcEnd": 56.68,
+   "start": 51.507,
+   "end": 51.947
+  },
+  {
+   "text": "partilhar,",
+   "seg": 27,
+   "srcStart": 56.67,
+   "srcEnd": 57.1,
+   "start": 51.937,
+   "end": 52.333
+  },
+  {
+   "text": "mas",
+   "seg": 27,
+   "srcStart": 57.09,
+   "srcEnd": 57.16,
+   "start": 52.323,
+   "end": 52.393
+  },
+  {
+   "text": "o",
+   "seg": 27,
+   "srcStart": 57.15,
+   "srcEnd": 57.22,
+   "start": 52.383,
+   "end": 52.453
+  },
+  {
+   "text": "tempo",
+   "seg": 27,
+   "srcStart": 57.21,
+   "srcEnd": 57.55,
+   "start": 52.443,
+   "end": 52.783
+  },
+  {
+   "text": "te",
+   "seg": 27,
+   "srcStart": 57.54,
+   "srcEnd": 57.61,
+   "start": 52.773,
+   "end": 52.843
+  },
+  {
+   "text": "limita,",
+   "seg": 27,
+   "srcStart": 57.6,
+   "srcEnd": 57.93,
+   "start": 52.833,
+   "end": 53.163
+  },
+  {
+   "text": "isso",
+   "seg": 28,
+   "srcStart": 58.18,
+   "srcEnd": 58.38,
+   "start": 53.347,
+   "end": 53.547
+  },
+  {
+   "text": "não",
+   "seg": 28,
+   "srcStart": 58.37,
+   "srcEnd": 58.45,
+   "start": 53.537,
+   "end": 53.617
+  },
+  {
+   "text": "significa",
+   "seg": 28,
+   "srcStart": 58.44,
+   "srcEnd": 58.92,
+   "start": 53.607,
+   "end": 54.087
+  },
+  {
+   "text": "que",
+   "seg": 28,
+   "srcStart": 58.91,
+   "srcEnd": 59.04,
+   "start": 54.077,
+   "end": 54.207
+  },
+  {
+   "text": "tu",
+   "seg": 28,
+   "srcStart": 59.03,
+   "srcEnd": 59.31,
+   "start": 54.197,
+   "end": 54.477
+  },
+  {
+   "text": "tens",
+   "seg": 28,
+   "srcStart": 59.3,
+   "srcEnd": 59.38,
+   "start": 54.467,
+   "end": 54.547
+  },
+  {
+   "text": "que",
+   "seg": 28,
+   "srcStart": 59.37,
+   "srcEnd": 59.6,
+   "start": 54.537,
+   "end": 54.767
+  },
+  {
+   "text": "trabalhar",
+   "seg": 28,
+   "srcStart": 59.59,
+   "srcEnd": 59.85,
+   "start": 54.757,
+   "end": 55.017
+  },
+  {
+   "text": "mais.",
+   "seg": 28,
+   "srcStart": 59.84,
+   "srcEnd": 59.92,
+   "start": 55.007,
+   "end": 55.087
+  },
+  {
+   "text": "Significa",
+   "seg": 29,
+   "srcStart": 60.33,
+   "srcEnd": 61.13,
+   "start": 55.497,
+   "end": 56.297
+  },
+  {
+   "text": "que",
+   "seg": 29,
+   "srcStart": 61.12,
+   "srcEnd": 61.2,
+   "start": 56.287,
+   "end": 56.367
+  },
+  {
+   "text": "talvez",
+   "seg": 29,
+   "srcStart": 61.19,
+   "srcEnd": 61.5,
+   "start": 56.357,
+   "end": 56.667
+  },
+  {
+   "text": "precisas",
+   "seg": 29,
+   "srcStart": 61.49,
+   "srcEnd": 61.96,
+   "start": 56.657,
+   "end": 57.127
+  },
+  {
+   "text": "mudar",
+   "seg": 29,
+   "srcStart": 61.95,
+   "srcEnd": 62.16,
+   "start": 57.117,
+   "end": 57.327
+  },
+  {
+   "text": "o",
+   "seg": 29,
+   "srcStart": 62.15,
+   "srcEnd": 62.25,
+   "start": 57.317,
+   "end": 57.417
+  },
+  {
+   "text": "seu",
+   "seg": 29,
+   "srcStart": 62.24,
+   "srcEnd": 62.33,
+   "start": 57.407,
+   "end": 57.497
+  },
+  {
+   "text": "processo.",
+   "seg": 29,
+   "srcStart": 62.32,
+   "srcEnd": 62.81,
+   "start": 57.487,
+   "end": 57.977
+  },
+  {
+   "text": "Para",
+   "seg": 30,
+   "srcStart": 63.25,
+   "srcEnd": 63.4,
+   "start": 58.217,
+   "end": 58.367
+  },
+  {
+   "text": "isso,",
+   "seg": 30,
+   "srcStart": 63.39,
+   "srcEnd": 63.53,
+   "start": 58.357,
+   "end": 58.497
+  },
+  {
+   "text": "siga",
+   "seg": 31,
+   "srcStart": 63.94,
+   "srcEnd": 64.1,
+   "start": 58.773,
+   "end": 58.933
+  },
+  {
+   "text": "o",
+   "seg": 31,
+   "srcStart": 64.09,
+   "srcEnd": 64.16,
+   "start": 58.923,
+   "end": 58.993
+  },
+  {
+   "text": "meu",
+   "seg": 31,
+   "srcStart": 64.15,
+   "srcEnd": 64.29,
+   "start": 58.983,
+   "end": 59.123
+  },
+  {
+   "text": "perfil,",
+   "seg": 31,
+   "srcStart": 64.28,
+   "srcEnd": 64.77,
+   "start": 59.113,
+   "end": 59.57
+  },
+  {
+   "text": "que",
+   "seg": 31,
+   "srcStart": 64.76,
+   "srcEnd": 64.83,
+   "start": 59.56,
+   "end": 59.63
+  },
+  {
+   "text": "eu",
+   "seg": 31,
+   "srcStart": 64.82,
+   "srcEnd": 64.9,
+   "start": 59.62,
+   "end": 59.7
+  },
+  {
+   "text": "vou",
+   "seg": 31,
+   "srcStart": 64.89,
+   "srcEnd": 64.96,
+   "start": 59.69,
+   "end": 59.76
+  },
+  {
+   "text": "mostrar",
+   "seg": 31,
+   "srcStart": 64.95,
+   "srcEnd": 65.19,
+   "start": 59.75,
+   "end": 59.99
+  },
+  {
+   "text": "tudo",
+   "seg": 31,
+   "srcStart": 65.18,
+   "srcEnd": 65.4,
+   "start": 59.98,
+   "end": 60.2
+  },
+  {
+   "text": "isso",
+   "seg": 31,
+   "srcStart": 65.39,
+   "srcEnd": 65.75,
+   "start": 60.19,
+   "end": 60.55
+  },
+  {
+   "text": "todos",
+   "seg": 31,
+   "srcStart": 65.74,
+   "srcEnd": 65.94,
+   "start": 60.54,
+   "end": 60.74
+  },
+  {
+   "text": "os",
+   "seg": 31,
+   "srcStart": 65.93,
+   "srcEnd": 66.09,
+   "start": 60.73,
+   "end": 60.89
+  },
+  {
+   "text": "dias.",
+   "seg": 31,
+   "srcStart": 66.08,
+   "srcEnd": 66.22,
+   "start": 60.88,
+   "end": 61.02
+  },
+  {
+   "text": "Deixe",
+   "seg": 32,
+   "srcStart": 66.72,
+   "srcEnd": 66.94,
+   "start": 61.387,
+   "end": 61.607
+  },
+  {
+   "text": "o",
+   "seg": 32,
+   "srcStart": 66.93,
+   "srcEnd": 66.98,
+   "start": 61.597,
+   "end": 61.647
+  },
+  {
+   "text": "seu",
+   "seg": 32,
+   "srcStart": 66.97,
+   "srcEnd": 67.03,
+   "start": 61.637,
+   "end": 61.697
+  },
+  {
+   "text": "like,",
+   "seg": 32,
+   "srcStart": 67.02,
+   "srcEnd": 67.11,
+   "start": 61.687,
+   "end": 61.777
+  },
+  {
+   "text": "curte",
+   "seg": 33,
+   "srcStart": 67.48,
+   "srcEnd": 67.54,
+   "start": 61.98,
+   "end": 62.04
+  },
+  {
+   "text": "e",
+   "seg": 34,
+   "srcStart": 68.02,
+   "srcEnd": 68.04,
+   "start": 62.287,
+   "end": 62.307
+  },
+  {
+   "text": "compartilhe.",
+   "seg": 34,
+   "srcStart": 68.03,
+   "srcEnd": 68.3,
+   "start": 62.297,
+   "end": 62.567
+  }
+ ],
+ "sentences": [
+  {
+   "seg": 0,
+   "text": "Um dos meus maiores problemas nunca foi a falta de ideias,",
+   "start": 0.0,
+   "end": 2.433
+  },
+  {
+   "seg": 1,
+   "text": "mas sim de tempo para transformar essas ideias em conteúdo.",
+   "start": 2.433,
+   "end": 5.467
+  },
+  {
+   "seg": 2,
+   "text": "Tenho que parar, gravar, repetir partes, editar, colocar legendas",
+   "start": 5.467,
+   "end": 9.633
+  },
+  {
+   "seg": 3,
+   "text": "e publicar.",
+   "start": 9.633,
+   "end": 10.367
+  },
+  {
+   "seg": 4,
+   "text": "E quando tens trabalho, responsabilidades e outras prioridades,",
+   "start": 10.367,
+   "end": 13.3
+  },
+  {
+   "seg": 5,
+   "text": "produzir conteúdo",
+   "start": 13.3,
+   "end": 14.267
+  },
+  {
+   "seg": 6,
+   "text": "constantemente torna-se um pouco complicado.",
+   "start": 14.267,
+   "end": 16.367
+  },
+  {
+   "seg": 7,
+   "text": "Até que pude perceber que podia utilizar a inteligência artificial",
+   "start": 16.367,
+   "end": 19.433
+  },
+  {
+   "seg": 8,
+   "text": "para mudar completamente este processo.",
+   "start": 19.433,
+   "end": 20.947
+  },
+  {
+   "seg": 9,
+   "text": "Hoje eu pego todo o meu conhecimento,",
+   "start": 21.103,
+   "end": 22.567
+  },
+  {
+   "seg": 10,
+   "text": "ideias e tudo aquilo que eu aprendo, transformo isso em um roteiro,",
+   "start": 22.567,
+   "end": 25.267
+  },
+  {
+   "seg": 11,
+   "text": "prompts e vídeos.",
+   "start": 25.267,
+   "end": 26.367
+  },
+  {
+   "seg": 12,
+   "text": "A ideia",
+   "start": 26.367,
+   "end": 26.9
+  },
+  {
+   "seg": 13,
+   "text": "continua a ser a minha. A inteligência artificial ajuda a estruturar a mensagem,",
+   "start": 26.9,
+   "end": 30.133
+  },
+  {
+   "seg": 14,
+   "text": "a melhorar os roteiros",
+   "start": 30.133,
+   "end": 31.267
+  },
+  {
+   "seg": 15,
+   "text": "e a construir",
+   "start": 31.267,
+   "end": 31.9
+  },
+  {
+   "seg": 16,
+   "text": "todas as cenas visuais.",
+   "start": 31.9,
+   "end": 33.067
+  },
+  {
+   "seg": 17,
+   "text": "E com ferramentas como o Remotion, consigo preparar este processo em vários vídeos dinâmicos",
+   "start": 33.067,
+   "end": 37.0
+  },
+  {
+   "seg": 18,
+   "text": "e produzir vários conteúdos",
+   "start": 37.0,
+   "end": 38.537
+  },
+  {
+   "seg": 19,
+   "text": "em um só dia.",
+   "start": 38.537,
+   "end": 39.3
+  },
+  {
+   "seg": 20,
+   "text": "E atenção.",
+   "start": 39.3,
+   "end": 40.0
+  },
+  {
+   "seg": 21,
+   "text": "Isso não significa substituir a sua imagem ou deixar de aparecer.",
+   "start": 40.0,
+   "end": 43.067
+  },
+  {
+   "seg": 22,
+   "text": "Significa que vais ter uma ferramenta que vai te ajudar a partilhar o seu conhecimento,",
+   "start": 43.067,
+   "end": 46.94
+  },
+  {
+   "seg": 23,
+   "text": "conectar e agregar as pessoas,",
+   "start": 46.94,
+   "end": 48.467
+  },
+  {
+   "seg": 24,
+   "text": "mesmo",
+   "start": 48.467,
+   "end": 48.883
+  },
+  {
+   "seg": 25,
+   "text": "que não tenhas tempo",
+   "start": 48.883,
+   "end": 49.733
+  },
+  {
+   "seg": 26,
+   "text": "para estar diante das câmeras.",
+   "start": 49.733,
+   "end": 50.67
+  },
+  {
+   "seg": 27,
+   "text": "Se tens conhecimento para partilhar, mas o tempo te limita,",
+   "start": 50.797,
+   "end": 53.267
+  },
+  {
+   "seg": 28,
+   "text": "isso não significa que tu tens que trabalhar mais.",
+   "start": 53.267,
+   "end": 55.297
+  },
+  {
+   "seg": 29,
+   "text": "Significa que talvez precisas mudar o seu processo.",
+   "start": 55.297,
+   "end": 58.1
+  },
+  {
+   "seg": 30,
+   "text": "Para isso,",
+   "start": 58.1,
+   "end": 58.6
+  },
+  {
+   "seg": 31,
+   "text": "siga o meu perfil, que eu vou mostrar tudo isso todos os dias.",
+   "start": 58.6,
+   "end": 61.27
+  },
+  {
+   "seg": 32,
+   "text": "Deixe o seu like,",
+   "start": 61.27,
+   "end": 61.867
+  },
+  {
+   "seg": 33,
+   "text": "curte",
+   "start": 61.867,
+   "end": 62.2
+  },
+  {
+   "seg": 34,
+   "text": "e compartilhe.",
+   "start": 62.2,
+   "end": 62.783
+  }
+ ]
+}
