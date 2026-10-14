@@ -211,6 +211,47 @@ const riser = () => {
   return o;
 };
 
+// Porta a fechar: pancada grave + clique do trinco.
+const door = () => {
+  const n = len(0.5);
+  const o = new Float32Array(n);
+  let ph = 0;
+  let lp = 0;
+  for (let i = 0; i < n; i++) {
+    const t = i / SR;
+    const f = 52 + 40 * Math.exp(-t * 18);
+    ph += (2 * Math.PI * f) / SR;
+    const body = Math.sin(ph) * Math.exp(-t * 9) * Math.min(1, t / 0.002);
+    const nz = rnd() * 2 - 1;
+    lp += 0.35 * (nz - lp);
+    const knock = (nz - lp) * Math.exp(-t * 60) * 0.5;
+    const tl = t - 0.075;
+    const latch = tl > 0 ? (Math.sin(2 * Math.PI * 3100 * tl) * 0.5 + (rnd() * 2 - 1) * 0.5) * Math.exp(-tl * 160) * 0.45 : 0;
+    o[i] = body + knock + latch;
+  }
+  return o;
+};
+
+// Notas suaves tipo sino (sinal positivo = sobe, negativo = desce).
+const notes = (seq, dur) => {
+  const n = len(dur);
+  const o = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    const tt = i / SR;
+    let s = 0;
+    for (const nt of seq) {
+      const t = tt - nt.at;
+      if (t < 0) continue;
+      const env = Math.min(1, t / 0.005) * Math.exp(-t * nt.decay);
+      s += (Math.sin(2 * Math.PI * nt.f * t) + nt.h * Math.sin(2 * Math.PI * nt.f * 2 * t) + nt.h * 0.5 * Math.sin(2 * Math.PI * nt.f * 3 * t)) * env;
+    }
+    o[i] = s;
+  }
+  return o;
+};
+const yes = () => notes([{ f: 659.3, at: 0, decay: 7, h: 0.15 }, { f: 987.8, at: 0.09, decay: 5, h: 0.12 }], 0.7);
+const no = () => notes([{ f: 440, at: 0, decay: 9, h: 0.35 }, { f: 349.2, at: 0.11, decay: 7, h: 0.35 }], 0.6);
+
 // Entradas
 writeWav("whoosh.wav", whoosh(0.55, 300, 3200), -37);
 writeWav("swish.wav", whoosh(0.28, 900, 5200), -38);
@@ -224,4 +265,8 @@ writeWav("shimmer.wav", shimmer(), -31);
 // Alertas
 writeWav("alert.wav", alert(), -33);
 writeWav("ding.wav", ding(), -21);
+// Sinais (vídeo 2)
+writeWav("door.wav", door(), -30);
+writeWav("yes.wav", yes(), -32);
+writeWav("no.wav", no(), -32);
 console.log("SFX gerados em", out);

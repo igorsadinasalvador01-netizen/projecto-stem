@@ -1,4 +1,4 @@
 node_modules/
 out/check/
-out/render.log
+out/*.log
 .remotion/
