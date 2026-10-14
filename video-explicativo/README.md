@@ -223,3 +223,32 @@ números dos capítulos ficam ≥ 1 dB abaixo da voz; o estalido no último foto
 ```bash
 npx remotion render src/index.ts Explicativo7 out/video-explicativo-7.mp4 --codec h264 --crf 16 --audio-bitrate 320k
 ```
+
+---
+
+# Vídeo 8 — "O truque da opção-isca" (composição `Explicativo8`)
+
+Mesma dinâmica dos vídeos 6 e 7 (fios de ligação, batimento, fios que se partem,
+entradas em arco), num **fundo e modelo dark**: superfícies `night` (carvão com brilho
+turquesa) e `abyss` (turquesa quase preto), vidro fumado (`DarkCard`), turquesa
+luminoso e verde/vermelho mais vivos para sinais (tokens `d4`), acabamento com grão
+e vinheta escura (`Finish4`). Peças novas em `src/v8/Sweet.tsx`: cupcake ilustrado,
+etiquetas de preço que balançam e focos de luz de palco.
+Áudio `public/narracao8.m4a` (30,63 s; voz intacta).
+
+| # | Tempo | Narração | Ideia · tema · transição |
+|---|---|---|---|
+| 1 | 0–3,0 s | o cliente compra dois produtos em vez de um | o cliente liga-se a uma caixa que se divide em duas (×2), "um" riscado · noite · pontos |
+| 2 | 3,0–5,9 s | você vende cupcakes a 5 reais | cupcake sob um foco de luz, etiqueta R$ 5 a balançar · abismo · anéis · íris |
+| 3 | 5,9–11,6 s | opção maior por 9; dois pequenos por 10 | palco com três focos: pequeno, grande e par · noite · chão · painel |
+| 4 | 11,6–17,9 s | três escolhas: pequeno 5, grande 9, dois por 10 | menu de vidro ligado ao cliente; cada linha acende quando é dita · abismo · grelha · íris |
+| 5 | 17,9–24,3 s | pouco · não vale tanto · +1 real = melhor negócio | três colunas; os fios para o pequeno e o grande partem-se, "+ R$ 1", o par acende a verde · noite · diagonais · zoom |
+| 6 | 24,3–28,8 s | o truque: uma opção que existe só para escolherem o que você quer | o grande vira "isca", seta para o par, o cliente larga a isca e liga-se ao alvo · abismo · anéis · íris |
+| 7 | 28,8–30,6 s | siga para mais estratégias de marketing | botão Seguir → Seguindo · noite · íris |
+
+**Mistura:** `sfxGain` = 3,8 com *ducking* (`src/v8/mix8.json`); efeitos sempre ≥ 2,8 dB
+abaixo da voz. O estalido no último fotograma (30,60 s) vem do áudio original.
+
+```bash
+npx remotion render src/index.ts Explicativo8 out/video-explicativo-8.mp4 --codec h264 --crf 16 --audio-bitrate 320k
+```
