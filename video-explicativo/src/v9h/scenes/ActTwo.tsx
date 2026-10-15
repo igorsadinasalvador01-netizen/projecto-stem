@@ -1,8 +1,8 @@
 import React from "react";
-import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, interpolate, OffthreadVideo, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { clamp, useAt } from "../../components/Motion";
 import { theme } from "../../theme";
-import { A, AI_GRAD, Backdrop, C, F, FaceCard, FaceFull, Glass, Laptop, Phone, SceneInH, THUMBS } from "../Premium";
+import { A, AI_GRAD, Backdrop, C, Cursor, F, FaceCard, FaceFull, Glass, Laptop, Phone, Pic, PREVIEW, SCN, SceneInH, SideCard, STILL, VIDS, VideoThumb } from "../Premium";
 import { SCENESH, t9 } from "../timelineH";
 
 const S = (id: string) => SCENESH.find((s) => s.id === id)!;
@@ -26,12 +26,58 @@ export const Orb: React.FC<{ size: number; energy?: number }> = ({ size, energy 
 const STEP_LABELS = ["Parar", "Gravar", "Repetir", "Editar", "Legendas", "Publicar"];
 
 // ——— b1: a virada — rosto com luz de nascer do sol ———
+const AppIcon: React.FC<{ s: number }> = ({ s }) => (
+  <div style={{ width: s, height: s, borderRadius: s * 0.26, background: "#fff", border: `1px solid ${C.line}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+    <div style={{ transform: `scale(${(s * 0.62) / 160})`, width: 160, height: 160, flexShrink: 0 }}>
+      <Orb size={160} energy={0.4} />
+    </div>
+  </div>
+);
 export const B1: React.FC = () => {
   const frame = useCurrentFrame();
+  const at = useAt(S("b1").from);
   const light = interpolate(frame, [0, 45], [0, 1], clamp);
+  const pude = at(t9("pude", 16.9));
+  const per = at(t9("perceber", 17.2));
   return (
     <SceneInH kind="light">
       <FaceFull sceneFrom={S("b1").from} grade="dawn" act="dawn" light={light} />
+      {/* notificações: a ideia chega */}
+      <SideCard x={130} y={250} w={480} at={8} pad="18px 20px">
+        <div style={{ display: "flex", gap: 16 }}>
+          <AppIcon s={56} />
+          <div style={{ flex: 1 }}>
+            <div style={{ display: "flex", fontSize: 15, fontWeight: 700, letterSpacing: "0.06em", color: D.dim }}>
+              ASSISTENTE IA<span style={{ marginLeft: "auto", fontWeight: 500, letterSpacing: 0 }}>agora</span>
+            </div>
+            <div style={{ fontSize: 21, fontWeight: 600, lineHeight: 1.3, marginTop: 4 }}>Posso transformar as tuas ideias em roteiros e vídeos.</div>
+          </div>
+        </div>
+      </SideCard>
+      <SideCard x={160} y={450} w={450} at={per} pad="16px 18px">
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <VideoThumb i={3} radius={10} style={{ width: 58, height: 80, flexShrink: 0 }} />
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 15, fontWeight: 700, letterSpacing: "0.06em", color: D.dim }}>RASCUNHO → ROTEIRO</div>
+            <div style={{ fontSize: 21, fontWeight: 600, marginTop: 2 }}>{VIDS[3].title}</div>
+          </div>
+          <div style={{ width: 36, height: 36, borderRadius: 18, background: C.good, color: "#fff", fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center" }}>✓</div>
+        </div>
+      </SideCard>
+      {/* antes → depois */}
+      <SideCard x={1320} y={270} w={460} at={pude} from="right" pad="24px 26px">
+        <div style={{ fontSize: 16, fontWeight: 700, letterSpacing: "0.1em", color: D.faint }}>ANTES</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 8 }}>
+          <div style={{ fontSize: 26, fontWeight: 600 }}>6 passos à mão</div>
+          <div style={{ marginLeft: "auto", padding: "4px 12px", borderRadius: 999, background: C.warnSoft, color: C.warn, fontWeight: 700, fontSize: 20 }}>≈ 3 h</div>
+        </div>
+        <div style={{ height: 1, background: C.line, margin: "18px 0" }} />
+        <div style={{ fontSize: 16, fontWeight: 700, letterSpacing: "0.1em", color: D.faint }}>DEPOIS</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 8 }}>
+          <div style={{ fontSize: 26, fontWeight: 600 }}>1 fluxo com IA</div>
+          <div style={{ marginLeft: "auto", padding: "4px 12px", borderRadius: 999, background: C.goodSoft, color: C.good, fontWeight: 700, fontSize: 20 }}>✓ simples</div>
+        </div>
+      </SideCard>
     </SceneInH>
   );
 };
@@ -141,12 +187,32 @@ const Src: React.FC<{ at: number; icon: string; title: string; sub: string }> = 
     </div>
   );
 };
+const Clips: React.FC<{ at: number }> = ({ at }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const p = spring({ frame: frame - at, fps, config: snap });
+  return (
+    <div style={{ padding: "16px 18px", borderRadius: 18, background: "#fff", border: `1px solid ${C.line}`, boxShadow: "0 10px 24px -14px rgba(15,23,42,0.25)", opacity: p, transform: `translateX(${(1 - p) * -60}px)` }}>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 12 }}>
+        <div style={{ fontFamily: F.sans, fontWeight: 700, fontSize: 24, color: D.ink }}>Gravações</div>
+        <div style={{ fontFamily: F.sans, fontSize: 18, color: D.dim }}>12 clipes</div>
+      </div>
+      <div style={{ display: "flex", gap: 8 }}>
+        {STILL.map((src, k) => (
+          <div key={k} style={{ position: "relative", flex: 1, height: 92, borderRadius: 10, overflow: "hidden" }}>
+            <Pic src={src} pos="50% 28%" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 const Out: React.FC<{ at: number; title: string; children: React.ReactNode }> = ({ at, title, children }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const p = spring({ frame: frame - at, fps, config: snap });
   return (
-    <div style={{ borderRadius: 18, background: "#fff", border: `1px solid ${C.line}`, padding: 18, boxShadow: "0 14px 30px -18px rgba(15,23,42,0.3)", opacity: p, transform: `translateY(${(1 - p) * 30}px) scale(${0.94 + p * 0.06})` }}>
+    <div style={{ height: 468, boxSizing: "border-box", borderRadius: 18, background: "#fff", border: `1px solid ${C.line}`, padding: 18, boxShadow: "0 14px 30px -18px rgba(15,23,42,0.3)", opacity: p, transform: `translateY(${(1 - p) * 30}px) scale(${0.94 + p * 0.06})` }}>
       <div style={{ fontFamily: F.sans, fontWeight: 700, fontSize: 22, color: D.ink, marginBottom: 12, display: "flex", alignItems: "center", gap: 10 }}>
         <span style={{ width: 10, height: 10, borderRadius: 5, backgroundImage: AI_GRAD }} />
         {title}
@@ -164,6 +230,8 @@ export const B3: React.FC = () => {
   const prompt = "Transforma isto em roteiro, prompts e vídeos";
   const n = Math.max(0, Math.min(prompt.length, Math.floor((frame - typeAt) * 2.2)));
   const glow = interpolate(frame, [typeAt, typeAt + 10], [0, 1], clamp);
+  const gen = at(t9("roteiro", 24.5)) - 3;
+  const genPress = interpolate(frame - gen, [-3, 0, 5], [0, 1, 0], clamp);
   return (
     <SceneInH kind="slide">
       <Backdrop act="dawn" />
@@ -181,37 +249,73 @@ export const B3: React.FC = () => {
               <Src at={at(t9("conhecimento", 21.5))} icon="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5zM20 17v4H6.5" title="Conhecimento" sub="anos de experiência" />
               <Src at={at(t9("ideias", 22.5))} icon="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" title="Ideias" sub="47 rascunhos" />
               <Src at={at(t9("aprendo", 23.5))} icon="M22 10L12 5 2 10l10 5 10-5zM6 12v5c3 2 9 2 12 0v-5" title="Aprendizados" sub="o que aprendo todos os dias" />
+              <Clips at={at(t9("aprendo", 23.5)) + 5} />
             </div>
             {/* barra de pedido com brilho de IA */}
             <div style={{ position: "absolute", left: 380, right: 24, top: 74, height: 80, borderRadius: 20, padding: 2.5, backgroundImage: AI_GRAD, opacity: 0.35 + glow * 0.65, boxShadow: `0 0 ${40 * glow}px rgba(255,90,140,0.35)` }}>
               <div style={{ width: "100%", height: "100%", borderRadius: 18, background: "#fff", display: "flex", alignItems: "center", padding: "0 22px", fontSize: 24, color: D.ink }}>
                 {n > 0 ? prompt.slice(0, n) : <span style={{ color: D.faint }}>Pergunta ou descreve…</span>}
                 {n > 0 && n < prompt.length && <span style={{ width: 3, height: 30, background: D.accent, marginLeft: 3 }} />}
+                <div style={{ marginLeft: "auto", padding: "10px 22px", borderRadius: 12, backgroundImage: AI_GRAD, color: "#fff", fontWeight: 700, fontSize: 21, transform: `scale(${1 - genPress * 0.08})`, boxShadow: "0 8px 18px -8px rgba(37,99,235,0.6)" }}>Gerar ✦</div>
               </div>
             </div>
             <div style={{ position: "absolute", left: 380, right: 24, top: 180, display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
               <Out at={at(t9("roteiro", 24.5))} title="Roteiro">
-                {[0.95, 0.8, 0.9, 0.6, 0.85, 0.7].map((w, i) => (
-                  <div key={i} style={{ height: 10, width: `${w * 100}%`, borderRadius: 5, background: i === 0 ? C.ink : C.line, marginBottom: 12 }} />
-                ))}
+                {[
+                  ["Gancho", "O problema nunca foram as ideias."],
+                  ["Problema", "Parar, gravar, repetir, editar…"],
+                  ["Virada", "A IA muda o meu processo."],
+                  ["Mensagem", "A ideia continua a ser minha."],
+                  ["Apelo", "Siga o perfil · like · partilhe."],
+                ].map(([k, v], i) => {
+                  const lp = spring({ frame: frame - at(t9("roteiro", 24.5)) - 3 - i * 3, fps, config: snap }); // eslint-disable-line react-hooks/rules-of-hooks
+                  return (
+                    <div key={k} style={{ marginBottom: 10, opacity: lp, transform: `translateY(${(1 - lp) * 10}px)` }}>
+                      <div style={{ fontFamily: F.mono, fontSize: 13, color: i === 2 ? D.accent : D.faint }}>
+                        {String(i + 1).padStart(2, "0")} · {k.toUpperCase()}
+                      </div>
+                      <div style={{ fontSize: 16, fontWeight: 600, lineHeight: 1.3, color: D.ink }}>{v}</div>
+                    </div>
+                  );
+                })}
+                <div style={{ display: "inline-block", marginTop: 2, padding: "5px 12px", borderRadius: 999, background: C.blueSoft, color: D.accent, fontWeight: 700, fontSize: 15 }}>≈ 60 s · 9:16</div>
               </Out>
               <Out at={at(t9("prompts", 25))} title="Prompts">
-                {["cena 1 · gancho", "cena 2 · problema", "cena 3 · virada"].map((p, i) => (
-                  <div key={i} style={{ fontFamily: F.mono, fontSize: 16, color: D.ink, padding: "8px 10px", borderRadius: 8, background: C.graySoft, marginBottom: 8 }}>
-                    {p}
-                  </div>
-                ))}
+                {[
+                  ["cena 1 · gancho", "rosto, luz de noite"],
+                  ["cena 2 · problema", "editor no telemóvel"],
+                  ["cena 3 · agenda", "semana sem espaço"],
+                  ["cena 4 · virada", "esfera de IA, luz"],
+                  ["cena 5 · processo", "roteiro → vídeos"],
+                  ["cena 6 · apelo", "perfil + like"],
+                ].map(([a, b], i) => {
+                  const pp = spring({ frame: frame - at(t9("prompts", 25)) - i * 2, fps, config: snap }); // eslint-disable-line react-hooks/rules-of-hooks
+                  return (
+                    <div key={i} style={{ padding: "7px 10px", borderRadius: 9, background: C.graySoft, marginBottom: 8, opacity: pp, transform: `translateX(${(1 - pp) * 14}px)` }}>
+                      <div style={{ fontFamily: F.mono, fontSize: 15, color: D.ink }}>{a}</div>
+                      <div style={{ fontSize: 14, color: D.dim }}>{b}</div>
+                    </div>
+                  );
+                })}
               </Out>
               <Out at={at(t9("vídeos", 25.5))} title="Vídeos">
-                <div style={{ display: "flex", gap: 10 }}>
-                  {[0, 1, 2].map((k) => (
-                    <div key={k} style={{ flex: 1, height: 150, borderRadius: 12, background: `linear-gradient(160deg, ${THUMBS[[0, 1, 5][k]]})`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <div style={{ width: 0, height: 0, borderLeft: "20px solid #fff", borderTop: "12px solid transparent", borderBottom: "12px solid transparent", marginLeft: 6 }} />
-                    </div>
-                  ))}
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
+                  {[0, 5, 8, 3, 6, 7].map((i, k) => {
+                    const vp = spring({ frame: frame - at(t9("vídeos", 25.5)) - k * 2, fps, config: snap }); // eslint-disable-line react-hooks/rules-of-hooks
+                    return <VideoThumb key={i} i={i} play={28} dur={10} radius={10} style={{ height: 186, opacity: vp, transform: `scale(${0.8 + vp * 0.2})` }} />;
+                  })}
                 </div>
               </Out>
             </div>
+            <Cursor
+              size={1.1}
+              keys={[
+                { f: at(t9("aprendo", 23.5)) - 4, x: 250, y: 420 },
+                { f: typeAt - 3, x: 560, y: 118, click: true },
+                { f: gen, x: 1046, y: 116, click: true },
+                { f: at(t9("vídeos", 25.5)) + 8, x: 990, y: 300 },
+              ]}
+            />
           </div>
         </Laptop>
       </div>
@@ -304,31 +408,59 @@ export const B5: React.FC = () => {
             </div>
           );
         })}
+        {/* duração por parte */}
+        <div style={{ position: "absolute", left: 34, right: 34, bottom: 34, opacity: order }}>
+          <div style={{ display: "flex", justifyContent: "space-between", fontFamily: F.sans, fontSize: 18, color: D.dim, marginBottom: 10 }}>
+            <span>Duração</span>
+            <span style={{ fontFamily: F.mono, color: D.ink }}>0:58 · 9:16</span>
+          </div>
+          <div style={{ display: "flex", gap: 6, height: 14 }}>
+            {[0.12, 0.28, 0.35, 0.25].map((w, k) => (
+              <div key={k} style={{ flex: w, borderRadius: 7, background: ["#93C5FD", "#60A5FA", "#2563EB", "#1D4ED8"][k], transform: `scaleX(${interpolate(order, [k * 0.15, 0.55 + k * 0.15], [0, 1], clamp)})`, transformOrigin: "left" }} />
+            ))}
+          </div>
+        </div>
       </Card>
       <Card x={690} n="02" title="Roteiro" on={active(f2)} delay={5}>
-        {[0.95, 0.85, 0.9, 0.7, 0.8].map((w, i) => (
-          <div key={i} style={{ position: "relative", height: 14, width: `${w * 100}%`, borderRadius: 7, background: C.line, marginBottom: 26 }}>
-            {i === 2 && <div style={{ position: "absolute", left: 0, top: 5, height: 4, width: `${strike * 100}%`, background: "#E5484D" }} />}
+        {["Um dos meus maiores problemas…", "Tenho que parar, gravar, repetir…", "Hoje vou explicar a técnica.", "Até que pude perceber…", "A ideia continua a ser a minha."].map((line, i) => (
+          <div key={i} style={{ position: "relative", fontFamily: F.sans, fontSize: 23, lineHeight: 1.25, color: i === 2 ? D.dim : D.ink, marginBottom: 16 }}>
+            <span style={{ fontFamily: F.mono, fontSize: 16, color: D.faint, marginRight: 10 }}>{String(i + 1).padStart(2, "0")}</span>
+            {line}
+            {i === 2 && <div style={{ position: "absolute", left: 34, top: 14, height: 3, width: `${strike * 82}%`, background: "#E5484D" }} />}
           </div>
         ))}
         <div style={{ opacity: insert, transform: `translateY(${(1 - insert) * 12}px)`, padding: "14px 18px", borderRadius: 14, background: "#E8F7EF", border: "1.5px solid #9FDDBE", fontFamily: F.sans, fontSize: 22, color: "#11633F" }}>
           Sugestão: começar pela emoção, não pela técnica.
         </div>
+        <div style={{ position: "absolute", left: 34, right: 34, bottom: 34 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", fontFamily: F.sans, fontSize: 18, color: D.dim, marginBottom: 10 }}>
+            <span>Clareza do roteiro</span>
+            <span style={{ fontFamily: F.mono, color: insert > 0.5 ? C.good : D.ink }}>{Math.round(62 + insert * 32)}%</span>
+          </div>
+          <div style={{ height: 14, borderRadius: 7, background: C.graySoft, overflow: "hidden" }}>
+            <div style={{ width: `${62 + insert * 32}%`, height: "100%", borderRadius: 7, background: insert > 0.5 ? C.good : "#93C5FD" }} />
+          </div>
+        </div>
       </Card>
       <Card x={1270} n="03" title="Cenas" on={active(f3)} delay={8}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 14 }}>
-          {[0, 1, 2, 3, 4, 5].map((k) => (
+          {SCN.map((src, k) => (
             <div
               key={k}
               style={{
-                height: 200,
+                position: "relative",
+                height: 244,
                 borderRadius: 14,
-                background: `linear-gradient(160deg, ${THUMBS[[0, 4, 3, 1, 2, 5][k]]})`,
-                opacity: 0.18 + lit(k) * 0.82,
+                overflow: "hidden",
+                background: C.graySoft,
+                opacity: 0.25 + lit(k) * 0.75,
                 transform: `scale(${0.92 + lit(k) * 0.08})`,
-                boxShadow: lit(k) > 0.5 ? "0 14px 26px -14px rgba(15,23,42,0.4)" : "none",
+                boxShadow: lit(k) > 0.5 ? "0 14px 26px -14px rgba(15,23,42,0.45)" : "none",
               }}
-            />
+            >
+              <Pic src={src} pos="50% 35%" filter={`grayscale(${1 - lit(k)})`} />
+              <div style={{ position: "absolute", left: 8, bottom: 8, padding: "2px 8px", borderRadius: 6, background: "rgba(0,0,0,0.55)", fontFamily: F.mono, fontSize: 14, color: "#fff" }}>C{k + 1}</div>
+            </div>
           ))}
         </div>
       </Card>
@@ -338,7 +470,6 @@ export const B5: React.FC = () => {
 
 // ——— b6: Remotion — código → pré-visualização → vários vídeos ———
 const CODE = ["<Composition", '  id="video-01"', "  fps={30}", "  width={1080}", "  height={1920}", "/>"];
-const GRADS = THUMBS;
 export const B6: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -349,6 +480,8 @@ export const B6: React.FC = () => {
   const many = at(t9("vários", 35.8));
   const fan = spring({ frame: frame - many, fps, config: { damping: 15, stiffness: 120, mass: 0.8 } });
   const rem = spring({ frame: frame - at(t9("remotion", 34)), fps, config: snap });
+  const go = at(t9("preparar", 34.5)) - 2;
+  const goPress = interpolate(frame - go, [-3, 0, 5], [0, 1, 0], clamp);
   let left = chars;
   return (
     <SceneInH kind="slide">
@@ -365,6 +498,7 @@ export const B6: React.FC = () => {
               <span style={{ width: 10, height: 10, borderRadius: 5, backgroundImage: AI_GRAD }} />
               Remotion
             </div>
+            <div style={{ marginLeft: 16, padding: "7px 16px", borderRadius: 10, background: frame >= go ? "#16A34A" : "#2563EB", fontFamily: F.sans, fontWeight: 700, fontSize: 18, color: "#fff", transform: `scale(${1 - goPress * 0.1})`, opacity: rem }}>▶ Render</div>
           </div>
           <div style={{ padding: "26px 32px", minHeight: 400 }}>
             {CODE.map((line, i) => {
@@ -385,9 +519,18 @@ export const B6: React.FC = () => {
             <div style={{ marginTop: 10, fontFamily: F.mono, fontSize: 18, color: "rgba(255,255,255,0.55)" }}>render · {Math.round(prog * 100)}%</div>
           </div>
         </div>
+        <Cursor
+          size={1.1}
+          keys={[
+            { f: at(t9("remotion", 34)) - 10, x: 560, y: 330 },
+            { f: go, x: 748, y: 27, click: true },
+            { f: many - 2, x: 640, y: 210 },
+          ]}
+          hideAt={many - 6}
+        />
       </div>
-      {/* pré-visualização → leque de vídeos */}
-      {GRADS.map((g, k) => {
+      {/* pré-visualização (o vídeo 9 real a correr) → leque com os vídeos reais */}
+      {VIDS.map((v, k) => {
         const off = k - 4;
         const x = 1360 + off * 150 * fan - fan * 220;
         const rot = off * 7 * fan;
@@ -403,7 +546,7 @@ export const B6: React.FC = () => {
               width: 340,
               height: 600,
               borderRadius: 30,
-              background: `linear-gradient(165deg, ${g})`,
+              background: "#0F172A",
               boxShadow: "0 40px 80px -30px rgba(15,23,42,0.45)",
               border: "4px solid #fff",
               transform: `rotate(${rot}deg)`,
@@ -413,10 +556,18 @@ export const B6: React.FC = () => {
               overflow: "hidden",
             }}
           >
-            <div style={{ position: "absolute", left: 26, right: 60, bottom: 40, height: 14, borderRadius: 7, background: "rgba(255,255,255,0.8)" }} />
-            <div style={{ position: "absolute", left: 26, right: 120, bottom: 70, height: 14, borderRadius: 7, background: "rgba(255,255,255,0.55)" }} />
-            <div style={{ position: "absolute", left: "50%", top: "42%", width: 0, height: 0, marginLeft: -12, borderLeft: "40px solid rgba(255,255,255,0.95)", borderTop: "24px solid transparent", borderBottom: "24px solid transparent" }} />
-            {k === 4 && fan < 0.5 && <div style={{ position: "absolute", left: 0, bottom: 0, height: 8, width: `${prog * 100}%`, background: "#fff" }} />}
+            {k === 4 ? (
+              <>
+                <OffthreadVideo src={staticFile(PREVIEW)} trimBefore={Math.round(33.3 * 30)} muted style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+                <div style={{ position: "absolute", left: 16, top: 16, padding: "5px 12px", borderRadius: 999, background: "rgba(0,0,0,0.5)", fontFamily: F.sans, fontWeight: 600, fontSize: 17, color: "#fff", display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ width: 8, height: 8, borderRadius: 4, background: fan > 0.5 ? "#16A34A" : "#60A5FA" }} />
+                  {fan > 0.5 ? "pronto" : "pré-visualização"}
+                </div>
+              </>
+            ) : (
+              <VideoThumb i={k} title={24} dur={16} play={64} radius={0} style={{ position: "absolute", inset: 0 }} />
+            )}
+            {k === 4 && fan < 0.5 && <div style={{ position: "absolute", left: 0, bottom: 0, height: 8, width: `${prog * 100}%`, backgroundImage: AI_GRAD }} />}
           </div>
         );
       })}
@@ -444,10 +595,10 @@ export const B7: React.FC = () => {
             <div style={{ fontSize: 20, color: D.dim }}>Agendados</div>
             <div style={{ fontSize: 44, fontWeight: 800, color: D.ink, letterSpacing: "-0.03em", marginBottom: 14 }}>Hoje</div>
             {times.map((tm, i) => (
-              <div key={tm} style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 12px", marginBottom: 8, borderRadius: 14, background: "#fff", border: `1px solid ${C.line}`, opacity: i < count ? 1 : 0.35 }}>
-                <div style={{ width: 34, height: 48, borderRadius: 8, background: `linear-gradient(165deg, ${GRADS[i]})` }} />
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 18, fontWeight: 700, color: D.ink }}>Vídeo {i + 1}</div>
+              <div key={tm} style={{ display: "flex", alignItems: "center", gap: 12, padding: "6px 10px", marginBottom: 6, borderRadius: 14, background: "#fff", border: `1px solid ${C.line}`, opacity: i < count ? 1 : 0.35 }}>
+                <VideoThumb i={i} radius={8} style={{ width: 36, height: 50, flexShrink: 0 }} />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 17, fontWeight: 700, color: D.ink, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{VIDS[i].title}</div>
                   <div style={{ fontSize: 15, color: D.dim }}>{tm}</div>
                 </div>
                 <div style={{ width: 28, height: 28, borderRadius: 14, background: i < count ? C.good : "#CBD5E1", color: "#fff", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center" }}>✓</div>

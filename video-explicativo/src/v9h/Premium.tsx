@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, interpolate, OffthreadVideo, random, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, Easing, Img, interpolate, OffthreadVideo, random, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { clamp } from "../components/Motion";
 import { theme } from "../theme";
 import { CUTS, FPS9, VOICE_END as VEND } from "../v9/timeline9";
@@ -34,6 +34,181 @@ export const AI_GRAD = "linear-gradient(90deg, #2563EB, #06B6D4 50%, #16A34A)";
 export const THUMBS = ["#2563EB,#60A5FA", "#0F172A,#475569", "#16A34A,#86EFAC", "#0EA5E9,#BAE6FD", "#64748B,#CBD5E1", "#1D4ED8,#93C5FD", "#15803D,#4ADE80", "#334155,#94A3B8", "#3B82F6,#DBEAFE"];
 
 export const F = { sans: theme.fonts.display, serif: theme.fonts.serif, mono: theme.fonts.mono, hand: theme.fonts.hand, body: theme.fonts.body };
+
+// ——— peças reais: os 9 vídeos já publicados (miniaturas + duração real),
+// cenas do vídeo 9 vertical e fotogramas do rosto (public/v9h/thumbs) ———
+export const VIDS = [
+  { src: "v9h/thumbs/v1.jpg", title: "A sua primeira venda", dur: "0:24" },
+  { src: "v9h/thumbs/v2.jpg", title: "Taxa de conversão", dur: "0:57" },
+  { src: "v9h/thumbs/v3.jpg", title: "O primeiro passo", dur: "0:22" },
+  { src: "v9h/thumbs/v4.jpg", title: "Errar e testar", dur: "0:31" },
+  { src: "v9h/thumbs/v5.jpg", title: "Quem faz a 1.ª venda", dur: "0:24" },
+  { src: "v9h/thumbs/v6.jpg", title: "Onde a venda acontece", dur: "0:29" },
+  { src: "v9h/thumbs/v7.jpg", title: "Clientes que discutem", dur: "0:36" },
+  { src: "v9h/thumbs/v8.jpg", title: "Um real a mais", dur: "0:30" },
+  { src: "v9h/thumbs/v9.jpg", title: "IA no meu processo", dur: "1:04" },
+];
+export const SCN = [1, 2, 3, 4, 5, 6].map((k) => `v9h/thumbs/s${k}.jpg`);
+export const STILL = [1, 2, 3, 4].map((k) => `v9h/thumbs/f${k}.jpg`);
+export const PREVIEW = "v9h/preview.mp4";
+
+export const Pic: React.FC<{ src: string; pos?: string; filter?: string; style?: React.CSSProperties }> = ({ src, pos = "50% 50%", filter, style }) => (
+  <Img src={staticFile(src)} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: pos, filter, ...style }} />
+);
+
+// miniatura de vídeo real: imagem, véu, botão de play em vidro, duração e título
+export const VideoThumb: React.FC<{ i: number; play?: number; title?: number; dur?: number; radius?: number; style?: React.CSSProperties; filter?: string }> = ({
+  i,
+  play = 0,
+  title = 0,
+  dur = 0,
+  radius = 12,
+  style,
+  filter,
+}) => {
+  const v = VIDS[i % VIDS.length];
+  return (
+    <div style={{ position: "relative", overflow: "hidden", borderRadius: radius, background: "#0F172A", ...style }}>
+      <Pic src={v.src} filter={filter} />
+      {(title > 0 || dur > 0) && <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.62))" }} />}
+      {play > 0 && (
+        <div style={{ position: "absolute", left: "50%", top: "50%", width: play, height: play, margin: -play / 2, borderRadius: play, background: "rgba(255,255,255,0.28)", backdropFilter: "blur(8px)", border: "1.5px solid rgba(255,255,255,0.55)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ width: 0, height: 0, marginLeft: play * 0.08, borderLeft: `${play * 0.3}px solid #fff`, borderTop: `${play * 0.19}px solid transparent`, borderBottom: `${play * 0.19}px solid transparent` }} />
+        </div>
+      )}
+      {dur > 0 && (
+        <div style={{ position: "absolute", right: dur * 0.5, bottom: dur * 0.5, padding: `${dur * 0.12}px ${dur * 0.4}px`, borderRadius: dur, background: "rgba(0,0,0,0.55)", fontFamily: F.mono, fontSize: dur, color: "#fff" }}>{v.dur}</div>
+      )}
+      {title > 0 && (
+        <div style={{ position: "absolute", left: title * 0.7, right: dur > 0 ? dur * 4.6 : title * 0.7, bottom: title * 0.6, fontFamily: F.sans, fontWeight: 700, fontSize: title, lineHeight: 1.15, color: "#fff", textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>{v.title}</div>
+      )}
+    </div>
+  );
+};
+
+// ——— cursor realista (seta do sistema ou toque no ecrã) com clique e onda ———
+export type CurKey = { f: number; x: number; y: number; click?: boolean };
+export const Cursor: React.FC<{ keys: CurKey[]; kind?: "arrow" | "touch"; size?: number; hideAt?: number }> = ({ keys, kind = "arrow", size = 1, hideAt }) => {
+  const frame = useCurrentFrame();
+  if (!keys.length) return null;
+  let x = keys[0].x;
+  let y = keys[0].y;
+  for (let i = 0; i < keys.length - 1; i++) {
+    const a = keys[i];
+    const b = keys[i + 1];
+    if (frame > b.f) {
+      x = b.x;
+      y = b.y;
+    } else if (frame >= a.f) {
+      const p = interpolate(frame, [a.f, b.f], [0, 1], { easing: Easing.bezier(0.45, 0, 0.15, 1), ...clamp });
+      const arc = Math.min(50, Math.hypot(b.x - a.x, b.y - a.y) * 0.1);
+      x = a.x + (b.x - a.x) * p;
+      y = a.y + (b.y - a.y) * p - Math.sin(p * Math.PI) * arc;
+    }
+  }
+  const op = interpolate(frame, [keys[0].f - 8, keys[0].f], [0, 1], clamp) * (hideAt !== undefined ? interpolate(frame, [hideAt, hideAt + 8], [1, 0], clamp) : 1);
+  if (op <= 0) return null;
+  let press = 0;
+  const waves: { d: number; x: number; y: number }[] = [];
+  keys.forEach((k) => {
+    if (!k.click) return;
+    const d = frame - k.f;
+    if (d >= -3 && d <= 5) press = Math.max(press, interpolate(d, [-3, 0, 5], [0, 1, 0], clamp));
+    if (d >= 0 && d < 18) waves.push({ d, x: k.x, y: k.y });
+  });
+  return (
+    <>
+      {waves.map((w, i) => {
+        const r = interpolate(w.d, [0, 18], [10, 46], { easing: theme.ease.out, ...clamp }) * size;
+        return (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              left: w.x - r,
+              top: w.y - r,
+              width: 2 * r,
+              height: 2 * r,
+              borderRadius: "50%",
+              border: `${3 * size}px solid ${kind === "touch" ? "rgba(255,255,255,0.9)" : "rgba(37,99,235,0.85)"}`,
+              background: kind === "touch" ? "rgba(255,255,255,0.12)" : "rgba(37,99,235,0.1)",
+              opacity: interpolate(w.d, [0, 18], [0.9, 0], clamp) * op,
+              pointerEvents: "none",
+            }}
+          />
+        );
+      })}
+      {kind === "arrow" ? (
+        <svg
+          width={30 * size}
+          height={40 * size}
+          viewBox="-2 -2 22 31"
+          style={{ position: "absolute", left: x - 2 * size, top: y - 2 * size, opacity: op, transform: `scale(${1 - press * 0.12})`, transformOrigin: "10% 8%", filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.35))", overflow: "visible" }}
+        >
+          <path d="M0 0 L0 22.5 L5.6 17.4 L9.4 26.2 L13 24.6 L9.3 16 L16.6 16 Z" fill="#111" stroke="#fff" strokeWidth={1.6} strokeLinejoin="round" />
+        </svg>
+      ) : (
+        <div
+          style={{
+            position: "absolute",
+            left: x - 27 * size,
+            top: y - 27 * size,
+            width: 54 * size,
+            height: 54 * size,
+            borderRadius: "50%",
+            background: `rgba(255,255,255,${0.42 + press * 0.3})`,
+            border: `${2 * size}px solid rgba(15,23,42,0.18)`,
+            boxShadow: "0 8px 18px rgba(0,0,0,0.3)",
+            backdropFilter: "blur(4px)",
+            opacity: op,
+            transform: `scale(${1 - press * 0.22})`,
+          }}
+        />
+      )}
+    </>
+  );
+};
+
+// ——— cartões laterais que preenchem o espaço à volta do rosto ———
+export const SideCard: React.FC<{ x: number; y: number; w: number; at: number; from?: "left" | "right"; out?: number; tilt?: number; children: React.ReactNode; style?: React.CSSProperties; pad?: string }> = ({
+  x,
+  y,
+  w,
+  at,
+  from = "left",
+  out,
+  tilt = 0,
+  children,
+  style,
+  pad = "22px 24px",
+}) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const p = spring({ frame: frame - at, fps, config: { damping: 17, stiffness: 140, mass: 0.75 } });
+  const o = out !== undefined ? interpolate(frame, [out, out + 10], [1, 0], clamp) : 1;
+  if (p <= 0.001) return null;
+  const dir = from === "left" ? -1 : 1;
+  const float = Math.sin((frame + x) / 38) * 5;
+  return (
+    <div style={{ position: "absolute", left: x, top: y, width: w, opacity: interpolate(p, [0, 0.35], [0, 1], clamp) * o, transform: `translateX(${(1 - p) * 70 * dir}px) translateY(${float}px) rotate(${tilt * p}deg) scale(${0.94 + p * 0.06})` }}>
+      <div
+        style={{
+          borderRadius: 26,
+          background: "rgba(255,255,255,0.92)",
+          border: "1px solid rgba(15,23,42,0.07)",
+          boxShadow: "0 40px 70px -34px rgba(15,23,42,0.4), 0 6px 18px -10px rgba(15,23,42,0.18)",
+          backdropFilter: "blur(20px)",
+          padding: pad,
+          fontFamily: F.sans,
+          color: BASE.ink,
+          ...style,
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+};
 
 const NOISE = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E")`;
 export const Grain: React.FC<{ o?: number }> = ({ o = 0.035 }) => {

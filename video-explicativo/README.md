@@ -308,6 +308,22 @@ moderna, realista e premium. Código em `src/v9h/`; trilha em `scripts/gen-v9h-a
 **Realismo:** telemóveis e portátil desenhados em detalhe, vidro, sombras suaves e profundidade.
 O rosto aparece em cartões verticais (sem esticar a imagem vertical), em cerca de 38% do vídeo.
 
+**Peças reais (sem espaços mortos):** em vez de gradientes vazios, tudo o que é "vídeo", "cena"
+ou "perfil" usa material real do autor (`public/v9h`, extraído com `scripts/extract-v9h-thumbs.sh`):
+- as miniaturas dos **9 vídeos já feitos**, com títulos e durações reais (lista de ideias, estúdio,
+  leque do Remotion, agenda do dia, grelha do perfil, "vídeo publicado", novo processo);
+- as **cenas reais do vídeo 9 vertical** no cartão "Cenas" e o próprio vídeo a correr na pré-visualização;
+- **fotogramas do rosto** nas gravações, no avatar do perfil e no "avatar gerado por IA" recusado;
+- o **perfil real do Instagram** recriado (@sergio_salvador10 · "IGOR SADINA| POLÍMATA", 3 publicações,
+  2127 seguidores, 31 a seguir, a bio real e os botões Seguir / Mensagem / Contactar): ao tocar em
+  "Seguir" passa a 2128, e "todos os dias" entram duas linhas de vídeos novos na grelha;
+- o **editor de vídeo no telemóvel** (como o CapCut: pista de clipes, forma de onda, "Toque para
+  adicionar legenda / música / autocolante", Editar · Áudio · Texto · Autocolantes · PiP · Efeitos);
+- **cartões laterais** à volta do rosto (ideias guardadas, notificação da IA, antes → depois,
+  atenção, processo atual vs. novo processo);
+- **cursor realista** (seta no portátil, toque no telemóvel) com onda de clique e som de clique
+  sintetizado (`scripts/gen-ui-sfx.py` → `public/sfx/click.wav`, `tap.wav`).
+
 **Referências emocionais:**
 - caderno cheio de ideias vs. "0 publicados";
 - "47 ideias por gravar";
@@ -323,11 +339,13 @@ O rosto aparece em cartões verticais (sem esticar a imagem vertical), em cerca 
 
 | Ato | Tempo | Cenas |
 |---|---|---|
-| 01 · O problema | 0–16,4 s | rosto · caderno de ideias + telemóvel (tempo livre 0 h 15, 47 rascunhos, 0 publicados) · telemóvel no tripé (take 7) + edição no portátil · calendário da semana sem espaço + rosto · ecrã de bloqueio 23:48 |
-| 02 · A virada | 16,4–39,3 s | rosto · esfera de IA "Inteligência artificial" + o processo reorganizado · estúdio de conteúdo no portátil (fontes → roteiro, prompts, vídeos) · "A ideia continua a ser *a minha.*" · estrutura / roteiro / cenas · código Remotion → leque de 9 vídeos · agenda do dia com 9 vídeos + rosto |
-| 03 · A mensagem | 39,3–64,2 s | rosto · visor de câmara: avatar recusado, "Você ✓" · globo de pessoas ligadas · cadeira vazia + "vídeo publicado" · conhecimento ✓ / tempo limitado / trabalhar mais ✕ · rosto · perfil, seguir, like, curte, compartilhe · despedida com o rosto num círculo |
+| 01 · O problema | 0–16,4 s | rosto + ideias guardadas (vídeos reais) e "o meu maior problema" · caderno de ideias + telemóvel (tempo livre 0 h 15, 47 rascunhos, 0 publicados) · telemóvel no tripé (take 7) + editor no telemóvel (cortar, legendas, exportar) + "O meu processo ≈ 3 h por vídeo" · calendário da semana sem espaço + rosto · ecrã de bloqueio 23:48 + vídeos por terminar |
+| 02 · A virada | 16,4–39,3 s | rosto + notificação da IA e antes → depois · esfera de IA "Inteligência artificial" + o processo reorganizado · estúdio de conteúdo no portátil (fontes e gravações reais → roteiro real, prompts, 6 vídeos reais; cursor a clicar "Gerar") · "A ideia continua a ser *a minha.*" · estrutura / roteiro / cenas reais · código Remotion ("Render") → o vídeo 9 a correr → leque dos 9 vídeos reais · agenda do dia com os 9 vídeos + rosto |
+| 03 · A mensagem | 39,3–64,2 s | rosto + "Atenção" e "a tua imagem continua a ser tua" · visor de câmara: avatar gerado recusado, "Você ✓", imagem / voz / ideias · globo de pessoas ligadas · cadeira vazia + "vídeo publicado" (miniatura real) · conhecimento ✓ / tempo limitado / trabalhar mais ✕ · rosto + processo atual → novo processo · perfil real @sergio_salvador10: seguir (+1), novos vídeos, like, curte, compartilhe · despedida com o @ |
 
 ```bash
-python scripts/gen-v9h-audio.py
-npx remotion render src/index.ts Conteudo9H out/video-conteudo-9-horizontal.mp4 --codec h264 --crf 18 --audio-bitrate 320k
+bash scripts/extract-v9h-thumbs.sh   # peças reais (public/v9h)
+python scripts/gen-v9h-audio.py      # trilha
+python scripts/gen-ui-sfx.py         # clique + toque (e picos em src/v9h/mixH.json)
+npx remotion render src/index.ts Conteudo9H out/video-conteudo-9-horizontal.mp4 --codec h264 --crf 16 --audio-bitrate 320k
 ```

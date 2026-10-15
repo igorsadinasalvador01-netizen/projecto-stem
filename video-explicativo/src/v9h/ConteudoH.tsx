@@ -19,6 +19,9 @@ type Sfx = { file: string; at: number; v?: number };
 const seq = (file: string, at: number, n: number, step: number, v?: number): Sfx[] => Array.from({ length: n }, (_, i) => ({ file, at: at + i * step, v }));
 const SFX: Sfx[] = [
   // noite
+  { file: "pop.wav", at: 0.13, v: 0.45 },
+  { file: "alert.wav", at: t9("problemas", 0.4), v: 0.3 },
+  { file: "pop.wav", at: t9("ideias", 1.8), v: 0.55 },
   { file: "swish.wav", at: 2.38, v: 0.6 },
   { file: "pop.wav", at: t9("tempo", 2.4), v: 0.7 },
   ...seq("tick.wav", t9("essas", 3.9), 6, 0.06, 0.6),
@@ -26,6 +29,7 @@ const SFX: Sfx[] = [
   { file: "whoosh.wav", at: 5.42, v: 0.6 },
   ...["parar", "gravar", "repetir", "editar", "legendas", "publicar"].map((w): Sfx => ({ file: "tick.wav", at: t9(w, 5.5) })),
   { file: "rec.wav", at: t9("gravar", 5.5) + 0.04, v: 0.3 },
+  ...["editar", "colocar", "publicar"].map((w): Sfx => ({ file: "tap.wav", at: t9(w, 7.5), v: 0.4 })),
   { file: "swish.wav", at: 10.32, v: 0.6 },
   ...["trabalho", "responsabilidades", "prioridades"].map((w): Sfx => ({ file: "pop.wav", at: t9(w, 10.4), v: 0.7 })),
   { file: "pop.wav", at: t9("produzir", 13), v: 0.7 },
@@ -35,12 +39,17 @@ const SFX: Sfx[] = [
   { file: "heartbeat.wav", at: t9("complicado", 15), v: 0.5 },
   // nascer do sol
   { file: "shimmer.wav", at: ACT2H + 0.02, v: 0.45 },
+  { file: "ding.wav", at: ACT2H + 8 / 30, v: 0.2 },
+  { file: "pop.wav", at: t9("pude", 16.9), v: 0.5 },
+  { file: "pop.wav", at: t9("perceber", 17.2), v: 0.5 },
   { file: "swish.wav", at: 18.36, v: 0.6 },
   { file: "shimmer.wav", at: t9("inteligência", 18.3), v: 0.5 },
   ...seq("tick.wav", t9("completamente", 19.4), 6, 0.08, 0.6),
   { file: "yes.wav", at: t9("processo", 20.2), v: 0.55 },
   { file: "whoosh.wav", at: 20.9, v: 0.6 },
   ...["conhecimento", "ideias", "aprendo"].map((w, i): Sfx => ({ file: "pop.wav", at: t9(w, [21.5, 22.5, 23.5][i]), v: 0.7 })),
+  { file: "click.wav", at: t9("transformo", 24) - 0.1, v: 0.4 },
+  { file: "click.wav", at: t9("roteiro", 24.5) - 0.1, v: 0.4 },
   ...seq("typekey.wav", t9("transformo", 24), 12, 0.05, 0.6),
   ...["roteiro", "prompts", "vídeos"].map((w, i): Sfx => ({ file: "pop.wav", at: t9(w, [24.5, 25, 25.5][i]), v: 0.7 })),
   { file: "swish.wav", at: 26.32, v: 0.55 },
@@ -52,6 +61,7 @@ const SFX: Sfx[] = [
   ...seq("tick.wav", t9("cenas", 32) - 0.5, 6, 0.13, 0.7),
   { file: "swish.wav", at: 33.02, v: 0.55 },
   ...seq("typekey.wav", 33.3, 14, 0.07, 0.6),
+  { file: "click.wav", at: t9("preparar", 34.5) - 2 / 30, v: 0.4 },
   { file: "whoosh.wav", at: t9("vários", 35.8) - 0.05, v: 0.6 },
   ...seq("pop.wav", t9("vários", 35.8), 5, 0.05, 0.55),
   { file: "swish.wav", at: 36.96, v: 0.55 },
@@ -60,10 +70,13 @@ const SFX: Sfx[] = [
   // dia
   { file: "whoosh.wav", at: ACT3H - 0.05, v: 0.55 },
   { file: "shimmer.wav", at: ACT3H, v: 0.4 },
+  { file: "alert.wav", at: t9("atenção", 39.4) - 0.1, v: 0.3 },
+  { file: "pop.wav", at: t9("atenção", 39.4) + 5 / 30, v: 0.5 },
   { file: "swish.wav", at: 39.96, v: 0.55 },
   { file: "whoosh.wav", at: t9("substituir", 40.5), v: 0.45 },
   { file: "no.wav", at: t9("imagem", 41.3), v: 0.45 },
   { file: "yes.wav", at: t9("aparecer", 42), v: 0.55 },
+  ...[1, 2].map((k): Sfx => ({ file: "pop.wav", at: t9("aparecer", 42) + (k * 5) / 30, v: 0.45 })),
   { file: "whoosh.wav", at: 43.02, v: 0.55 },
   { file: "swell.wav", at: t9("partilhar", 45.3) - 0.4, v: 0.6 },
   ...seq("tick.wav", t9("partilhar", 45.3), 8, 0.067, 0.6),
@@ -79,19 +92,21 @@ const SFX: Sfx[] = [
   { file: "swish.wav", at: 55.26, v: 0.5 },
   { file: "swell.wav", at: t9("mudar", 56.8) - 0.6, v: 0.5 },
   { file: "shimmer.wav", at: t9("mudar", 56.8), v: 0.55 },
+  { file: "pop.wav", at: t9("mudar", 56.8) - 2 / 30, v: 0.5 },
   { file: "whoosh.wav", at: 58.05, v: 0.55 },
   { file: "pop.wav", at: t9("siga", 58.5), v: 0.7 },
-  { file: "typekey.wav", at: t9("perfil", 58.9) + 0.07 },
+  { file: "tap.wav", at: t9("perfil", 58.9) + 2 / 30, v: 0.45 },
   { file: "yes.wav", at: t9("perfil", 58.9) + 0.15, v: 0.6 },
   ...seq("tick.wav", t9("todos", 60.3), 9, 0.067, 0.6),
   { file: "pop.wav", at: t9("like", 61.5), v: 0.8 },
+  { file: "tap.wav", at: t9("like", 61.5), v: 0.35 },
   { file: "pop.wav", at: t9("curte", 61.8), v: 0.8 },
   { file: "whoosh.wav", at: t9("compartilhe", 62.2) + 0.2, v: 0.5 },
   { file: "ding.wav", at: VOICE_END + 0.1, v: 0.3 },
 ];
 const SFX_SECONDS: Record<string, number> = {
-  "alert.wav": 0.32, "ding.wav": 1.3, "heartbeat.wav": 0.9, "no.wav": 0.6, "pop.wav": 0.16, "rec.wav": 0.32, "shimmer.wav": 1.4,
-  "swell.wav": 2.2, "swish.wav": 0.28, "tick.wav": 0.04, "typekey.wav": 0.09, "whoosh.wav": 0.55, "yes.wav": 0.7,
+  "alert.wav": 0.32, "click.wav": 0.09, "ding.wav": 1.3, "heartbeat.wav": 0.9, "no.wav": 0.6, "pop.wav": 0.16, "rec.wav": 0.32, "shimmer.wav": 1.4,
+  "swell.wav": 2.2, "swish.wav": 0.28, "tap.wav": 0.07, "tick.wav": 0.04, "typekey.wav": 0.09, "whoosh.wav": 0.55, "yes.wav": 0.7,
 };
 
 const headroomAt = (f: number) => {
