@@ -292,3 +292,42 @@ ffmpeg -i public/v9/conteudo_original.mp4 -an -vf "scale=1080:-2:flags=lanczos,u
 python scripts/gen-v9-audio.py      # trilha + efeitos novos (braam, vhs, filmburn, rec, clap)
 npx remotion render src/index.ts Conteudo9 out/video-conteudo-9.mp4 --codec h264 --crf 18 --audio-bitrate 320k
 ```
+
+## Vídeo 9 — versão horizontal (composição `Conteudo9H`, 1920×1080)
+
+A mesma voz limpa (`public/v9/voz.wav`) e os mesmos tempos por palavra, com uma linguagem
+moderna, realista e premium. Código em `src/v9h/`; trilha em `scripts/gen-v9h-audio.py`.
+
+**Paleta:**
+- **branco** como cenário dominante;
+- **azul e cinza** destacam vídeos, miniaturas e cenas;
+- **verde** só para o que é positivo (vistos, "publicado", "Você", novo processo, ligações entre pessoas);
+- **vermelho** só para alertas (sem espaço, adiado, limitado, avatar recusado, "trabalhar mais" riscado);
+- as legendas seguem a mesma regra: palavra ativa a azul, palavras negativas a vermelho, positivas a verde.
+
+**Realismo:** telemóveis e portátil desenhados em detalhe, vidro, sombras suaves e profundidade.
+O rosto aparece em cartões verticais (sem esticar a imagem vertical), em cerca de 38% do vídeo.
+
+**Referências emocionais:**
+- caderno cheio de ideias vs. "0 publicados";
+- "47 ideias por gravar";
+- take 7 e "video_final_v7";
+- calendário sem espaço;
+- ecrã de bloqueio às 23:48 com "criar conteúdo · adiado 7×";
+- a esfera da IA;
+- "a minha." em destaque;
+- o avatar gerado recusado no visor da câmara;
+- globo com mensagens de agradecimento (ilustrativas);
+- a cadeira vazia diante da câmara;
+- o perfil a encher-se.
+
+| Ato | Tempo | Cenas |
+|---|---|---|
+| 01 · O problema | 0–16,4 s | rosto · caderno de ideias + telemóvel (tempo livre 0 h 15, 47 rascunhos, 0 publicados) · telemóvel no tripé (take 7) + edição no portátil · calendário da semana sem espaço + rosto · ecrã de bloqueio 23:48 |
+| 02 · A virada | 16,4–39,3 s | rosto · esfera de IA "Inteligência artificial" + o processo reorganizado · estúdio de conteúdo no portátil (fontes → roteiro, prompts, vídeos) · "A ideia continua a ser *a minha.*" · estrutura / roteiro / cenas · código Remotion → leque de 9 vídeos · agenda do dia com 9 vídeos + rosto |
+| 03 · A mensagem | 39,3–64,2 s | rosto · visor de câmara: avatar recusado, "Você ✓" · globo de pessoas ligadas · cadeira vazia + "vídeo publicado" · conhecimento ✓ / tempo limitado / trabalhar mais ✕ · rosto · perfil, seguir, like, curte, compartilhe · despedida com o rosto num círculo |
+
+```bash
+python scripts/gen-v9h-audio.py
+npx remotion render src/index.ts Conteudo9H out/video-conteudo-9-horizontal.mp4 --codec h264 --crf 18 --audio-bitrate 320k
+```
