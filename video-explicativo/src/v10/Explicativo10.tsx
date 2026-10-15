@@ -5,7 +5,7 @@ import { Finish10 } from "./Kit10";
 import { Efeito10, Psico10, Siga10, Truque10 } from "./Finale10";
 import { P10 } from "./look10";
 import { Stage10 } from "./Stage10";
-import { SCENES10, TOTAL10, W10 as W } from "./timeline10";
+import { SCENES10, TAP10, TOTAL10, W10 as W } from "./timeline10";
 import mix from "./mix10.json";
 
 loadFonts();
@@ -77,9 +77,9 @@ const SFX: Sfx[] = [
   { file: "yes.wav", at: W.vendas + 0.25, v: 0.35 },
   // 11 · siga
   { file: "whoosh.wav", at: SCENES10.siga.from - 0.05, v: 0.4 },
-  { file: "tap.wav", at: W.para, v: 0.5 },
-  { file: "yes.wav", at: W.para + 0.08, v: 0.7 },
-  ...seq("pop.wav", W.dicas, 3, 0.09, 0.55),
+  { file: "tap.wav", at: TAP10, v: 0.5 },
+  { file: "yes.wav", at: TAP10 + 0.08, v: 0.6 },
+  ...seq("pop.wav", W.valiosas, 3, 0.09, 0.5),
   { file: "shimmer.wav", at: W.valiosas + 0.05, v: 0.4 },
   { file: "ding.wav", at: 29.3, v: 0.25 },
 ];

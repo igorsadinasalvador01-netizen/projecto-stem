@@ -105,6 +105,9 @@ export const W10 = {
   marketing: 28.8,
 };
 
+// toque em "Seguir" no perfil original (fecho)
+export const TAP10 = 27.8;
+
 export const SCENES10 = {
   palco: { from: 0, to: 23.62 }, // o mesmo palco do gancho até à escolha
   efeito: { from: 23.62, to: 24.96 },

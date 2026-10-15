@@ -4,7 +4,7 @@ import { clamp } from "../components/Motion";
 import { PerfilCard } from "../components/PerfilFinal";
 import { BrainIcon, Chip, GemIcon, Headline, HookIcon, Paper, Spark, useClock } from "./Kit10";
 import { EASE, F10, P10, SPR } from "./look10";
-import { SCENES10, W10 as W } from "./timeline10";
+import { SCENES10, TAP10, W10 as W } from "./timeline10";
 
 // ——— entradas de cena (0,45 s) ———
 const Enter: React.FC<{ kind: "whip" | "zoom" | "iris"; children: React.ReactNode }> = ({ kind, children }) => {
@@ -165,7 +165,8 @@ export const Siga10: React.FC = () => {
   const off = SCENES10.siga.from;
   const { t, frame, fps, sp } = useClock(off);
   const card = sp(off + 0.05, SPR.soft);
-  const tapAt = Math.round((W.para - off) * fps);
+  // o toque em "Seguir" depois de o perfil assentar (lê-se primeiro, toca-se depois)
+  const tapAt = Math.round((TAP10 - off) * fps);
   return (
     <Enter kind="iris">
       <Paper warm={1} />
@@ -180,12 +181,12 @@ export const Siga10: React.FC = () => {
         ]}
       />
       <div style={{ position: "absolute", left: 40, top: 500, opacity: interpolate(card, [0, 0.3], [0, 1], clamp), transform: `translateY(${(1 - card) * 90}px) scale(${0.94 + card * 0.06})`, transformOrigin: "50% 0%" }}>
-        <PerfilCard width={1000} tapAt={tapAt} enterAt={0} />
+        <PerfilCard width={1000} tapAt={tapAt} />
       </div>
       {/* mais dicas: os vídeos de marketing já publicados (miniaturas reais) */}
       <div style={{ position: "absolute", left: 0, right: 0, top: 1360, display: "flex", justifyContent: "center", gap: 22 }}>
         {[6, 7, 8].map((v, k) => {
-          const p = sp(W.dicas + k * 0.09, SPR.snap);
+          const p = sp(W.valiosas + k * 0.09, SPR.snap);
           return (
             <div key={v} style={{ position: "relative", width: 200, height: 270, borderRadius: 22, overflow: "hidden", border: "4px solid #fff", boxShadow: "0 30px 50px -24px rgba(11,13,18,0.45)", opacity: interpolate(p, [0, 0.3], [0, 1], clamp), transform: `translateY(${(1 - p) * 60}px) rotate(${(k - 1) * 4}deg) scale(${1 + (t - off) * 0.01})` }}>
               <Img src={staticFile(`v9h/thumbs/v${v}.jpg`)} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 30%" }} />
@@ -201,7 +202,7 @@ export const Siga10: React.FC = () => {
           );
         })}
       </div>
-      <Spark x={960} y={520} s={44} at={W.para + 0.1} c={P10.turq} offset={off} />
+      <Spark x={960} y={520} s={44} at={TAP10 + 0.1} c={P10.turq} offset={off} />
       <Spark x={150} y={1350} s={36} at={W.valiosas + 0.1} offset={off} />
     </Enter>
   );

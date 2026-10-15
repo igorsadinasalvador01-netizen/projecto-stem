@@ -382,7 +382,7 @@ e da escolhida no fim; o grave dá um *punch*.
 | 8 | 21,2–23,6 s | por um pouco mais, eu levo muito mais benefícios | "+ R$ 30 → 2× benefícios"; o pensamento palavra a palavra; "Escolhido" |
 | 9 | 23,6–25,0 s | é o efeito isca | a etiqueta da opção B pendurada no anzol; "efeito *isca.*"; definição |
 | 10 | 25,0–27,0 s | psicologia pura aplicada nas vendas | cérebro com sinapses, feixe até ao gráfico de vendas a subir |
-| 11 | 27,0–29,9 s | siga para mais dicas valiosas de marketing | o perfil real do Instagram (réplica): toque em Seguir → "A seguir", 2127 → 2128 seguidores; por baixo, 3 vídeos de dicas já publicados |
+| 11 | 27,0–29,9 s | siga para mais dicas valiosas de marketing | o perfil original do Instagram (captura sem alterações) com o toque em "Seguir"; por baixo, 3 vídeos de dicas já publicados |
 
 **Mistura:** `sfxGain` = 3,8 com *ducking* (`src/v10/mix10.json`, gerado com
 `scripts/gen-mix.py`); nenhum efeito sobre o grave original.
@@ -392,7 +392,7 @@ python scripts/gen-mix.py public/narracao10.m4a src/v10/mix10.json 29.9
 npx remotion render src/index.ts Explicativo10 out/video-explicativo-10.mp4 --codec h264 --crf 16 --audio-bitrate 320k
 ```
 
-**Fecho padrão com o perfil:** `src/components/PerfilFinal.tsx` (`PerfilCard`) é a réplica do
-perfil @sergio_salvador10 (nome, números, bio, Threads/Facebook, Seguir / Mensagem / Contactar)
-para fechar sempre os vídeos. A foto de perfil vem de um só ficheiro, `public/perfil/avatar.jpg`:
-colocar lá a foto oficial (sem alterações) atualiza todos os vídeos que usam o cartão.
+**Fecho padrão com o perfil:** `src/components/PerfilFinal.tsx` (`PerfilCard`) mostra a captura
+**original** do perfil @sergio_salvador10 (`public/perfil/perfil.png`, com a foto de fundo laranja),
+sem qualquer alteração — por cima entra só a animação do toque em "Seguir" (dedo, onda e brilhos).
+É o fecho de todos os vídeos com "siga"; trocar esse ficheiro atualiza-os todos.
