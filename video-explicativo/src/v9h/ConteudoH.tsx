@@ -20,7 +20,7 @@ const seq = (file: string, at: number, n: number, step: number, v?: number): Sfx
 const SFX: Sfx[] = [
   // noite
   { file: "pop.wav", at: 0.13, v: 0.45 },
-  { file: "alert.wav", at: t9("problemas", 0.4), v: 0.3 },
+  { file: "alert.wav", at: t9("problemas", 0.4), v: 0.15 },
   { file: "pop.wav", at: t9("ideias", 1.8), v: 0.55 },
   { file: "swish.wav", at: 2.38, v: 0.6 },
   { file: "pop.wav", at: t9("tempo", 2.4), v: 0.7 },
@@ -39,7 +39,7 @@ const SFX: Sfx[] = [
   { file: "heartbeat.wav", at: t9("complicado", 15), v: 0.5 },
   // nascer do sol
   { file: "shimmer.wav", at: ACT2H + 0.02, v: 0.45 },
-  { file: "ding.wav", at: ACT2H + 8 / 30, v: 0.2 },
+  { file: "ding.wav", at: ACT2H + 8 / 30, v: 0.08 },
   { file: "pop.wav", at: t9("pude", 16.9), v: 0.5 },
   { file: "pop.wav", at: t9("perceber", 17.2), v: 0.5 },
   { file: "swish.wav", at: 18.36, v: 0.6 },
