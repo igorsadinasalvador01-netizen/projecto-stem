@@ -19,6 +19,8 @@ import { AUDIO8_SECONDS } from "./v8/timeline8";
 import { Conteudo9, Conteudo9Props } from "./v9/Conteudo9";
 import { TOTAL9 } from "./v9/timeline9";
 import { ConteudoH, ConteudoHProps } from "./v9h/ConteudoH";
+import { Explicativo10, Explicativo10Props } from "./v10/Explicativo10";
+import { TOTAL10 } from "./v10/timeline10";
 
 const FPS = 30;
 
@@ -113,6 +115,15 @@ export const RemotionRoot: React.FC = () => (
     width={1920}
     height={1080}
     defaultProps={{ sfx: true, sfxGain: 4 } satisfies ConteudoHProps}
+  />
+  <Composition
+    id="Explicativo10"
+    component={Explicativo10}
+    durationInFrames={Math.round(TOTAL10 * FPS)}
+    fps={FPS}
+    width={1080}
+    height={1920}
+    defaultProps={{ sfx: true, sfxGain: 3.8 } satisfies Explicativo10Props}
   />
   </>
 );

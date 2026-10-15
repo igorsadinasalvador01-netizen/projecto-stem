@@ -349,3 +349,50 @@ python scripts/gen-v9h-audio.py      # trilha
 python scripts/gen-ui-sfx.py         # clique + toque (e picos em src/v9h/mixH.json)
 npx remotion render src/index.ts Conteudo9H out/video-conteudo-9-horizontal.mp4 --codec h264 --crf 16 --audio-bitrate 320k
 ```
+
+---
+
+# Vídeo 10 — "O efeito isca: parecer mais barato" (composição `Explicativo10`)
+
+Mesmos critérios dos vídeos anteriores (voz intacta, animação palavra a palavra, efeitos
+por baixo da voz), com uma **paleta nova**: branco premium dominante, cinzas de estúdio,
+**azul-turquesa** como cor herói (só o produto que você quer vender), **preto em minoria**
+(tinta do texto, "VS", botão Seguir e o instante do "truque") e **cores vivas** só nos
+detalhes que mandam: coral = retirar / isca, âmbar = truque / benefício principal,
+verde-lima = escolha e ganho, violeta = psicologia.
+Áudio `public/narracao10.m4a` (29,28 s, voz intacta; o grave dos 20,35 s em
+"comparar, vai pensar" é do próprio áudio e vira o momento de impacto). Código em `src/v10/`.
+
+**Um palco contínuo** (0–23,6 s): os mesmos dois cartões evoluem com a voz, em vez de
+cenas soltas — o produto nasce sozinho, a segunda opção nasce tracejada ao lado, os
+benefícios entram, os principais da opção barata caem para a bandeja "retirados", o
+cartão é içado por uma linha de pesca e leva o carimbo "ISCA", o cliente compara
+(olhos esquerda/direita, "VS") e escolhe. A câmara aproxima-se da opção barata ao retirar
+e da escolhida no fim; o grave dá um *punch*.
+
+| # | Tempo | Narração | Ideia |
+|---|---|---|---|
+| 1 | 0–4,2 s | parecer mais barato usando psicologia | o produto (capa + R$ 197) sozinho; medidor "percepção de preço" de caro para barato; cérebro violeta |
+| 2 | 4,2–9,3 s | crie uma segunda opção com preço um pouco menor | a opção B nasce tracejada; preço 197 → 167 a contar; "− R$ 30"; barras de diferença; anel turquesa "o que você quer vender" |
+| 3 | 9,3–12,8 s | liste os benefícios principais e secundários | as capas recolhem; 3 principais (★) e 3 secundários nos dois cartões; legenda |
+| 4 | 12,8–13,8 s | aqui vem o truque | o único instante a preto: íris que abre e fecha, "truque." em âmbar |
+| 5 | 13,8–16,7 s | retire os principais benefícios da opção mais barata | zoom na opção B; cada principal é riscado, cai e deixa um lugar "retirado"; 6 → 3 benefícios |
+| 6 | 16,7–19,3 s | vira uma isca ruim de propósito | linha de pesca e anzol içam o cartão, que balança; carimbo "ISCA", "ruim de propósito" |
+| 7 | 19,3–21,2 s | quando o cliente comparar, vai pensar | o cliente aparece, os olhos comparam, "VS"; punch no grave; balão a pensar |
+| 8 | 21,2–23,6 s | por um pouco mais, eu levo muito mais benefícios | "+ R$ 30 → 2× benefícios"; o pensamento palavra a palavra; "Escolhido" |
+| 9 | 23,6–25,0 s | é o efeito isca | a etiqueta da opção B pendurada no anzol; "efeito *isca.*"; definição |
+| 10 | 25,0–27,0 s | psicologia pura aplicada nas vendas | cérebro com sinapses, feixe até ao gráfico de vendas a subir |
+| 11 | 27,0–29,9 s | siga para mais dicas valiosas de marketing | o perfil real do Instagram (réplica): toque em Seguir → "A seguir", 2127 → 2128 seguidores; por baixo, 3 vídeos de dicas já publicados |
+
+**Mistura:** `sfxGain` = 3,8 com *ducking* (`src/v10/mix10.json`, gerado com
+`scripts/gen-mix.py`); nenhum efeito sobre o grave original.
+
+```bash
+python scripts/gen-mix.py public/narracao10.m4a src/v10/mix10.json 29.9
+npx remotion render src/index.ts Explicativo10 out/video-explicativo-10.mp4 --codec h264 --crf 16 --audio-bitrate 320k
+```
+
+**Fecho padrão com o perfil:** `src/components/PerfilFinal.tsx` (`PerfilCard`) é a réplica do
+perfil @sergio_salvador10 (nome, números, bio, Threads/Facebook, Seguir / Mensagem / Contactar)
+para fechar sempre os vídeos. A foto de perfil vem de um só ficheiro, `public/perfil/avatar.jpg`:
+colocar lá a foto oficial (sem alterações) atualiza todos os vídeos que usam o cartão.
