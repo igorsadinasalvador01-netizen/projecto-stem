@@ -396,3 +396,27 @@ npx remotion render src/index.ts Explicativo10 out/video-explicativo-10.mp4 --co
 **original** do perfil @sergio_salvador10 (`public/perfil/perfil.png`, com a foto de fundo laranja),
 sem qualquer alteração — por cima entra só a animação do toque em "Seguir" (dedo, onda e brilhos).
 É o fecho de todos os vídeos com "siga"; trocar esse ficheiro atualiza-os todos.
+
+---
+
+# Vídeo 11 — "O efeito isca", versão cobalto (composição `Explicativo11`)
+
+O ficheiro enviado tem **exatamente o mesmo áudio do vídeo 10** (byte a byte; só muda o fundo
+da imagem), por isso usa `public/narracao10.m4a`, os mesmos tempos (`src/v10/timeline10.ts`) e
+a mesma margem de mistura (`src/v10/mix10.json`). Mesma dinâmica do vídeo 10 (palco contínuo
+com as duas opções), com **cores novas** e a **nostalgia só em dois momentos**:
+
+- **Paleta moderna** (`src/v11/look11.ts`): branco e cinza frio dominantes, **azul-cobalto** como
+  cor herói (o produto que você quer vender), tinta quase preta em minoria e cores vivas nos
+  detalhes — laranja vivo = retirar/isca, amarelo = truque/benefício principal,
+  verde-esmeralda = escolha e ganho, magenta = psicologia.
+- **Os dois únicos momentos nostálgicos**, com película (grão, pó, cintilação, fuga de luz),
+  papel envelhecido e som de época (projetor, película, papel):
+  1. "Aqui vem o truque." — intertítulo de cinema mudo com moldura ornamentada (12,8–13,8 s);
+  2. "É o efeito isca." — página de dicionário antigo com a etiqueta da opção B no anzol
+     e a definição (23,6–25,0 s).
+- Fecho com o **perfil original** (captura sem alterações), sem filtros por cima.
+
+```bash
+npx remotion render src/index.ts Explicativo11 out/video-explicativo-11.mp4 --codec h264 --crf 16 --audio-bitrate 320k
+```

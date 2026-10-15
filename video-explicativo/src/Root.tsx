@@ -21,6 +21,7 @@ import { TOTAL9 } from "./v9/timeline9";
 import { ConteudoH, ConteudoHProps } from "./v9h/ConteudoH";
 import { Explicativo10, Explicativo10Props } from "./v10/Explicativo10";
 import { TOTAL10 } from "./v10/timeline10";
+import { Explicativo11, Explicativo11Props } from "./v11/Explicativo11";
 
 const FPS = 30;
 
@@ -124,6 +125,15 @@ export const RemotionRoot: React.FC = () => (
     width={1080}
     height={1920}
     defaultProps={{ sfx: true, sfxGain: 3.8 } satisfies Explicativo10Props}
+  />
+  <Composition
+    id="Explicativo11"
+    component={Explicativo11}
+    durationInFrames={Math.round(TOTAL10 * FPS)}
+    fps={FPS}
+    width={1080}
+    height={1920}
+    defaultProps={{ sfx: true, sfxGain: 3.8 } satisfies Explicativo11Props}
   />
   </>
 );
