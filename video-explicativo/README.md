@@ -459,3 +459,43 @@ for n in 12 13 14 15 16; do
   npx remotion render /tmp/bundle Video$n out/video-$n.mp4 --codec h264 --crf 17 --audio-bitrate 320k --gl=angle
 done
 ```
+
+# Vídeo 17 — "Vender valor na construção" (composição `Video17`, 1080×1920)
+
+Filmagem do próprio cliente (vertical, 464×832 a 60 fps) editada com o **modelo extraído por
+engenharia reversa** de um vídeo de referência no estilo "editando ao vivo".
+
+**Modelo da referência** (plano único, sem cortes; tudo por camadas):
+1. HUD fixo no canto: ponto vermelho "AO VIVO", timecode com fotogramas, contador de etapas
+   (05/13) e o nome da etapa; @ e ícone do Instagram no canto oposto.
+2. Legendas curtas (3–5 palavras) com a palavra-chave destacada.
+3. Profundidade: objetos 3D a passar **atrás** do apresentador (recorte da pessoa).
+4. A cena separa-se em **camadas de vidro** em perspetiva (fundo · gráficos · pessoa), com rótulos.
+5. **Modo moldura**: o apresentador encolhe para uma moldura com crachá e o resto do ecrã mostra
+   conteúdo editorial (passos numerados, checklist, objetos 3D). *Não usado aqui (ver abaixo).*
+6. Volta ao ecrã inteiro; **ecrãs/tiles 3D a flutuar**; **casa 3D explodida** por andares com
+   etiquetas e depois remontada; CTA final (comentar + direct).
+
+**O que foi melhorado na edição do cliente**:
+- Recorte da pessoa com Robust Video Matting (`scripts/matte-footage.py`): `public/v17/plate.mp4`
+  + `public/v17/fg.webm` (VP9 com transparência); os gráficos passam entre os dois.
+- **Regra do cliente: o fundo do vídeo nunca é tapado por cor.** A filmagem fica sempre no ecrã
+  inteiro e com a cor natural. Em vez do modo moldura da referência, o conteúdo vive na faixa de
+  cima (por cima do capacete, por baixo do HUD) em vidro escuro e passa por trás da cabeça.
+  Vermelho e verde aparecem só como bordas finas, e a separação em camadas usa a própria
+  filmagem desfocada à volta.
+- Subida para 1080×1920 a 30 fps com nitidez; HUD com 10 capítulos da própria fala.
+- 3D de vidro turquesa com transparência real (three.js, `src/v17/Building3D.tsx`): prédio de
+  vidro e prédio de betão por cima do capacete ("obra excelente" → "perdeu a obra"), "?" de vidro,
+  e um prédio atrás do ombro que explode em andares com o **valor entregue** e se remonta em
+  "transformar".
+- Paleta: branco, cinza, turquesa e azul alternados; **vermelho** nas cenas de atenção
+  ("perder", "é aqui que falham"); **verde** para validação (checks, confiança, transformar).
+- Fecho com o **perfil original** (captura sem filtros) a subir por cima do colete, com seguir,
+  like e partilhar ao ritmo da fala; a filmagem fica parada no último fotograma nos 2 s finais.
+
+```bash
+# public/v17/ não vai para o git (filmagem do cliente, ~117 MB): regenera-se com
+python scripts/matte-footage.py <video.mp4> rvm_mobilenetv3_fp32.onnx public/v17
+npx remotion render src/index.ts Video17 out/video-17.mp4 --codec h264 --crf 17 --audio-bitrate 320k --gl=angle
+```
