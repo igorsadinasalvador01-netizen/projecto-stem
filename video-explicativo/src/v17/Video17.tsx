@@ -78,7 +78,6 @@ const ENTRY: [number, "s" | "l"][] = [
   [8.24, "l"],
   [11.6, "s"],
   [16.64, "s"],
-  [20.24, "s"],
   [23.92, "l"],
   [33.2, "l"],
   [36.24, "s"],
@@ -89,19 +88,19 @@ const ENTRY: [number, "s" | "l"][] = [
 ];
 // gatilhos: graves, falhas, PB e volta da cor, subidas e impactos
 const TRIGGERS: Cue[] = [
-  { file: "v17_pb.wav", at: 4.46, v: 0.5 },
-  { file: "v17_sub.wav", at: 4.48, v: 0.6 },
+  { file: "v17_pb.wav", at: 4.3, v: 0.4 },
+  { file: "v17_sub.wav", at: 4.4, v: 0.4 },
   { file: "v17_cor.wav", at: 6.78, v: 0.45 },
-  { file: "v17_sub.wav", at: 12.4, v: 0.45 },
-  { file: "v17_hit.wav", at: 15.84, v: 0.5 },
-  { file: "v17_sub.wav", at: 35.36, v: 0.45 },
+  { file: "v17_sub.wav", at: 12.32, v: 0.28 },
+  { file: "v17_hit.wav", at: 15.38, v: 0.26 },
+  { file: "v17_sub.wav", at: 35.28, v: 0.4 },
   { file: "v17_pb.wav", at: 37.34, v: 0.45 },
   { file: "v17_cor.wav", at: 39.4, v: 0.45 },
-  { file: "v17_pb.wav", at: 42.26, v: 0.55 },
-  { file: "v17_sub.wav", at: 44.56, v: 0.6 },
-  { file: "v17_cor.wav", at: 49.16, v: 0.55 },
-  { file: "v17_hit.wav", at: 59.04, v: 0.55 },
-  ...GLITCHES.map(([at, k]) => ({ file: "v17_glitch.wav", at, v: 0.3 + 0.2 * k })),
+  { file: "v17_pb.wav", at: 42.02, v: 0.3 },
+  { file: "v17_sub.wav", at: 44.48, v: 0.45 },
+  { file: "v17_cor.wav", at: 49.12, v: 0.45 },
+  { file: "v17_hit.wav", at: 58.96, v: 0.45 },
+  ...GLITCHES.map(([at, k]) => ({ file: "v17_glitch.wav", at: at - 0.04, v: 0.25 + 0.15 * k })),
 ];
 // risers (2 s): o pico cai na palavra
 const RISERS = [15.84, 59.04];
@@ -109,13 +108,25 @@ const CUES: Cue[] = [
   ...CUES_SRC.map((c) => ({ ...c, at: M(c.at) })),
   ...TRIGGERS.map((c) => ({ ...c, at: M(c.at) })),
   ...ENTRY.map(([at, k]) => ({ file: k === "s" ? "v17_entry.wav" : "v17_entry_long.wav", at: Math.max(0, M(at) - (k === "s" ? 0.44 : 0.92)), v: k === "s" ? 0.4 : 0.42 })),
-  ...RISERS.map((at) => ({ file: "v17_riser.wav", at: Math.max(0, M(at) - 2.0), v: 0.32 })),
+  // o pico do riser acaba 0,12 s antes da palavra (na pausa), para não pisar a voz
+  ...RISERS.map((at) => ({ file: "v17_riser.wav", at: Math.max(0, M(at) - 2.12), v: 0.28 })),
 ].sort((a, b) => a.at - b.at);
 
 // música de fundo própria (scripts/gen-v17-audio.py), com o ducking à voz já aplicado
 const BED_VOL = 0.26;
 
 export type Video17Props = { sfx: boolean; sfxGain: number };
+
+// só o áudio (voz + música + efeitos), para refazer a mistura sem voltar a renderizar a imagem;
+// `master` baixa tudo por igual (o limitador final repõe o nível sem saturar)
+export type Video17AudioProps = { sfxGain: number; master: number };
+export const Video17Audio: React.FC<Video17AudioProps> = ({ sfxGain, master }) => (
+  <AbsoluteFill>
+    <Audio src={staticFile("narracao17c.m4a")} volume={master} />
+    <Audio src={staticFile("bed17.m4a")} volume={BED_VOL * master} />
+    <SfxTrack cues={CUES} mix={mixJson as Mix} gain={sfxGain} master={master} />
+  </AbsoluteFill>
+);
 // palavras-chave das legendas (ficam maiores)
 const EMPH = ["perder", "pior.", "porquê?", "demonstrar", "escolher-te.", "Exemplo.", "confiança.", "segurança,", "previsibilidade", "tranquilidade.", "falham.", "valor", "transformar."];
 
