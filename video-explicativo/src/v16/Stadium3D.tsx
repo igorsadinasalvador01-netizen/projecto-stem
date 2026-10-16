@@ -45,7 +45,7 @@ const usePitchTexture = () =>
       g.fillStyle = i % 2 ? "#2F5D45" : "#2A553F";
       g.fillRect(0, Z(-14 + i * 2), W, Z(-12 + i * 2) - Z(-14 + i * 2) + 1);
     }
-    g.strokeStyle = "rgba(242,244,239,0.92)";
+    g.strokeStyle = "rgba(244,247,250,0.92)";
     g.lineWidth = 4;
     g.beginPath();
     g.moveTo(0, Z(GOAL_Z));
@@ -56,7 +56,7 @@ const usePitchTexture = () =>
     g.beginPath();
     g.ellipse(X(0), Z(0), X(9.15) - X(0), Z(9.15) - Z(0), 0, Math.asin(5.5 / 9.15), Math.PI - Math.asin(5.5 / 9.15));
     g.stroke();
-    g.fillStyle = "rgba(242,244,239,0.95)";
+    g.fillStyle = "rgba(244,247,250,0.95)";
     g.beginPath();
     g.ellipse(X(0), Z(0), 3, 3, 0, 0, Math.PI * 2);
     g.fill();
@@ -71,7 +71,7 @@ const useNetTexture = () =>
     c.width = 256;
     c.height = 256;
     const g = c.getContext("2d")!;
-    g.strokeStyle = "rgba(242,244,239,0.75)";
+    g.strokeStyle = "rgba(244,247,250,0.75)";
     g.lineWidth = 2;
     for (let i = 0; i <= 256; i += 16) {
       g.beginPath();
@@ -93,14 +93,14 @@ const useCrowdTexture = () =>
     c.height = 256;
     const g = c.getContext("2d")!;
     const grd = g.createLinearGradient(0, 0, 0, 256);
-    grd.addColorStop(0, "#0B110F");
-    grd.addColorStop(1, "#16211C");
+    grd.addColorStop(0, "#0A1A2F");
+    grd.addColorStop(1, "#10243F");
     g.fillStyle = grd;
     g.fillRect(0, 0, 1024, 256);
     for (let i = 0; i < 2600; i++) {
       const x = random(`cx${i}`) * 1024;
       const y = 40 + random(`cy${i}`) * 200;
-      g.fillStyle = `rgba(242,244,239,${0.04 + random(`ca${i}`) * 0.12})`;
+      g.fillStyle = `rgba(244,247,250,${0.04 + random(`ca${i}`) * 0.12})`;
       g.fillRect(x, y, 3, 3);
     }
     const tex = new THREE.CanvasTexture(c);
@@ -167,7 +167,7 @@ export const Stadium3D: React.FC<{ width: number; height: number; offset: number
   const pitch = usePitchTexture();
   const net = useNetTexture();
   const crowd = useCrowdTexture();
-  const glow = useGlowTexture("rgba(242,244,239,0.95)");
+  const glow = useGlowTexture("rgba(244,247,250,0.95)");
   // remate em curso (ou o último)
   const last = [...KICKS].reverse().find((k) => t >= k.at);
   const next = KICKS.find((k) => k.at > t);
@@ -194,7 +194,7 @@ export const Stadium3D: React.FC<{ width: number; height: number; offset: number
   return (
     <ThreeCanvas width={width} height={height} camera={{ position: c.pos, fov: 60, near: 0.1, far: 200 }} gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }} style={{ background: "transparent" }}>
       <CamRig pos={c.pos} look={c.look} />
-      <ambientLight intensity={0.45} color="#DDE8E0" />
+      <ambientLight intensity={0.45} color="#DCE6EF" />
       <directionalLight position={[-8, 14, 6]} intensity={1.5} />
       <directionalLight position={[8, 12, -14]} intensity={0.8} color="#E8EEF0" />
       {/* relvado */}

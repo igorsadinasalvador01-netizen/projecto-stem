@@ -87,11 +87,11 @@ export const Video14: React.FC<Video14Props> = ({ sfx, sfxGain }) => {
         </Sequence>
       ))}
       <Sequence durationInFrames={Math.round(AUDIO14 * fps)} name="acabamento">
-        <Finish vignette="rgba(40,55,70,0.16)" grain={0.035} />
+        <Finish vignette="rgba(2,8,18,0.55)" grain={0.05} />
       </Sequence>
-      <Captions words={WORDS} maxChars={26} until={AUDIO14 + 0.1} st={{ font: T.body, size: 50, weight: 800, color: T.ink, active: T.steel, y: 1600, pill: { bg: "rgba(255,255,255,0.78)", edge: "rgba(18,20,23,0.08)" }, tone }} />
+      <Captions words={WORDS} maxChars={26} until={AUDIO14 + 0.1} st={{ font: T.body, size: 50, weight: 800, color: T.ink, active: T.steel, y: 1600, pill: { bg: "rgba(10,26,47,0.72)", edge: "rgba(255,255,255,0.16)" }, tone }} />
       <Sequence from={Math.round(AUDIO14 * fps)} name="fecho · perfil">
-        <ProfileOutro from={AUDIO14} tap={AUDIO14 + 1.4} bg={<Bg14 />} title={[{ w: "Siga", at: AUDIO14 + 0.1 }, { w: "o perfil", at: AUDIO14 + 0.3, color: T.steel }]} sub="roteiro de vendas para qualquer produto" font={T.display} subFont={T.body} ink={T.ink} dim={T.dim} accent={T.steel} />
+        <ProfileOutro from={AUDIO14} tap={AUDIO14 + 1.4} bg={<Bg14 />} title={[{ w: "Siga", at: AUDIO14 + 0.1 }, { w: "o perfil", at: AUDIO14 + 0.3, color: T.steel }]} sub="roteiro de vendas para qualquer produto" font={T.display} subFont={T.body} ink={T.ink} dim={T.dim} accent="#147A88" />
       </Sequence>
       <Audio src={staticFile("narracao14.m4a")} />
       {sfx && <SfxTrack cues={CUES} mix={mixJson as Mix} gain={sfxGain} />}

@@ -423,19 +423,23 @@ npx remotion render src/index.ts Explicativo11 out/video-explicativo-11.mp4 --co
 
 # Vídeos 12–16 — primeiro lote de 5 (kit partilhado `src/kit/`)
 
-Cada vídeo tem animações, cores e modelos diferentes, mas a mesma gramática: narração original
+Cada vídeo tem animações e modelos diferentes, mas a mesma gramática: narração original
 intacta, legendas palavra a palavra, títulos cinéticos, vidro premium e o **fecho com o perfil
-original** (`public/perfil/perfil.png`, sem filtros por cima). Regra de cor deste lote (pedido do
-cliente): **paletas minimalistas, sem rosa/roxo nem cores exageradas, cenários limpos e fáceis
-de ler** — cada vídeo alterna para uma paleta sóbria diferente.
+original** (`public/perfil/perfil.png`, sem filtros por cima).
 
-| Vídeo | Formato | Paleta | Fontes | 3D / modelo |
+**Padrão de cores da série** (pedido do cliente, vale para todos os vídeos, `src/kit/serie.ts`):
+fundos **azul-escuro**, **branco**, acento **azul-turquesa**, **cinza** para o secundário,
+**vermelho** para falas/sinais negativos e **verde** para positivos. Nada de rosa/roxo nem cores
+exageradas; cenários limpos e fáceis de ler. **Sem gráficos a exemplificar animais**: quando a
+narração usa uma metáfora (vaca, leão), a imagem mostra o que ela significa no mundo das vendas.
+
+| Vídeo | Formato | Modelo | Fontes | 3D |
 |---|---|---|---|---|
-| 12 — "O que você não quer?" (`Video12`) | 1080×1920 | grafite + champanhe, terracota (erro), salva (solução) | Syne + Manrope | "?" de vidro em three.js |
-| 13 — "Herbívoro vs carnívoro" (`Video13`) | 1920×1080 | savana sóbria: areia, argila, ocre, silhuetas em carvão | Fraunces + Space Grotesk | documentário em silhuetas, mapa em perspectiva, telemóvel real |
-| 14 — "Vender qualquer coisa" (`Video14`) | 1080×1920 | gelo + grafite + azul-aço | Unbounded + Manrope | carrossel 3D com 8 produtos modelados (panela, telemóvel, roupa de cama, casa, carro, portátil, trator, moedas) |
-| 15 — "5 palavras proibidas" (`Video15`) | 1920×1080 | editorial preto + marfim + champanhe | Playfair Display + Manrope | cartas 3D que viram (evite → use) e leque de cartas |
-| 16 — "Chutar pro gol" (`Video16`) | 1080×1920 | estádio noturno: relva escura, branco-giz, verde suave | Bebas Neue + Sora | relvado, baliza com rede e bola em three.js, remates com placar |
+| 12 — "O que você não quer?" (`Video12`) | 1080×1920 | vidro fumado sobre azul-escuro, perguntas e listas | Syne + Manrope | "?" de vidro turquesa em three.js |
+| 13 — "Herbívoro vs carnívoro" (`Video13`) | 1920×1080 | o mundo das vendas: caixa de entrada que o marketing enche, comissão a cair, lista de prospecção com o alvo do dia, carteira esgotada → mercado novo, ligações, reação do mercado, contrato high ticket | Fraunces + Space Grotesk | — |
+| 14 — "Vender qualquer coisa" (`Video14`) | 1080×1920 | roteiro de vendas, parâmetros, característica → benefício → vantagem | Unbounded + Manrope | carrossel com 8 produtos modelados |
+| 15 — "5 palavras proibidas" (`Video15`) | 1920×1080 | cartas editoriais: evite (escura, vermelho) → use (branca, verde) | Playfair Display + Manrope | cartas que viram e leque |
+| 16 — "Chutar pro gol" (`Video16`) | 1080×1920 | placar, metas e remates | Bebas Neue + Sora | relvado, baliza com rede e bola |
 
 - **Kit** (`src/kit/Kit.tsx`): relógio em segundos (`useClock`), fundos mesh, `Glass`, legendas,
   `Kinetic`, entradas de cena, `SfxTrack` e `ProfileOutro`. Fontes locais em `public/fonts`

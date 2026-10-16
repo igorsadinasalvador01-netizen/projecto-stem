@@ -108,10 +108,10 @@ export const Video12: React.FC<Video12Props> = ({ sfx, sfxGain }) => {
           <C />
         </Sequence>
       ))}
-      <Finish vignette="rgba(4,4,5,0.7)" grain={0.07} />
-      <Captions words={WORDS} maxChars={26} until={AUDIO12 + 0.1} st={{ font: T.body, size: 50, weight: 800, color: T.ink, active: "#E3D3B3", y: 1600, pill: { bg: "rgba(23,25,28,0.6)", edge: T.edge }, tone }} />
+      <Finish vignette="rgba(4,8,16,0.7)" grain={0.07} />
+      <Captions words={WORDS} maxChars={26} until={AUDIO12 + 0.1} st={{ font: T.body, size: 50, weight: 800, color: T.ink, active: "#8FE6F0", y: 1600, pill: { bg: "rgba(18,34,58,0.6)", edge: T.edge }, tone }} />
       <Sequence from={Math.round(AUDIO12 * fps)} name="fecho · perfil">
-        <ProfileOutro from={AUDIO12} tap={67.2} bg={<Bg12 />} title={[{ w: "Siga", at: AUDIO12 + 0.1 }, { w: "o perfil", at: AUDIO12 + 0.3, color: "#E3D3B3" }]} sub="mais perguntas que vendem" font={T.display} subFont={T.body} ink={T.ink} dim={T.dim} accent={T.violetDeep} />
+        <ProfileOutro from={AUDIO12} tap={67.2} bg={<Bg12 />} title={[{ w: "Siga", at: AUDIO12 + 0.1 }, { w: "o perfil", at: AUDIO12 + 0.3, color: "#8FE6F0" }]} sub="mais perguntas que vendem" font={T.display} subFont={T.body} ink={T.ink} dim={T.dim} accent={T.violetDeep} />
       </Sequence>
       <Audio src={staticFile("narracao12.m4a")} />
       {sfx && <SfxTrack cues={CUES} mix={mixJson as Mix} gain={sfxGain} />}

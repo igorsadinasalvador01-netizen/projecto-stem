@@ -1,22 +1,23 @@
-// Vídeo 15 — "5 palavras proibidas" · EDITORIAL NOIR & CHAMPANHE (horizontal)
-// Página preta de revista, cartas em 3D (escuras = evite, marfim = use), filetes champanhe.
-// Paleta minimalista: preto, marfim, champanhe; tijolo suave só para o que é proibido.
+// Vídeo 15 — "5 palavras proibidas" · PADRÃO DA SÉRIE (horizontal)
+// Página azul-escura, cartas em 3D (escuras = evite, brancas = use), filetes turquesa.
+// Vermelho = palavra proibida, verde = porque funciona; cinza para o secundário.
 // Fontes: Playfair Display (palavras, editorial) + Manrope (texto e legendas).
 import { FONTS } from "../kit/fonts2";
 
 export const T15 = {
-  base: "#0B0B0C",
-  card: "#18181A",
-  ivory: "#F3EFE6",
-  ink: "#F3EFE6",
-  inkDark: "#141414",
-  dim: "#9C978C",
-  champagne: "#C9B37E",
-  champagneDeep: "#8A7442",
-  brick: "#B5524A",
-  rule: "rgba(201,179,126,0.28)",
-  glass: "rgba(24,24,26,0.62)",
-  edge: "rgba(201,179,126,0.3)",
+  base: "#0A1A2F",
+  card: "#10243F",
+  ivory: "#F4F7FA",
+  ink: "#F4F7FA",
+  inkDark: "#0A1A2F",
+  dim: "#9AA8B8",
+  champagne: "#2EC4D6",
+  champagneDeep: "#147A88",
+  brick: "#F25C5C",
+  rule: "rgba(46,196,214,0.28)",
+  glass: "rgba(16,36,64,0.62)",
+  edge: "rgba(46,196,214,0.3)",
+  green: "#36D399",
   serif: FONTS.playfair,
   body: FONTS.manrope,
 } as const;

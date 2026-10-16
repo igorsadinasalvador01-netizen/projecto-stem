@@ -7,18 +7,18 @@ import { T14 as T } from "./theme14";
 // ——— peças do tema ———
 export const Bg14: React.FC = () => (
   <Mesh
-    base={`linear-gradient(180deg, ${T.paper}, #E7ECF0)`}
-    grid="rgba(18,20,23,0.035)"
+    base={`linear-gradient(180deg, ${T.paper}, ${T.base})`}
+    grid="rgba(255,255,255,0.035)"
     gridSize={90}
     blobs={[
-      { c: "rgba(143,167,188,0.28)", x: 18, y: 14, r: 900 },
-      { c: "rgba(255,255,255,0.9)", x: 80, y: 40, r: 800, s: 0.2 },
-      { c: "rgba(62,92,118,0.10)", x: 70, y: 86, r: 1000, s: 0.3 },
+      { c: "rgba(46,196,214,0.16)", x: 18, y: 14, r: 900 },
+      { c: "rgba(40,72,118,0.55)", x: 80, y: 40, r: 800, s: 0.2 },
+      { c: "rgba(46,196,214,0.08)", x: 70, y: 86, r: 1000, s: 0.3 },
     ]}
   />
 );
 const G: React.FC<{ style?: React.CSSProperties; children?: React.ReactNode; radius?: number; tint?: string; edge?: string }> = ({ style, children, radius = 36, tint = T.glass, edge = T.edge }) => (
-  <Glass tint={tint} edge={edge} radius={radius} blur={22} style={{ boxShadow: `${T.shadow}, inset 0 1px 0 rgba(255,255,255,0.9)`, ...style }}>
+  <Glass tint={tint} edge={edge} radius={radius} blur={22} style={{ boxShadow: `${T.shadow}, inset 0 1px 0 rgba(255,255,255,0.18)`, ...style }}>
     {children}
   </Glass>
 );
@@ -34,7 +34,7 @@ const Label: React.FC<{ children: React.ReactNode; color?: string }> = ({ childr
   <div style={{ fontFamily: T.body, fontWeight: 800, fontSize: 22, letterSpacing: "0.22em", color }}>{children}</div>
 );
 const Check: React.FC<{ on: number; size?: number }> = ({ on, size = 44 }) => (
-  <div style={{ width: size, height: size, borderRadius: size / 2, background: on > 0.5 ? T.sage : "rgba(18,20,23,0.06)", border: `2px solid ${on > 0.5 ? T.sage : T.line}`, display: "flex", alignItems: "center", justifyContent: "center", transform: `scale(${0.8 + on * 0.2})` }}>
+  <div style={{ width: size, height: size, borderRadius: size / 2, background: on > 0.5 ? T.sage : "rgba(255,255,255,0.06)", border: `2px solid ${on > 0.5 ? T.sage : T.line}`, display: "flex", alignItems: "center", justifyContent: "center", transform: `scale(${0.8 + on * 0.2})` }}>
     <svg width={size * 0.55} height={size * 0.55} viewBox="0 0 24 24">
       <path d="M5 12.5l4.5 4.5L19 7.5" stroke="#fff" strokeWidth={3} fill="none" strokeLinecap="round" strokeLinejoin="round" strokeDasharray={24} strokeDashoffset={24 * (1 - Math.min(1, on))} />
     </svg>
@@ -69,11 +69,11 @@ export const S1: React.FC = () => {
 // ——— 2 · o segredo: cadeado abre → mentalidade de vendas ———
 const Padlock: React.FC<{ open: number }> = ({ open }) => (
   <svg width={400} height={480} viewBox="0 0 100 120" style={{ overflow: "visible" }}>
-    <path d={`M28 ${54 - open * 22} V36 a22 22 0 0 1 44 0 V${54 - open * 0}`} stroke="#2B3036" strokeWidth={9} fill="none" strokeLinecap="round" transform={`rotate(${open * -24} 72 ${54})`} />
-    <rect x={14} y={52} width={72} height={60} rx={14} fill="#2B3036" />
-    <rect x={14} y={52} width={72} height={22} rx={10} fill="rgba(255,255,255,0.08)" />
-    <circle cx={50} cy={78} r={7} fill={open > 0.5 ? T.sage : "#C9CED3"} />
-    <rect x={47} y={82} width={6} height={14} rx={3} fill={open > 0.5 ? T.sage : "#C9CED3"} />
+    <path d={`M28 ${54 - open * 22} V36 a22 22 0 0 1 44 0 V${54 - open * 0}`} stroke="#DCE6EF" strokeWidth={9} fill="none" strokeLinecap="round" transform={`rotate(${open * -24} 72 ${54})`} />
+    <rect x={14} y={52} width={72} height={60} rx={14} fill="#DCE6EF" />
+    <rect x={14} y={52} width={72} height={22} rx={10} fill="rgba(255,255,255,0.35)" />
+    <circle cx={50} cy={78} r={7} fill={open > 0.5 ? T.sage : T.base} />
+    <rect x={47} y={82} width={6} height={14} rx={3} fill={open > 0.5 ? T.sage : T.base} />
   </svg>
 );
 const Mind: React.FC<{ t: number }> = ({ t }) => (
@@ -112,7 +112,7 @@ export const S2: React.FC = () => {
             <Mind t={t} />
           </div>
           {/* brilho ao abrir */}
-          <div style={{ position: "absolute", left: "50%", top: "50%", width: 700, height: 700, marginLeft: -350, marginTop: -350, borderRadius: "50%", background: "radial-gradient(circle, rgba(143,167,188,0.45), transparent 60%)", opacity: ez(7.6, 8.0) * (1 - ez(8.6, 9.6)) }} />
+          <div style={{ position: "absolute", left: "50%", top: "50%", width: 700, height: 700, marginLeft: -350, marginTop: -350, borderRadius: "50%", background: "radial-gradient(circle, rgba(46,196,214,0.4), transparent 60%)", opacity: ez(7.6, 8.0) * (1 - ez(8.6, 9.6)) }} />
         </G>
       </div>
     </Enter>
@@ -134,7 +134,7 @@ export const Roteiro: React.FC<{ from: number; gap?: number; sp: (a: number, c?:
         return (
           <div key={s} style={{ ...pin(p) }}>
             <div style={{ display: "flex", alignItems: "center", gap: 26, padding: "16px 0" }}>
-              <div style={{ width: 58, height: 58, borderRadius: 29, background: p > 0.5 ? T.steel : T.mist, color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: T.display, fontWeight: 600, fontSize: 26, position: "relative" }}>{i + 1}</div>
+              <div style={{ width: 58, height: 58, borderRadius: 29, background: p > 0.5 ? T.steel : T.mist, color: T.base, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: T.display, fontWeight: 600, fontSize: 26, position: "relative" }}>{i + 1}</div>
               <span style={{ fontFamily: T.body, fontWeight: 800, fontSize: 44, color: T.ink }}>{s}</span>
             </div>
             {i === 2 && slot && <div style={{ height: slotOpen * 150, overflow: "hidden", marginLeft: 84 }}>{slot}</div>}
@@ -253,7 +253,7 @@ export const S5: React.FC = () => {
       <div style={{ position: "absolute", left: 140, right: 140, top: 760, opacity: talk, transform: `translateY(${(1 - talk) * 40}px) scale(${0.92 + talk * 0.08})` }}>
         <G radius={44} style={{ padding: "40px 44px", display: "flex", alignItems: "center", gap: 30 }}>
           <div style={{ position: "relative", width: 130, height: 130, flexShrink: 0 }}>
-            <div style={{ position: "absolute", inset: 0, borderRadius: 65, background: "linear-gradient(145deg, #8FA7BC, #3E5C76)" }} />
+            <div style={{ position: "absolute", inset: 0, borderRadius: 65, background: "linear-gradient(145deg, #2EC4D6, #147A88)" }} />
             <div style={{ position: "absolute", inset: -10, borderRadius: 75, border: `3px solid ${T.ice}`, opacity: 0.5 + 0.5 * Math.sin(t * 6) }} />
             <svg width={130} height={130} viewBox="0 0 24 24" style={{ position: "absolute", inset: 0 }} fill="none" stroke="#fff" strokeWidth={1.4} strokeLinecap="round">
               {ICONS.perfil}
@@ -346,7 +346,7 @@ export const S7: React.FC = () => {
         return (
           <div key={c.k} style={{ position: "absolute", left: 90, right: 90, top: 600 + i * 270, opacity: interpolate(p, [0, 0.35], [0, 1], clamp) * interpolate(fill, [0, 0.5], [0.5, 1], clamp), transform: `perspective(1600px) rotateX(${(1 - p) * 40}deg) translateY(${(1 - p) * 60}px) scale(${0.97 + fill * 0.03})`, transformOrigin: "50% 0%" }}>
             <G radius={36} style={{ padding: "30px 36px", display: "flex", alignItems: "center", gap: 30 }}>
-              <div style={{ width: 120, height: 120, borderRadius: 30, background: i === 2 ? T.steel : T.steelSoft, color: i === 2 ? "#fff" : T.steel, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: T.display, fontWeight: 800, fontSize: 60, flexShrink: 0 }}>{c.k}</div>
+              <div style={{ width: 120, height: 120, borderRadius: 30, background: i === 2 ? T.steel : T.steelSoft, color: i === 2 ? T.base : T.steel, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: T.display, fontWeight: 800, fontSize: 60, flexShrink: 0 }}>{c.k}</div>
               <div>
                 <Label color={i === 2 ? T.steel : T.dim}>{c.l}</Label>
                 <div style={{ fontFamily: T.body, fontWeight: 800, fontSize: 42, color: T.ink, marginTop: 8, lineHeight: 1.15, opacity: interpolate(fill, [0, 0.4], [0, 1], clamp), transform: `translateX(${(1 - fill) * 30}px)` }}>{c.v}</div>
@@ -370,7 +370,7 @@ export const S8: React.FC = () => {
         const p = sp(54.0 + i * 0.18, SP.pop);
         return (
           <div key={c.k} style={{ ...pin(p) }}>
-            <div style={{ padding: "12px 20px", borderRadius: 18, background: i === 2 ? T.steel : T.steelSoft, color: i === 2 ? "#fff" : T.steel, fontFamily: T.body, fontWeight: 800, fontSize: 26, whiteSpace: "nowrap" }}>
+            <div style={{ padding: "12px 20px", borderRadius: 18, background: i === 2 ? T.steel : T.steelSoft, color: i === 2 ? T.base : T.steel, fontFamily: T.body, fontWeight: 800, fontSize: 26, whiteSpace: "nowrap" }}>
               {c.k} · {c.l.charAt(0) + c.l.slice(1).toLowerCase()}
             </div>
           </div>

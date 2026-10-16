@@ -63,9 +63,9 @@ export const Video16: React.FC<Video16Props> = ({ sfx, sfxGain }) => {
       <Sequence durationInFrames={Math.round(AUDIO16 * fps)} name="acabamento">
         <Finish vignette="rgba(0,0,0,0.55)" grain={0.06} />
       </Sequence>
-      <Captions words={WORDS} maxChars={26} until={AUDIO16 + 0.1} st={{ font: T.body, size: 48, weight: 800, color: T.chalk, active: T.green, y: 1600, pill: { bg: "rgba(10,15,13,0.66)", edge: T.edge }, tone }} />
+      <Captions words={WORDS} maxChars={26} until={AUDIO16 + 0.1} st={{ font: T.body, size: 48, weight: 800, color: T.chalk, active: T.turq, y: 1600, pill: { bg: "rgba(10,26,47,0.66)", edge: T.edge }, tone }} />
       <Sequence from={Math.round(AUDIO16 * fps)} name="fecho · perfil">
-        <ProfileOutro from={AUDIO16} tap={AUDIO16 + 1.4} bg={<Bg16 />} title={[{ w: "Siga", at: AUDIO16 + 0.1 }, { w: "o perfil", at: AUDIO16 + 0.3, color: T.green }]} sub="treino de vendas todos os dias" font={T.display} subFont={T.body} ink={T.chalk} dim={T.dim} accent={T.pitch} titleSize={150} />
+        <ProfileOutro from={AUDIO16} tap={AUDIO16 + 1.4} bg={<Bg16 />} title={[{ w: "Siga", at: AUDIO16 + 0.1 }, { w: "o perfil", at: AUDIO16 + 0.3, color: T.turq }]} sub="treino de vendas todos os dias" font={T.display} subFont={T.body} ink={T.chalk} dim={T.dim} accent="#147A88" titleSize={150} />
       </Sequence>
       <Audio src={staticFile("narracao16.m4a")} />
       {sfx && <SfxTrack cues={CUES} mix={mixJson as Mix} gain={sfxGain} />}

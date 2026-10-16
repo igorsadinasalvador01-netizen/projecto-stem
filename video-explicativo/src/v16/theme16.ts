@@ -1,20 +1,21 @@
-// Vídeo 16 — "Chutar pro gol" · ESTÁDIO NOTURNO (vertical)
-// Relvado escuro sob refletores, branco-giz e um único verde suave para o golo/acerto.
-// Paleta minimalista: sem néon; vermelho apagado só para o remate falhado.
+// Vídeo 16 — "Chutar pro gol" · PADRÃO DA SÉRIE (vertical)
+// Noite de estádio em azul-escuro, relvado verde, branco e acento turquesa;
+// verde = golo/acerto, vermelho = remate falhado; cinza para o secundário.
 // Fontes: Bebas Neue (placar e títulos) + Sora (texto e legendas).
 import { FONTS } from "../kit/fonts2";
 
 export const T16 = {
-  night: "#0A0F0D",
-  deep: "#101915",
+  night: "#0A1A2F",
+  deep: "#0F2440",
   pitch: "#2F5D45",
   pitchDark: "#284F3B",
-  chalk: "#F2F4EF",
-  dim: "rgba(242,244,239,0.66)",
-  green: "#7DBF8A",
-  miss: "#C46A5E",
-  glass: "rgba(16,25,21,0.55)",
-  edge: "rgba(242,244,239,0.22)",
+  chalk: "#F4F7FA",
+  dim: "#9AA8B8",
+  green: "#36D399",
+  miss: "#F25C5C",
+  glass: "rgba(16,36,64,0.55)",
+  edge: "rgba(255,255,255,0.18)",
+  turq: "#2EC4D6",
   display: FONTS.bebas,
   body: FONTS.sora,
 } as const;

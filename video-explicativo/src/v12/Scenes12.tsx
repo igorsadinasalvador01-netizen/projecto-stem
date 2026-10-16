@@ -8,12 +8,12 @@ import { T12 as T } from "./theme12";
 export const Bg12: React.FC<{ hue?: "violet" | "coral" | "mint" }> = ({ hue = "violet" }) => (
   <Mesh
     base={`linear-gradient(180deg, ${T.deep}, ${T.base} 60%)`}
-    grid="rgba(214,193,154,0.06)"
+    grid="rgba(46,196,214,0.06)"
     gridSize={72}
     blobs={[
-      { c: hue === "coral" ? "rgba(210,104,90,0.22)" : "rgba(214,193,154,0.16)", x: 22, y: 18, r: 900 },
-      { c: hue === "mint" ? "rgba(141,181,154,0.2)" : "rgba(70,75,82,0.55)", x: 82, y: 70, r: 1000, s: 0.18 },
-      { c: "rgba(214,193,154,0.07)", x: 60, y: 40, r: 700, s: 0.3 },
+      { c: hue === "coral" ? "rgba(242,92,92,0.22)" : "rgba(46,196,214,0.14)", x: 22, y: 18, r: 900 },
+      { c: hue === "mint" ? "rgba(54,211,153,0.2)" : "rgba(40,72,118,0.55)", x: 82, y: 70, r: 1000, s: 0.18 },
+      { c: "rgba(70,110,160,0.16)", x: 60, y: 40, r: 700, s: 0.3 },
     ]}
   />
 );
@@ -79,7 +79,7 @@ export const S1: React.FC = () => {
       <Title offset={0} out={4.9} top={170} rows={[row([{ w: "Pouquíssimos", at: 0.16 }], 100), small([{ w: "vendedores fazem", at: 0.88 }], 50), row([{ w: "esta pergunta", at: 1.92, color: T.violet }], 100)]} />
       <Title offset={0} out={7.3} top={170} rows={[row([{ w: "Você", at: 4.96 }, { w: "vira o jogo", at: 5.2, color: T.violet }], 100), row([{ w: "e fecha", at: 5.92, color: T.mint }, { w: "mais antes", at: 6.4 }], 100)]} />
       <div style={{ position: "absolute", right: 110, top: 1300, opacity: ver, transform: `scale(${0.5 + ver * 0.5}) rotate(${(1 - ver) * -12}deg)` }}>
-        <G radius={999} glow="rgba(141,181,154,0.5)" style={{ padding: "14px 30px" }}>
+        <G radius={999} glow="rgba(54,211,153,0.5)" style={{ padding: "14px 30px" }}>
           <span style={{ fontFamily: T.body, fontWeight: 800, fontSize: 40, color: T.mint }}>quer ver?</span>
         </G>
       </div>
@@ -110,14 +110,14 @@ export const S2: React.FC = () => {
         const rot = (random(`br${k}`) - 0.5) * 30;
         return (
           <div key={k} style={{ position: "absolute", left: x, top: -80 + (yEnd + 80) * p, transform: `rotate(${rot * p}deg)`, opacity: (1 - focus * 0.85) * Math.min(1, p * 2), filter: `blur(${focus * 6}px)` }}>
-            <G radius={999} tint="rgba(210,104,90,0.10)" style={{ padding: "10px 22px" }}>
+            <G radius={999} tint="rgba(242,92,92,0.10)" style={{ padding: "10px 22px" }}>
               <span style={{ fontFamily: T.body, fontWeight: 700, fontSize: 28, color: T.ink, whiteSpace: "nowrap" }}>{b}</span>
             </G>
           </div>
         );
       })}
       {/* contador 0 → 400 */}
-      <div style={{ position: "absolute", left: 90, right: 90, top: 640, height: 520, borderRadius: "50%", background: "radial-gradient(ellipse, rgba(10,11,12,0.85) 30%, transparent 70%)", opacity: counter * (1 - focus) }} />
+      <div style={{ position: "absolute", left: 90, right: 90, top: 640, height: 520, borderRadius: "50%", background: "radial-gradient(ellipse, rgba(8,16,28,0.85) 30%, transparent 70%)", opacity: counter * (1 - focus) }} />
       <div style={{ position: "absolute", left: 0, right: 0, top: 700, textAlign: "center", opacity: counter * (1 - focus), transform: `scale(${0.7 + counter * 0.3})` }}>
         <div style={{ fontFamily: T.display, fontWeight: 800, fontSize: 300, lineHeight: 1, color: T.coral, textShadow: `0 0 80px ${T.coral}88`, fontVariantNumeric: "tabular-nums" }}>{n}</div>
         <div style={{ fontFamily: T.body, fontWeight: 700, fontSize: 52, color: T.ink, letterSpacing: "0.04em" }}>benefícios de uma vez</div>
@@ -125,7 +125,7 @@ export const S2: React.FC = () => {
       {/* o benefício certo */}
       {focus > 0.01 && (
         <div style={{ position: "absolute", left: 0, right: 0, top: 820, display: "flex", justifyContent: "center", opacity: focus, transform: `scale(${0.7 + focus * 0.3})` }}>
-          <G radius={999} glow="rgba(141,181,154,0.6)" tint="rgba(141,181,154,0.14)" style={{ padding: "26px 54px" }}>
+          <G radius={999} glow="rgba(54,211,153,0.6)" tint="rgba(54,211,153,0.14)" style={{ padding: "26px 54px" }}>
             <span style={{ display: "flex", alignItems: "center", gap: 18, fontFamily: T.display, fontWeight: 800, fontSize: 60, color: T.ink }}>
               <Check s={56} /> o benefício certo
             </span>
@@ -148,7 +148,7 @@ export const S3: React.FC = () => {
       <Bg12 hue="mint" />
       <Title offset={off} out={99} rows={[small([{ w: "quando o diferencial", at: 13.84 }], 50), row([{ w: "faz sentido", at: 14.88, color: T.mint }], 104), small([{ w: "pra quem tá comprando", at: 15.36 }], 50)]} />
       <div style={{ position: "absolute", left: 140, right: 140, top: 640, opacity: card, transform: `translateY(${(1 - card) * 80}px)` }}>
-        <G style={{ padding: "48px 48px 56px" }} glow={fit > 0.5 ? "rgba(141,181,154,0.45)" : undefined}>
+        <G style={{ padding: "48px 48px 56px" }} glow={fit > 0.5 ? "rgba(54,211,153,0.45)" : undefined}>
           <div style={{ display: "flex", alignItems: "center", gap: 30 }}>
             <Person s={190} tone={fit > 0.5 ? T.mint : T.violet} eyes={fit > 0.5 ? "ok" : "?"} />
             <div>
@@ -162,7 +162,7 @@ export const S3: React.FC = () => {
       </div>
       {/* a peça certa voa até ao lugar */}
       <div style={{ position: "absolute", left: 300 + fly * 250, top: 1240 - fly * 455, opacity: 1 - fit, transform: `rotate(${(1 - fly) * -8}deg) scale(${1 - fly * 0.1})` }}>
-        <G radius={999} glow="rgba(141,181,154,0.6)" tint="rgba(141,181,154,0.16)" style={{ padding: "22px 40px" }}>
+        <G radius={999} glow="rgba(54,211,153,0.6)" tint="rgba(54,211,153,0.16)" style={{ padding: "22px 40px" }}>
           <span style={{ fontFamily: T.display, fontWeight: 800, fontSize: 44, color: T.ink }}>o diferencial certo</span>
         </G>
       </div>
@@ -231,7 +231,7 @@ export const S5: React.FC = () => {
         const r = 330 + (k % 2) * 60;
         return (
           <div key={k} style={{ position: "absolute", left: 540 + Math.cos(a) * r - 120, top: 950 + Math.sin(a) * r * 0.9 - 20 + Math.sin(t * 3 + k) * 6, opacity: p * (1 - mute), transform: `scale(${(0.6 + p * 0.4) * (1 - mute * 0.5)})` }}>
-            <G radius={28} tint="rgba(210,104,90,0.12)" style={{ padding: "14px 24px" }}>
+            <G radius={28} tint="rgba(242,92,92,0.12)" style={{ padding: "14px 24px" }}>
               <span style={{ fontFamily: T.body, fontWeight: 700, fontSize: 38, color: T.ink, whiteSpace: "nowrap" }}>{b}</span>
             </G>
           </div>
@@ -247,7 +247,7 @@ export const S5: React.FC = () => {
       )}
       {simple > 0.01 && (
         <div style={{ position: "absolute", left: 0, right: 0, top: 1240, display: "flex", justifyContent: "center", opacity: simple, transform: `translateY(${(1 - simple) * 40}px) scale(${0.7 + simple * 0.3})` }}>
-          <G radius={999} glow="rgba(141,181,154,0.55)" tint="rgba(141,181,154,0.14)" style={{ padding: "24px 60px" }}>
+          <G radius={999} glow="rgba(54,211,153,0.55)" tint="rgba(54,211,153,0.14)" style={{ padding: "24px 60px" }}>
             <span style={{ fontFamily: T.display, fontWeight: 800, fontSize: 46, color: T.ink, whiteSpace: "nowrap" }}>
               faz um negócio <span style={{ color: T.mint }}>simples</span>
             </span>
@@ -273,7 +273,7 @@ export const S6: React.FC = () => {
       </div>
       <Title offset={off} out={99} top={800} rows={[small([{ w: "pergunta para o seu cliente", at: 25.84 }], 48)]} />
       <div style={{ position: "absolute", left: 90, right: 90, top: 900, opacity: pad, transform: `translateY(${(1 - pad) * 60}px) rotate(-1.5deg)` }}>
-        <G style={{ padding: "38px 50px 54px" }} glow="rgba(214,193,154,0.45)">
+        <G style={{ padding: "38px 50px 54px" }} glow="rgba(46,196,214,0.45)">
           <div style={{ fontFamily: T.body, fontWeight: 800, fontSize: 30, letterSpacing: "0.2em", color: T.violet }}>ANOTA AÍ</div>
           <div style={{ marginTop: 18, minHeight: 260, fontFamily: T.display, fontWeight: 800, fontSize: 92, lineHeight: 1.08, color: T.ink }}>
             {q.slice(0, n).split("NÃO").map((part, i, arr) => (
@@ -301,7 +301,7 @@ export const S7: React.FC = () => {
       <Bg12 />
       <Title offset={off} out={99} rows={[small([{ w: "essa pergunta é", at: 29.04 }], 50), row([{ w: "poderosíssima", at: 30.08, color: T.violet }], 84)]} />
       <div style={{ position: "absolute", left: 70, right: 70, top: 560, display: "flex", gap: 30, opacity: cols, transform: `translateY(${(1 - cols) * 60}px)` }}>
-        <G style={{ flex: 1, padding: "34px 30px", minHeight: 760 }} tint="rgba(210,104,90,0.08)" glow="rgba(210,104,90,0.35)">
+        <G style={{ flex: 1, padding: "34px 30px", minHeight: 760 }} tint="rgba(242,92,92,0.08)" glow="rgba(242,92,92,0.35)">
           <div style={{ fontFamily: T.display, fontWeight: 800, fontSize: 44, color: T.coral }}>NÃO QUER</div>
           <div style={{ fontFamily: T.body, fontSize: 26, color: T.dim, marginBottom: 20 }}>responde em segundos</div>
           {NOT.map((x, k) => {
@@ -313,7 +313,7 @@ export const S7: React.FC = () => {
             );
           })}
         </G>
-        <G style={{ flex: 1, padding: "34px 30px", minHeight: 760 }} tint="rgba(141,181,154,0.06)">
+        <G style={{ flex: 1, padding: "34px 30px", minHeight: 760 }} tint="rgba(54,211,153,0.06)">
           <div style={{ fontFamily: T.display, fontWeight: 800, fontSize: 44, color: T.mint }}>QUER</div>
           <div style={{ fontFamily: T.body, fontSize: 26, color: T.dim, marginBottom: 20 }}>fica a pensar…</div>
           <div style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: T.display, fontSize: 120, color: T.faint, marginTop: 120, justifyContent: "center" }}>
@@ -349,9 +349,9 @@ export const S8: React.FC = () => {
         </svg>
         {/* escudo */}
         <div style={{ position: "absolute", left: 150, top: 150, width: 300, height: 300 }}>
-          <G radius={150} style={{ width: 300, height: 300 }} glow="rgba(214,193,154,0.55)">
+          <G radius={150} style={{ width: 300, height: 300 }} glow="rgba(46,196,214,0.55)">
             <svg width={300} height={300} viewBox="0 0 48 48" style={{ position: "absolute", inset: 0, padding: 70 }}>
-              <path d="M24 4l16 6v12c0 10-7 18-16 22C15 40 8 32 8 22V10z" fill="rgba(214,193,154,0.35)" stroke={T.ink} strokeWidth={2} strokeLinejoin="round" />
+              <path d="M24 4l16 6v12c0 10-7 18-16 22C15 40 8 32 8 22V10z" fill="rgba(46,196,214,0.35)" stroke={T.ink} strokeWidth={2} strokeLinejoin="round" />
               <path d="M17 24l5 5 9-10" stroke={T.mint} strokeWidth={3} fill="none" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </G>
@@ -361,7 +361,7 @@ export const S8: React.FC = () => {
           const bounce = interpolate(s, [0, 1], [1, 0]);
           return s > 0.01 ? (
             <div key={p.w} style={{ position: "absolute", left: 300 + Math.cos(p.a) * (360 + bounce * 200) - 110, top: 300 + Math.sin(p.a) * (360 + bounce * 200) - 30, opacity: s }}>
-              <G radius={999} tint="rgba(210,104,90,0.16)" style={{ padding: "12px 26px" }}>
+              <G radius={999} tint="rgba(242,92,92,0.16)" style={{ padding: "12px 26px" }}>
                 <span style={{ fontFamily: T.display, fontWeight: 800, fontSize: 38, color: T.coral }}>{p.w}</span>
               </G>
             </div>
@@ -389,12 +389,12 @@ export const S9: React.FC = () => {
       <AbsoluteFill style={{ opacity: 1 - partB }}>
         <Title offset={off} out={43.85} rows={[small([{ w: "é muito mais", at: 38.8 }], 50), row([{ w: "fácil e eficiente", at: 39.36, color: T.mint }], 86), small([{ w: "mostrar que o medo", at: 40.88 }], 50)]} />
         <div style={{ position: "absolute", left: 120, right: 120, top: 720, opacity: fear, transform: `translateY(${(1 - fear) * 60}px)` }}>
-          <G style={{ padding: "40px 44px" }} tint="rgba(210,104,90,0.10)" glow={shield > 0.5 ? "rgba(141,181,154,0.5)" : "rgba(210,104,90,0.35)"}>
+          <G style={{ padding: "40px 44px" }} tint="rgba(242,92,92,0.10)" glow={shield > 0.5 ? "rgba(54,211,153,0.5)" : "rgba(242,92,92,0.35)"}>
             <div style={{ fontFamily: T.body, fontWeight: 800, fontSize: 28, letterSpacing: "0.18em", color: T.coral }}>O MEDO DO CLIENTE</div>
             <div style={{ marginTop: 16, fontFamily: T.display, fontWeight: 800, fontSize: 64, color: T.ink, lineHeight: 1.1 }}>"E se não funcionar comigo?"</div>
             <div style={{ marginTop: 30, display: "flex", alignItems: "center", gap: 18, opacity: shield, transform: `scale(${0.7 + shield * 0.3})`, transformOrigin: "left" }}>
               <div style={{ width: 70, height: 70, borderRadius: 35, background: T.mint, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <Check s={44} c="#122019" />
+                <Check s={44} c="#10261E" />
               </div>
               <span style={{ fontFamily: T.display, fontWeight: 800, fontSize: 52, color: T.mint }}>isso não vai acontecer</span>
             </div>
@@ -413,10 +413,10 @@ export const S9: React.FC = () => {
           ))}
           <div style={{ position: "absolute", left: 330, right: 90, top: 640, opacity: paint * (1 - pop * 0.9), transform: `scale(${(0.8 + paint * 0.2) * (1 - pop * 0.15)})`, transformOrigin: "20% 100%" }}>
             <G radius={60} style={{ padding: 26 }}>
-              <div style={{ position: "relative", height: 380, borderRadius: 36, overflow: "hidden", filter: `grayscale(${grey}) brightness(${1 - grey * 0.35})`, background: "linear-gradient(180deg, #EDE3D1, #CDB89A 48%, #7E8A84)" }}>
-                <div style={{ position: "absolute", left: "50%", top: 150, width: 170, height: 170, marginLeft: -85, borderRadius: "50%", background: "radial-gradient(circle, #FFF8EC, #E8D3A8)", boxShadow: "0 0 80px #EFE2C4" }} />
+              <div style={{ position: "relative", height: 380, borderRadius: 36, overflow: "hidden", filter: `grayscale(${grey}) brightness(${1 - grey * 0.35})`, background: "linear-gradient(180deg, #DCEBF3, #9EC6DA 48%, #4A6F8A)" }}>
+                <div style={{ position: "absolute", left: "50%", top: 150, width: 170, height: 170, marginLeft: -85, borderRadius: "50%", background: "radial-gradient(circle, #FFFFFF, #CFEFF5)", boxShadow: "0 0 80px #CFEFF5" }} />
                 <svg width="100%" height={180} viewBox="0 0 400 180" preserveAspectRatio="none" style={{ position: "absolute", bottom: 0 }}>
-                  <path d="M0 120 L80 70 L160 110 L240 50 L320 100 L400 60 L400 180 L0 180z" fill="#3E4A47" opacity={0.85} />
+                  <path d="M0 120 L80 70 L160 110 L240 50 L320 100 L400 60 L400 180 L0 180z" fill="#2E4A5E" opacity={0.85} />
                 </svg>
                 {Array.from({ length: 6 }).map((_, k) => (
                   <div key={k} style={{ position: "absolute", left: `${12 + k * 15}%`, top: `${12 + (k % 3) * 10}%`, width: 8, height: 8, borderRadius: 4, background: "#fff", opacity: 0.5 + 0.5 * Math.sin(t * 3 + k) }} />
@@ -507,7 +507,7 @@ export const S11: React.FC = () => {
           const p = sp(s.at, SP.snap);
           return (
             <div key={s.w} style={{ position: "absolute", left: 0, top: k * 200, display: "flex", alignItems: "center", gap: 30, opacity: Math.max(0.25, p), transform: `translateX(${(1 - p) * 30}px)` }}>
-              <div style={{ width: 122, height: 122, borderRadius: 61, background: p > 0.5 ? s.c : "rgba(255,255,255,0.06)", border: `2px solid ${T.edge}`, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: T.display, fontWeight: 800, fontSize: 54, color: p > 0.5 ? "#0E0F11" : T.dim, boxShadow: p > 0.5 ? `0 0 40px ${s.c}88` : "none" }}>{k + 1}</div>
+              <div style={{ width: 122, height: 122, borderRadius: 61, background: p > 0.5 ? s.c : "rgba(255,255,255,0.06)", border: `2px solid ${T.edge}`, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: T.display, fontWeight: 800, fontSize: 54, color: p > 0.5 ? "#081526" : T.dim, boxShadow: p > 0.5 ? `0 0 40px ${s.c}88` : "none" }}>{k + 1}</div>
               <G radius={28} style={{ padding: "22px 36px" }}>
                 <span style={{ fontFamily: T.display, fontWeight: 800, fontSize: 52, color: T.ink }}>{s.w}</span>
               </G>
@@ -516,7 +516,7 @@ export const S11: React.FC = () => {
         })}
       </div>
       <div style={{ position: "absolute", right: 90, top: 560, opacity: badge, transform: `rotate(${8 - badge * 8}deg) scale(${0.6 + badge * 0.4})` }}>
-        <G radius={999} glow="rgba(141,181,154,0.5)" tint="rgba(141,181,154,0.12)" style={{ padding: "12px 28px" }}>
+        <G radius={999} glow="rgba(54,211,153,0.5)" tint="rgba(54,211,153,0.12)" style={{ padding: "12px 28px" }}>
           <span style={{ fontFamily: T.body, fontWeight: 800, fontSize: 30, letterSpacing: "0.14em", color: T.mint }}>CONSULTOR</span>
         </G>
       </div>

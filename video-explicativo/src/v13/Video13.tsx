@@ -3,9 +3,9 @@ import { AbsoluteFill, Audio, Sequence, staticFile, useVideoConfig } from "remot
 import { loadFonts } from "../fonts";
 import { Captions, Cue, Finish, Mix, ProfileOutro, seq, SfxTrack, Word } from "../kit/Kit";
 import { loadFonts2 } from "../kit/fonts2";
-import { Ground, Sky, T13 as T } from "./Art13";
 import mixJson from "./mix13.json";
-import { S1, S11, S2, S3, S4, S5, S6, S7 } from "./Scenes13";
+import { Bg13, Inbox, Market, Reaction, S1, S11, S6, Territory } from "./Scenes13";
+import { T13 as T } from "./theme13";
 import { S10, S8, S9 } from "./Scenes13b";
 import wordsJson from "./words13.json";
 
@@ -19,12 +19,11 @@ export const TOTAL13 = 73.7;
 const WORDS = wordsJson as Word[];
 const SCENES: [React.FC, number, number][] = [
   [S1, 0, 3.0],
-  [S2, 3.0, 10.8],
-  [S3, 10.8, 16.4],
-  [S4, 16.4, 22.9],
-  [S5, 22.9, 30.4],
+  [Inbox, 3.0, 16.4],
+  [Market, 16.4, 22.9],
+  [Territory, 22.9, 30.4],
   [S6, 30.4, 35.2],
-  [S7, 35.2, 41.4],
+  [Reaction, 35.2, 41.4],
   [S8, 41.4, 45.5],
   [S9, 45.5, 54.8],
   [S10, 54.8, 64.5],
@@ -34,8 +33,8 @@ const NEG = ["acaba,", "emagrece", "morre", "errar", "fome", "cai.", "tirador", 
 const POS = ["escolhe.", "escolhe", "decide", "caçar", "prospectar.", "prospectar,", "high", "ticket.", "carnívoro.", "carnívoro"];
 const tone = (w: string) => {
   const k = w.toLowerCase();
-  if (NEG.includes(k)) return "#DE8C7E";
-  if (POS.includes(k)) return T.gold;
+  if (NEG.includes(k)) return T.miss;
+  if (POS.includes(k)) return T.carn;
   return undefined;
 };
 
@@ -101,29 +100,22 @@ const CUES: Cue[] = [
   { file: "ding.wav", at: 73.0, v: 0.25 },
 ];
 
-const Bg13: React.FC = () => (
-  <>
-    <Sky sunX={70} sunY={64} dusk={0.25} />
-    <Ground y={900} />
-  </>
-);
-
 export type Video13Props = { sfx: boolean; sfxGain: number };
 export const Video13: React.FC<Video13Props> = ({ sfx, sfxGain }) => {
   const { fps } = useVideoConfig();
   return (
-    <AbsoluteFill style={{ background: T.night }}>
+    <AbsoluteFill style={{ background: T.paper }}>
       {SCENES.map(([C, a, b], i) => (
         <Sequence key={i} from={Math.round(a * fps)} durationInFrames={Math.round((b + 0.6) * fps) - Math.round(a * fps)} name={`cena ${i + 1}`}>
           <C />
         </Sequence>
       ))}
       <Sequence durationInFrames={Math.round(AUDIO13 * fps)} name="acabamento">
-        <Finish vignette="rgba(20,17,15,0.62)" grain={0.075} />
+        <Finish vignette="rgba(2,8,18,0.55)" grain={0.05} />
       </Sequence>
-      <Captions words={WORDS} maxChars={40} until={AUDIO13 + 0.1} st={{ font: T.sans, size: 40, weight: 700, color: T.ink, active: T.gold, y: 1000, maxWidth: 1500, pill: { bg: "rgba(24,21,19,0.58)", edge: T.edge }, tone }} />
+      <Captions words={WORDS} maxChars={40} until={AUDIO13 + 0.1} st={{ font: T.sans, size: 40, weight: 700, color: T.ink, active: T.carn, y: 1000, maxWidth: 1500, pill: { bg: "rgba(10,26,47,0.72)", edge: T.edge }, tone }} />
       <Sequence from={Math.round(AUDIO13 * fps)} name="fecho · perfil">
-        <ProfileOutro from={AUDIO13} tap={71.5} bg={<Bg13 />} title={[{ w: "Seja", at: AUDIO13 + 0.1 }, { w: "o leão.", at: AUDIO13 + 0.3, color: T.gold, italic: true }]} sub="Siga para mais estratégia de vendas" font={T.serif} subFont={T.sans} ink={T.ink} dim={T.dim} accent={T.amber} />
+        <ProfileOutro from={AUDIO13} tap={71.5} bg={<Bg13 />} title={[{ w: "Seja", at: AUDIO13 + 0.1 }, { w: "carnívoro.", at: AUDIO13 + 0.3, color: T.carn, italic: true }]} sub="Siga para mais estratégia de vendas" font={T.serif} subFont={T.sans} ink={T.ink} dim={T.dim} accent={T.turqDeep} titleSize={100} />
       </Sequence>
       <Audio src={staticFile("narracao13.m4a")} />
       {sfx && <SfxTrack cues={CUES} mix={mixJson as Mix} gain={sfxGain} />}

@@ -25,7 +25,7 @@ const QMark: React.FC<{ spin: number; float: number }> = ({ spin, float }) => {
   }, []);
   const mat = (
     <meshPhysicalMaterial
-      color="#F4EFE6"
+      color="#EAF6F8"
       transmission={1}
       thickness={1.1}
       roughness={0.06}
@@ -33,7 +33,7 @@ const QMark: React.FC<{ spin: number; float: number }> = ({ spin, float }) => {
       iridescence={0.12}
       iridescenceIOR={1.3}
       clearcoat={1}
-      attenuationColor="#E3D3B3"
+      attenuationColor="#8FE6F0"
       attenuationDistance={3.2}
       envMapIntensity={1.6}
     />
@@ -64,8 +64,8 @@ export const GlassQuestion: React.FC<{ width: number; height: number; at?: numbe
   const t = frame / fps;
   const intro = interpolate(frame, [at * fps, at * fps + 0.9 * fps], [0, 1], { easing: EZ.out, ...clamp });
   const spin = (1 - intro) * -2.4 + Math.sin(t * 0.7) * 0.45;
-  const glowV = useGlowTexture("rgba(214,193,154,0.95)");
-  const glowC = useGlowTexture(color2 === T12.mint ? "rgba(141,181,154,0.8)" : "rgba(210,104,90,0.75)");
+  const glowV = useGlowTexture("rgba(46,196,214,0.95)");
+  const glowC = useGlowTexture(color2 === T12.mint ? "rgba(54,211,153,0.8)" : "rgba(242,92,92,0.75)");
   return (
     <ThreeCanvas width={width} height={height} camera={{ position: [0, 0.2, 5.2], fov: 32 }} gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }} style={{ background: "transparent" }}>
       <ambientLight intensity={0.3} />
@@ -73,7 +73,7 @@ export const GlassQuestion: React.FC<{ width: number; height: number; at?: numbe
       <pointLight position={[-2.5, 1, 2]} intensity={14} color={T12.violet} />
       <pointLight position={[2.5, -1, 2]} intensity={10} color={color2} />
       <Environment resolution={256}>
-        <color attach="background" args={["#1A1B1E"]} />
+        <color attach="background" args={["#10243F"]} />
         <Lightformer form="rect" intensity={4} position={[0, 4, 2]} rotation-x={Math.PI / 2} scale={[8, 3, 1]} />
         <Lightformer form="rect" intensity={3} color={T12.violet} position={[-4, 0.5, 1]} rotation-y={Math.PI / 2} scale={[5, 2, 1]} />
         <Lightformer form="rect" intensity={2.6} color={color2} position={[4, -0.5, 1]} rotation-y={-Math.PI / 2} scale={[5, 1.5, 1]} />

@@ -241,18 +241,18 @@ export const Carousel3D: React.FC<{ width: number; height: number; offset: numbe
   const idx = idle ? t * 0.55 : carouselIndex(t);
   const step = (Math.PI * 2) / MODELS.length;
   const R = 2.7;
-  const shadow = useGlowTexture("rgba(40,55,70,0.45)");
+  const shadow = useGlowTexture("rgba(0,0,0,0.6)");
   return (
     <ThreeCanvas width={width} height={height} camera={{ position: [0, 1.5, 9.4 / zoom], fov: 30, rotation: [-0.13, 0, 0] }} gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }} style={{ background: "transparent" }}>
-      <ambientLight intensity={0.55} />
-      <directionalLight position={[4, 7, 6]} intensity={1.7} />
-      <directionalLight position={[-5, 3, -2]} intensity={0.6} color="#DDE6EE" />
+      <ambientLight intensity={0.95} />
+      <directionalLight position={[4, 7, 6]} intensity={2.2} />
+      <directionalLight position={[-5, 3, -2]} intensity={0.9} color="#8FE6F0" />
       <Environment resolution={256}>
-        <color attach="background" args={["#E9EDF1"]} />
+        <color attach="background" args={["#10243F"]} />
         <Lightformer form="rect" intensity={3.2} position={[0, 5, 3]} rotation-x={Math.PI / 2} scale={[10, 4, 1]} />
         <Lightformer form="rect" intensity={2} position={[-5, 1, 2]} rotation-y={Math.PI / 2} scale={[6, 1.2, 1]} />
         <Lightformer form="rect" intensity={2} position={[5, 1, 2]} rotation-y={-Math.PI / 2} scale={[6, 1.2, 1]} />
-        <Lightformer form="rect" intensity={1.2} color="#8FA7BC" position={[0, -3, -4]} scale={[8, 2, 1]} />
+        <Lightformer form="rect" intensity={1.4} color="#2EC4D6" position={[0, -3, -4]} scale={[8, 2, 1]} />
       </Environment>
       <group rotation={[0, -idx * step, 0]}>
         {MODELS.map((M, i) => {

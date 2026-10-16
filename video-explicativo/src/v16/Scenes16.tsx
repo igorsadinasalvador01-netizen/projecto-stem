@@ -8,12 +8,12 @@ import { T16 as T } from "./theme16";
 export const Bg16: React.FC = () => {
   const { t } = useClock();
   return (
-    <AbsoluteFill style={{ background: `linear-gradient(180deg, ${T.night} 0%, ${T.deep} 55%, #13221B 100%)` }}>
+    <AbsoluteFill style={{ background: `linear-gradient(180deg, ${T.night} 0%, ${T.deep} 55%, #0F2440 100%)` }}>
       {[-1, 1].map((s) => (
-        <div key={s} style={{ position: "absolute", left: s < 0 ? -260 : 640, top: -280, width: 700, height: 700, borderRadius: "50%", background: "radial-gradient(circle, rgba(242,244,239,0.22), transparent 62%)", opacity: 0.85 + Math.sin(t * 1.3 + s) * 0.08 }} />
+        <div key={s} style={{ position: "absolute", left: s < 0 ? -260 : 640, top: -280, width: 700, height: 700, borderRadius: "50%", background: "radial-gradient(circle, rgba(244,247,250,0.22), transparent 62%)", opacity: 0.85 + Math.sin(t * 1.3 + s) * 0.08 }} />
       ))}
       <div style={{ position: "absolute", left: -400, right: -400, bottom: -40, height: 760, transform: "perspective(900px) rotateX(62deg)", transformOrigin: "50% 100%", background: `repeating-linear-gradient(180deg, ${T.pitch} 0 90px, ${T.pitchDark} 90px 180px)`, opacity: 0.55 }} />
-      <AbsoluteFill style={{ background: "linear-gradient(180deg, transparent 55%, rgba(10,15,13,0.55))" }} />
+      <AbsoluteFill style={{ background: "linear-gradient(180deg, transparent 55%, rgba(10,26,47,0.55))" }} />
     </AbsoluteFill>
   );
 };
@@ -44,7 +44,7 @@ export const S1: React.FC = () => {
       <Title offset={0} out={99} rows={[small([{ w: "Vendedor que é vendedor", at: 0.08 }], 46), big([{ w: "liga até", at: 2.0 }, { w: "bater a meta.", at: 2.88, color: T.green }], 150)]} />
       <div style={{ position: "absolute", left: 540 - 300, top: 620, width: 600, height: 600, ...pin(sp(0.3, SP.soft)) }}>
         <svg width={600} height={600} viewBox="0 0 600 600" style={{ position: "absolute", inset: 0, transform: "rotate(-90deg)" }}>
-          <circle cx={300} cy={300} r={r} stroke="rgba(242,244,239,0.1)" strokeWidth={26} fill="none" />
+          <circle cx={300} cy={300} r={r} stroke="rgba(244,247,250,0.1)" strokeWidth={26} fill="none" />
           <circle cx={300} cy={300} r={r} stroke={hit > 0.5 ? T.green : T.chalk} strokeWidth={26} fill="none" strokeLinecap="round" strokeDasharray={`${C * fill} ${C}`} />
         </svg>
         <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
@@ -66,8 +66,8 @@ export const S2: React.FC = () => {
   return (
     <Enter kind="zoom">
       <Bg16 />
-      <div style={{ position: "absolute", left: 540 - 900, top: -200, width: 1800, height: 1800, background: `conic-gradient(from ${180 + Math.sin(t * 1.4) * 18}deg at 50% 0%, transparent 0deg, rgba(242,244,239,0.12) 12deg, transparent 26deg)` }} />
-      <Title offset={3.7} out={99} top={700} rows={[small([{ w: "Esse é", at: 3.76 }], 50), big([{ w: "o segredo", at: 4.08 }], 190), big([{ w: "da venda.", at: 4.56, color: T.green }], 190)]} />
+      <div style={{ position: "absolute", left: 540 - 900, top: -200, width: 1800, height: 1800, background: `conic-gradient(from ${180 + Math.sin(t * 1.4) * 18}deg at 50% 0%, transparent 0deg, rgba(244,247,250,0.12) 12deg, transparent 26deg)` }} />
+      <Title offset={3.7} out={99} top={700} rows={[small([{ w: "Esse é", at: 3.76 }], 50), big([{ w: "o segredo", at: 4.08 }], 190), big([{ w: "da venda.", at: 4.56, color: T.turq }], 190)]} />
     </Enter>
   );
 };
@@ -99,7 +99,7 @@ export const S3: React.FC = () => {
       <div style={{ position: "absolute", left: 80, right: 80, top: 1000, height: 380, display: "flex", alignItems: "flex-end", gap: 22 }}>
         {bars.map((h, i) => {
           const p = sp(5.5 + i * 0.28, SP.snap);
-          return <div key={i} style={{ flex: 1, height: `${h * 100 * p}%`, borderRadius: "14px 14px 4px 4px", background: i === bars.length - 1 ? T.green : "rgba(242,244,239,0.22)" }} />;
+          return <div key={i} style={{ flex: 1, height: `${h * 100 * p}%`, borderRadius: "14px 14px 4px 4px", background: i === bars.length - 1 ? T.green : "rgba(244,247,250,0.22)" }} />;
         })}
       </div>
     </Enter>
@@ -141,10 +141,10 @@ export const Pitch: React.FC = () => {
   const goalPop = KICKS.filter((k) => k.kind === "goal" && k.at > 14.4).reduce((a, k) => a + Math.max(0, 1 - Math.abs(t - (k.at + 0.45)) / 0.2), 0);
   return (
     <Enter kind="blur">
-      <AbsoluteFill style={{ background: `linear-gradient(180deg, ${T.night}, ${T.deep} 60%, #13221B)` }} />
+      <AbsoluteFill style={{ background: `linear-gradient(180deg, ${T.night}, ${T.deep} 60%, #0F2440)` }} />
       <Stadium3D width={1080} height={1920} offset={off} cam={camAt} ballFrom={8.2} />
-      <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(10,15,13,0.75) 0%, transparent 30%, transparent 70%, rgba(10,15,13,0.6) 100%)" }} />
-      <Title offset={off} out={11.3} rows={[small([{ w: "E quanto mais você", at: 7.76 }], 46), big([{ w: "treina,", at: 8.64, color: T.green }], 160)]} />
+      <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(10,26,47,0.75) 0%, transparent 30%, transparent 70%, rgba(10,26,47,0.6) 100%)" }} />
+      <Title offset={off} out={11.3} rows={[small([{ w: "E quanto mais você", at: 7.76 }], 46), big([{ w: "treina,", at: 8.64, color: T.turq }], 160)]} />
       <Title offset={off} out={14.25} rows={[small([{ w: "Nunca jogou futebol?", at: 12.16 }], 46), big([{ w: "Pega a bola.", at: 13.28 }, { w: "Tem o gol.", at: 13.84, color: T.green }], 120)]} />
       <Title offset={off} out={99} rows={[small([{ w: "Quanto mais você", at: 14.4 }], 46), big([{ w: "chuta pro gol,", at: 15.2 }], 130)]} />
       {/* índice de acerto a subir */}
@@ -154,7 +154,7 @@ export const Pitch: React.FC = () => {
             <Caps>ÍNDICE DE ACERTO</Caps>
             <span style={{ fontFamily: T.display, fontSize: 84, lineHeight: 1, color: acc > 50 ? T.green : T.chalk }}>{acc}%</span>
           </div>
-          <div style={{ marginTop: 12, height: 14, borderRadius: 7, background: "rgba(242,244,239,0.12)" }}>
+          <div style={{ marginTop: 12, height: 14, borderRadius: 7, background: "rgba(244,247,250,0.12)" }}>
             <div style={{ width: `${acc}%`, height: "100%", borderRadius: 7, background: acc > 50 ? T.green : T.chalk }} />
           </div>
         </Glass>
@@ -175,7 +175,7 @@ export const Pitch: React.FC = () => {
         </Glass>
       </div>
       <div style={{ position: "absolute", left: 0, right: 0, top: 960, display: "flex", justifyContent: "center", opacity: interpolate(pro, [0, 0.3], [0, 1], clamp), transform: `rotate(-4deg) scale(${1.8 - pro * 0.8})` }}>
-        <div style={{ padding: "10px 40px", border: `6px solid ${T.green}`, borderRadius: 16, background: "rgba(10,15,13,0.55)", fontFamily: T.display, fontSize: 110, letterSpacing: "0.04em", color: T.green }}>PROFICIENTE</div>
+        <div style={{ padding: "10px 40px", border: `6px solid ${T.green}`, borderRadius: 16, background: "rgba(10,26,47,0.55)", fontFamily: T.display, fontSize: 110, letterSpacing: "0.04em", color: T.green }}>PROFICIENTE</div>
       </div>
     </Enter>
   );

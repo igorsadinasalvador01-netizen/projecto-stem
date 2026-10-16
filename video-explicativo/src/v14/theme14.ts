@@ -1,25 +1,25 @@
-// Vídeo 14 — "Vender qualquer coisa" · GELO & AÇO (vertical)
-// Fundo branco-gelo, vidro fosco claro, grafite para o texto e um único acento azul-aço.
-// Paleta minimalista (sem cores exageradas): sálvia = certo, tijolo suave = erro.
+// Vídeo 14 — "Vender qualquer coisa" · PADRÃO DA SÉRIE (vertical)
+// Fundo azul-escuro, vidro fumado, texto branco e acento azul-turquesa; carrossel 3D de
+// produtos num estúdio escuro. Verde = certo, vermelho = erro; cinza para o secundário.
 // Fontes: Unbounded (títulos geométricos) + Manrope (texto e legendas).
 import { FONTS } from "../kit/fonts2";
 
 export const T14 = {
-  base: "#EEF1F4",
-  paper: "#F8F9FA",
-  mist: "#DDE3E9",
-  ink: "#121417",
-  dim: "#5B636C",
-  faint: "rgba(18,20,23,0.32)",
-  steel: "#3E5C76",
-  steelSoft: "rgba(62,92,118,0.12)",
-  ice: "#8FA7BC",
-  sage: "#5E8C6A",
-  brick: "#B5524A",
-  glass: "rgba(255,255,255,0.55)",
-  edge: "rgba(255,255,255,0.95)",
-  line: "rgba(18,20,23,0.08)",
-  shadow: "0 30px 60px -30px rgba(30,45,60,0.35)",
+  base: "#0A1A2F",
+  paper: "#0F2440",
+  mist: "#2A4466",
+  ink: "#F4F7FA",
+  dim: "#9AA8B8",
+  faint: "rgba(244,247,250,0.32)",
+  steel: "#2EC4D6",
+  steelSoft: "rgba(46,196,214,0.14)",
+  ice: "#8FE6F0",
+  sage: "#36D399",
+  brick: "#F25C5C",
+  glass: "rgba(255,255,255,0.06)",
+  edge: "rgba(255,255,255,0.16)",
+  line: "rgba(255,255,255,0.10)",
+  shadow: "0 40px 80px -40px rgba(0,0,0,0.6)",
   display: FONTS.unbounded,
   body: FONTS.manrope,
 } as const;

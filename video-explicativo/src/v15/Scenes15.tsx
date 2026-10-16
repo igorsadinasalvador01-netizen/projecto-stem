@@ -8,8 +8,8 @@ export const Bg15: React.FC = () => {
   const { t } = useClock();
   return (
     <AbsoluteFill style={{ background: T.base }}>
-      <AbsoluteFill style={{ background: `radial-gradient(1100px 760px at ${38 + Math.sin(t * 0.2) * 3}% 42%, rgba(201,179,126,0.12), transparent 70%)` }} />
-      <AbsoluteFill style={{ background: "radial-gradient(900px 700px at 85% 90%, rgba(243,239,230,0.05), transparent 70%)" }} />
+      <AbsoluteFill style={{ background: `radial-gradient(1100px 760px at ${38 + Math.sin(t * 0.2) * 3}% 42%, rgba(46,196,214,0.12), transparent 70%)` }} />
+      <AbsoluteFill style={{ background: "radial-gradient(900px 700px at 85% 90%, rgba(244,247,250,0.05), transparent 70%)" }} />
       {[110, 1810].map((x) => (
         <div key={x} style={{ position: "absolute", left: x, top: 60, bottom: 60, width: 1, background: T.rule }} />
       ))}
@@ -33,7 +33,7 @@ const wordSize = (w: string, big: number) => (w.length <= 9 ? big : w.length <= 
 // ——— carta 3D: frente escura (evite) → verso marfim (use) ———
 const Card: React.FC<{ bad: string; good: string; flip: number; strike: number; w?: number; h?: number }> = ({ bad, good, flip, strike, w = 820, h = 520 }) => (
   <div style={{ width: w, height: h, position: "relative", transformStyle: "preserve-3d", transform: `rotateY(${flip * 180}deg)` }}>
-    <div style={{ position: "absolute", inset: 0, backfaceVisibility: "hidden", borderRadius: 28, background: `linear-gradient(150deg, #222225, ${T.card} 60%)`, border: `1.5px solid ${T.edge}`, boxShadow: "0 50px 100px -40px rgba(0,0,0,0.9)", padding: "48px 56px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+    <div style={{ position: "absolute", inset: 0, backfaceVisibility: "hidden", borderRadius: 28, background: `linear-gradient(150deg, #16335A, ${T.card} 60%)`, border: `1.5px solid ${T.edge}`, boxShadow: "0 50px 100px -40px rgba(0,0,0,0.9)", padding: "48px 56px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <Caps color={T.brick}>EVITE</Caps>
         <svg width={44} height={44} viewBox="0 0 24 24" fill="none" stroke={T.brick} strokeWidth={2} strokeLinecap="round">
@@ -47,7 +47,7 @@ const Card: React.FC<{ bad: string; good: string; flip: number; strike: number; 
       </div>
       <div style={{ height: 1, background: T.rule }} />
     </div>
-    <div style={{ position: "absolute", inset: 0, backfaceVisibility: "hidden", transform: "rotateY(180deg)", borderRadius: 28, background: `linear-gradient(150deg, #FBF8F2, ${T.ivory} 60%, #E9E2D3)`, boxShadow: "0 50px 100px -40px rgba(0,0,0,0.9)", padding: "48px 56px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+    <div style={{ position: "absolute", inset: 0, backfaceVisibility: "hidden", transform: "rotateY(180deg)", borderRadius: 28, background: `linear-gradient(150deg, #FFFFFF, ${T.ivory} 60%, #DCE6EF)`, boxShadow: "0 50px 100px -40px rgba(0,0,0,0.9)", padding: "48px 56px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <Caps color={T.champagneDeep}>USE</Caps>
         <svg width={44} height={44} viewBox="0 0 24 24" fill="none" stroke={T.champagneDeep} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -56,14 +56,14 @@ const Card: React.FC<{ bad: string; good: string; flip: number; strike: number; 
         </svg>
       </div>
       <div style={{ fontFamily: T.serif, fontWeight: 700, fontStyle: "italic", fontSize: wordSize(good, 128), lineHeight: 1.02, letterSpacing: "-0.01em", color: T.inkDark }}>{good}</div>
-      <div style={{ height: 1, background: "rgba(20,20,20,0.15)" }} />
+      <div style={{ height: 1, background: "rgba(10,26,47,0.15)" }} />
     </div>
   </div>
 );
 const Reason: React.FC<{ text: string; ok: boolean; p: number; out?: number }> = ({ text, ok, p, out = 0 }) => (
   <div style={{ opacity: interpolate(p, [0, 0.35], [0, 1], clamp) * (1 - out), transform: `translateX(${(1 - p) * 60 - out * 60}px)` }}>
     <Glass tint={T.glass} edge={T.edge} radius={22} blur={18} style={{ padding: "22px 28px", display: "flex", alignItems: "center", gap: 22 }}>
-      <div style={{ width: 52, height: 52, borderRadius: 26, background: ok ? T.champagne : "rgba(181,82,74,0.18)", border: ok ? "none" : `2px solid ${T.brick}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+      <div style={{ width: 52, height: 52, borderRadius: 26, background: ok ? T.green : "rgba(242,92,92,0.18)", border: ok ? "none" : `2px solid ${T.brick}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
         <svg width={28} height={28} viewBox="0 0 24 24" fill="none" stroke={ok ? T.inkDark : T.brick} strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
           {ok ? <path d="M5 12.5l4.5 4.5L19 7.5" /> : <path d="M6 6l12 12M18 6 6 18" />}
         </svg>
@@ -89,8 +89,8 @@ export const Intro: React.FC = () => {
         {Array.from({ length: 5 }).map((_, i) => {
           const p = sp(0.1 + i * 0.09, SP.snap);
           return (
-            <div key={i} style={{ position: "absolute", left: i * 14, top: -i * 12, width: 560, height: 360, borderRadius: 24, background: `linear-gradient(150deg, #232326, ${T.card})`, border: `1.5px solid ${T.edge}`, boxShadow: "0 40px 80px -40px rgba(0,0,0,0.9)", opacity: interpolate(p, [0, 0.3], [0, 1], clamp), transform: `rotateX(${48 - p * 20}deg) rotateZ(${-8 + i * 1.5 + Math.sin(t + i) * 0.4}deg) translateY(${(1 - p) * -200}px)`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <span style={{ fontFamily: T.serif, fontWeight: 900, fontStyle: "italic", fontSize: 120, color: "rgba(201,179,126,0.22)" }}>{i === 4 ? "5" : ""}</span>
+            <div key={i} style={{ position: "absolute", left: i * 14, top: -i * 12, width: 560, height: 360, borderRadius: 24, background: `linear-gradient(150deg, #16335A, ${T.card})`, border: `1.5px solid ${T.edge}`, boxShadow: "0 40px 80px -40px rgba(0,0,0,0.9)", opacity: interpolate(p, [0, 0.3], [0, 1], clamp), transform: `rotateX(${48 - p * 20}deg) rotateZ(${-8 + i * 1.5 + Math.sin(t + i) * 0.4}deg) translateY(${(1 - p) * -200}px)`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ fontFamily: T.serif, fontWeight: 900, fontStyle: "italic", fontSize: 120, color: "rgba(46,196,214,0.22)" }}>{i === 4 ? "5" : ""}</span>
             </div>
           );
         })}
@@ -126,7 +126,7 @@ export const PairScene: React.FC<{ pair: Pair }> = ({ pair: P }) => {
       </div>
       <div style={{ position: "absolute", right: 110, top: 130, display: "flex", gap: 10 }}>
         {[1, 2, 3, 4, 5].map((k) => (
-          <div key={k} style={{ width: 64, height: 6, borderRadius: 3, background: k < P.n ? T.champagne : k === P.n ? (flip > 0.5 ? T.champagne : T.brick) : "rgba(243,239,230,0.14)" }} />
+          <div key={k} style={{ width: 64, height: 6, borderRadius: 3, background: k < P.n ? T.champagne : k === P.n ? (flip > 0.5 ? T.champagne : T.brick) : "rgba(244,247,250,0.14)" }} />
         ))}
       </div>
       {/* a carta é dada do baralho e vira */}
@@ -146,7 +146,7 @@ export const PairScene: React.FC<{ pair: Pair }> = ({ pair: P }) => {
           </div>
         ))}
         <div style={{ marginTop: 22, ...pin(sp(P.flip + 0.25, SP.soft), 20) }}>
-          <Caps>PORQUE FUNCIONA</Caps>
+          <Caps color={T.green}>PORQUE FUNCIONA</Caps>
         </div>
         {P.gain.map(([w, at]) => (
           <Reason key={w} text={w} ok p={sp(at, SP.snap)} />
@@ -171,7 +171,7 @@ export const Conclusion: React.FC = () => {
           const p = sp(40.85 + i * 0.12, SP.snap);
           const a = (i - 2) * 11;
           return (
-            <div key={P.n} style={{ position: "absolute", left: -230, top: -560, width: 460, height: 300, borderRadius: 22, background: `linear-gradient(150deg, #FBF8F2, ${T.ivory} 60%, #E9E2D3)`, boxShadow: "0 30px 60px -30px rgba(0,0,0,0.9)", transformOrigin: "50% 160%", opacity: interpolate(p, [0, 0.3], [0, 1], clamp), transform: `rotateY(-14deg) rotateZ(${a * p + Math.sin(t * 0.8 + i) * 0.6}deg) translateY(${(1 - p) * 140}px)`, padding: "30px 34px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+            <div key={P.n} style={{ position: "absolute", left: -230, top: -560, width: 460, height: 300, borderRadius: 22, background: `linear-gradient(150deg, #FFFFFF, ${T.ivory} 60%, #DCE6EF)`, boxShadow: "0 30px 60px -30px rgba(0,0,0,0.9)", transformOrigin: "50% 160%", opacity: interpolate(p, [0, 0.3], [0, 1], clamp), transform: `rotateY(-14deg) rotateZ(${a * p + Math.sin(t * 0.8 + i) * 0.6}deg) translateY(${(1 - p) * 140}px)`, padding: "30px 34px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
               <Caps color={T.champagneDeep} size={18}>USE · Nº {String(P.n).padStart(2, "0")}</Caps>
               <div style={{ fontFamily: T.serif, fontWeight: 700, fontStyle: "italic", fontSize: wordSize(P.good, 60), lineHeight: 1.04, color: T.inkDark }}>{P.good}</div>
             </div>
@@ -183,11 +183,11 @@ export const Conclusion: React.FC = () => {
         <Glass tint={T.glass} edge={T.edge} radius={26} style={{ padding: "26px 32px" }}>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Caps>VENDAS</Caps>
-            <span style={{ fontFamily: T.body, fontWeight: 800, fontSize: 28, color: T.champagne }}>+{Math.round(rise * 68)}%</span>
+            <span style={{ fontFamily: T.body, fontWeight: 800, fontSize: 28, color: T.green }}>+{Math.round(rise * 68)}%</span>
           </div>
           <svg width={696} height={180} viewBox="0 0 696 180" style={{ marginTop: 10 }}>
-            <path d="M0 150 L120 140 L240 146 L360 120" stroke="rgba(243,239,230,0.35)" strokeWidth={4} fill="none" strokeLinecap="round" />
-            <path d="M360 120 C 480 100, 560 60, 690 10" stroke={T.champagne} strokeWidth={6} fill="none" strokeLinecap="round" pathLength={1} strokeDasharray={`${rise} 1`} />
+            <path d="M0 150 L120 140 L240 146 L360 120" stroke="rgba(244,247,250,0.35)" strokeWidth={4} fill="none" strokeLinecap="round" />
+            <path d="M360 120 C 480 100, 560 60, 690 10" stroke={T.green} strokeWidth={6} fill="none" strokeLinecap="round" pathLength={1} strokeDasharray={`${rise} 1`} />
           </svg>
         </Glass>
       </div>

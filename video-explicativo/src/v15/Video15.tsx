@@ -27,8 +27,8 @@ const NEG = ["desconto.", "barato!", "promoção", "agora,", "melhor,", "genéri
 const POS = ["exclusiva,", "acessível,", "oportunidade", "limitada", "experimente,", "reconhecido", "milhares,", "convencem.", "decolar.", "premium."];
 const tone = (w: string) => {
   const k = w.toLowerCase();
-  if (NEG.includes(k)) return "#D9877D";
-  if (POS.includes(k)) return T.champagne;
+  if (NEG.includes(k)) return "#F25C5C";
+  if (POS.includes(k)) return T.green;
   return undefined;
 };
 
@@ -72,7 +72,7 @@ export const Video15: React.FC<Video15Props> = ({ sfx, sfxGain }) => {
       <Sequence durationInFrames={Math.round(OUTRO15 * fps)} name="acabamento">
         <Finish vignette="rgba(0,0,0,0.6)" grain={0.06} />
       </Sequence>
-      <Captions words={WORDS} maxChars={40} until={OUTRO15} st={{ font: T.body, size: 38, weight: 800, color: T.ink, active: T.champagne, y: 1000, maxWidth: 1500, pill: { bg: "rgba(11,11,12,0.7)", edge: T.edge }, tone }} />
+      <Captions words={WORDS} maxChars={40} until={OUTRO15} st={{ font: T.body, size: 38, weight: 800, color: T.ink, active: T.champagne, y: 1000, maxWidth: 1500, pill: { bg: "rgba(10,26,47,0.72)", edge: T.edge }, tone }} />
       <Sequence from={Math.round(OUTRO15 * fps)} name="fecho · perfil">
         <ProfileOutro from={OUTRO15} tap={51.3} bg={<Bg15 />} title={[{ w: "Siga", at: 50.64 }, { w: "o perfil.", at: 50.96, color: T.champagne }]} titleSize={92} sub="dicas de vendas, empreendedorismo e carreira" font={T.serif} subFont={T.body} ink={T.ink} dim={T.dim} accent={T.champagneDeep} />
       </Sequence>
