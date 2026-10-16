@@ -486,8 +486,8 @@ engenharia reversa** de um vídeo de referência no estilo "editando ao vivo".
   filmagem desfocada à volta.
 - Subida para 1080×1920 a 30 fps com nitidez; HUD com 10 capítulos da própria fala.
 - **Ritmo sem pausas mortas** (`scripts/cut-pauses.py`): mede o silêncio da fala e encurta cada
-  pausa (>= 0,22 s fica com 0,13 s; as de respiração >= 0,5 s ficam com 0,2 s). A filmagem, o
-  recorte e a narração são cortados nos mesmos fotogramas (25 cortes, 64,3 s → 58,6 s). Cada corte
+  pausa (>= 0,18 s fica com 0,10 s; as de respiração >= 0,45 s ficam com 0,16 s). A filmagem, o
+  recorte e a narração são cortados nos mesmos fotogramas (33 cortes, 64,3 s → 57,0 s). Cada corte
   maior muda o enquadramento (punch-in 1,00 / 1,08 / 1,03 / 1,12) para esconder o salto, com um
   avanço lento dentro de cada plano. Todas as marcas continuam no tempo original da fala e
   `src/v17/cuts17.ts` converte-as para a montagem (cenas, legendas e efeitos sonoros).
@@ -495,6 +495,18 @@ engenharia reversa** de um vídeo de referência no estilo "editando ao vivo".
   vidro e prédio de betão por cima do capacete ("obra excelente" → "perdeu a obra"), "?" de vidro,
   e um prédio atrás do ombro que explode em andares com o **valor entregue** e se remonta em
   "transformar".
+- **Som** (`scripts/gen-v17-audio.py`, tudo sintetizado): música de fundo própria a 100 BPM (pad,
+  sub, kick, hats, arpejo) com secções que seguem a história e ducking à voz já aplicado (fica
+  ~15 dB abaixo da fala, sobe nas pausas, fecha no "é aqui que falham"); sons de entrada que
+  acabam mesmo antes de cada frase (cobrem as pausas); gatilhos: sub-grave, glitch, PB, volta da
+  cor, riser e impacto cinematográfico.
+- **Destaque da fala** (`src/v17/Fx17.tsx`): **PB** nos momentos de falha (perder, apenas
+  construção, é aqui que falham → esquecem-se); a cor volta no "valor" num círculo a partir do
+  rosto; **falhas** (glitch com bandas deslocadas e separação RGB) nas viragens e palavras-chave;
+  zoom curto e tremor de impacto; legendas com a palavra ativa realçada e as palavras-chave maiores.
+- Animações: ícones desenhados nas propostas e no valor, medidores de confiança (31 % · 87 %),
+  reflexo de luz a passar no vidro, palavras grandes a entrar letra a letra, linha do tempo de
+  edição no HUD.
 - Paleta: branco, cinza, turquesa e azul alternados; **vermelho** nas cenas de atenção
   ("perder", "é aqui que falham"); **verde** para validação (checks, confiança, transformar).
 - Fecho com o **perfil original** (captura sem filtros) a subir por cima do colete, com seguir,
@@ -503,7 +515,9 @@ engenharia reversa** de um vídeo de referência no estilo "editando ao vivo".
 ```bash
 # public/v17/ não vai para o git (filmagem do cliente, ~117 MB): regenera-se com
 python scripts/matte-footage.py <video.mp4> rvm_mobilenetv3_fp32.onnx public/v17
-python scripts/cut-pauses.py public/narracao17.m4a public/v17/plate.mp4 public/v17/fg.webm public/v17 src/v17/cuts17.json --narr-out public/narracao17c.m4a
-python scripts/gen-mix.py public/narracao17c.m4a src/v17/mix17.json 60.6
+python scripts/cut-pauses.py public/narracao17.m4a public/v17/plate.mp4 public/v17/fg.webm public/v17 src/v17/cuts17.json --min 0.18 --keep 0.10 --long 0.45 --keep-long 0.16 --narr-out public/narracao17c.m4a
+python scripts/gen-v17-audio.py sfx
+python scripts/gen-v17-audio.py bed public/narracao17c.m4a src/v17/cuts17.json public/bed17.m4a 59.0
+python scripts/gen-mix.py public/narracao17c.m4a src/v17/mix17.json 59.0
 npx remotion render src/index.ts Video17 out/video-17.mp4 --codec h264 --crf 17 --audio-bitrate 320k --gl=angle
 ```

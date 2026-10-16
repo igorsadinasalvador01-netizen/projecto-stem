@@ -2,10 +2,11 @@
 """Corta as pausas mortas de um vídeo de rosto (vídeo 17+) e mantém tudo sincronizado.
 
 Uso: cut-pauses.py <narracao> <plate.mp4> <fg.webm> <saida_dir> <cuts.json> [--fps 30]
+       [--min 0.22] [--keep 0.13] [--long 0.5] [--keep-long 0.2] [--narr-out f.m4a]
 
 - Mede o silêncio na narração (RMS em janelas de 10 ms, limiar = p95 - 32 dB).
-- Cada pausa >= 0,22 s fica com 0,13 s (pausas >= 0,5 s ficam com 0,2 s, para respirar);
-  o silêncio inicial fica com 0,12 s. Os cortes são alinhados aos fotogramas.
+- Cada pausa >= --min fica com --keep segundos (as >= --long ficam com --keep-long, para
+  respirar); o silêncio inicial fica com --keep. Os cortes são alinhados aos fotogramas.
 - Escreve <cuts.json> (fotogramas mantidos) e aplica os MESMOS cortes a plate.mp4, fg.webm
   (com transparência) e à narração (com micro-fades de 8 ms para não dar estalos).
 """
@@ -16,7 +17,14 @@ import sys
 import numpy as np
 
 narr, plate, fg, out, cuts_path = sys.argv[1:6]
-FPS = int(sys.argv[sys.argv.index("--fps") + 1]) if "--fps" in sys.argv else 30
+
+
+def opt(name: str, default: float) -> float:
+    return float(sys.argv[sys.argv.index(name) + 1]) if name in sys.argv else default
+
+
+FPS = int(opt("--fps", 30))
+MIN, KEEP, LONG, KEEP_LONG = opt("--min", 0.22), opt("--keep", 0.13), opt("--long", 0.5), opt("--keep-long", 0.2)
 SR = 16000
 
 pcm = subprocess.run(["ffmpeg", "-v", "error", "-i", narr, "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"], capture_output=True, check=True).stdout
@@ -44,11 +52,11 @@ remove = []
 for a, b in runs:
     L = b - a
     if a <= 0.001:  # silêncio inicial
-        ra, rb = 0.0, b - 0.12
+        ra, rb = 0.0, b - KEEP
     elif b >= dur - 0.02:  # cauda: fica (o fecho com o perfil vem depois)
         continue
-    elif L >= 0.22:
-        keep = 0.2 if L >= 0.5 else 0.13
+    elif L >= MIN:
+        keep = KEEP_LONG if L >= LONG else KEEP
         pad_l = keep * 0.55
         ra, rb = a + pad_l, b - (keep - pad_l)
     else:
