@@ -22,6 +22,11 @@ import { ConteudoH, ConteudoHProps } from "./v9h/ConteudoH";
 import { Explicativo10, Explicativo10Props } from "./v10/Explicativo10";
 import { TOTAL10 } from "./v10/timeline10";
 import { Explicativo11, Explicativo11Props } from "./v11/Explicativo11";
+import { TOTAL12, Video12, Video12Props } from "./v12/Video12";
+import { TOTAL13, Video13, Video13Props } from "./v13/Video13";
+import { TOTAL14, Video14, Video14Props } from "./v14/Video14";
+import { TOTAL15, Video15, Video15Props } from "./v15/Video15";
+import { TOTAL16, Video16, Video16Props } from "./v16/Video16";
 
 const FPS = 30;
 
@@ -134,6 +139,51 @@ export const RemotionRoot: React.FC = () => (
     width={1080}
     height={1920}
     defaultProps={{ sfx: true, sfxGain: 3.8 } satisfies Explicativo11Props}
+  />
+  <Composition
+    id="Video12"
+    component={Video12}
+    durationInFrames={Math.round(TOTAL12 * FPS)}
+    fps={FPS}
+    width={1080}
+    height={1920}
+    defaultProps={{ sfx: true, sfxGain: 3.8 } satisfies Video12Props}
+  />
+  <Composition
+    id="Video13"
+    component={Video13}
+    durationInFrames={Math.round(TOTAL13 * FPS)}
+    fps={FPS}
+    width={1920}
+    height={1080}
+    defaultProps={{ sfx: true, sfxGain: 3.8 } satisfies Video13Props}
+  />
+  <Composition
+    id="Video14"
+    component={Video14}
+    durationInFrames={Math.round(TOTAL14 * FPS)}
+    fps={FPS}
+    width={1080}
+    height={1920}
+    defaultProps={{ sfx: true, sfxGain: 3.8 } satisfies Video14Props}
+  />
+  <Composition
+    id="Video15"
+    component={Video15}
+    durationInFrames={Math.round(TOTAL15 * FPS)}
+    fps={FPS}
+    width={1920}
+    height={1080}
+    defaultProps={{ sfx: true, sfxGain: 3.8 } satisfies Video15Props}
+  />
+  <Composition
+    id="Video16"
+    component={Video16}
+    durationInFrames={Math.round(TOTAL16 * FPS)}
+    fps={FPS}
+    width={1080}
+    height={1920}
+    defaultProps={{ sfx: true, sfxGain: 3.8 } satisfies Video16Props}
   />
   </>
 );

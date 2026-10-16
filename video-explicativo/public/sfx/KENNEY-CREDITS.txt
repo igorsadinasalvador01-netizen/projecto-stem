@@ -1,0 +1,4 @@
+Os ficheiros k_*.wav vêm do pacote de efeitos da skill /brag (latent-spaces/brag, MIT):
+- impact/*, interface/*, ui/*, casino/*: Kenney (https://kenney.nl/) — CC0
+- keyboard/*: "Keyboard Soundpack #1" de unicae_games (OpenGameArt) — CC0
+Convertidos para WAV 48 kHz estéreo, sem outras alterações.

@@ -420,3 +420,38 @@ com as duas opções), com **cores novas** e a **nostalgia só em dois momentos*
 ```bash
 npx remotion render src/index.ts Explicativo11 out/video-explicativo-11.mp4 --codec h264 --crf 16 --audio-bitrate 320k
 ```
+
+# Vídeos 12–16 — primeiro lote de 5 (kit partilhado `src/kit/`)
+
+Cada vídeo tem animações, cores e modelos diferentes, mas a mesma gramática: narração original
+intacta, legendas palavra a palavra, títulos cinéticos, vidro premium e o **fecho com o perfil
+original** (`public/perfil/perfil.png`, sem filtros por cima). Regra de cor deste lote (pedido do
+cliente): **paletas minimalistas, sem rosa/roxo nem cores exageradas, cenários limpos e fáceis
+de ler** — cada vídeo alterna para uma paleta sóbria diferente.
+
+| Vídeo | Formato | Paleta | Fontes | 3D / modelo |
+|---|---|---|---|---|
+| 12 — "O que você não quer?" (`Video12`) | 1080×1920 | grafite + champanhe, terracota (erro), salva (solução) | Syne + Manrope | "?" de vidro em three.js |
+| 13 — "Herbívoro vs carnívoro" (`Video13`) | 1920×1080 | savana sóbria: areia, argila, ocre, silhuetas em carvão | Fraunces + Space Grotesk | documentário em silhuetas, mapa em perspectiva, telemóvel real |
+| 14 — "Vender qualquer coisa" (`Video14`) | 1080×1920 | gelo + grafite + azul-aço | Unbounded + Manrope | carrossel 3D com 8 produtos modelados (panela, telemóvel, roupa de cama, casa, carro, portátil, trator, moedas) |
+| 15 — "5 palavras proibidas" (`Video15`) | 1920×1080 | editorial preto + marfim + champanhe | Playfair Display + Manrope | cartas 3D que viram (evite → use) e leque de cartas |
+| 16 — "Chutar pro gol" (`Video16`) | 1080×1920 | estádio noturno: relva escura, branco-giz, verde suave | Bebas Neue + Sora | relvado, baliza com rede e bola em three.js, remates com placar |
+
+- **Kit** (`src/kit/Kit.tsx`): relógio em segundos (`useClock`), fundos mesh, `Glass`, legendas,
+  `Kinetic`, entradas de cena, `SfxTrack` e `ProfileOutro`. Fontes locais em `public/fonts`
+  (`src/kit/fonts2.ts`, licença OFL).
+- **Mistura com cadeia lateral**: `scripts/gen-mix.py` grava, por fotograma, a margem livre e o
+  nível da voz; o `SfxTrack` mantém cada efeito ~4 dB abaixo da voz durante a fala (antecipa
+  100 ms) e só deixa subir nos silêncios. Efeitos Kenney (CC0) em `public/sfx/k_*.wav`.
+- **Verificação**: `node scripts/stills.mjs <bundle> <Comp> <pasta> 0.5 <seg>…` renderiza
+  fotogramas de controlo com um só navegador; `scripts/check-audio.py <narração> <vídeo>`
+  confirma atraso 0 ms, sem saturação nova, ganho da voz ≈ 1 e a voz sempre acima dos efeitos.
+- O vídeo 15 já pede "siga o meu perfil" na narração (50,6 s): o fecho entra aí e ocupa o
+  silêncio final; nos outros, o fecho tem 3,6 s depois da narração.
+
+```bash
+npx remotion bundle src/index.ts --out-dir /tmp/bundle
+for n in 12 13 14 15 16; do
+  npx remotion render /tmp/bundle Video$n out/video-$n.mp4 --codec h264 --crf 17 --audio-bitrate 320k --gl=angle
+done
+```
