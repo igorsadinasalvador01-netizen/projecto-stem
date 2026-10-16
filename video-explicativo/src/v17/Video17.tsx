@@ -4,6 +4,7 @@ import { loadFonts } from "../fonts";
 import { Captions, Cue, Finish, Mix, seq, SfxTrack, Word } from "../kit/Kit";
 import { loadFonts2 } from "../kit/fonts2";
 import mixJson from "./mix17.json";
+import { M, OUT_LEN } from "./cuts17";
 import { Behind, CTA, CTA_CARD_AT, Front, HUD, Person, Plate } from "./Scenes17";
 import { T17 as T } from "./theme17";
 import wordsJson from "./words17.json";
@@ -12,10 +13,12 @@ loadFonts();
 loadFonts2();
 
 // Vídeo 17 — "Vender valor na construção" (vertical 1080×1920, filmagem do cliente).
-// Áudio original intacto (public/narracao17.m4a, 64,28 s) + 2 s finais com o perfil original.
-export const AUDIO17 = 64.28;
-export const TOTAL17 = 66.3;
-const WORDS = wordsJson as Word[];
+// Fala original sem as pausas mortas (public/narracao17c.m4a, cortada nos mesmos fotogramas da
+// filmagem) + 2 s finais com o perfil original. Todas as marcas abaixo estão no tempo ORIGINAL
+// da fala e são convertidas com M() para o tempo da montagem.
+export const AUDIO17 = OUT_LEN;
+export const TOTAL17 = OUT_LEN + 2.0;
+const WORDS = (wordsJson as Word[]).map((w) => ({ ...w, start: M(w.start), end: M(w.end) }));
 const RED = ["perder", "pior.", "falham.", "esquecem-se", "apenas"];
 const GREEN = ["excelentes,", "confiança.", "segurança,", "previsibilidade", "tranquilidade.", "valor", "transformar.", "controlar", "reduzir", "minimizar", "cumprir", "escolher-te."];
 const tone = (w: string) => {
@@ -25,7 +28,7 @@ const tone = (w: string) => {
   return undefined;
 };
 
-const CUES: Cue[] = [
+const CUES_SRC: Cue[] = [
   { file: "swell.wav", at: 0, v: 0.35 },
   { file: "k_glass_med.wav", at: 0.6, v: 0.5 },
   { file: "yes.wav", at: 2.64, v: 0.45 },
@@ -75,6 +78,8 @@ const CUES: Cue[] = [
   { file: "swish.wav", at: 63.52, v: 0.45 },
 ];
 
+const CUES: Cue[] = CUES_SRC.map((c) => ({ ...c, at: M(c.at) }));
+
 export type Video17Props = { sfx: boolean; sfxGain: number };
 export const Video17: React.FC<Video17Props> = ({ sfx, sfxGain }) => (
   <AbsoluteFill style={{ background: T.navy }}>
@@ -84,9 +89,9 @@ export const Video17: React.FC<Video17Props> = ({ sfx, sfxGain }) => (
     <Front />
     <Finish vignette="rgba(2,8,18,0.26)" grain={0.035} />
     <HUD />
-    <Captions words={WORDS} maxChars={24} until={AUDIO17 + 0.1} hide={[[CTA_CARD_AT, 99]]} st={{ font: T.ui, size: 54, weight: 800, color: T.white, active: T.turq, y: 1610, pill: { bg: "rgba(10,26,47,0.55)", edge: "rgba(255,255,255,0.14)" }, shadow: "0 4px 18px rgba(0,0,0,0.55)", tone }} />
+    <Captions words={WORDS} maxChars={24} until={AUDIO17 + 0.1} hide={[[M(CTA_CARD_AT), 99]]} st={{ font: T.ui, size: 54, weight: 800, color: T.white, active: T.turq, y: 1610, pill: { bg: "rgba(10,26,47,0.55)", edge: "rgba(255,255,255,0.14)" }, shadow: "0 4px 18px rgba(0,0,0,0.55)", tone }} />
     <CTA />
-    <Audio src={staticFile("narracao17.m4a")} />
+    <Audio src={staticFile("narracao17c.m4a")} />
     {sfx && <SfxTrack cues={CUES} mix={mixJson as Mix} gain={sfxGain} />}
   </AbsoluteFill>
 );

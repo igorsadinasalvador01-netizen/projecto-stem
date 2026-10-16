@@ -485,6 +485,12 @@ engenharia reversa** de um vídeo de referência no estilo "editando ao vivo".
   Vermelho e verde aparecem só como bordas finas, e a separação em camadas usa a própria
   filmagem desfocada à volta.
 - Subida para 1080×1920 a 30 fps com nitidez; HUD com 10 capítulos da própria fala.
+- **Ritmo sem pausas mortas** (`scripts/cut-pauses.py`): mede o silêncio da fala e encurta cada
+  pausa (>= 0,22 s fica com 0,13 s; as de respiração >= 0,5 s ficam com 0,2 s). A filmagem, o
+  recorte e a narração são cortados nos mesmos fotogramas (25 cortes, 64,3 s → 58,6 s). Cada corte
+  maior muda o enquadramento (punch-in 1,00 / 1,08 / 1,03 / 1,12) para esconder o salto, com um
+  avanço lento dentro de cada plano. Todas as marcas continuam no tempo original da fala e
+  `src/v17/cuts17.ts` converte-as para a montagem (cenas, legendas e efeitos sonoros).
 - 3D de vidro turquesa com transparência real (three.js, `src/v17/Building3D.tsx`): prédio de
   vidro e prédio de betão por cima do capacete ("obra excelente" → "perdeu a obra"), "?" de vidro,
   e um prédio atrás do ombro que explode em andares com o **valor entregue** e se remonta em
@@ -497,5 +503,7 @@ engenharia reversa** de um vídeo de referência no estilo "editando ao vivo".
 ```bash
 # public/v17/ não vai para o git (filmagem do cliente, ~117 MB): regenera-se com
 python scripts/matte-footage.py <video.mp4> rvm_mobilenetv3_fp32.onnx public/v17
+python scripts/cut-pauses.py public/narracao17.m4a public/v17/plate.mp4 public/v17/fg.webm public/v17 src/v17/cuts17.json --narr-out public/narracao17c.m4a
+python scripts/gen-mix.py public/narracao17c.m4a src/v17/mix17.json 60.6
 npx remotion render src/index.ts Video17 out/video-17.mp4 --codec h264 --crf 17 --audio-bitrate 320k --gl=angle
 ```

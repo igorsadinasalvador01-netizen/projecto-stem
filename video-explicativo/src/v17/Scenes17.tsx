@@ -1,7 +1,8 @@
 import React from "react";
 import { AbsoluteFill, Freeze, interpolate, OffthreadVideo, staticFile, useCurrentFrame } from "remotion";
 import { PerfilCard } from "../components/PerfilFinal";
-import { clamp, EZ, Glass, SP, useClock } from "../kit/Kit";
+import { clamp, EZ, Glass, SP } from "../kit/Kit";
+import { M, OUT_FRAMES, OUT_LEN, punch, useClock17 as useClock } from "./cuts17";
 import { GlassQuestion } from "../v12/Q3D";
 import { Building, Scene3D } from "./Building3D";
 import { T17 as T, ZONE } from "./theme17";
@@ -10,15 +11,20 @@ import { T17 as T, ZONE } from "./theme17";
 // na faixa de cima (por cima do capacete) e passam por trás da pessoa recortada.
 
 // ——— linha do tempo (segundos da narração) ———
-const ez = (t: number, a: number, b: number, e = EZ.inOut) => interpolate(t, [a, b], [0, 1], { easing: e, ...clamp });
+// marcas no tempo original, interpoladas no tempo da montagem (contínuo mesmo sobre um corte)
+const ez = (t: number, a: number, b: number, e = EZ.inOut) => {
+  const A = M(a);
+  const B = Math.max(M(b), A + Math.min(b - a, 0.12));
+  return interpolate(M(t), [A, B], [0, 1], { easing: e, ...clamp });
+};
 export const layersK = (t: number) => ez(t, 15.5, 15.95, EZ.out) * (1 - ez(t, 16.45, 16.95));
 const redK = (t: number) => ez(t, 42.2, 42.5, EZ.out) * (1 - ez(t, 44.5, 44.9));
 // separação em camadas 3D (fundo atrás, título no meio, pessoa à frente)
 // (o deslocamento em x/y compensa a rotação, para a pessoa da frente tapar a do fundo)
 const layerT = (L: number, z: number) => `rotateY(${-24 * L}deg) rotateX(${6 * L}deg) translate3d(${0.4477 * z * L}px, ${0.1051 * z * L}px, ${z * L}px) scale(${1 - 0.34 * L})`;
 
-// a filmagem acaba em 64,3 s: depois disso fica parada no último fotograma (fecho com o perfil)
-export const LAST17 = 1925;
+// depois do último fotograma da montagem, a filmagem fica parada (fecho com o perfil)
+export const LAST17 = OUT_FRAMES - 4;
 const Footage: React.FC<{ src: string; transparent?: boolean; style?: React.CSSProperties }> = ({ src, transparent, style }) => {
   const frame = useCurrentFrame();
   return (
@@ -60,19 +66,21 @@ const Slab: React.FC<{ word: string; color: string; p: number; top?: number; siz
 
 // ——— 1 · filmagem (fundo) ———
 export const Plate: React.FC = () => {
-  const { t } = useClock();
+  const { t, to } = useClock();
   const L = layersK(t);
   return (
     <AbsoluteFill>
       {/* durante a separação em camadas, o que aparece à volta é a própria filmagem desfocada */}
       {L > 0.002 && (
         <AbsoluteFill style={{ opacity: Math.min(1, L * 4) }}>
-          <Footage src="v17/plate.mp4" style={{ filter: "blur(34px) brightness(0.8) saturate(0.95)", transform: "scale(1.18)" }} />
+          <Footage src="v17/plate_c.mp4" style={{ filter: "blur(34px) brightness(0.8) saturate(0.95)", transform: "scale(1.18)" }} />
         </AbsoluteFill>
       )}
       <AbsoluteFill style={{ perspective: 2200 }}>
         <div style={{ position: "absolute", inset: 0, overflow: "hidden", borderRadius: 44 * L, transform: layerT(L, -260), boxShadow: L > 0.02 ? `0 60px 120px -40px rgba(0,0,0,${0.7 * L}), inset 0 0 0 3px rgba(255,255,255,${0.35 * L})` : "none" }}>
-          <Footage src="v17/plate.mp4" style={{ filter: "contrast(1.04) saturate(1.05)" }} />
+          <div style={{ position: "absolute", inset: 0, transform: `scale(${punch(to)})`, transformOrigin: "40% 46%" }}>
+            <Footage src="v17/plate_c.mp4" style={{ filter: "contrast(1.04) saturate(1.05)" }} />
+          </div>
           {L > 0.02 && (
             <div style={{ position: "absolute", right: 40, top: 610, opacity: L }}>
               <Chip color={T.gray} size={36}>
@@ -88,12 +96,14 @@ export const Plate: React.FC = () => {
 
 // ——— 3 · pessoa recortada (por cima dos gráficos "de trás") ———
 export const Person: React.FC = () => {
-  const { t } = useClock();
+  const { t, to } = useClock();
   const L = layersK(t);
   return (
     <AbsoluteFill style={{ perspective: 2200 }}>
       <div style={{ position: "absolute", inset: 0, transform: layerT(L, 260) }}>
-        <Footage src="v17/fg.webm" transparent />
+        <div style={{ position: "absolute", inset: 0, transform: `scale(${punch(to)})`, transformOrigin: "40% 46%" }}>
+          <Footage src="v17/fg_c.webm" transparent />
+        </div>
         {L > 0.02 && (
           <div style={{ position: "absolute", right: 60, top: 1380, opacity: L }}>
             <Chip color={T.turq} size={36}>
@@ -120,21 +130,21 @@ const CH: [number, string][] = [
   [59.7, "Segue o perfil"],
 ];
 export const HUD: React.FC = () => {
-  const { t, frame, fps } = useClock();
+  const { t, to, frame, fps } = useClock();
   let i = 0;
   CH.forEach(([a], k) => {
     if (t >= a) i = k;
   });
-  const s = Math.floor(Math.min(t, 64.3));
+  const s = Math.floor(Math.min(to, OUT_LEN));
   const tc = `00:00:${String(s).padStart(2, "0")}:${String(frame % fps).padStart(2, "0")}`;
   const red = redK(t);
-  const chIn = interpolate(t - CH[i][0], [0, 0.35], [0, 1], { easing: EZ.out, ...clamp });
+  const chIn = ez(t, CH[i][0], CH[i][0] + 0.35, EZ.out);
   const pill = "rgba(8,20,38,0.66)";
   return (
     <>
       <div style={{ position: "absolute", left: 36, top: 40 }}>
         <G radius={999} tint={pill} style={{ padding: "11px 22px", display: "flex", alignItems: "center", gap: 16 }}>
-          <span style={{ width: 14, height: 14, borderRadius: 7, background: T.red, boxShadow: `0 0 ${10 + 8 * Math.abs(Math.sin(t * 3))}px ${T.red}` }} />
+          <span style={{ width: 14, height: 14, borderRadius: 7, background: T.red, boxShadow: `0 0 ${10 + 8 * Math.abs(Math.sin(to * 3))}px ${T.red}` }} />
           <span style={{ fontFamily: T.ui, fontWeight: 800, fontSize: 20, letterSpacing: "0.18em", color: red > 0.3 ? T.red : T.white }}>AO VIVO</span>
           <span style={{ width: 1, height: 22, background: T.line }} />
           <span style={{ fontFamily: T.mono, fontWeight: 500, fontSize: 20, color: T.gray }}>{tc}</span>
@@ -142,7 +152,7 @@ export const HUD: React.FC = () => {
           <span style={{ fontFamily: T.mono, fontWeight: 600, fontSize: 20, color: T.turq }}>
             {String(i + 1).padStart(2, "0")}/{CH.length}
           </span>
-          <svg width={20} height={20} viewBox="0 0 24 24" style={{ transform: `rotate(${t * 240}deg)` }}>
+          <svg width={20} height={20} viewBox="0 0 24 24" style={{ transform: `rotate(${to * 240}deg)` }}>
             <circle cx={12} cy={12} r={8} stroke={T.gray} strokeWidth={3} fill="none" strokeDasharray="30 20" />
           </svg>
         </G>
@@ -170,7 +180,7 @@ export const HUD: React.FC = () => {
 // ——— 2 · gráficos ATRÁS da pessoa ———
 const cam1 = (t: number) => ({ pos: [Math.sin(t * 0.35) * 0.35, 1.5, 8.6] as [number, number, number], look: [0, 1.2, 0] as [number, number, number] });
 export const Behind: React.FC = () => {
-  const { t, sp } = useClock();
+  const { t, to, sp } = useClock();
   const L = layersK(t);
   // cap. 1: prédio de vidro (obra excelente) e prédio de betão (trabalha pior), por cima do capacete
   const riseA = ez(t, 0.5, 2.3, EZ.out);
@@ -193,7 +203,7 @@ export const Behind: React.FC = () => {
     <AbsoluteFill>
       {t < 7.1 && (
         <div style={{ position: "absolute", left: 0, top: 150, width: 1080, height: 520, opacity: ch1 }}>
-          <Scene3D width={1080} height={520} cam={cam1(t)} fov={30}>
+          <Scene3D width={1080} height={520} cam={cam1(to)} fov={30}>
             <Building x={-2.3} floors={6} w={1.3} d={1.1} rise={riseA} glow={0.4 + 0.6 * ez(t, 2.4, 2.9) * (1 - lose)} edge={lose > 0.5 ? T.red : T.turq} />
             <Building x={2.2} floors={3} w={1.3} d={1.1} rise={riseB} concrete />
           </Scene3D>
@@ -201,7 +211,7 @@ export const Behind: React.FC = () => {
       )}
       {t > 6.6 && t < 8.6 && (
         <div style={{ position: "absolute", left: 300, top: 120, opacity: 1 - ez(t, 8.0, 8.4) }}>
-          <GlassQuestion width={480} height={480} at={6.85} color2={T.turq} />
+          <GlassQuestion width={480} height={480} at={M(6.85)} color2={T.turq} />
         </div>
       )}
       {/* cap. 3 · não basta ser bom → DEMONSTRAR */}
@@ -259,7 +269,7 @@ export const Behind: React.FC = () => {
           const out = ez(t, 42.0, 42.3);
           return (
             <div key={x.l} style={{ position: "absolute", left: x.x, top: x.y, perspective: 1200, opacity: interpolate(p, [0, 0.3], [0, 1], clamp) * (1 - out) }}>
-              <div style={{ transform: `rotateY(${(i === 1 ? -18 : 18) + Math.sin(t * 1.2 + i) * 6}deg) rotateX(${8 + Math.cos(t + i) * 4}deg) translateY(${(1 - p) * 80 + Math.sin(t * 1.6 + i) * 8}px) scale(${0.7 + p * 0.3})` }}>
+              <div style={{ transform: `rotateY(${(i === 1 ? -18 : 18) + Math.sin(to * 1.2 + i) * 6}deg) rotateX(${8 + Math.cos(to + i) * 4}deg) translateY(${(1 - p) * 80 + Math.sin(to * 1.6 + i) * 8}px) scale(${0.7 + p * 0.3})` }}>
                 <G radius={26} tint="rgba(10,26,47,0.6)" edge="rgba(143,230,240,0.6)" glow="rgba(54,211,153,0.3)" style={{ width: 350, padding: "20px 22px", display: "flex", alignItems: "center", gap: 16 }}>
                   <div style={{ width: 60, height: 60, borderRadius: 18, background: T.greenSoft, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                     <svg width={36} height={36} viewBox="0 0 24 24" fill="none" stroke={T.green} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -300,8 +310,8 @@ const Tender: React.FC = () => {
     ["Minimiza os riscos", 29.92],
     ["Cumpre o prazo", 31.6],
   ];
-  const barA = interpolate(t, [34.24, 35.1], [0, 0.31], { easing: EZ.out, ...clamp });
-  const barB = interpolate(t, [34.24, 35.3], [0, 0.87], { easing: EZ.out, ...clamp });
+  const barA = 0.31 * ez(t, 34.24, 35.1, EZ.out);
+  const barB = 0.87 * ez(t, 34.24, 35.3, EZ.out);
   return (
     <AbsoluteFill>
       {/* a mesma obra */}
@@ -380,7 +390,7 @@ const Tender: React.FC = () => {
 // ——— o prédio explodido (à direita, atrás do ombro) e a lista do valor (à esquerda, no topo) ———
 const VALUES = ["Prazo cumprido", "Menos risco", "Menos imprevistos", "Custo controlado"];
 const ValueTower: React.FC = () => {
-  const { t, sp } = useClock();
+  const { t, to, sp } = useClock();
   const rise = ez(t, 44.9, 46.1, EZ.out);
   const explode = ez(t, 48.4, 49.6) * (1 - ez(t, 55.3, 56.6));
   const note = sp(51.6, SP.soft) * (1 - ez(t, 54.9, 55.3));
@@ -394,7 +404,7 @@ const ValueTower: React.FC = () => {
     <AbsoluteFill style={{ opacity: fade }}>
       <div style={{ position: "absolute", left: 620, top: 130, width: 460, height: 1000, opacity: 1 - note * 0.7 }}>
         <Scene3D width={460} height={1000} cam={{ pos: [0, 2.3, 8.4], look: [0, 1.8, 0] }} fov={30}>
-          <Building x={0} floors={4} w={1.05} d={0.95} rise={rise} explode={explode} spin={Math.sin(t * 0.4) * 0.2 + (t - 45) * 0.04} glow={0.3 + glow * 0.9} edge={glow > 0.5 ? T.green : T.turq} />
+          <Building x={0} floors={4} w={1.05} d={0.95} rise={rise} explode={explode} spin={Math.sin(to * 0.4) * 0.2 + (to - M(45)) * 0.04} glow={0.3 + glow * 0.9} edge={glow > 0.5 ? T.green : T.turq} />
         </Scene3D>
       </div>
       {/* o que fazem → esquecem-se do valor */}
@@ -456,7 +466,7 @@ const ValueTower: React.FC = () => {
 
 // ——— 4 · à FRENTE: etiquetas, carimbo vermelho, bordas de validação ———
 export const Front: React.FC = () => {
-  const { t, sp } = useClock();
+  const { t, to, sp } = useClock();
   const red = redK(t);
   const okA = sp(2.64, SP.pop) * (1 - ez(t, 4.3, 4.5));
   const loseA = sp(4.48, SP.pop) * (1 - ez(t, 6.6, 6.9));
@@ -464,7 +474,7 @@ export const Front: React.FC = () => {
   const lower = sp(0.4, SP.soft) * (1 - ez(t, 3.2, 3.5));
   // validação (verde) e atenção (vermelho) só nas bordas: a filmagem nunca fica tapada
   const green = Math.max(sp(14.8, SP.soft) * (1 - ez(t, 15.2, 15.5)), sp(35.36, SP.soft) * (1 - ez(t, 35.9, 36.2)), sp(59.04, SP.soft) * (1 - ez(t, 59.5, 59.8)));
-  const pulse = 0.75 + 0.25 * Math.sin(t * 12);
+  const pulse = 0.75 + 0.25 * Math.sin(to * 12);
   return (
     <AbsoluteFill>
       {/* cap. 1 · etiquetas dos prédios */}
@@ -540,7 +550,7 @@ export const CTA: React.FC = () => {
       </div>
       {/* perfil original, sem filtros nem grão por cima */}
       <div style={{ position: "absolute", left: 60, top: 1086, opacity: interpolate(card, [0, 0.2], [0, 1], clamp), transform: `translateY(${(1 - card) * 900}px)` }}>
-        <PerfilCard width={960} tapAt={Math.round(61.95 * fps)} />
+        <PerfilCard width={960} tapAt={Math.round(M(61.95) * fps)} />
       </div>
     </AbsoluteFill>
   );
