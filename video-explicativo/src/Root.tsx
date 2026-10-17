@@ -28,6 +28,7 @@ import { TOTAL14, Video14, Video14Props } from "./v14/Video14";
 import { TOTAL15, Video15, Video15Props } from "./v15/Video15";
 import { TOTAL16, Video16, Video16Props } from "./v16/Video16";
 import { TOTAL17, Video17, Video17Audio, Video17AudioProps, Video17Props } from "./v17/Video17";
+import { TOTAL18, Video18, Video18Audio, Video18AudioProps, Video18Props } from "./v18/Video18";
 
 const FPS = 30;
 
@@ -203,6 +204,24 @@ export const RemotionRoot: React.FC = () => (
     width={1080}
     height={1920}
     defaultProps={{ sfxGain: 3.2, master: 0.5 } satisfies Video17AudioProps}
+  />
+  <Composition
+    id="Video18"
+    component={Video18}
+    durationInFrames={Math.round(TOTAL18 * FPS)}
+    fps={FPS}
+    width={1080}
+    height={1920}
+    defaultProps={{ sfx: true, sfxGain: 3.2 } satisfies Video18Props}
+  />
+  <Composition
+    id="Video18Audio"
+    component={Video18Audio}
+    durationInFrames={Math.round(TOTAL18 * FPS)}
+    fps={FPS}
+    width={1080}
+    height={1920}
+    defaultProps={{ sfxGain: 3.2, master: 0.5 } satisfies Video18AudioProps}
   />
   </>
 );

@@ -9,7 +9,7 @@ sfx → public/sfx/v17_*.wav: entrada (swell invertido curto e longo), sub (impa
       sirene — e sem agudos; "soft" gera só estes, e também pb, cor e riser na versão suave),
       glitch (falha digital), pb (cor a escorrer → preto e branco), cor (volta da cor),
       riser (subida de 2 s) e hit (impacto cinematográfico).
-bed → música de fundo a 100 BPM (pad, sub, kick, hats, arpejo) com secções que seguem a
+bed [secções.json] → música de fundo a 100 BPM (pad, sub, kick, hats, arpejo) com secções que seguem a
       história (tensão, groove, quebra no "é aqui que falham", subida para "transformar") e
       ducking à voz já aplicado (a música baixa ~9 dB quando há fala e sobe nas pausas).
 """
@@ -283,6 +283,8 @@ def gen_bed(narr, cuts_path, out_path, total):
         (59.6, 0.8, 0.8, 0.7, 0.7, 0.6, 1800),  # segue o perfil
         (64.0, 0.7, 0.4, 0.0, 0.3, 0.3, 1200),  # fecho
     ]
+    if SECTIONS_JSON:  # secções de outro vídeo (mesmo formato: [início, pad, sub, kick, hats, arp, corte])
+        SEC_SRC = [tuple(x) for x in json.load(open(SECTIONS_JSON))]
     secs = [(M(s),) + tuple(v) for s, *v in SEC_SRC]
 
     def level(idx):
@@ -440,6 +442,8 @@ def gen_bed(narr, cuts_path, out_path, total):
     print("bed ok", out_path)
 
 
+SECTIONS_JSON = None
+
 if __name__ == "__main__":
     if sys.argv[1] == "sfx":
         gen_sfx()
@@ -447,4 +451,5 @@ if __name__ == "__main__":
     elif sys.argv[1] == "soft":
         gen_soft()
     else:
+        SECTIONS_JSON = sys.argv[6] if len(sys.argv) > 6 else None
         gen_bed(sys.argv[2], sys.argv[3], sys.argv[4], float(sys.argv[5]))

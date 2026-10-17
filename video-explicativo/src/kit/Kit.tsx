@@ -130,6 +130,7 @@ export type CapStyle = {
   tone?: (w: string) => string | undefined; // cor especial por palavra (ex.: negativo/positivo)
   activeBg?: string; // realce atrás da palavra que está a ser dita
   emph?: (w: string) => boolean; // palavras-chave: ficam maiores
+  emphStyle?: (w: string) => React.CSSProperties | undefined; // estilo próprio por palavra (ex.: itálico serifado)
 };
 type Chunk = { words: Word[]; start: number; end: number };
 export const chunkWords = (words: Word[], maxChars: number): Chunk[] => {
@@ -190,7 +191,7 @@ export const Captions: React.FC<{ words: Word[]; maxChars?: number; st: CapStyle
           const big = said && em;
           const hl = active && st.activeBg;
           return (
-            <span key={i} style={{ display: "inline-block", color: tone ?? (active ? st.active : st.color), opacity: said ? 1 : st.dim ?? 0.4, transform: active ? `translateY(-3px) scale(${big ? 1.1 : 1.04})` : big ? "scale(1.06)" : "none", ...(em ? { margin: "0 0.2em" } : {}), ...(hl ? { borderRadius: "0.16em", background: st.activeBg, boxShadow: `0 0 0 0.12em ${st.activeBg}` } : {}) }}>
+            <span key={i} style={{ display: "inline-block", color: tone ?? (active ? st.active : st.color), opacity: said ? 1 : st.dim ?? 0.4, transform: active ? `translateY(-3px) scale(${big ? 1.1 : 1.04})` : big ? "scale(1.06)" : "none", ...(em ? { margin: "0 0.2em" } : {}), ...(st.emphStyle?.(w.text) ?? {}), ...(hl ? { borderRadius: "0.16em", background: st.activeBg, boxShadow: `0 0 0 0.12em ${st.activeBg}` } : {}) }}>
               {w.text}
             </span>
           );

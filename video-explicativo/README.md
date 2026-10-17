@@ -532,3 +532,40 @@ python scripts/gen-v17-audio.py bed public/narracao17c.m4a src/v17/cuts17.json p
 python scripts/gen-mix.py public/narracao17c.m4a src/v17/mix17.json 59.0
 npx remotion render src/index.ts Video17 out/video-17.mp4 --codec h264 --crf 17 --audio-bitrate 320k --gl=angle
 ```
+
+
+# Vídeo 18 — "Medir antes de vender" (composição `Video18`, 1080×1920)
+
+Segunda filmagem do cliente (464×832, 83 s), editada com a **dinâmica do vídeo de referência**
+(criador de conteúdo sobre IA): cartões brancos de app com sombra, texto forte + *itálico
+serifado*, etiquetas mono em maiúsculas, destaque azul, cartões escuros em azul-marinho,
+entradas em "pop" (escala + desfoque), listas que se marcam, conversa no telemóvel, riscos
+vermelhos no "não", modo cartão (o cliente grande num cartão de borda azul), legendas de 1–3
+palavras com a palavra ativa num bloco azul e as palavras-chave em itálico serifado maiúsculo.
+**O cliente aparece sempre**, em simultâneo com os motions (sem cenas só de gráficos e sem
+fundos de cor: no modo cartão, à volta fica a própria filmagem desfocada).
+
+- Transcrição em português com Whisper turbo (sherpa-onnx) + tempos palavra a palavra do
+  Parakeet, alinhados por semelhança (`scratchpad/asr-py/align_words.py`) → `src/v18/words18.json`.
+- Recorte da pessoa (RVM), 37 pausas cortadas (83,4 s → 75,2 s), zoom alternado nos cortes.
+- **8 efeitos** (`src/v18/Effects18.tsx`), cada um no momento certo da fala:
+  01 orbit (gancho: medições · obra · vendas · dinheiro à volta do boné; em "perder" cai) ·
+  07 checklist (como medir uma obra, 6 passos com visto desenhado) · 06 phone mockup (conversa
+  com o cliente: o que precisa e que problema quer resolver) · 03 ui world (o que impede a
+  decisão: orçamento, prazo, confiança, decisão pendente) · 04 frame break (solução perfeita
+  para o problema errado, em PB, com a cor a voltar num círculo) · 05 digital zoom (o
+  diagnóstico: visor, linha de varrimento, foco) · 02 quote wall (parede de perguntas) ·
+  08 headline wall (compreender · resolver · perguntar).
+- Som como na referência: música de fundo própria (secções em `src/v18/bed18.json`), "pop" em
+  cada elemento, cliques nos vistos, teclas na conversa, "shu" quase inaudível nas transições,
+  graves suaves nas palavras-chave; a voz fica ~20 dB acima de tudo.
+- Fecho com o perfil original (sem filtros) + gostar, seguir, partilhar na própria fala.
+
+```bash
+python scripts/matte-footage.py <video.mp4> rvm_mobilenetv3_fp32.onnx public/v18
+python scripts/cut-pauses.py public/narracao18.m4a public/v18/plate.mp4 public/v18/fg.webm public/v18 src/v18/cuts18.json --min 0.18 --keep 0.10 --long 0.45 --keep-long 0.16 --narr-out public/narracao18c.m4a
+python scripts/gen-mix.py public/narracao18c.m4a src/v18/mix18.json 77.25
+python scripts/gen-v17-audio.py bed public/narracao18c.m4a src/v18/cuts18.json public/bed18.m4a 77.25 src/v18/bed18.json
+npx remotion render src/index.ts Video18 out/video-18.mp4 --codec h264 --crf 17 --gl=angle
+npx remotion render src/index.ts Video18Audio a18.wav --codec wav   # mistura final (+6 dB com limitador a -1 dB)
+```
