@@ -5,8 +5,8 @@ Uso: gen-v17-audio.py sfx
      gen-v17-audio.py bed <narracao_cortada> <cuts.json> <saida.m4a> <duracao_total_s>
 
 sfx → public/sfx/v17_*.wav: entrada (swell invertido curto e longo), sub (impacto grave),
-      slide e slide_long (transições suaves, tom limpo sem ruído áspero; "soft" gera só estes,
-      e também pb, cor e riser na versão suave),
+      slide e slide_long (transições suaves: sopro de ar filtrado, sem tom a subir — nada de
+      sirene — e sem agudos; "soft" gera só estes, e também pb, cor e riser na versão suave),
       glitch (falha digital), pb (cor a escorrer → preto e branco), cor (volta da cor),
       riser (subida de 2 s) e hit (impacto cinematográfico).
 bed → música de fundo a 100 BPM (pad, sub, kick, hats, arpejo) com secções que seguem a
@@ -166,36 +166,46 @@ def gen_sfx():
 
 
 # ——— transições suaves (sem ruído áspero) ———
-def soft_slide(d, f0, f1, air=0.18, pan=(0.35, 0.65), peak=0.4, shimmer=False):
-    """slide suave: tom limpo a deslizar f0 → f1 + "ar" filtrado (sem agudos), envelope em sino"""
+def var_lp(x, fc):
+    """passa-baixo de 1 polo com corte a variar amostra a amostra (fc em Hz, array)"""
+    a = np.exp(-2 * np.pi * fc / SR)
+    y = np.empty(len(x))
+    acc = 0.0
+    for i in range(len(x)):
+        acc = a[i] * acc + (1 - a[i]) * x[i]
+        y[i] = acc
+    return y
+
+
+def air_slide(d, cmax=1500, pan=(0.3, 0.7), peak=0.4, seed=1, shape=(1.3, 1.2)):
+    """slide suave SEM tom (nada de sirene): sopro de ar filtrado, o corte abre e fecha com o
+    envelope (≤ cmax Hz, sem agudos ásperos) e o som atravessa o estéreo"""
     t = tvec(d)
     x = t / d
-    env = (x ** 1.4) * ((1 - x) ** 1.1)
+    env = (x ** shape[0]) * ((1 - x) ** shape[1])
     env /= env.max()
-    f = f0 * (f1 / f0) ** (x ** 0.9)
-    ph = 2 * np.pi * np.cumsum(f) / SR
-    tone = np.sin(ph) + 0.25 * np.sin(2 * ph)
-    srng = np.random.default_rng(int(f0 * 7 + f1))
-    nz = lp(hp(srng.standard_normal(len(t)), 160), 1400, order=4)
-    nz /= np.abs(nz).max() + 1e-9
-    sig = tone * 0.55 + nz * air
-    if shimmer:
-        sig += sum(np.sin(2 * np.pi * fr * t) for fr in (1046, 1568)) * 0.08 * np.clip((x - 0.5) * 2, 0, 1)
-    sig = lp(sig, 2600, order=4) * env
-    p = pan[0] + (pan[1] - pan[0]) * x
-    L = sig * np.cos(p * np.pi / 2)
-    R = sig * np.sin(p * np.pi / 2)
-    return fade(L, 0.004, 0.03), fade(R, 0.004, 0.03), peak
+    srng = np.random.default_rng(seed)
+    out = []
+    for ch in range(2):
+        nz = hp(srng.standard_normal(len(t)), 120)
+        fc = 380 + (cmax - 380) * env
+        y = var_lp(var_lp(nz, fc), fc)  # 2 polos
+        y = lp(y, cmax * 1.3, order=4) * env
+        p = pan[0] + (pan[1] - pan[0]) * x
+        g = np.cos(p * np.pi / 2) if ch == 0 else np.sin(p * np.pi / 2)
+        out.append(fade(y * g, 0.004, 0.03))
+    return out[0], out[1], peak
 
 
 def gen_soft():
     for name, args in [
-        ("v17_slide.wav", dict(d=0.38, f0=420, f1=780)),  # transições entre cenas
-        ("v17_slide_long.wav", dict(d=0.7, f0=300, f1=640, air=0.22)),  # entrada antes das frases
-        ("v17_pb.wav", dict(d=0.5, f0=640, f1=260, pan=(0.6, 0.4), peak=0.35)),  # cor → preto e branco
-        ("v17_cor.wav", dict(d=0.5, f0=300, f1=820, peak=0.35, shimmer=True)),  # volta da cor
+        ("v17_shu.wav", dict(d=0.26, cmax=1900, pan=(0.42, 0.58), peak=0.3, seed=11, shape=(0.55, 2.2))),  # "shu": sopro curto, quase inaudível
+        ("v17_slide.wav", dict(d=0.36, cmax=1600, seed=3)),  # transições entre cenas
+        ("v17_slide_long.wav", dict(d=0.6, cmax=1400, seed=5)),  # transição mais longa
+        ("v17_pb.wav", dict(d=0.5, cmax=1100, pan=(0.7, 0.3), peak=0.32, seed=7)),  # cor → preto e branco
+        ("v17_cor.wav", dict(d=0.5, cmax=1800, peak=0.32, seed=9)),  # volta da cor
     ]:
-        L, R, peak = soft_slide(**args)
+        L, R, peak = air_slide(**args)
         save(name, L, R, peak=peak)
     # riser suave: dois tons a subir + "ar" filtrado (corte a abrir só até 2,5 kHz)
     t = tvec(2.0)

@@ -30,28 +30,28 @@ const tone = (w: string) => {
 };
 
 const CUES_SRC: Cue[] = [
-  { file: "v17_slide_long.wav", at: 0, v: 0.3 },
+  { file: "v17_shu.wav", at: 0, v: 0.08 },
   { file: "k_glass_med.wav", at: 0.6, v: 0.5 },
   { file: "yes.wav", at: 2.64, v: 0.45 },
   { file: "pop.wav", at: 6.0, v: 0.45 },
-  { file: "v17_slide.wav", at: 6.6, v: 0.3 },
+  { file: "v17_shu.wav", at: 6.6, v: 0.08 },
   { file: "k_bong.wav", at: 7.04, v: 0.4 },
   { file: "k_error.wav", at: 9.2, v: 0.3 },
   { file: "pop.wav", at: 9.84, v: 0.45 },
-  { file: "v17_slide.wav", at: 12.6, v: 0.32 },
+  { file: "v17_shu.wav", at: 12.6, v: 0.08 },
   { file: "yes.wav", at: 14.8, v: 0.45 },
   { file: "k_glass_light.wav", at: 15.7, v: 0.5 },
-  { file: "v17_slide.wav", at: 16.5, v: 0.3 },
+  { file: "v17_shu.wav", at: 16.5, v: 0.08 },
   { file: "pop.wav", at: 17.04, v: 0.4 },
   { file: "pop.wav", at: 17.5, v: 0.4 },
-  { file: "v17_slide.wav", at: 20.0, v: 0.3 },
+  { file: "v17_shu.wav", at: 20.0, v: 0.08 },
   { file: "tick.wav", at: 20.96, v: 0.45 },
   { file: "tick.wav", at: 22.56, v: 0.45 },
-  { file: "v17_slide.wav", at: 23.92, v: 0.3 },
+  { file: "v17_shu.wav", at: 23.92, v: 0.08 },
   ...[26.24, 27.84, 29.92, 31.6].map((at) => ({ file: "k_select.wav", at, v: 0.5 })),
   ...seq("tick.wav", 34.24, 8, 0.12, 0.35),
   { file: "yes.wav", at: 35.36, v: 0.45 },
-  { file: "v17_slide.wav", at: 35.95, v: 0.28 },
+  { file: "v17_shu.wav", at: 35.95, v: 0.08 },
   { file: "pop.wav", at: 37.4, v: 0.4 },
   { file: "k_error.wav", at: 38.2, v: 0.35 },
   ...[39.44, 40.16, 41.36].map((at) => ({ file: "k_glass_light.wav", at, v: 0.45 })),
@@ -63,34 +63,20 @@ const CUES_SRC: Cue[] = [
   { file: "k_glass_med.wav", at: 42.78, v: 0.2 },
   { file: "k_glass_med.wav", at: 44.95, v: 0.45 },
   { file: "pop.wav", at: 45.6, v: 0.4 },
-  { file: "v17_slide.wav", at: 48.4, v: 0.3 },
+  { file: "v17_shu.wav", at: 48.4, v: 0.08 },
   ...seq("k_select.wav", 49.3, 4, 0.25, 0.45),
-  { file: "v17_slide.wav", at: 51.5, v: 0.28 },
+  { file: "v17_shu.wav", at: 51.5, v: 0.08 },
   { file: "k_error.wav", at: 54.4, v: 0.3 },
-  { file: "v17_slide_long.wav", at: 55.0, v: 0.26 },
+  { file: "v17_shu.wav", at: 55.0, v: 0.08 },
   { file: "shimmer.wav", at: 59.25, v: 0.3 },
   { file: "pop.wav", at: 60.4, v: 0.4 },
-  { file: "v17_slide.wav", at: 61.2, v: 0.32 },
+  { file: "v17_shu.wav", at: 61.2, v: 0.08 },
   { file: "tap.wav", at: 61.95, v: 0.5 },
   { file: "yes.wav", at: 62.03, v: 0.5 },
   { file: "pop.wav", at: 62.64, v: 0.45 },
-  { file: "v17_slide.wav", at: 63.52, v: 0.3 },
+  { file: "v17_shu.wav", at: 63.52, v: 0.08 },
 ];
 
-// sons de entrada (slide suave): acabam mesmo antes da frase seguinte (cobrem as pausas)
-const ENTRY: [number, "s" | "l"][] = [
-  [6.88, "s"],
-  [8.24, "l"],
-  [11.6, "s"],
-  [16.64, "s"],
-  [23.92, "l"],
-  [33.2, "l"],
-  [36.24, "s"],
-  [45.28, "s"],
-  [51.44, "l"],
-  [55.12, "s"],
-  [59.84, "s"],
-];
 // gatilhos: graves, falhas, PB e volta da cor, subidas e impactos
 const TRIGGERS: Cue[] = [
   // todos no arranque real da palavra (nunca antes), mais baixos: a voz fica sempre à frente
@@ -108,15 +94,11 @@ const TRIGGERS: Cue[] = [
   { file: "v17_hit.wav", at: 59.23, v: 0.3 },
   ...GLITCHES.map(([at, k]) => ({ file: "v17_glitch.wav", at, v: 0.1 + 0.06 * k })),
 ];
-// risers (2 s): o pico cai na palavra
-const RISERS = [15.91, 59.23];
+// sem sons de entrada antes das frases nem risers (soavam a sirene); transições com um "shu"
+// curto e muito leve (quase inaudível)
 const CUES: Cue[] = [
   ...CUES_SRC.map((c) => ({ ...c, at: M(c.at) })),
   ...TRIGGERS.map((c) => ({ ...c, at: M(c.at) })),
-  // entradas: slide suave que acaba mesmo antes da frase
-  ...ENTRY.map(([at, k]) => ({ file: k === "s" ? "v17_slide.wav" : "v17_slide_long.wav", at: Math.max(0, M(at) - (k === "s" ? 0.4 : 0.72)), v: k === "s" ? 0.26 : 0.28 })),
-  // o pico do riser acaba 0,12 s antes da palavra (na pausa), para não pisar a voz
-  ...RISERS.map((at) => ({ file: "v17_riser.wav", at: Math.max(0, M(at) - 2.06), v: 0.2 })),
 ].sort((a, b) => a.at - b.at);
 
 // música de fundo própria (scripts/gen-v17-audio.py), com o ducking à voz já aplicado
