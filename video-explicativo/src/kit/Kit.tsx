@@ -281,7 +281,7 @@ export const SFX_SECONDS: Record<string, number> = {
   "riser.wav": 1.0, "shimmer.wav": 1.4, "shutter.wav": 0.35, "stamp.wav": 0.3, "swell.wav": 2.2, "swish.wav": 0.28, "tap.wav": 0.07, "thud.wav": 0.28, "tick.wav": 0.04,
   "typekey.wav": 0.09, "whoosh.wav": 0.55, "yes.wav": 0.7, "click.wav": 0.09, "braam.wav": 2.6, "rec.wav": 0.32, "clap.wav": 0.25,
   "k_bell.wav": 1.48, "k_bong.wav": 0.12, "k_card_fan.wav": 0.72, "k_card_place.wav": 0.69, "k_card_slide.wav": 0.6, "k_chips.wav": 0.29, "k_click.wav": 0.02, "k_drop.wav": 0.19,
-  "v17_entry.wav": 0.42, "v17_entry_long.wav": 0.9, "v17_sub.wav": 1.1, "v17_glitch.wav": 0.34, "v17_pb.wav": 0.65, "v17_cor.wav": 0.55, "v17_riser.wav": 2.0, "v17_hit.wav": 1.4,
+  "v17_slide.wav": 0.38, "v17_slide_long.wav": 0.7, "v17_entry.wav": 0.42, "v17_entry_long.wav": 0.9, "v17_sub.wav": 1.1, "v17_glitch.wav": 0.34, "v17_pb.wav": 0.65, "v17_cor.wav": 0.55, "v17_riser.wav": 2.0, "v17_hit.wav": 1.4,
   "k_error.wav": 0.5, "k_glass_light.wav": 0.21, "k_glass_med.wav": 0.54, "k_glitch.wav": 0.03, "k_grass.wav": 0.67, "k_impact_heavy.wav": 0.57, "k_impact_soft.wav": 0.18,
   "k_key.wav": 0.25, "k_metal_light.wav": 0.23, "k_mouse.wav": 0.06, "k_punch.wav": 0.54, "k_roll.wav": 0.06, "k_select.wav": 0.06, "k_switch.wav": 0.61, "k_wood.wav": 0.33,
 };

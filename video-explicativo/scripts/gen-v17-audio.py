@@ -5,6 +5,8 @@ Uso: gen-v17-audio.py sfx
      gen-v17-audio.py bed <narracao_cortada> <cuts.json> <saida.m4a> <duracao_total_s>
 
 sfx → public/sfx/v17_*.wav: entrada (swell invertido curto e longo), sub (impacto grave),
+      slide e slide_long (transições suaves, tom limpo sem ruído áspero; "soft" gera só estes,
+      e também pb, cor e riser na versão suave),
       glitch (falha digital), pb (cor a escorrer → preto e branco), cor (volta da cor),
       riser (subida de 2 s) e hit (impacto cinematográfico).
 bed → música de fundo a 100 BPM (pad, sub, kick, hats, arpejo) com secções que seguem a
@@ -161,6 +163,53 @@ def gen_sfx():
     x = np.tanh(1.3 * (sub + crack + ring))
     save("v17_hit.wav", fade(x, 0.001, 0.1), fade(np.tanh(1.3 * (sub + np.roll(crack, 90) + ring)), 0.001, 0.1), peak=0.7)
     print("sfx ok")
+
+
+# ——— transições suaves (sem ruído áspero) ———
+def soft_slide(d, f0, f1, air=0.18, pan=(0.35, 0.65), peak=0.4, shimmer=False):
+    """slide suave: tom limpo a deslizar f0 → f1 + "ar" filtrado (sem agudos), envelope em sino"""
+    t = tvec(d)
+    x = t / d
+    env = (x ** 1.4) * ((1 - x) ** 1.1)
+    env /= env.max()
+    f = f0 * (f1 / f0) ** (x ** 0.9)
+    ph = 2 * np.pi * np.cumsum(f) / SR
+    tone = np.sin(ph) + 0.25 * np.sin(2 * ph)
+    srng = np.random.default_rng(int(f0 * 7 + f1))
+    nz = lp(hp(srng.standard_normal(len(t)), 160), 1400, order=4)
+    nz /= np.abs(nz).max() + 1e-9
+    sig = tone * 0.55 + nz * air
+    if shimmer:
+        sig += sum(np.sin(2 * np.pi * fr * t) for fr in (1046, 1568)) * 0.08 * np.clip((x - 0.5) * 2, 0, 1)
+    sig = lp(sig, 2600, order=4) * env
+    p = pan[0] + (pan[1] - pan[0]) * x
+    L = sig * np.cos(p * np.pi / 2)
+    R = sig * np.sin(p * np.pi / 2)
+    return fade(L, 0.004, 0.03), fade(R, 0.004, 0.03), peak
+
+
+def gen_soft():
+    for name, args in [
+        ("v17_slide.wav", dict(d=0.38, f0=420, f1=780)),  # transições entre cenas
+        ("v17_slide_long.wav", dict(d=0.7, f0=300, f1=640, air=0.22)),  # entrada antes das frases
+        ("v17_pb.wav", dict(d=0.5, f0=640, f1=260, pan=(0.6, 0.4), peak=0.35)),  # cor → preto e branco
+        ("v17_cor.wav", dict(d=0.5, f0=300, f1=820, peak=0.35, shimmer=True)),  # volta da cor
+    ]:
+        L, R, peak = soft_slide(**args)
+        save(name, L, R, peak=peak)
+    # riser suave: dois tons a subir + "ar" filtrado (corte a abrir só até 2,5 kHz)
+    t = tvec(2.0)
+    x = t / 2.0
+    out = []
+    srng = np.random.default_rng(29)
+    for ch in range(2):
+        f = 200 * (2 ** (x * 2.0))
+        ph = 2 * np.pi * np.cumsum(f * (1 + 0.004 * (ch * 2 - 1))) / SR
+        tone = (np.sin(ph) + 0.35 * np.sin(2 * ph)) * 0.5
+        nz = sweep_lp(srng.standard_normal(len(t)), 300, 2500, 1.5) * 0.35
+        out.append(fade(lp(tone + nz, 2500, order=4) * x ** 2.2, 0.01, 0.02))
+    save("v17_riser.wav", *out, peak=0.4)
+    print("soft ok")
 
 
 # ——— música de fundo ———
@@ -384,5 +433,8 @@ def gen_bed(narr, cuts_path, out_path, total):
 if __name__ == "__main__":
     if sys.argv[1] == "sfx":
         gen_sfx()
+        gen_soft()
+    elif sys.argv[1] == "soft":
+        gen_soft()
     else:
         gen_bed(sys.argv[2], sys.argv[3], sys.argv[4], float(sys.argv[5]))
