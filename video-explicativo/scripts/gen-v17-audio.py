@@ -115,7 +115,9 @@ def gen_sfx():
         x[pos : pos + seg] = s[: n - pos] * rng.uniform(0.4, 1.0)
         pos += seg
     x = hp(x, 180) * (0.6 + 0.4 * np.sin(np.linspace(0, 9 * np.pi, n)) ** 2)
-    save("v17_glitch.wav", fade(x, 0.001, 0.02), np.roll(fade(x.copy(), 0.001, 0.02), 240), peak=0.45)
+    # suave: sem agudos ásperos (passa-baixo 3,8 kHz), ataque de 6 ms e a decair, mais baixo
+    x = lp(x, 3800) * np.exp(-np.arange(n) / SR / 0.14)
+    save("v17_glitch.wav", fade(x, 0.006, 0.04), np.roll(fade(x.copy(), 0.006, 0.04), 240), peak=0.3)
 
     # pb: a cor "escorre" (ruído a fechar 6 kHz → 250 Hz + tom a descer)
     t = tvec(0.65)

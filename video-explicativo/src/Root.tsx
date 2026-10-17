@@ -193,7 +193,7 @@ export const RemotionRoot: React.FC = () => (
     fps={FPS}
     width={1080}
     height={1920}
-    defaultProps={{ sfx: true, sfxGain: 3.8 } satisfies Video17Props}
+    defaultProps={{ sfx: true, sfxGain: 3.2 } satisfies Video17Props}
   />
   <Composition
     id="Video17Audio"
@@ -202,7 +202,7 @@ export const RemotionRoot: React.FC = () => (
     fps={FPS}
     width={1080}
     height={1920}
-    defaultProps={{ sfxGain: 3.8, master: 0.5 } satisfies Video17AudioProps}
+    defaultProps={{ sfxGain: 3.2, master: 0.5 } satisfies Video17AudioProps}
   />
   </>
 );

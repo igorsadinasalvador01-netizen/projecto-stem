@@ -35,10 +35,10 @@ const CUES_SRC: Cue[] = [
   { file: "yes.wav", at: 2.64, v: 0.45 },
   { file: "pop.wav", at: 6.0, v: 0.45 },
   { file: "swish.wav", at: 6.6, v: 0.35 },
-  { file: "k_bong.wav", at: 6.85, v: 0.45 },
+  { file: "k_bong.wav", at: 7.04, v: 0.4 },
   { file: "k_error.wav", at: 9.2, v: 0.3 },
   { file: "pop.wav", at: 9.84, v: 0.45 },
-  { file: "whoosh.wav", at: 12.35, v: 0.45 },
+  { file: "whoosh.wav", at: 12.62, v: 0.4 },
   { file: "yes.wav", at: 14.8, v: 0.45 },
   { file: "k_glass_light.wav", at: 15.7, v: 0.5 },
   { file: "swish.wav", at: 16.5, v: 0.4 },
@@ -54,16 +54,21 @@ const CUES_SRC: Cue[] = [
   { file: "swish.wav", at: 35.95, v: 0.35 },
   { file: "pop.wav", at: 37.4, v: 0.4 },
   { file: "k_error.wav", at: 38.2, v: 0.35 },
-  ...[39.44, 40.16, 41.36].map((at) => ({ file: "k_glass_light.wav", at, v: 0.5 })),
+  ...[39.44, 40.16, 41.36].map((at) => ({ file: "k_glass_light.wav", at, v: 0.45 })),
+  // efeitos: zoom digital (degraus), ui world (anel e clique), frame break (vidro a partir)
+  { file: "k_switch.wav", at: 33.2, v: 0.25 },
+  { file: "k_click.wav", at: 33.45, v: 0.35 },
+  { file: "k_select.wav", at: 40.6, v: 0.35 },
+  { file: "tap.wav", at: 41.95, v: 0.4 },
+  { file: "k_glass_med.wav", at: 42.78, v: 0.2 },
   { file: "k_glass_med.wav", at: 44.95, v: 0.45 },
   { file: "pop.wav", at: 45.6, v: 0.4 },
   { file: "whoosh.wav", at: 48.4, v: 0.4 },
   ...seq("k_select.wav", 49.3, 4, 0.25, 0.45),
-  { file: "paper.wav", at: 51.6, v: 0.45 },
+  { file: "k_card_fan.wav", at: 51.55, v: 0.3 },
   { file: "k_error.wav", at: 54.4, v: 0.3 },
-  { file: "k_glass_med.wav", at: 55.3, v: 0.45 },
-  { file: "pop.wav", at: 56.56, v: 0.4 },
-  { file: "shimmer.wav", at: 59.1, v: 0.35 },
+  { file: "whoosh.wav", at: 55.12, v: 0.3 },
+  { file: "shimmer.wav", at: 59.25, v: 0.3 },
   { file: "pop.wav", at: 60.4, v: 0.4 },
   { file: "whoosh.wav", at: 61.2, v: 0.45 },
   { file: "tap.wav", at: 61.95, v: 0.5 },
@@ -88,32 +93,33 @@ const ENTRY: [number, "s" | "l"][] = [
 ];
 // gatilhos: graves, falhas, PB e volta da cor, subidas e impactos
 const TRIGGERS: Cue[] = [
-  { file: "v17_pb.wav", at: 4.3, v: 0.4 },
-  { file: "v17_sub.wav", at: 4.4, v: 0.4 },
-  { file: "v17_cor.wav", at: 6.78, v: 0.45 },
-  { file: "v17_sub.wav", at: 12.32, v: 0.28 },
-  { file: "v17_hit.wav", at: 15.38, v: 0.26 },
-  { file: "v17_sub.wav", at: 35.28, v: 0.4 },
-  { file: "v17_pb.wav", at: 37.34, v: 0.45 },
-  { file: "v17_cor.wav", at: 39.4, v: 0.45 },
-  { file: "v17_pb.wav", at: 42.02, v: 0.3 },
-  { file: "v17_sub.wav", at: 44.48, v: 0.45 },
-  { file: "v17_cor.wav", at: 49.12, v: 0.45 },
-  { file: "v17_hit.wav", at: 58.96, v: 0.45 },
-  ...GLITCHES.map(([at, k]) => ({ file: "v17_glitch.wav", at: at - 0.04, v: 0.25 + 0.15 * k })),
+  // todos no arranque real da palavra (nunca antes), mais baixos: a voz fica sempre à frente
+  { file: "v17_pb.wav", at: 4.4, v: 0.26 },
+  { file: "v17_sub.wav", at: 4.42, v: 0.3 },
+  { file: "v17_cor.wav", at: 7.02, v: 0.3 },
+  { file: "v17_sub.wav", at: 12.72, v: 0.22 },
+  { file: "v17_hit.wav", at: 15.98, v: 0.18 },
+  { file: "v17_sub.wav", at: 35.37, v: 0.28 },
+  { file: "v17_pb.wav", at: 37.37, v: 0.26 },
+  { file: "v17_cor.wav", at: 39.44, v: 0.3 },
+  { file: "v17_pb.wav", at: 42.47, v: 0.24 },
+  { file: "v17_sub.wav", at: 44.7, v: 0.3 },
+  { file: "v17_cor.wav", at: 49.1, v: 0.3 },
+  { file: "v17_hit.wav", at: 59.23, v: 0.3 },
+  ...GLITCHES.map(([at, k]) => ({ file: "v17_glitch.wav", at, v: 0.1 + 0.06 * k })),
 ];
 // risers (2 s): o pico cai na palavra
-const RISERS = [15.84, 59.04];
+const RISERS = [15.91, 59.23];
 const CUES: Cue[] = [
   ...CUES_SRC.map((c) => ({ ...c, at: M(c.at) })),
   ...TRIGGERS.map((c) => ({ ...c, at: M(c.at) })),
-  ...ENTRY.map(([at, k]) => ({ file: k === "s" ? "v17_entry.wav" : "v17_entry_long.wav", at: Math.max(0, M(at) - (k === "s" ? 0.44 : 0.92)), v: k === "s" ? 0.4 : 0.42 })),
+  ...ENTRY.map(([at, k]) => ({ file: k === "s" ? "v17_entry.wav" : "v17_entry_long.wav", at: Math.max(0, M(at) - (k === "s" ? 0.44 : 0.92)), v: k === "s" ? 0.3 : 0.32 })),
   // o pico do riser acaba 0,12 s antes da palavra (na pausa), para não pisar a voz
-  ...RISERS.map((at) => ({ file: "v17_riser.wav", at: Math.max(0, M(at) - 2.12), v: 0.28 })),
+  ...RISERS.map((at) => ({ file: "v17_riser.wav", at: Math.max(0, M(at) - 2.06), v: 0.2 })),
 ].sort((a, b) => a.at - b.at);
 
 // música de fundo própria (scripts/gen-v17-audio.py), com o ducking à voz já aplicado
-const BED_VOL = 0.26;
+const BED_VOL = 0.15;
 
 export type Video17Props = { sfx: boolean; sfxGain: number };
 

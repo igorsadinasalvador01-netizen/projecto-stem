@@ -504,6 +504,17 @@ engenharia reversa** de um vídeo de referência no estilo "editando ao vivo".
   construção, é aqui que falham → esquecem-se); a cor volta no "valor" num círculo a partir do
   rosto; **falhas** (glitch com bandas deslocadas e separação RGB) nas viragens e palavras-chave;
   zoom curto e tremor de impacto; legendas com a palavra ativa realçada e as palavras-chave maiores.
+- **8 efeitos** (`src/v17/Effects17.tsx`), cada um no momento da fala que lhe assenta (o HUD mostra
+  "FX nn · nome" enquanto estão ativos): 01 **orbit** (etiquetas a girar à volta do capacete, atrás
+  e à frente) em "obras excelentes"; 06 **phone mockup** (telemóvel 3D com as duas propostas a
+  chegar) em "dois empreendedores"; 07 **checklist** (caixas a marcar com o visto desenhado) na
+  proposta B; 05 **digital zoom** (zoom em degraus com visor) em "quem tu achas…"; 03 **ui world**
+  (widgets de segurança, cronograma e notificação a flutuar) em "segurança, previsibilidade e
+  tranquilidade"; 04 **frame break** (moldura vermelha atrás, a cabeça a sair dela, estilhaços)
+  em "é aqui que falham"; 02 **quote wall** (parede de citações) em "guarda isto"; 08 **headline
+  wall** (linhas de títulos a correr por trás) em "compra aquilo que acredita… transformar".
+- Falhas e gatilhos alinhados ao arranque real das palavras (medido no áudio, não na transcrição);
+  sons de falha suaves e música mais baixa: a voz fica ~19 dB acima de tudo.
 - Animações: ícones desenhados nas propostas e no valor, medidores de confiança (31 % · 87 %),
   reflexo de luz a passar no vidro, palavras grandes a entrar letra a letra, linha do tempo de
   edição no HUD.

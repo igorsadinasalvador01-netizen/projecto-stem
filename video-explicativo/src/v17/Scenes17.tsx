@@ -3,6 +3,7 @@ import { AbsoluteFill, Freeze, interpolate, OffthreadVideo, staticFile, useCurre
 import { PerfilCard } from "../components/PerfilFinal";
 import { clamp, EZ, Glass, SP } from "../kit/Kit";
 import { M, OUT_FRAMES, OUT_LEN, punch, useClock17 as useClock } from "./cuts17";
+import { digitalZoomAt, EffectsBehind, EffectsFront, FxTag } from "./Effects17";
 import { useFx17 } from "./Fx17";
 import { GlassQuestion } from "../v12/Q3D";
 import { Building, Scene3D } from "./Building3D";
@@ -13,7 +14,7 @@ import { T17 as T, ZONE } from "./theme17";
 
 // ——— linha do tempo (segundos da narração) ———
 // marcas no tempo original, interpoladas no tempo da montagem (contínuo mesmo sobre um corte)
-const ez = (t: number, a: number, b: number, e = EZ.inOut) => {
+export const ez = (t: number, a: number, b: number, e = EZ.inOut) => {
   const A = M(a);
   const B = Math.max(M(b), A + Math.min(b - a, 0.12));
   return interpolate(M(t), [A, B], [0, 1], { easing: e, ...clamp });
@@ -36,7 +37,7 @@ const Footage: React.FC<{ src: string; transparent?: boolean; style?: React.CSSP
 };
 
 // vidro; `shine` (0→1) passa um reflexo de luz na diagonal quando o cartão entra
-const G: React.FC<{ style?: React.CSSProperties; children?: React.ReactNode; radius?: number; tint?: string; edge?: string; glow?: string; shine?: number }> = ({ style, children, radius = 28, tint = T.glass, edge = T.edge, glow, shine }) => (
+export const G: React.FC<{ style?: React.CSSProperties; children?: React.ReactNode; radius?: number; tint?: string; edge?: string; glow?: string; shine?: number }> = ({ style, children, radius = 28, tint = T.glass, edge = T.edge, glow, shine }) => (
   <Glass tint={tint} edge={edge} radius={radius} blur={22} glow={glow} style={style}>
     {children}
     {shine !== undefined && shine > 0.001 && shine < 0.999 && <div style={{ position: "absolute", inset: 0, background: "linear-gradient(105deg, transparent 36%, rgba(255,255,255,0.26) 50%, transparent 64%)", transform: `translateX(${-120 + 240 * shine}%)`, pointerEvents: "none" }} />}
@@ -53,11 +54,11 @@ export const ICON: Record<string, string> = {
   brick: "M3 6h18v4H3zM3 10h18v4H3zM3 14h18v4H3zM9 6v4M15 10v4M9 14v4",
   trophy: "M8 4h8v4a4 4 0 0 1-8 0V4zM8 5H5a3 3 0 0 0 3 3.5M16 5h3a3 3 0 0 1-3 3.5M12 12v4M9 20h6M10 16h4v4h-4z",
 };
-const pin = (p: number, d = 40) => ({ opacity: interpolate(p, [0, 0.35], [0, 1], clamp), transform: `translateY(${(1 - p) * d}px) scale(${0.94 + p * 0.06})` });
-const Caps: React.FC<{ children: React.ReactNode; color?: string; size?: number }> = ({ children, color = T.gray, size = 22 }) => (
+export const pin = (p: number, d = 40) => ({ opacity: interpolate(p, [0, 0.35], [0, 1], clamp), transform: `translateY(${(1 - p) * d}px) scale(${0.94 + p * 0.06})` });
+export const Caps: React.FC<{ children: React.ReactNode; color?: string; size?: number }> = ({ children, color = T.gray, size = 22 }) => (
   <div style={{ fontFamily: T.ui, fontWeight: 800, fontSize: size, letterSpacing: "0.2em", color }}>{children}</div>
 );
-const Chip: React.FC<{ children: React.ReactNode; color: string; soft?: string; size?: number; icon?: "ok" | "no"; svg?: string }> = ({ children, color, soft = T.chip, size = 30, icon, svg }) => (
+export const Chip: React.FC<{ children: React.ReactNode; color: string; soft?: string; size?: number; icon?: "ok" | "no"; svg?: string }> = ({ children, color, soft = T.chip, size = 30, icon, svg }) => (
   <div style={{ display: "inline-flex", alignItems: "center", gap: size * 0.4, padding: `${size * 0.36}px ${size * 0.7}px`, borderRadius: 999, background: soft, border: `2px solid ${color}66`, backdropFilter: "blur(14px)", boxShadow: "0 18px 40px -18px rgba(0,0,0,0.55)", fontFamily: T.ui, fontWeight: 800, fontSize: size, color, whiteSpace: "nowrap" }}>
     {icon && (
       <svg width={size * 0.9} height={size * 0.9} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
@@ -73,7 +74,7 @@ const Chip: React.FC<{ children: React.ReactNode; color: string; soft?: string; 
   </div>
 );
 // palavra grande numa placa de vidro escuro, atrás da cabeça (a pessoa tapa-lhe a base)
-const Slab: React.FC<{ word: string; color: string; p: number; top?: number; size?: number; glow?: string }> = ({ word, color, p, top = 352, size = 196, glow }) => (
+export const Slab: React.FC<{ word: string; color: string; p: number; top?: number; size?: number; glow?: string }> = ({ word, color, p, top = 352, size = 196, glow }) => (
   <div style={{ position: "absolute", left: 0, right: 0, top, display: "flex", justifyContent: "center", perspective: 1400, opacity: interpolate(p, [0, 0.3], [0, 1], clamp) }}>
     <div style={{ transform: `rotateX(${(1 - p) * 40}deg) translateY(${(1 - p) * 60}px) scale(${0.9 + 0.1 * p})`, transformOrigin: "50% 100%" }}>
       <G radius={34} tint="rgba(10,26,47,0.62)" edge="rgba(143,230,240,0.45)" glow={glow} shine={interpolate(p, [0.2, 1], [0, 1], clamp)} style={{ padding: "6px 46px 0" }}>
@@ -128,7 +129,7 @@ export const Plate: React.FC = () => {
       )}
       <AbsoluteFill style={{ perspective: 2200 }}>
         <div style={{ position: "absolute", inset: 0, overflow: "hidden", borderRadius: 44 * L, transform: layerT(L, -260), boxShadow: L > 0.02 ? `0 60px 120px -40px rgba(0,0,0,${0.7 * L}), inset 0 0 0 3px rgba(255,255,255,${0.35 * L})` : "none" }}>
-          <div style={{ position: "absolute", inset: 0, transform: `scale(${punch(to) * zoom})`, transformOrigin: "40% 46%" }}>
+          <div style={{ position: "absolute", inset: 0, transform: `scale(${punch(to) * zoom * digitalZoomAt(to)})`, transformOrigin: "40% 46%" }}>
             <Graded src="v17/plate_c.mp4" />
           </div>
           {L > 0.02 && (
@@ -152,7 +153,7 @@ export const Person: React.FC = () => {
   return (
     <AbsoluteFill style={{ perspective: 2200 }}>
       <div style={{ position: "absolute", inset: 0, transform: layerT(L, 260) }}>
-        <div style={{ position: "absolute", inset: 0, transform: `scale(${punch(to) * zoom})`, transformOrigin: "40% 46%" }}>
+        <div style={{ position: "absolute", inset: 0, transform: `scale(${punch(to) * zoom * digitalZoomAt(to)})`, transformOrigin: "40% 46%" }}>
           <Graded src="v17/fg_c.webm" transparent />
         </div>
         {L > 0.02 && (
@@ -214,6 +215,7 @@ export const HUD: React.FC = () => {
           <span style={{ fontFamily: T.ui, fontWeight: 700, fontSize: 21, color: T.white }}>{CH[i][1]}</span>
         </G>
       </div>
+      <FxTag />
       {/* linha do tempo da "edição": capítulos e cabeça de leitura */}
       <div style={{ position: "absolute", left: 36, right: 36, top: 154, height: 6, borderRadius: 3, background: "rgba(8,20,38,0.55)", boxShadow: "0 0 0 1px rgba(255,255,255,0.12)" }}>
         <div style={{ width: `${Math.min(1, to / OUT_LEN) * 100}%`, height: "100%", borderRadius: 3, background: `linear-gradient(90deg, ${T.blue}, ${T.turq})` }} />
@@ -249,14 +251,8 @@ export const Behind: React.FC = () => {
   // cap. 3
   const notEnough = sp(9.2, SP.pop) * (1 - ez(t, 14.3, 14.6));
   const good = sp(9.84, SP.pop) * (1 - ez(t, 14.3, 14.6));
-  const demo = sp(12.4, SP.snap) * (1 - ez(t, 15.2, 15.5));
+  const demo = sp(12.68, SP.snap) * (1 - ez(t, 15.2, 15.5));
   const chosen = sp(14.8, SP.pop) * (1 - ez(t, 15.25, 15.5));
-  // cap. 7: tiles de vidro (segurança, previsibilidade, tranquilidade)
-  const tiles = [
-    { at: 39.44, x: 40, y: 182, l: "SEGURANÇA", s: "risco sob controlo", ic: "shield" },
-    { at: 40.16, x: 690, y: 262, l: "PREVISIBILIDADE", s: "custo e prazo claros", ic: "chart" },
-    { at: 41.36, x: 330, y: 404, l: "TRANQUILIDADE", s: "o cliente dorme bem", ic: "calm" },
-  ];
   const construct = sp(37.4, SP.pop) * (1 - ez(t, 39.1, 39.4));
   return (
     <AbsoluteFill>
@@ -270,7 +266,7 @@ export const Behind: React.FC = () => {
       )}
       {t > 6.6 && t < 8.6 && (
         <div style={{ position: "absolute", left: 300, top: 120, opacity: 1 - ez(t, 8.0, 8.4) }}>
-          <GlassQuestion width={480} height={480} at={M(6.85)} color2={T.turq} />
+          <GlassQuestion width={480} height={480} at={M(7.04)} color2={T.turq} />
         </div>
       )}
       {/* cap. 3 · não basta ser bom → DEMONSTRAR */}
@@ -322,32 +318,9 @@ export const Behind: React.FC = () => {
           </div>
         </div>
       )}
-      {t > 39.3 && t < 42.4 &&
-        tiles.map((x, i) => {
-          const p = sp(x.at, SP.pop);
-          const out = ez(t, 42.0, 42.3);
-          return (
-            <div key={x.l} style={{ position: "absolute", left: x.x, top: x.y, perspective: 1200, opacity: interpolate(p, [0, 0.3], [0, 1], clamp) * (1 - out) }}>
-              <div style={{ transform: `rotateY(${(i === 1 ? -18 : 18) + Math.sin(to * 1.2 + i) * 6}deg) rotateX(${8 + Math.cos(to + i) * 4}deg) translateY(${(1 - p) * 80 + Math.sin(to * 1.6 + i) * 8}px) scale(${0.7 + p * 0.3})` }}>
-                <G radius={26} tint="rgba(10,26,47,0.6)" edge="rgba(143,230,240,0.6)" glow="rgba(54,211,153,0.3)" style={{ width: 350, padding: "20px 22px", display: "flex", alignItems: "center", gap: 16 }}>
-                  <div style={{ width: 60, height: 60, borderRadius: 18, background: T.greenSoft, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <svg width={36} height={36} viewBox="0 0 24 24" fill="none" stroke={T.green} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                      {x.ic === "shield" && <path d="M12 3l7 3v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6l7-3zM8.5 12l2.5 2.5 4.5-5" />}
-                      {x.ic === "chart" && <path d="M4 20V10M10 20V4M16 20v-7M22 20H2" />}
-                      {x.ic === "calm" && <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM8 14s1.5 2 4 2 4-2 4-2M9 9.5h.01M15 9.5h.01" />}
-                    </svg>
-                  </div>
-                  <div>
-                    <div style={{ fontFamily: T.ui, fontWeight: 800, fontSize: 25, letterSpacing: "0.05em", color: T.white }}>{x.l}</div>
-                    <div style={{ fontFamily: T.ui, fontWeight: 600, fontSize: 20, color: T.gray }}>{x.s}</div>
-                  </div>
-                </G>
-              </div>
-            </div>
-          );
-        })}
       {/* cap. 8–9: o prédio explodido (o valor) e TRANSFORMAR */}
       {t > 44.8 && t < 59.95 && <ValueTower />}
+      <EffectsBehind />
     </AbsoluteFill>
   );
 };
@@ -401,26 +374,11 @@ const Tender: React.FC = () => {
   const barB = 0.87 * ez(t, 34.24, 35.3, EZ.out);
   return (
     <AbsoluteFill>
-      {/* a mesma obra */}
-      <div style={{ position: "absolute", left: 40, right: 40, top: ZONE.top, ...pin(one, 50) }}>
-        <G radius={32} tint="rgba(10,26,47,0.66)" shine={ez(t, 17.1, 17.9)} style={{ padding: "26px 32px" }}>
-          <Caps color={T.turq}>CONCURSO · A MESMA OBRA</Caps>
-          <div style={{ fontFamily: T.ui, fontWeight: 800, fontSize: 50, color: T.white, marginTop: 6 }}>Edifício residencial</div>
-          <div style={{ display: "flex", gap: 16, marginTop: 20 }}>
-            {[
-              { n: "A", at: 17.04, c: T.gray },
-              { n: "B", at: 17.5, c: T.blueLight },
-            ].map((x) => (
-              <div key={x.n} style={{ flex: 1, display: "flex", alignItems: "center", gap: 14, padding: "14px 18px", borderRadius: 20, background: "rgba(255,255,255,0.06)", border: `1.5px solid ${T.line}`, ...pin(sp(x.at, SP.pop), 20) }}>
-                <div style={{ width: 56, height: 56, borderRadius: 28, background: x.c, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: T.display, fontSize: 36, color: T.navy, paddingTop: 3 }}>{x.n}</div>
-                <div>
-                  <div style={{ fontFamily: T.ui, fontWeight: 800, fontSize: 26, color: T.white }}>Empreendedor {x.n}</div>
-                  <div style={{ fontFamily: T.ui, fontWeight: 600, fontSize: 19, color: T.gray }}>proposta enviada</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </G>
+      {/* a mesma obra (o detalhe está no telemóvel, efeito 06) */}
+      <div style={{ position: "absolute", left: 40, top: ZONE.top + 10, ...pin(one, 40) }}>
+        <Chip color={T.turq} svg="brick" size={30}>
+          A MESMA OBRA · 2 PROPOSTAS
+        </Chip>
       </div>
       {/* as duas propostas lado a lado */}
       <div style={{ position: "absolute", left: 40, right: 40, top: ZONE.top, display: "flex", gap: 18, ...pin(props, 50) }}>
@@ -452,9 +410,10 @@ const Tender: React.FC = () => {
                           </svg>
                         </span>
                         <span style={{ flex: 1, fontFamily: T.ui, fontWeight: 700, fontSize: 26, color: T.white, lineHeight: 1.1 }}>{r}</span>
-                        <span style={{ width: 26, height: 26, borderRadius: 13, background: win ? T.green : "rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transform: `scale(${win ? ok : 1})` }}>
-                          <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke={win ? T.navy : T.gray} strokeWidth={3.4} strokeLinecap="round">
-                            {win ? <path d="M5 12.5l4.5 4.5L19 7.5" /> : <path d="M6 12h12" />}
+                        {/* checklist (efeito 07): caixa que se marca com o visto desenhado */}
+                        <span style={{ width: 30, height: 30, borderRadius: 8, border: `2.5px solid ${win ? T.green : "rgba(255,255,255,0.3)"}`, background: win ? `rgba(54,211,153,${0.9 * ok})` : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transform: `scale(${win ? 0.9 + 0.1 * ok : 1})` }}>
+                          <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke={win ? T.navy : T.gray} strokeWidth={3.4} strokeLinecap="round" strokeLinejoin="round">
+                            {win ? <path d="M5 12.5l4.5 4.5L19 7.5" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - Math.min(1, ok)} /> : <path d="M7 12h10" opacity={0.6} />}
                           </svg>
                         </span>
                       </div>
@@ -480,15 +439,14 @@ const ValueTower: React.FC = () => {
   const rise = ez(t, 44.9, 46.1, EZ.out);
   const explode = ez(t, 48.4, 49.6) * (1 - ez(t, 55.3, 56.6));
   const note = sp(51.6, SP.soft) * (1 - ez(t, 54.9, 55.3));
-  const glow = ez(t, 58.8, 59.3);
+  const glow = ez(t, 59.0, 59.45);
   const fade = 1 - ez(t, 59.5, 59.9);
   const what = sp(45.6, SP.pop) * (1 - ez(t, 47.1, 47.4));
   const forget = sp(47.36, SP.pop) * (1 - ez(t, 48.9, 49.2));
   const head = sp(49.2, SP.pop) * (1 - note) * (1 - ez(t, 55.3, 55.6));
-  const believe = sp(56.56, SP.pop) * (1 - ez(t, 58.9, 59.2));
   return (
     <AbsoluteFill style={{ opacity: fade }}>
-      <div style={{ position: "absolute", left: 620, top: 130, width: 460, height: 1000, opacity: 1 - note * 0.7 }}>
+      <div style={{ position: "absolute", left: 620, top: 130, width: 460, height: 1000, opacity: (1 - note * 0.85) * (1 - ez(t, 54.9, 55.3)) }}>
         <Scene3D width={460} height={1000} cam={{ pos: [0, 2.3, 8.4], look: [0, 1.8, 0] }} fov={30}>
           <Building x={0} floors={4} w={1.05} d={0.95} rise={rise} explode={explode} spin={Math.sin(to * 0.4) * 0.2 + (to - M(45)) * 0.04} glow={0.3 + glow * 0.9} edge={glow > 0.5 ? T.green : T.turq} />
         </Scene3D>
@@ -519,33 +477,8 @@ const ValueTower: React.FC = () => {
           </div>
         );
       })}
-      {/* guarda isto */}
-      <div style={{ position: "absolute", left: 40, right: 40, top: ZONE.top, ...pin(note, 60) }}>
-        <G radius={32} tint="rgba(10,26,47,0.74)" edge="rgba(143,230,240,0.5)" shine={ez(t, 51.7, 52.6)} style={{ padding: "26px 34px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <svg width={40} height={40} viewBox="0 0 24 24" fill="none" stroke={T.turq} strokeWidth={2} strokeLinejoin="round">
-              <path d="M6 3h12v18l-6-4-6 4z" />
-            </svg>
-            <Caps color={T.turq} size={24}>
-              GUARDA ISTO
-            </Caps>
-          </div>
-          <div style={{ fontFamily: T.ui, fontWeight: 800, fontSize: 50, lineHeight: 1.12, color: T.white, marginTop: 12 }}>
-            O cliente não compra apenas o teu{" "}
-            <span style={{ position: "relative", color: T.gray }}>
-              serviço.
-              <span style={{ position: "absolute", left: -4, right: -4, top: "55%", height: 5, background: T.red, transform: `scaleX(${ez(t, 54.4, 54.8)})`, transformOrigin: "left" }} />
-            </span>
-          </div>
-        </G>
-      </div>
-      <div style={{ position: "absolute", left: 40, top: ZONE.top + 10, ...pin(believe) }}>
-        <Chip color={T.blue} size={30}>
-          compra aquilo em que acredita
-        </Chip>
-      </div>
       {/* transformar */}
-      <Slab word="TRANSFORMAR" color={T.green} p={sp(59.04, SP.snap)} glow="rgba(54,211,153,0.35)" />
+      <Slab word="TRANSFORMAR" color={T.green} p={sp(59.2, SP.snap)} glow="rgba(54,211,153,0.35)" />
     </AbsoluteFill>
   );
 };
@@ -555,21 +488,15 @@ export const Front: React.FC = () => {
   const { t, to, sp } = useClock();
   const { reveal } = useFx17();
   const red = redK(t);
-  const okA = sp(2.64, SP.pop) * (1 - ez(t, 4.3, 4.5));
   const loseA = sp(4.48, SP.pop) * (1 - ez(t, 6.6, 6.9));
   const tagB = sp(6.0, SP.pop) * (1 - ez(t, 6.6, 6.9));
   const lower = sp(0.4, SP.soft) * (1 - ez(t, 3.2, 3.5));
   // validação (verde) e atenção (vermelho) só nas bordas: a filmagem nunca fica tapada
-  const green = Math.max(sp(14.8, SP.soft) * (1 - ez(t, 15.2, 15.5)), sp(35.36, SP.soft) * (1 - ez(t, 35.9, 36.2)), sp(59.04, SP.soft) * (1 - ez(t, 59.5, 59.8)));
+  const green = Math.max(sp(14.8, SP.soft) * (1 - ez(t, 15.2, 15.5)), sp(35.36, SP.soft) * (1 - ez(t, 35.9, 36.2)), sp(59.2, SP.soft) * (1 - ez(t, 59.6, 59.85)));
   const pulse = 0.75 + 0.25 * Math.sin(to * 12);
   return (
     <AbsoluteFill>
       {/* cap. 1 · etiquetas dos prédios */}
-      <div style={{ position: "absolute", left: 392, top: 236, ...pin(okA) }}>
-        <Chip color={T.green} icon="ok" size={28}>
-          OBRA EXCELENTE
-        </Chip>
-      </div>
       <div style={{ position: "absolute", left: 392, top: 236, ...pin(loseA) }}>
         <Chip color={T.red} icon="no" size={28}>
           PERDEU A OBRA
@@ -590,7 +517,6 @@ export const Front: React.FC = () => {
       {/* cap. 8 · cena de atenção: carimbo no topo + borda vermelha */}
       {red > 0.01 && (
         <>
-          <AbsoluteFill style={{ boxShadow: `inset 0 0 0 ${10 * red}px rgba(242,92,92,${0.9 * pulse}), inset 0 0 ${80 * red}px rgba(242,92,92,${0.32 * pulse})`, pointerEvents: "none" }} />
           <div style={{ position: "absolute", left: 0, right: 0, top: 236, display: "flex", justifyContent: "center", opacity: red, transform: `rotate(-4deg) scale(${1.5 - sp(42.32, SP.pop) * 0.5})` }}>
             <div style={{ padding: "10px 36px 2px", border: `7px solid ${T.red}`, borderRadius: 20, background: "rgba(10,26,47,0.72)", backdropFilter: "blur(10px)", fontFamily: T.display, fontSize: 112, lineHeight: 1, color: T.red, letterSpacing: "0.03em" }}>É AQUI QUE FALHAM</div>
           </div>
@@ -600,6 +526,7 @@ export const Front: React.FC = () => {
       {reveal > 0 && reveal < 1 && (
         <div style={{ position: "absolute", left: 432 - reveal * 1947, top: 768 - reveal * 1947, width: reveal * 3894, height: reveal * 3894, borderRadius: "50%", border: `6px solid rgba(46,196,214,${1 - reveal})`, boxShadow: `0 0 40px rgba(46,196,214,${0.6 * (1 - reveal)}), inset 0 0 40px rgba(46,196,214,${0.4 * (1 - reveal)})`, pointerEvents: "none" }} />
       )}
+      <EffectsFront />
       {green > 0.01 && <AbsoluteFill style={{ boxShadow: `inset 0 0 0 ${8 * green}px rgba(54,211,153,0.9), inset 0 0 ${70 * green}px rgba(54,211,153,0.3)`, pointerEvents: "none" }} />}
     </AbsoluteFill>
   );

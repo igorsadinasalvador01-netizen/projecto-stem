@@ -12,12 +12,13 @@ import { M, Minv } from "./cuts17";
 const ez = (to: number, a: number, b: number, e = EZ.inOut) => interpolate(to, [M(a), Math.max(M(b), M(a) + 0.06)], [0, 1], { easing: e, ...clamp });
 
 // [entra, sai] no tempo original; a 3.ª janela sai com revelação circular
+// (arranques medidos no áudio da fala, não na estimativa da transcrição)
 export const PB_WIN: [number, number][] = [
-  [4.48, 6.8],
-  [37.36, 39.4],
-  [42.3, 49.2],
+  [4.4, 7.0],
+  [37.37, 39.4],
+  [42.47, 49.1],
 ];
-export const REVEAL_AT = 49.2;
+export const REVEAL_AT = 49.1;
 export const pbAt = (to: number) => {
   let k = 0;
   PB_WIN.forEach(([a, b], i) => {
@@ -31,16 +32,16 @@ export const revealAt = (to: number) => (to < M(REVEAL_AT) ? 0 : interpolate(to 
 
 // falhas: [instante, intensidade, duração]
 export const GLITCHES: [number, number, number][] = [
-  [4.46, 1, 0.24],
-  [6.32, 0.6, 0.16],
-  [6.78, 1, 0.22],
-  [7.52, 0.5, 0.14],
-  [37.34, 0.8, 0.2],
-  [39.4, 0.7, 0.18],
-  [42.28, 1, 0.26],
-  [44.56, 1, 0.3],
-  [47.36, 0.8, 0.22],
-  [49.16, 1, 0.24],
+  [4.4, 1, 0.24],
+  [6.29, 0.6, 0.16],
+  [7.02, 1, 0.22],
+  [7.43, 0.5, 0.14],
+  [37.37, 0.8, 0.2],
+  [39.44, 0.7, 0.18],
+  [42.47, 1, 0.26],
+  [44.7, 1, 0.3],
+  [47.41, 0.8, 0.22],
+  [49.1, 1, 0.24],
   [54.56, 0.5, 0.14],
 ];
 const hash = (n: number) => {
@@ -64,16 +65,16 @@ export const glitchAt = (to: number, frame: number) => {
 // impacto: [palavra no tempo original, força]
 export const IMPACTS: [number, number][] = [
   [2.64, 0.5],
-  [4.48, 1],
-  [6.32, 0.7],
-  [7.52, 0.6],
-  [12.4, 0.9],
-  [15.84, 0.8],
-  [35.36, 0.8],
-  [42.32, 1],
-  [44.56, 1],
-  [49.2, 0.8],
-  [59.04, 1],
+  [4.4, 1],
+  [6.29, 0.7],
+  [7.43, 0.6],
+  [12.72, 0.9],
+  [15.91, 0.8],
+  [35.37, 0.8],
+  [42.47, 1],
+  [44.7, 1],
+  [49.1, 0.8],
+  [59.23, 1],
 ];
 export const impactAt = (to: number) => {
   let z = 0;
