@@ -108,7 +108,10 @@ export const samples = (clip: ClipId, s: number, speed: number) => {
   return [...acc.entries()].sort((a, b) => a[0] - b[0]).map(([f, wt]) => ({ f, w: wt / tot }));
 };
 
-export const shotIndexAt = (beat: number) => {
-  for (let i = SHOTS.length - 1; i >= 0; i--) if (beat >= SHOTS[i].b[0]) return i;
+// fotograma de corte (arredondado): planos, pretos e transições usam todos o mesmo
+export const cutF = (b: number) => Math.round(bf(b));
+
+export const shotIndexAt = (frame: number) => {
+  for (let i = SHOTS.length - 1; i >= 0; i--) if (frame >= cutF(SHOTS[i].b[0])) return i;
   return 0;
 };

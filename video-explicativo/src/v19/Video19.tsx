@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Audio, Easing, Freeze, interpolate, OffthreadVideo, staticFile, useCurrentFrame } from "remotion";
 import { loadFonts } from "../fonts";
-import { BEAT, BLACK, bf, ClipId, fb, FPS19, samples, SHOTS, Shot, shotIndexAt, speedAt, srcAt, TEXTS, k60 } from "./edit19";
+import { BEAT, BLACK, bf, ClipId, cutF, fb, FPS19, samples, SHOTS, Shot, shotIndexAt, speedAt, srcAt, TEXTS, k60 } from "./edit19";
 
 loadFonts();
 
@@ -11,13 +11,12 @@ const H = 1920;
 const UI = "Inter Tight";
 const C = { white: "#F3F5F8", ink: "#05070A" };
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
-const TR = 4; // meia-duração (fotogramas) das transições direcionais
+const TR = 3; // meia-duração (fotogramas) das transições direcionais
 
 const SRC = (k: ClipId) => staticFile(`v19/${k}.mp4`);
 // recortes da pessoa (alfa) só onde o texto passa por trás do corpo
 const FG: Partial<Record<number, { file: string; k0: number }>> = {
   5: { file: "v19/A_fg.webm", k0: 120 },
-  20: { file: "v19/E_fg.webm", k0: 405 },
 };
 
 const ease = Easing.bezier(0.45, 0, 0.55, 1);
@@ -132,14 +131,14 @@ const TextLayer: React.FC<{ frame: number; layer: "behind" | "front" }> = ({ fra
       const outBlur = (1 - out) * 10;
       if (t.style === "behind" && layer === "behind")
         return (
-          <AbsoluteFill key={i} style={{ alignItems: "center", top: 430, height: 200, opacity: out, filter: outBlur > 0.3 ? `blur(${outBlur}px)` : undefined }}>
-            <Letters txt={t.txt} f={f} size={150} weight={800} track0={0.2} track1={0.05} dur={f1 - f0} />
+          <AbsoluteFill key={i} style={{ alignItems: "center", top: 490, height: 160, opacity: out, filter: outBlur > 0.3 ? `blur(${outBlur}px)` : undefined }}>
+            <Letters txt={t.txt} f={f} size={124} weight={800} track0={0.1} track1={0.04} dur={f1 - f0} />
           </AbsoluteFill>
         );
-      if (t.style === "hero" && layer === "behind")
+      if (t.style === "hero" && layer === "front")
         return (
-          <AbsoluteFill key={i} style={{ alignItems: "center", top: 300, height: 200, opacity: out, filter: outBlur > 0.3 ? `blur(${outBlur}px)` : undefined }}>
-            <Letters txt={t.txt} f={f} size={128} weight={800} track0={0.16} track1={0.04} dur={f1 - f0} stagger={1.3} />
+          <AbsoluteFill key={i} style={{ alignItems: "center", top: 1210, height: 160, opacity: out, filter: outBlur > 0.3 ? `blur(${outBlur}px)` : undefined }}>
+            <Letters txt={t.txt} f={f} size={104} weight={800} track0={0.16} track1={0.05} dur={f1 - f0} stagger={1.3} />
           </AbsoluteFill>
         );
       if (t.style === "end" && layer === "front") {
@@ -169,12 +168,12 @@ const whipDir = (k?: string) => ({ whipL: [-1, 0], whipR: [1, 0], whipU: [0, -1]
 
 const looksAt = (frame: number) => {
   const beat = fb(frame);
-  const i = shotIndexAt(beat);
+  const i = shotIndexAt(frame);
   const out: { idx: number; L: Look; beat: number }[] = [];
   const sh = SHOTS[i];
-  const fc = bf(sh.b[0]);
+  const fc = cutF(sh.b[0]);
   const nx = SHOTS[i + 1];
-  const fn = nx ? bf(nx.b[0]) : Infinity;
+  const fn = nx ? cutF(nx.b[0]) : Infinity;
   // transição de entrada no plano atual (perto do início) ou saída para o próximo (perto do fim)
   const pair = (P: number, Q: number, fcut: number) => {
     const typ = SHOTS[Q].in ?? "cut";
@@ -189,7 +188,7 @@ const looksAt = (frame: number) => {
       const du = 1 / (2 * TR);
       const de = E(Math.min(1, u + du / 2)) - E(Math.max(0, u - du / 2));
       const span = dir[0] ? W : H;
-      const blurPx = Math.min(90, de * span * 0.45);
+      const blurPx = Math.min(70, de * span * 0.34);
       LP.tx += dir[0] * e * W;
       LP.ty += dir[1] * e * H;
       LQ.tx += -dir[0] * (1 - e) * W;
@@ -263,22 +262,22 @@ export const Video19: React.FC<Video19Props> = ({ music }) => {
   const beat = fb(frame);
   const looks = looksAt(frame);
   // texto por trás do corpo: desenhado dentro do plano (mesma transformação), entre a imagem e o recorte
-  const behindOn = TEXTS.some((t) => t.style !== "end" && frame >= Math.round(bf(t.b[0])) && frame <= Math.round(bf(t.b[1])));
+  const behindOn = TEXTS.some((t) => t.style === "behind" && frame >= Math.round(bf(t.b[0])) && frame <= Math.round(bf(t.b[1])));
   // freeze: leve escurecimento para o texto respirar
-  const cur = SHOTS[shotIndexAt(beat)];
+  const cur = SHOTS[shotIndexAt(frame)];
   let dim = 0;
   if (cur.freeze && beat >= cur.freeze[0]) dim = interpolate(beat, [cur.freeze[0] + 0.3, cur.freeze[0] + 2], [0, cur.freeze[1] > 70 ? 0.5 : 0.22], { ...clamp, easing: ease });
   // preto: pausas antes do drop/clímax e o fecho
   let black = 0;
   for (const [a, e] of BLACK) {
-    const fa = bf(a);
-    const fe = bf(e);
+    const fa = cutF(a);
+    const fe = cutF(e);
     if (e >= 80) black = Math.max(black, interpolate(frame, [fa, fa + 22], [0, 1], { ...clamp, easing: Easing.inOut(Easing.cubic) }));
-    else if (frame >= Math.round(fa) && frame < Math.round(fe)) black = 1;
+    else if (frame >= fa && frame < fe) black = 1;
   }
   // flash curto (exposição) nas entradas com "flash"
-  const sh = SHOTS[shotIndexAt(beat)];
-  const df = frame - bf(sh.b[0]);
+  const sh = SHOTS[shotIndexAt(frame)];
+  const df = frame - cutF(sh.b[0]);
   const flash = sh.in === "flash" && df >= 0 && df < 6 ? 0.32 * Math.exp(-df / 1.2) : 0;
   return (
     <AbsoluteFill style={{ background: C.ink, overflow: "hidden" }}>

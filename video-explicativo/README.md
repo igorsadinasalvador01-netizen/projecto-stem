@@ -590,8 +590,9 @@ Edição em estilo anúncio atlético / videoclipe: escuro, premium, minimalista
   sombras neutras/frias, pretos profundos com detalhe, altas luzes contidas. Vinheta e grão subtis.
 - **Movimento**: punch-ins nos picos, tremor controlado só nos impactos, whips com desfoque
   direcional, zoom-through, flash curto no drop e no clímax, mergulho em preto no título.
-- **Texto**: só três momentos, Inter Tight em maiúsculas espaçadas; "DISCIPLINE." e
-  "NO EXCUSES." passam por trás do corpo (recorte em `public/v19/*_fg.webm`). Sem marca inventada.
+- **Texto**: só três momentos, Inter Tight em maiúsculas espaçadas; "DISCIPLINE." passa por
+  trás do corpo (recorte em `public/v19/A_fg.webm`); "NO EXCUSES." e o fecho ficam no terço
+  inferior, sobre a zona escura. Sem marca inventada.
 - **Música e SFX originais** (`scripts/gen-v19-audio.py`, sintetizados, sem licenças de terceiros):
   phonk / trap cinematográfico em Fá menor — 808 saturado com slides, kick, clap em meio-tempo,
   hats com rolos, cowbell melódico, pad escuro, sino FM no build; impactos graves, golpes de grave

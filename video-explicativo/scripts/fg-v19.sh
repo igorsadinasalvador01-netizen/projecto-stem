@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Vídeo 19: depois de scripts/grade-gym.py, grava a contagem real de fotogramas (n60) em
 # src/v19/edit19.json e cria os recortes da pessoa (VP9 com alfa) só nos intervalos onde o texto
-# passa por trás do corpo (DISCIPLINE. no plano A, NO EXCUSES. no plano E).
+# passa por trás do corpo (DISCIPLINE. no plano A).
 # Uso: scripts/fg-v19.sh   (a partir de video-explicativo/)
 set -euo pipefail
 D=public/v19
@@ -25,4 +25,3 @@ fg() { # clip k0 k1
   echo "$1_fg.webm  fotogramas $2–$3"
 }
 fg A 120 250
-fg E 405 450
