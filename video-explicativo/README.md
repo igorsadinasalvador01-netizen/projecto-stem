@@ -569,3 +569,44 @@ python scripts/gen-v17-audio.py bed public/narracao18c.m4a src/v18/cuts18.json p
 npx remotion render src/index.ts Video18 out/video-18.mp4 --codec h264 --crf 17 --gl=angle
 npx remotion render src/index.ts Video18Audio a18.wav --codec wav   # mistura final (+6 dB com limitador a -1 dB)
 ```
+
+# Vídeo 19 — edição cinematográfica de ginásio (composição `Video19`, 1080×1920, 30 fps)
+
+Filmagem de treino sem fala (576×1024, 58 s, 5 clipes com transições já gravadas pelo telemóvel).
+Edição em estilo anúncio atlético / videoclipe: escuro, premium, minimalista, **ao ritmo da música**.
+
+- **Análise**: cortes de origem por diferença de histograma e nitidez (só se usam os intervalos
+  limpos, sem as transições gravadas); picos de cada repetição (topo da rosca, bloqueio do
+  press, extensão no cabo) por fluxo ótico integrado. Os picos caem nas batidas.
+- **Planos** (`src/v19/edit19.json`, em batidas de 140 BPM): cada plano tem uma curva de tempo
+  (PCHIP monótona) → speed ramps suaves, câmara lenta, freeze frames. Estrutura: gancho (5 picos,
+  ~3 s) → título → build-up com planos longos → meia batida de preto → drop → freeze com
+  "NO EXCUSES." → clímax com cortes a cada meia batida → freeze final no bloqueio do press.
+- **Câmara lenta**: interpolação a 60 fps por compensação de movimento (minterpolate) por clipe;
+  na composição, mistura de fotogramas vizinhos (lento) e obturador de ~270° quando a velocidade
+  sobe (desfoque de movimento natural).
+- **Gradação** (`scripts/grade-gym.py`): recorte da pessoa (RVM) só para graduar à parte — fundo
+  ~0,6 stop abaixo, mais frio e menos saturado; pele natural e micro-contraste suave no sujeito;
+  sombras neutras/frias, pretos profundos com detalhe, altas luzes contidas. Vinheta e grão subtis.
+- **Movimento**: punch-ins nos picos, tremor controlado só nos impactos, whips com desfoque
+  direcional, zoom-through, flash curto no drop e no clímax, mergulho em preto no título.
+- **Texto**: só três momentos, Inter Tight em maiúsculas espaçadas; "DISCIPLINE." e
+  "NO EXCUSES." passam por trás do corpo (recorte em `public/v19/*_fg.webm`). Sem marca inventada.
+- **Música e SFX originais** (`scripts/gen-v19-audio.py`, sintetizados, sem licenças de terceiros):
+  phonk / trap cinematográfico em Fá menor — 808 saturado com slides, kick, clap em meio-tempo,
+  hats com rolos, cowbell melódico, pad escuro, sino FM no build; impactos graves, golpes de grave
+  nos picos, whooshes de ar (sem tom) nos whips, risers de ruído (sem sirene). Master a −14 LUFS,
+  pico −1 dBFS. O som original do ginásio não é usado (tinha música de fundo de terceiros).
+
+```bash
+# 1) graduar + interpolar cada clipe limpo (fotogramas de origem fa–fb)
+for c in "A 0 389" "B 401 857" "C 871 1223" "D 1235 1437" "E 1449 1751"; do set -- $c
+  python scripts/grade-gym.py clip public/v19/src.mp4 rvm_mobilenetv3_fp32.onnx $1 $2 $3 public/v19 & done; wait
+# 2) contagens reais + recortes para o texto por trás do corpo
+scripts/fg-v19.sh
+# 3) música + SFX a partir da montagem
+python scripts/gen-v19-audio.py a19.wav && ffmpeg -i a19.wav -c:a aac -b:a 256k public/audio19.m4a
+# 4) render (o áudio final é o wav, multiplexado sem recodificar o vídeo)
+npx remotion render src/index.ts Video19 out/v19-video.mp4 --codec h264 --crf 16 --gl=angle --muted
+ffmpeg -i out/v19-video.mp4 -i a19.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 320k -shortest out/video-19.mp4
+```
