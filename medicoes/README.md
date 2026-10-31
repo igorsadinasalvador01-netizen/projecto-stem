@@ -8,6 +8,8 @@ Nova medição feita no mesmo modelo da planilha `Mod._Arm_-_PS_000.xls`:
 |---|---|
 | `22128_Medicao_Betao_Aco_R01.xlsx` | Versão principal (fórmulas + valores calculados) |
 | `22128_Medicao_Betao_Aco_R01.xls` | Mesmo conteúdo no formato do original |
+| `22128_Medicao_Betao_Aco_Zona_A_R01.xlsx` / `.xls` | Medição só da Zona A (Nova entrada), no mesmo modelo: RESUMO + Betão de limpeza, Fundações, Lajes, Pilares, Vigas |
+| `22128_MQT_Zona_A_R01.xlsx` | Zona A em formato de MQT (artigos, preços do MQT e diferenças em €) |
 
 ## Fonte
 
