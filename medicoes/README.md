@@ -50,3 +50,7 @@ O registo completo, com 21 entradas, está na folha **DISCREPÂNCIAS**.
   - número de vigotas da laje LAC1.C.
 
 Os critérios de medição (recobrimentos, amarrações e emendas de 50Ø, regras de cofragem, exclusões) estão na folha **CRITÉRIOS E FONTES**.
+
+## Outros projetos
+
+- `pavilhao_joao_de_meira/` — Pavilhão da Escola EB2,3 João de Meira: modelo `PAVIMENTO_DESPORTIVO` completado (medição R01 de pavimentos, com detalhe, discrepâncias e prints). Ver o README dessa pasta.
