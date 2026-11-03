@@ -10,12 +10,14 @@ Esta é a conclusão do modelo `PAVIMENTO_DESPORTIVO.xlsx`. Os critérios são o
 |---|---|
 | `PAVIMENTO_DESPORTIVO_Medicao_R01.xlsx` | Modelo completo (ver folhas abaixo) |
 | `prints/P1…P7`, `prints/E03_*` | Recortes das plantas com as áreas e comprimentos medidos |
+| `mapas/M01…M08` | Mapas de medição de todo o projeto: cada cor = um artigo do MQT, com legenda (código, designação, quantidade) |
 
 Folhas do livro:
 - **PV Interiores / PV Exteriores:** as duas folhas originais, com a coluna G toda preenchida. A coluna G está ligada à folha de detalhe.
 - **MEDIÇÃO DETALHADA:** linha de total por artigo e, por baixo, as parcelas. Mostra também o valor anterior do modelo, a diferença para o MQT em quantidade e em €, o estado e a fonte.
 - **DISCREPÂNCIAS:** os 38 artigos que se afastam do MQT, que foram corrigidos ou que ficam a confirmar.
 - **CRITÉRIOS E FONTES:** escalas, métodos e pressupostos.
+- **MAPAS:** os 8 mapas de medição por cor (M01 a M08).
 - **PRINTS:** as imagens de evidência (P1–P7 e E03_0–E03_2).
 
 ## Fontes
