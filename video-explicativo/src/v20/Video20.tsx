@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Audio, Easing, Freeze, Img, interpolate, OffthreadVideo, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Audio, Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { loadFonts } from "../fonts";
 import { FADES, footageFrames, FPS20, opacityAt, Shot20, TITLE, visibleAt, zoomAt } from "./edit20";
 
@@ -36,9 +36,8 @@ const Footage: React.FC<{ sh: Shot20; t: number }> = ({ sh, t }) => {
         cum += w;
         return (
           <AbsoluteFill key={f} style={{ opacity: i === 0 ? 1 : w / cum }}>
-            <Freeze frame={f} active>
-              <OffthreadVideo src={staticFile("v20/plate4k.mp4")} muted style={{ width: W, height: H }} />
-            </Freeze>
+            {/* fotogramas 4K graduados, extraídos de plate4k.mp4 (só os que a montagem usa) */}
+            <Img src={staticFile(`v20/f/${String(f).padStart(4, "0")}.jpg`)} style={{ width: W, height: H }} />
           </AbsoluteFill>
         );
       })}
@@ -52,13 +51,14 @@ const Plate: React.FC<{ sh: Shot20; t: number }> = ({ sh, t }) => (
   </AbsoluteFill>
 );
 
+// grão calculado a meia resolução e ampliado ×2: grãos de ~2 px em 4K, 4× mais leve
 const Grain: React.FC<{ frame: number }> = ({ frame }) => (
-  <svg width={W} height={H} style={{ position: "absolute", inset: 0, mixBlendMode: "overlay", opacity: 0.16 }}>
+  <svg width={W / 2} height={H / 2} style={{ position: "absolute", left: 0, top: 0, transform: "scale(2)", transformOrigin: "0 0", mixBlendMode: "overlay", opacity: 0.2 }}>
     <filter id="grain20" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.52" numOctaves={2} seed={(frame * 7) % 211} stitchTiles="stitch" />
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves={2} seed={(frame * 7) % 211} stitchTiles="stitch" />
       <feColorMatrix type="saturate" values="0" />
     </filter>
-    <rect width={W} height={H} filter="url(#grain20)" />
+    <rect width={W / 2} height={H / 2} filter="url(#grain20)" />
   </svg>
 );
 
