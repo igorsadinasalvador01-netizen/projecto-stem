@@ -9,14 +9,14 @@ Esta é a conclusão do modelo `PAVIMENTO_DESPORTIVO.xlsx`. Os critérios são o
 | Ficheiro | Uso |
 |---|---|
 | `PAVIMENTO_DESPORTIVO_Medicao_R01.xlsx` | Modelo completo (ver folhas abaixo) |
-| `prints/P1…P7` | Recortes das plantas com as áreas e comprimentos medidos |
+| `prints/P1…P7`, `prints/E03_*` | Recortes das plantas com as áreas e comprimentos medidos |
 
 Folhas do livro:
 - **PV Interiores / PV Exteriores:** as duas folhas originais, com a coluna G toda preenchida. A coluna G está ligada à folha de detalhe.
 - **MEDIÇÃO DETALHADA:** linha de total por artigo e, por baixo, as parcelas. Mostra também o valor anterior do modelo, a diferença para o MQT em quantidade e em €, o estado e a fonte.
 - **DISCREPÂNCIAS:** os 38 artigos que se afastam do MQT, que foram corrigidos ou que ficam a confirmar.
 - **CRITÉRIOS E FONTES:** escalas, métodos e pressupostos.
-- **PRINTS:** as 7 imagens de evidência.
+- **PRINTS:** as imagens de evidência (P1–P7 e E03_0–E03_2).
 
 ## Fontes
 
@@ -65,7 +65,7 @@ As exportações AutoCAD/GstarCAD não trazem propriedades de objeto, por isso t
 
 **Diferenças grandes, a confirmar:**
 - **Guia corten:** 427,11 ml contra 210 no MQT. O MQT só conta a orla da pista, que mede 210,65 ml.
-- **PAV E 03:** 1493,20 m² contra 1680. Inclui a zona sudoeste com betuminoso pontilhado; sem ela, 891,65.
+- **PAV E 03:** 1519,77 m² contra 1680, medido na folha 3.2.1 (1:250): Área A (trama roxa, acesso norte/poente) 891,65 + Área B (zona sudoeste com betuminoso pontilhado) 628,12. Ver `prints/E03_0…E03_2`.
 - **PAV E 05:** 296,24 m² contra 210. É a soma das manchas dos dois pisos; o MQT só usou a folha do Piso 01.
 - **P.T.1 e endurecedor:** 331,24 m² contra 419,56.
 - **COB 04:** 220,36 m² contra 265.
@@ -85,4 +85,4 @@ As exportações AutoCAD/GstarCAD não trazem propriedades de objeto, por isso t
 
 O banco pré-fabricado junto à pista (trama magenta, 91,04 m²) é o artigo 3.17.1 do MQT (187 ml) e não entra no PAV E 04.
 
-O impacto líquido das diferenças, a preço de venda do MQT, é cerca de −9,3 k€. O detalhe está na folha MEDIÇÃO DETALHADA.
+O impacto líquido das diferenças, a preço de venda do MQT, é cerca de −8,4 k€. O detalhe está na folha MEDIÇÃO DETALHADA.
