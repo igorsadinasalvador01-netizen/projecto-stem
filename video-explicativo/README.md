@@ -620,8 +620,9 @@ sair. A edição transforma esse momento simples numa curta contemplativa, sem c
 efeitos agressivos, sem sobreposições — só montagem, luz, tempo e som.
 
 - **Tempo**: câmara lenta nativa a partir dos 59,94 fps (a caminhada abranda de ~0,63× para
-  ~0,36× ao chegar à janela; o momento parado fica a ~0,3×); mistura de fotogramas vizinhos,
-  sem interpolação artificial. Curvas de tempo PCHIP em `src/v20/edit20.json`.
+  ~0,36× ao chegar à janela; o momento parado fica a ~0,3×), sem interpolação artificial: cada
+  fotograma é a média de uma janela fixa de 3 fotogramas de origem (≈1/20 s), pré-misturada em
+  float (`scripts/frames-v20.py`). Curvas de tempo PCHIP em `src/v20/edit20.json`.
 - **Montagem**: sala vazia (placa limpa feita da própria filmagem, ver abaixo) → entrada em
   dissolução → caminhada → paragem com push-in muito lento → corte para um plano mais fechado
   no momento em que ele olha para cima (o centro emocional) → dissolução "match" de volta ao
@@ -650,8 +651,10 @@ python scripts/matte-footage.py ...   # (ou o RVM direto) → public/v20/alpha.m
 ffmpeg -i public/v20/src.mp4 -vf hqdn3d=0:0:24:24 -c:v libx264 -crf 4 public/v20/src_dn.mp4
 python scripts/grade-silence.py clip public/v20/src_dn.mp4 public/v20/alpha.mp4 public/v20
 python scripts/grade-silence.py empty public/v20/src_dn.mp4 public/v20/empty4k.png
-# só os fotogramas que a montagem usa, como JPEG 4K (o extrator de vídeo esgotava a memória em 4K)
+# câmara lenta pré-misturada em precisão total, um JPEG 4K por fotograma de saída e por plano
+# (no Chrome a mistura de 3–4 camadas é a 8 bits: clarões de ~1 nível nas sombras)
 python scripts/frames-v20.py
+python scripts/grain-v20.py          # grão de película: texturas com média constante
 python scripts/gen-v20-audio.py a20.wav && ffmpeg -i a20.wav -c:a aac -b:a 256k public/audio20.m4a
 npx remotion render src/index.ts Video20 out/v20-video.mp4 --codec h264 --crf 14 --gl=angle --muted
 ffmpeg -i out/v20-video.mp4 -i a20.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 320k out/video-20.mp4
