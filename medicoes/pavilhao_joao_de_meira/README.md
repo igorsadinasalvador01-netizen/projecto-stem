@@ -65,7 +65,7 @@ As exportações AutoCAD/GstarCAD não trazem propriedades de objeto, por isso t
 
 **Diferenças grandes, a confirmar:**
 - **Guia corten:** 427,11 ml contra 210 no MQT. O MQT só conta a orla da pista, que mede 210,65 ml.
-- **PAV E 03:** 1519,77 m² contra 1680, medido na folha 3.2.1 (1:250): Área A (trama roxa, acesso norte/poente) 891,65 + Área B (zona sudoeste com betuminoso pontilhado) 628,12. Ver `prints/E03_0…E03_2`.
+- **PAV E 03:** 1519,77 m² contra 1680. Segue os artigos do MQT de venda: o PAV E 03 é o único artigo de betuminoso, por isso leva a Área A (trama roxa, 891,65) e a Área B (betuminoso pontilhado a sudoeste, 628,12). As lajetas a repor (133,09 m²) ficam no artigo 3.9.2.13. O MQT parece ter contado as lajetas também no PAV E 03 (891,65 + 628,12 + 133,09 = 1652,86 ≈ 1680). Ver `prints/E03_0…E03_2`.
 - **PAV E 05:** 296,24 m² contra 210. É a soma das manchas dos dois pisos; o MQT só usou a folha do Piso 01.
 - **P.T.1 e endurecedor:** 331,24 m² contra 419,56.
 - **COB 04:** 220,36 m² contra 265.
