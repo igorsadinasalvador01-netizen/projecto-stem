@@ -5,7 +5,6 @@ export const FPS20 = ED.fps;
 export const SRC_FPS = ED.srcFps;
 export const TOTAL20 = ED.total;
 export const FRAMES20 = Math.round(TOTAL20 * FPS20);
-export const SRC_FRAMES = 1838;
 
 export type Shot20 = {
   id: string;
@@ -75,23 +74,16 @@ export const opacityAt = (sh: Shot20, t: number) => {
   return 0.5 - 0.5 * Math.cos(Math.PI * p);
 };
 
-// fotograma(s) da filmagem: janela temporal de largura FIXA (3 fotogramas de origem ≈ 1/20 s)
-// centrada no índice fracionário. Com largura fixa a nitidez/ruído é igual em todos os
-// fotogramas; com a mistura simples de 2 vizinhos, um fotograma "puro" de vez em quando
-// ficava mais nítido e via-se um pequeno salto no contorno.
-const WIN = 3; // também espalha o resto dos saltos de I-frame da origem por 3 fotogramas
-export const footageFrames = (sh: Shot20, t: number) => {
-  const s = pchip(sh.t!, t);
-  const k = Math.max(1, Math.min(SRC_FRAMES - 2, s * SRC_FPS));
-  const a = k - WIN / 2;
-  const b = k + WIN / 2;
-  const out: { f: number; w: number }[] = [];
-  for (let j = Math.round(a); j <= Math.round(b); j++) {
-    const w = Math.max(0, Math.min(b, j + 0.5) - Math.max(a, j - 0.5));
-    if (w > 0.01 && j >= 0 && j < SRC_FRAMES) out.push({ f: j, w });
-  }
-  const tot = out.reduce((x, y) => x + y.w, 0);
-  return out.map((o) => ({ f: o.f, w: o.w / tot }));
+// fotograma da filmagem já misturado (câmara lenta) por scripts/frames-v20.py, em precisão total:
+// public/v20/fx/<plano>/NNNN.jpg, com NNNN = fotograma da montagem. A mistura de 3–4 camadas com
+// opacidade no Chrome é feita a 8 bits e o arredondamento mudava com o número de camadas
+// ("clarões" de ~1 nível nas sombras); por isso a mistura temporal (janela fixa de 3 fotogramas de
+// origem ≈ 1/20 s) é feita fora do navegador. Correr o script depois de mudar os tempos.
+export const fxFrame = (sh: Shot20, frame: number) => {
+  const f0 = Math.ceil(sh.span[0] * FPS20);
+  const f1 = Math.ceil(sh.span[1] * FPS20) - 1;
+  const f = Math.max(f0, Math.min(f1, frame));
+  return `v20/fx/${sh.id}/${String(f).padStart(4, "0")}.jpg`;
 };
 
 export const visibleAt = (t: number) => SHOTS20.filter((s) => t >= s.span[0] && t < s.span[1]);

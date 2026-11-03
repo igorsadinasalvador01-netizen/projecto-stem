@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Audio, Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { loadFonts } from "../fonts";
-import { FADES, footageFrames, FPS20, opacityAt, Shot20, TITLE, visibleAt, zoomAt } from "./edit20";
+import { FADES, FPS20, fxFrame, opacityAt, Shot20, TITLE, visibleAt, zoomAt } from "./edit20";
 
 loadFonts();
 
@@ -28,22 +28,11 @@ const frameStyle = (sh: Shot20, t: number): React.CSSProperties => {
   return { transform: `translate(${tx}px, ${ty}px) scale(${z})`, transformOrigin: "50% 50%" };
 };
 
-const Footage: React.FC<{ sh: Shot20; t: number }> = ({ sh, t }) => {
-  let cum = 0;
-  return (
-    <AbsoluteFill style={frameStyle(sh, t)}>
-      {footageFrames(sh, t).map(({ f, w }, i) => {
-        cum += w;
-        return (
-          <AbsoluteFill key={f} style={{ opacity: i === 0 ? 1 : w / cum }}>
-            {/* fotogramas 4K graduados, extraídos de plate4k.mp4 (só os que a montagem usa) */}
-            <Img src={staticFile(`v20/f/${String(f).padStart(4, "0")}.jpg`)} style={{ width: W, height: H }} />
-          </AbsoluteFill>
-        );
-      })}
-    </AbsoluteFill>
-  );
-};
+const Footage: React.FC<{ sh: Shot20; t: number; frame: number }> = ({ sh, t, frame }) => (
+  <AbsoluteFill style={frameStyle(sh, t)}>
+    <Img src={staticFile(fxFrame(sh, frame))} style={{ width: W, height: H }} />
+  </AbsoluteFill>
+);
 
 const Plate: React.FC<{ sh: Shot20; t: number }> = ({ sh, t }) => (
   <AbsoluteFill style={frameStyle(sh, t)}>
@@ -51,15 +40,14 @@ const Plate: React.FC<{ sh: Shot20; t: number }> = ({ sh, t }) => (
   </AbsoluteFill>
 );
 
-// grão calculado a meia resolução e ampliado ×2: grãos de ~2 px em 4K, 4× mais leve
+// grão de película: texturas pré-geradas com a mesma média (scripts/grain-v20.py), a meia
+// resolução e ampliadas ×2 → grãos de ~2 px em 4K, sem "clarões" de um fotograma
+const GRAINS = 48;
 const Grain: React.FC<{ frame: number }> = ({ frame }) => (
-  <svg width={W / 2} height={H / 2} style={{ position: "absolute", left: 0, top: 0, transform: "scale(2)", transformOrigin: "0 0", mixBlendMode: "overlay", opacity: 0.2 }}>
-    <filter id="grain20" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves={2} seed={(frame * 7) % 211} stitchTiles="stitch" />
-      <feColorMatrix type="saturate" values="0" />
-    </filter>
-    <rect width={W / 2} height={H / 2} filter="url(#grain20)" />
-  </svg>
+  <Img
+    src={staticFile(`v20/grain/g${String((frame * 17) % GRAINS).padStart(2, "0")}.png`)}
+    style={{ position: "absolute", left: 0, top: 0, width: W, height: H, mixBlendMode: "overlay", opacity: 0.17 }}
+  />
 );
 
 const Title: React.FC<{ t: number }> = ({ t }) => {
@@ -105,7 +93,7 @@ export const Video20: React.FC<Video20Props> = ({ music }) => {
           // nunca opacidade 1 nem 0 exatos: o Chrome muda de caminho de composição nesses extremos
           // (passo de ~1 nível de brilho no fim de cada dissolução); 0,995 (254/255) é imperceptível
           <AbsoluteFill key={sh.id} style={{ opacity: Math.min(0.995, opacityAt(sh, t)) }}>
-            {sh.kind === "plate" ? <Plate sh={sh} t={t} /> : <Footage sh={sh} t={t} />}
+            {sh.kind === "plate" ? <Plate sh={sh} t={t} /> : <Footage sh={sh} t={t} frame={frame} />}
           </AbsoluteFill>
         ))}
       </AbsoluteFill>
