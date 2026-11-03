@@ -645,8 +645,13 @@ efeitos agressivos, sem sobreposições — só montagem, luz, tempo e som.
 
 ```bash
 python scripts/matte-footage.py ...   # (ou o RVM direto) → public/v20/alpha.mp4
-python scripts/grade-silence.py clip public/v20/src.mp4 public/v20/alpha.mp4 public/v20
-python scripts/grade-silence.py empty public/v20/src.mp4 public/v20/empty4k.png
+# a origem (WhatsApp) tem um I-frame a cada 30 fotogramas: na câmara lenta via-se um "salto" de
+# textura a cada 1–1,7 s. Um desruído só temporal (adaptativo ao movimento) tira-o sem fantasmas:
+ffmpeg -i public/v20/src.mp4 -vf hqdn3d=0:0:24:24 -c:v libx264 -crf 4 public/v20/src_dn.mp4
+python scripts/grade-silence.py clip public/v20/src_dn.mp4 public/v20/alpha.mp4 public/v20
+python scripts/grade-silence.py empty public/v20/src_dn.mp4 public/v20/empty4k.png
+# só os fotogramas que a montagem usa, como JPEG 4K (o extrator de vídeo esgotava a memória em 4K)
+python scripts/frames-v20.py
 python scripts/gen-v20-audio.py a20.wav && ffmpeg -i a20.wav -c:a aac -b:a 256k public/audio20.m4a
 npx remotion render src/index.ts Video20 out/v20-video.mp4 --codec h264 --crf 14 --gl=angle --muted
 ffmpeg -i out/v20-video.mp4 -i a20.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 320k out/video-20.mp4
