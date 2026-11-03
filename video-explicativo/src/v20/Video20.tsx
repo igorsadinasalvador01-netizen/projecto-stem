@@ -102,7 +102,9 @@ export const Video20: React.FC<Video20Props> = ({ music }) => {
     <AbsoluteFill style={{ background: T.ink, overflow: "hidden" }}>
       <AbsoluteFill style={{ filter: `brightness(${flicker(t)})` }}>
         {shots.map((sh) => (
-          <AbsoluteFill key={sh.id} style={{ opacity: opacityAt(sh, t) }}>
+          // nunca opacidade 1 nem 0 exatos: o Chrome muda de caminho de composição nesses extremos
+          // (passo de ~1 nível de brilho no fim de cada dissolução); 0,995 (254/255) é imperceptível
+          <AbsoluteFill key={sh.id} style={{ opacity: Math.min(0.995, opacityAt(sh, t)) }}>
             {sh.kind === "plate" ? <Plate sh={sh} t={t} /> : <Footage sh={sh} t={t} />}
           </AbsoluteFill>
         ))}
@@ -110,7 +112,7 @@ export const Video20: React.FC<Video20Props> = ({ music }) => {
       {/* vinheta muito suave (a luz da janela continua a ser o centro) */}
       <AbsoluteFill style={{ background: "radial-gradient(ellipse 80% 66% at 56% 44%, rgba(0,0,0,0) 60%, rgba(4,3,2,0.30) 100%)" }} />
       <Grain frame={frame} />
-      <AbsoluteFill style={{ background: "#000", opacity: black }} />
+      <AbsoluteFill style={{ background: "#000", opacity: Math.max(0.002, black) }} />
       <Title t={t} />
       {music && <Audio src={staticFile("audio20.m4a")} />}
     </AbsoluteFill>
