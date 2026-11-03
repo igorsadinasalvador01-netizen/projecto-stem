@@ -16,6 +16,7 @@ Folhas do livro:
 - **PV Interiores / PV Exteriores:** as duas folhas originais, com a coluna G toda preenchida. A coluna G está ligada à folha de detalhe.
 - **MEDIÇÃO DETALHADA:** linha de total por artigo e, por baixo, as parcelas. Mostra também o valor anterior do modelo, a diferença para o MQT em quantidade e em €, o estado e a fonte.
 - **DISCREPÂNCIAS:** os 38 artigos que se afastam do MQT, que foram corrigidos ou que ficam a confirmar.
+- **DESIGNAÇÕES:** a legenda de acabamentos (texto citado) comparada com a designação de cada artigo do MQT.
 - **CRITÉRIOS E FONTES:** escalas, métodos e pressupostos.
 - **MAPAS:** os 8 mapas de medição por cor (M01 a M08).
 - **PRINTS:** as imagens de evidência (P1–P7 e E03_0–E03_2).
@@ -88,3 +89,12 @@ As exportações AutoCAD/GstarCAD não trazem propriedades de objeto, por isso t
 O banco pré-fabricado junto à pista (trama magenta, 91,04 m²) é o artigo 3.17.1 do MQT (187 ml) e não entra no PAV E 04.
 
 O impacto líquido das diferenças, a preço de venda do MQT, é cerca de −8,4 k€. O detalhe está na folha MEDIÇÃO DETALHADA.
+
+## Designações: desenho vs MQT
+
+A verificação completa está na folha DESIGNAÇÕES e no print `mapas/D01_legenda_vs_MQT`. Há dois códigos em que o MQT usa outra designação:
+
+- **PAV I 02:** o desenho diz “betão armado com endurecedor de superfície”, o MQT 3.9.1.2 diz “betão armado tipo Secil Unipiso (10 cm)”. O Unipiso do desenho é o PAV E 01. No Piso 01 isso é a laje P.T.1 com endurecedor (2.3.14.1 + 2.6.3), pelo que o 3.9.1.2.1 pode estar em duplicado.
+- **PAV E 04:** o desenho diz “banco pré-fabricado” (MQT 3.17.1), o MQT 3.9.2.1 diz “lajes pré-fabricadas ACL”, que é a descrição do PAV E 05.
+
+Coincidem em parte: SOL 01 (o MQT diz “vãos interiores” num artigo exterior) e COB 04 (não existe na legenda; a circulação do Piso 02 está desenhada como PAV E 01).
