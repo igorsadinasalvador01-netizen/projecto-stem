@@ -16,7 +16,7 @@ for sh in ED["shots"]:
         continue
     a = min(k[1] for k in sh["t"])
     b = max(k[1] for k in sh["t"])
-    need.update(range(max(0, int(a * fps) - 2), min(1837, int(b * fps) + 3) + 1))
+    need.update(range(max(0, int(a * fps) - 3), min(1837, int(b * fps) + 4) + 1))
 out = os.path.join(ROOT, "public", "v20", "f")
 os.makedirs(out, exist_ok=True)
 cap = cv2.VideoCapture(os.path.join(ROOT, "public", "v20", "plate4k.mp4"))

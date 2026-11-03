@@ -75,13 +75,23 @@ export const opacityAt = (sh: Shot20, t: number) => {
   return 0.5 - 0.5 * Math.cos(Math.PI * p);
 };
 
-// fotograma(s) da filmagem: índice fracionário → mistura dos dois vizinhos (câmara lenta suave)
+// fotograma(s) da filmagem: janela temporal de largura FIXA (3 fotogramas de origem ≈ 1/20 s)
+// centrada no índice fracionário. Com largura fixa a nitidez/ruído é igual em todos os
+// fotogramas; com a mistura simples de 2 vizinhos, um fotograma "puro" de vez em quando
+// ficava mais nítido e via-se um pequeno salto no contorno.
+const WIN = 3; // também espalha o resto dos saltos de I-frame da origem por 3 fotogramas
 export const footageFrames = (sh: Shot20, t: number) => {
   const s = pchip(sh.t!, t);
-  const k = Math.max(0, Math.min(SRC_FRAMES - 1.001, s * SRC_FPS));
-  const f0 = Math.floor(k);
-  const fr = k - f0;
-  return fr < 0.02 ? [{ f: f0, w: 1 }] : [{ f: f0, w: 1 - fr }, { f: f0 + 1, w: fr }];
+  const k = Math.max(1, Math.min(SRC_FRAMES - 2, s * SRC_FPS));
+  const a = k - WIN / 2;
+  const b = k + WIN / 2;
+  const out: { f: number; w: number }[] = [];
+  for (let j = Math.round(a); j <= Math.round(b); j++) {
+    const w = Math.max(0, Math.min(b, j + 0.5) - Math.max(a, j - 0.5));
+    if (w > 0.01 && j >= 0 && j < SRC_FRAMES) out.push({ f: j, w });
+  }
+  const tot = out.reduce((x, y) => x + y.w, 0);
+  return out.map((o) => ({ f: o.f, w: o.w / tot }));
 };
 
 export const visibleAt = (t: number) => SHOTS20.filter((s) => t >= s.span[0] && t < s.span[1]);
