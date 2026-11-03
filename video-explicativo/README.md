@@ -611,3 +611,43 @@ python scripts/gen-v19-audio.py a19.wav && ffmpeg -i a19.wav -c:a aac -b:a 256k 
 npx remotion render src/index.ts Video19 out/v19-video.mp4 --codec h264 --crf 16 --gl=angle --muted
 ffmpeg -i out/v19-video.mp4 -i a19.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 320k -shortest out/video-19.mp4
 ```
+
+# Vídeo 20 — "A Moment of Silence" (composição `Video20`, 2160×3840, 30 fps)
+
+Plano fixo de 30,6 s (464×832, 59,94 fps, sem som): um trabalhador da construção entra, caminha
+até à janela, para, olha a cidade (e o céu, onde se vê a lua), vira a cabeça e prepara-se para
+sair. A edição transforma esse momento simples numa curta contemplativa, sem citações, sem
+efeitos agressivos, sem sobreposições — só montagem, luz, tempo e som.
+
+- **Tempo**: câmara lenta nativa a partir dos 59,94 fps (a caminhada abranda de ~0,63× para
+  ~0,36× ao chegar à janela; o momento parado fica a ~0,3×); mistura de fotogramas vizinhos,
+  sem interpolação artificial. Curvas de tempo PCHIP em `src/v20/edit20.json`.
+- **Montagem**: sala vazia (placa limpa feita da própria filmagem, ver abaixo) → entrada em
+  dissolução → caminhada → paragem com push-in muito lento → corte para um plano mais fechado
+  no momento em que ele olha para cima (o centro emocional) → dissolução "match" de volta ao
+  plano largo (o zoom recua durante a dissolução, as figuras coincidem) → ele vira-se e
+  desvanece na janela vazia → negro → título "A MOMENT OF SILENCE".
+- **Sala vazia**: fotograma 2 (janela livre, ele ainda à entrada) + faixa direita de um
+  fotograma em que ele está parado, unidos com transição suave — mesma câmara, mesma luz
+  (exposição constante verificada).
+- **Gradação** (`scripts/grade-silence.py`): tons terrosos ligeiramente dessaturados, o azul
+  elétrico do chão sóbrio, o laranja do equipamento preservado; altas luzes quentes e suaves
+  (ombro da curva, halação e "bloom" de película na janela), sombras frias e profundas com
+  detalhe; separação subtil do sujeito (recorte RVM: um pouco mais de luz e micro-contraste).
+  Sobe para 4K com Lanczos e nitidez leve. Na composição: grão fino, ondulação de película
+  sub-píxel, cintilação quase invisível, vinheta suave.
+- **Som original** (`scripts/gen-v20-audio.py`): piano de feltro sintetizado (inarmonicidade de
+  corda, decaimento em dois tempos, três cordas por nota), pad de cordas, tom de sala, cidade
+  distante, um carro ao longe durante o silêncio, passos macios de bota nos fotogramas em que o
+  calcanhar pousa. Primeira nota quando ele aparece → cresce até à janela → cadência quando
+  para → silêncio (−7 dB) → motivo agudo quando olha para cima → o tema volta quando se vira →
+  acorde final quando desaparece → uma nota no título. −16 LUFS, pico −2,7 dBFS.
+
+```bash
+python scripts/matte-footage.py ...   # (ou o RVM direto) → public/v20/alpha.mp4
+python scripts/grade-silence.py clip public/v20/src.mp4 public/v20/alpha.mp4 public/v20
+python scripts/grade-silence.py empty public/v20/src.mp4 public/v20/empty4k.png
+python scripts/gen-v20-audio.py a20.wav && ffmpeg -i a20.wav -c:a aac -b:a 256k public/audio20.m4a
+npx remotion render src/index.ts Video20 out/v20-video.mp4 --codec h264 --crf 14 --gl=angle --muted
+ffmpeg -i out/v20-video.mp4 -i a20.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 320k out/video-20.mp4
+```
