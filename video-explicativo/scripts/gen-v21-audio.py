@@ -267,7 +267,7 @@ def main():
     io = int(min(N - 1, (total - 1.2) * SR))
     music[io:] *= np.linspace(1, 0, N - io)[:, None] ** 1.5
     # ducking pela voz (envolvente de 60 ms)
-    env = np.sqrt(a19.lp(v**2, 6))
+    env = np.sqrt(np.maximum(a19.lp(v**2, 6), 0))
     env = env / (np.percentile(env[env > 1e-4], 95) + 1e-9)
     duck = 1 - 0.55 * np.clip(env, 0, 1)
     music *= duck[:, None]
@@ -276,8 +276,22 @@ def main():
     act = env > 0.15
     vr = np.sqrt((v[act] ** 2).mean())
     mr = np.sqrt((music.mean(1)[act] ** 2).mean()) + 1e-9
-    music *= vr * 10 ** (-19 / 20) / mr
-    mix = np.stack([v, v], 1) + music + fxm * (vr / 0.05) * 0.5
+    # níveis medidos em janelas de 50 ms com fala: a voz fica ~21 dB acima da música (mediana)
+    # e os efeitos, mesmo nos picos (p95), ~13 dB abaixo da voz — presentes, nunca por cima dela
+    hop = int(0.05 * SR)
+    kk = N // hop
+    wr = lambda x: np.sqrt((x[: kk * hop].reshape(kk, hop) ** 2).mean(1)) + 1e-9
+    vw = wr(v)
+    sp = vw > np.percentile(vw[vw > 1e-4], 40)
+    mw = wr(music.mean(1))
+    music *= 10 ** ((np.median(20 * np.log10(vw[sp]) - 20 * np.log10(mw[sp])) - 21) / 20)
+    fw = wr(fxm.mean(1))
+    on = fw > fw.max() * 0.05
+    fxm *= 10 ** ((20 * np.log10(np.median(vw[sp])) - 13 - 20 * np.log10(np.percentile(fw[on], 95))) / 20)
+    mix = np.stack([v, v], 1) + music + fxm
+    bw = wr((music + fxm).mean(1))
+    marg = 20 * np.log10(vw[sp]) - 20 * np.log10(bw[sp])
+    print(f"voz acima de música+efeitos (janelas com fala): mediana {np.median(marg):.1f} dB, p10 {np.percentile(marg, 10):.1f} dB")
     mix = a19.hp(mix, 30, order=2) if mix.ndim == 1 else np.stack([a19.hp(mix[:, c], 30, order=2) for c in range(2)], 1)
     for _ in range(2):
         mix = mix * 10 ** ((-16.0 - a20.lufs(mix)) / 20)

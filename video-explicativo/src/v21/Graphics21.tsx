@@ -184,7 +184,7 @@ export const Question: React.FC<{ to: number }> = ({ to }) => {
   return (
     <div style={{ position: "absolute", left: 140, top: 250, width: 860, opacity: g }}>
       <Label style={rise(k(to, 26.5, 0.5), 10)}>Vendedor 2 · pergunta</Label>
-      <div style={{ marginTop: 10, fontFamily: T.ui, fontWeight: 300, fontSize: 150, lineHeight: 0.8, color: T.blue, opacity: k(to, 26.7, 0.5) }}>“</div>
+      <div style={{ marginTop: 6, height: 96, fontFamily: "Instrument Serif", fontWeight: 400, fontSize: 210, lineHeight: 1, color: T.blue, opacity: k(to, 26.7, 0.5) }}>“</div>
       <div style={{ fontFamily: T.ui, fontWeight: 800, fontSize: 76, lineHeight: 1.08, letterSpacing: "-0.02em", color: T.white, display: "flex", flexWrap: "wrap", columnGap: 22 }}>
         {words.map(([at, w, hi]) => {
           const p = k(to, at, 0.45);
@@ -211,9 +211,9 @@ const ROUTES = [
   [[960, 120], [520, 440], [760, 200], [120, 380]],
 ];
 export const Answer: React.FC<{ to: number }> = ({ to }) => {
-  const g = win(to, 31.0, 37.75);
+  const g = win(to, 31.95, 37.75);
   if (g <= 0) return null;
-  const head = k(to, 31.0, 0.5);
+  const head = k(to, 31.95, 0.5);
   const plan = k(to, 32.64, 1.0, Easing.inOut(Easing.cubic));
   const people = k(to, 33.2, 0.6);
   const clock = k(to, 34.4, 0.6);
@@ -275,11 +275,11 @@ export const Reveal: React.FC<{ to: number }> = ({ to }) => {
     [40.08, "diferença?", true],
   ];
   return (
-    <div style={{ position: "absolute", left: 0, right: 0, top: 800, display: "flex", justifyContent: "center", columnGap: 26, opacity: g }}>
+    <div style={{ position: "absolute", left: 0, right: 0, top: 880, display: "flex", justifyContent: "center", columnGap: 24, opacity: g }}>
       {words.map(([at, w, hi]) => {
         const p = k(to, at, 0.35);
         return (
-          <span key={w} style={{ fontFamily: T.ui, fontWeight: 800, fontSize: 104, letterSpacing: "-0.025em", color: hi ? T.blueHi : T.white, textShadow: hi ? `0 0 40px ${T.glow}` : "0 10px 40px rgba(0,0,0,0.6)", display: "inline-block", ...rise(p, 26), transform: `translateY(${(1 - p) * 26}px) scale(${hi ? 0.92 + 0.08 * p : 1})` }}>
+          <span key={w} style={{ fontFamily: T.ui, fontWeight: 800, fontSize: 90, letterSpacing: "-0.025em", color: hi ? T.blueHi : T.white, textShadow: hi ? `0 0 40px ${T.glow}` : "0 10px 40px rgba(0,0,0,0.6)", display: "inline-block", ...rise(p, 26), transform: `translateY(${(1 - p) * 26}px) scale(${hi ? 0.92 + 0.08 * p : 1})` }}>
             {w}
           </span>
         );

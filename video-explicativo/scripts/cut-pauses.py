@@ -2,7 +2,7 @@
 """Corta as pausas mortas de um vídeo de rosto (vídeo 17+) e mantém tudo sincronizado.
 
 Uso: cut-pauses.py <narracao> <plate.mp4> <fg.webm> <saida_dir> <cuts.json> [--fps 30]
-       [--min 0.22] [--keep 0.13] [--long 0.5] [--keep-long 0.2] [--narr-out f.m4a]
+       [--min 0.22] [--keep 0.13] [--long 0.5] [--keep-long 0.2] [--narr-out f.m4a|f.wav] [--narr-only]
 
 - Mede o silêncio na narração (RMS em janelas de 10 ms, limiar = p95 - 32 dB).
 - Cada pausa >= --min fica com --keep segundos (as >= --long ficam com --keep-long, para
@@ -77,8 +77,9 @@ print(f"{len(remove)} cortes · {src_frames} → {out_frames} fotogramas ({src_f
 
 sel = "+".join(f"between(n\\,{a}\\,{b - 1})" for a, b in keep)
 vf = f"select='{sel}',setpts=N/{FPS}/TB"
-subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", plate, "-vf", vf, "-an", "-r", str(FPS), "-c:v", "libx264", "-preset", "medium", "-crf", "15", "-pix_fmt", "yuv420p", f"{out}/plate_c.mp4"], check=True)
-subprocess.run(["ffmpeg", "-v", "error", "-y", "-c:v", "libvpx-vp9", "-i", fg, "-vf", vf, "-an", "-r", str(FPS), "-c:v", "libvpx-vp9", "-pix_fmt", "yuva420p", "-b:v", "5M", "-deadline", "good", "-cpu-used", "4", "-row-mt", "1", "-auto-alt-ref", "0", f"{out}/fg_c.webm"], check=True)
+if "--narr-only" not in sys.argv:  # --narr-only: refaz só a narração com os mesmos cortes
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", plate, "-vf", vf, "-an", "-r", str(FPS), "-c:v", "libx264", "-preset", "medium", "-crf", "15", "-pix_fmt", "yuv420p", f"{out}/plate_c.mp4"], check=True)
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-c:v", "libvpx-vp9", "-i", fg, "-vf", vf, "-an", "-r", str(FPS), "-c:v", "libvpx-vp9", "-pix_fmt", "yuva420p", "-b:v", "5M", "-deadline", "good", "-cpu-used", "4", "-row-mt", "1", "-auto-alt-ref", "0", f"{out}/fg_c.webm"], check=True)
 
 parts, labels = [], []
 for k, (a, b) in enumerate(keep):
@@ -90,5 +91,7 @@ for k, (a, b) in enumerate(keep):
     labels.append(f"[a{k}]")
 fc = ";".join(parts) + ";" + "".join(labels) + f"concat=n={len(keep)}:v=0:a=1[out]"
 narr_out = sys.argv[sys.argv.index("--narr-out") + 1] if "--narr-out" in sys.argv else f"{out}/narracao_c.m4a"
-subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", narr, "-filter_complex", fc, "-map", "[out]", "-c:a", "aac", "-b:a", "256k", narr_out], check=True)
+# .wav → PCM sem perdas (para a mistura final); outra extensão → AAC 256k
+codec = ["-c:a", "pcm_s24le"] if narr_out.lower().endswith(".wav") else ["-c:a", "aac", "-b:a", "256k"]
+subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", narr, "-filter_complex", fc, "-map", "[out]", *codec, narr_out], check=True)
 print("ok", narr_out)

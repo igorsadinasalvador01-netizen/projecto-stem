@@ -23,7 +23,7 @@ export const CAM = {
   wide: { s: 0.74, fx: 960, fy: 470 },
   med: { s: 0.88, fx: 960, fy: 420 },
   close: { s: 1.1, fx: 960, fy: 440 },
-  xcu: { s: 1.42, fx: 960, fy: 470 },
+  xcu: { s: 1.42, fx: 960, fy: 380 },
   right: { s: 0.86, fx: 1330, fy: 430 },
   left: { s: 0.86, fx: 600, fy: 430 },
   rightClose: { s: 1.02, fx: 1350, fy: 450 },

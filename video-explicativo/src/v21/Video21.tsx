@@ -139,7 +139,7 @@ const Captions21: React.FC<{ to: number }> = ({ to }) => {
         const key = KEYW.has(norm(w.text));
         const pk = interpolate(to, [M(w.start), M(w.start) + 0.12], [0, 1], clamp);
         return (
-          <span key={i} style={{ display: "inline-block", fontFamily: T.ui, fontWeight: 700, fontSize: 50, letterSpacing: "-0.005em", color: said && key ? T.blueHi : T.white, opacity: said ? 1 : 0.38, textShadow: said && key ? `0 0 22px ${T.glow}, 0 4px 18px rgba(0,0,0,0.7)` : "0 4px 18px rgba(0,0,0,0.75)", transform: `scale(${key ? 1 + 0.06 * pk : 1})` }}>
+          <span key={i} style={{ display: "inline-block", fontFamily: T.ui, fontWeight: 700, fontSize: 50, letterSpacing: "-0.005em", color: said && key ? T.blueHi : T.white, opacity: said ? 1 : 0.38, textShadow: said && key ? `0 0 22px ${T.glow}, 0 4px 18px rgba(0,0,0,0.7)` : "0 4px 18px rgba(0,0,0,0.75)", transform: `scale(${key ? 1 + 0.06 * pk : 1})`, margin: key ? "0 7px" : undefined }}>
             {w.text}
           </span>
         );
