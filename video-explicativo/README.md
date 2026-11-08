@@ -659,3 +659,39 @@ python scripts/gen-v20-audio.py a20.wav && ffmpeg -i a20.wav -c:a aac -b:a 256k 
 npx remotion render src/index.ts Video20 out/v20-video.mp4 --codec h264 --crf 14 --gl=angle --muted
 ffmpeg -i out/v20-video.mp4 -i a20.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 320k out/video-20.mp4
 ```
+
+# Vídeo 21 — "Dois vendedores" (composição `Video21`, 1920×1080, 30 fps)
+
+Talking head vertical (576×1024, 68 s) transformado num documental horizontal 16:9: o autor,
+recortado, sobre o **próprio espaço desfocado** (placa limpa sem ele, com profundidade de campo),
+com câmara virtual, gráficos explicativos fiéis ao discurso e legendas em português europeu.
+Nada do discurso foi alterado: só se cortaram 21 pausas (68,2 s → 62,9 s).
+
+- **Realização** (`src/v21/Video21.tsx`, marcas no tempo ORIGINAL de cada palavra): planos médio,
+  aberto, próximo e grande plano; movimentos laterais quando os gráficos precisam de espaço;
+  micro-punch a cada corte (jump cuts elegantes); picture-in-picture com moldura (empresário →
+  empresa → remodelação); freeze frame com recorte e contorno no canto enquanto o cliente
+  "responde"; split screen na comparação; grande plano na revelação; clímax com "vendedor comum
+  | profissional estratégico" e a linha azul por trás do sujeito; frase-chave em composição
+  própria; conclusão mais calma; fecho com o perfil ORIGINAL.
+- **Gradação** (`scripts/prep-v21.py`): fundo ~1 stop abaixo, mais frio e menos saturado (a luz do
+  candeeiro fica como ponto de luz), pele natural, pretos sólidos com detalhe; recorte RVM com
+  fade suave nas margens (os ombros cortados pelo quadro vertical dissolvem-se no escuro).
+- **Legendas**: segmentos curtos, palavra a palavra, branco + azul elétrico nas palavras-chave,
+  sempre na zona segura; nas frases de impacto dão lugar a tipografia grande.
+- **Voz**: passa-alto, redução de ruído adaptativa, EQ (menos lama a 250 Hz, presença a 3,4 kHz,
+  ar), de-esser, compressão, limitador — com o atraso da cadeia (24,4 ms) compensado.
+- **Música e SFX originais** (`scripts/gen-v21-audio.py`): Ré menor, 84 BPM, por secções que
+  seguem a narrativa; whooshes de ar, cliques, impactos, sub drops e risers de ruído com
+  intenção; voz ~20 dB acima de tudo; −16 LUFS.
+
+```bash
+python scripts/prep-v21.py <video.mp4> rvm_mobilenetv3_fp32.onnx public/v21
+ffmpeg -i public/v21/bg_clean.png -vf "scale=2000:3556:flags=lanczos,gblur=sigma=26" public/v21/bg_wide.png
+python scripts/grain-v20.py public/v21/grain 960 540 24
+# voz tratada → voz_proc.wav (ver a cadeia acima), depois:
+python scripts/cut-pauses.py voz_proc.wav public/v21/plate.mp4 public/v21/fg.webm public/v21 src/v21/cuts21.json --min 0.18 --keep 0.10 --long 0.45 --keep-long 0.18 --narr-out public/narracao21c.wav
+python scripts/gen-v21-audio.py public/narracao21c.wav src/v21/cuts21.json a21.wav 66.6667
+npx remotion render src/index.ts Video21 out/v21-video.mp4 --codec h264 --crf 16 --gl=angle --muted
+ffmpeg -i out/v21-video.mp4 -i a21.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 320k out/video-21.mp4
+```
