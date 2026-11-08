@@ -4,13 +4,15 @@ composição → grãos de ~2 px em 4K). Todas têm exatamente a mesma média e 
 feTurbulence algumas sementes davam um ruído ligeiramente mais claro e via-se um "clarão" de um
 fotograma nas zonas escuras."""
 import os
+import sys
 
 import cv2
 import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = os.path.join(ROOT, "public", "v20", "grain")
-N, W, H = 48, 1080, 1920
+# uso: grain-v20.py [pasta W H N]  (por omissão: public/v20/grain 1080 1920 48; o vídeo 21 usa 960×540)
+OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "public", "v20", "grain")
+W, H, N = (int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4])) if len(sys.argv) > 4 else (1080, 1920, 48)
 os.makedirs(OUT, exist_ok=True)
 rng = np.random.default_rng(2020)
 for i in range(N):

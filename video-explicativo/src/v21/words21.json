@@ -1,0 +1,837 @@
+[
+{
+"text": "Dois",
+"start": 0.24,
+"end": 0.56
+},
+{
+"text": "vendedores",
+"start": 0.56,
+"end": 1.04
+},
+{
+"text": "entram",
+"start": 1.12,
+"end": 1.44
+},
+{
+"text": "na",
+"start": 1.6,
+"end": 1.76
+},
+{
+"text": "mesma",
+"start": 1.76,
+"end": 1.92
+},
+{
+"text": "sala",
+"start": 2.08,
+"end": 2.4
+},
+{
+"text": "de",
+"start": 2.4,
+"end": 2.48
+},
+{
+"text": "reunião.",
+"start": 2.48,
+"end": 3.28
+},
+{
+"text": "Um",
+"start": 3.28,
+"end": 3.44
+},
+{
+"text": "apenas",
+"start": 3.6,
+"end": 3.84
+},
+{
+"text": "tenta",
+"start": 4.0,
+"end": 4.32
+},
+{
+"text": "vender",
+"start": 4.4,
+"end": 4.8
+},
+{
+"text": "e",
+"start": 4.96,
+"end": 5.12
+},
+{
+"text": "o",
+"start": 5.12,
+"end": 5.2
+},
+{
+"text": "outro",
+"start": 5.2,
+"end": 5.44
+},
+{
+"text": "apenas",
+"start": 5.6,
+"end": 5.92
+},
+{
+"text": "tenta",
+"start": 6.08,
+"end": 6.4
+},
+{
+"text": "compreender",
+"start": 6.64,
+"end": 7.28
+},
+{
+"text": "e",
+"start": 7.36,
+"end": 7.44
+},
+{
+"text": "só",
+"start": 7.52,
+"end": 7.68
+},
+{
+"text": "um",
+"start": 7.68,
+"end": 7.76
+},
+{
+"text": "conquistou",
+"start": 8.08,
+"end": 8.64
+},
+{
+"text": "o",
+"start": 8.72,
+"end": 8.8
+},
+{
+"text": "cliente.",
+"start": 8.8,
+"end": 9.68
+},
+{
+"text": "Imagina",
+"start": 10.0,
+"end": 10.64
+},
+{
+"text": "esta",
+"start": 10.8,
+"end": 10.96
+},
+{
+"text": "situação.",
+"start": 11.12,
+"end": 11.52
+},
+{
+"text": "Um",
+"start": 11.53,
+"end": 11.9
+},
+{
+"text": "empresário",
+"start": 11.92,
+"end": 12.32
+},
+{
+"text": "procura",
+"start": 12.48,
+"end": 12.96
+},
+{
+"text": "uma",
+"start": 13.04,
+"end": 13.2
+},
+{
+"text": "empresa",
+"start": 13.2,
+"end": 13.52
+},
+{
+"text": "para",
+"start": 13.52,
+"end": 13.68
+},
+{
+"text": "fazer",
+"start": 13.68,
+"end": 13.84
+},
+{
+"text": "a",
+"start": 13.84,
+"end": 14.0
+},
+{
+"text": "remodelação",
+"start": 14.0,
+"end": 14.8
+},
+{
+"text": "do",
+"start": 14.8,
+"end": 14.96
+},
+{
+"text": "seu",
+"start": 14.96,
+"end": 15.2
+},
+{
+"text": "espaço.",
+"start": 15.2,
+"end": 15.76
+},
+{
+"text": "E",
+"start": 15.92,
+"end": 16.08
+},
+{
+"text": "o",
+"start": 16.08,
+"end": 16.16
+},
+{
+"text": "primeiro",
+"start": 16.16,
+"end": 16.32
+},
+{
+"text": "vendedor",
+"start": 16.48,
+"end": 17.12
+},
+{
+"text": "já",
+"start": 17.12,
+"end": 17.36
+},
+{
+"text": "chega",
+"start": 17.36,
+"end": 17.6
+},
+{
+"text": "imediatamente",
+"start": 17.76,
+"end": 18.48
+},
+{
+"text": "apresentando",
+"start": 18.48,
+"end": 19.04
+},
+{
+"text": "os",
+"start": 19.28,
+"end": 19.52
+},
+{
+"text": "materiais,",
+"start": 19.52,
+"end": 20.16
+},
+{
+"text": "o",
+"start": 20.32,
+"end": 20.48
+},
+{
+"text": "preço,",
+"start": 20.48,
+"end": 21.04
+},
+{
+"text": "as",
+"start": 21.04,
+"end": 21.28
+},
+{
+"text": "vantagens",
+"start": 21.28,
+"end": 21.84
+},
+{
+"text": "e",
+"start": 21.86,
+"end": 22.21
+},
+{
+"text": "o",
+"start": 22.21,
+"end": 22.32
+},
+{
+"text": "serviço.",
+"start": 22.32,
+"end": 22.78
+},
+{
+"text": "E",
+"start": 23.2,
+"end": 23.36
+},
+{
+"text": "o",
+"start": 23.37,
+"end": 23.45
+},
+{
+"text": "segundo",
+"start": 23.38,
+"end": 23.68
+},
+{
+"text": "vendedor",
+"start": 23.76,
+"end": 24.08
+},
+{
+"text": "apenas",
+"start": 24.48,
+"end": 24.72
+},
+{
+"text": "pergunta",
+"start": 24.88,
+"end": 25.2
+},
+{
+"text": "calma",
+"start": 25.44,
+"end": 25.84
+},
+{
+"text": "e",
+"start": 25.86,
+"end": 25.98
+},
+{
+"text": "friamente",
+"start": 26.0,
+"end": 26.4
+},
+{
+"text": "o",
+"start": 26.88,
+"end": 27.04
+},
+{
+"text": "que",
+"start": 27.04,
+"end": 27.12
+},
+{
+"text": "atualmente",
+"start": 27.13,
+"end": 28.21
+},
+{
+"text": "mais",
+"start": 28.24,
+"end": 28.32
+},
+{
+"text": "te",
+"start": 28.56,
+"end": 28.72
+},
+{
+"text": "incomoda",
+"start": 28.72,
+"end": 29.2
+},
+{
+"text": "neste",
+"start": 29.52,
+"end": 29.76
+},
+{
+"text": "espaço.",
+"start": 29.92,
+"end": 30.4
+},
+{
+"text": "E",
+"start": 30.41,
+"end": 30.69
+},
+{
+"text": "o",
+"start": 30.72,
+"end": 30.88
+},
+{
+"text": "cliente",
+"start": 30.88,
+"end": 31.52
+},
+{
+"text": "responde,",
+"start": 31.52,
+"end": 32.4
+},
+{
+"text": "os",
+"start": 32.64,
+"end": 32.8
+},
+{
+"text": "meus",
+"start": 32.8,
+"end": 33.2
+},
+{
+"text": "funcionários",
+"start": 33.2,
+"end": 33.84
+},
+{
+"text": "perdem",
+"start": 33.84,
+"end": 34.16
+},
+{
+"text": "muito",
+"start": 34.4,
+"end": 34.56
+},
+{
+"text": "tempo",
+"start": 34.8,
+"end": 35.12
+},
+{
+"text": "porque",
+"start": 35.36,
+"end": 35.6
+},
+{
+"text": "o",
+"start": 35.84,
+"end": 36.0
+},
+{
+"text": "espaço",
+"start": 36.0,
+"end": 36.56
+},
+{
+"text": "está",
+"start": 36.56,
+"end": 36.8
+},
+{
+"text": "mal",
+"start": 36.8,
+"end": 36.88
+},
+{
+"text": "organizado.",
+"start": 37.12,
+"end": 38.16
+},
+{
+"text": "E",
+"start": 38.56,
+"end": 38.86
+},
+{
+"text": "então,",
+"start": 38.86,
+"end": 39.25
+},
+{
+"text": "percebes",
+"start": 39.28,
+"end": 39.76
+},
+{
+"text": "a",
+"start": 39.92,
+"end": 40.08
+},
+{
+"text": "diferença?",
+"start": 40.08,
+"end": 40.56
+},
+{
+"text": "O",
+"start": 40.78,
+"end": 40.99
+},
+{
+"text": "primeiro",
+"start": 41.04,
+"end": 41.2
+},
+{
+"text": "vendedor",
+"start": 41.44,
+"end": 41.92
+},
+{
+"text": "estava",
+"start": 41.94,
+"end": 42.45
+},
+{
+"text": "apenas",
+"start": 42.48,
+"end": 42.64
+},
+{
+"text": "preocupado",
+"start": 42.8,
+"end": 43.28
+},
+{
+"text": "em",
+"start": 43.3,
+"end": 43.38
+},
+{
+"text": "vender",
+"start": 43.31,
+"end": 43.76
+},
+{
+"text": "a",
+"start": 43.76,
+"end": 43.84
+},
+{
+"text": "remodelação.",
+"start": 43.84,
+"end": 44.64
+},
+{
+"text": "E",
+"start": 44.83,
+"end": 44.91
+},
+{
+"text": "o",
+"start": 44.88,
+"end": 45.04
+},
+{
+"text": "segundo,",
+"start": 45.04,
+"end": 45.36
+},
+{
+"text": "percebeu",
+"start": 45.6,
+"end": 46.24
+},
+{
+"text": "que",
+"start": 46.24,
+"end": 46.4
+},
+{
+"text": "o",
+"start": 46.4,
+"end": 46.56
+},
+{
+"text": "problema",
+"start": 46.56,
+"end": 46.88
+},
+{
+"text": "era",
+"start": 47.04,
+"end": 47.2
+},
+{
+"text": "a",
+"start": 47.28,
+"end": 47.36
+},
+{
+"text": "produtividade",
+"start": 47.36,
+"end": 48.24
+},
+{
+"text": "e,",
+"start": 48.25,
+"end": 48.51
+},
+{
+"text": "em",
+"start": 48.51,
+"end": 48.63
+},
+{
+"text": "vez",
+"start": 48.63,
+"end": 48.82
+},
+{
+"text": "de",
+"start": 48.82,
+"end": 48.94
+},
+{
+"text": "vender",
+"start": 48.94,
+"end": 49.31
+},
+{
+"text": "apenas",
+"start": 49.31,
+"end": 49.68
+},
+{
+"text": "a",
+"start": 49.68,
+"end": 49.81
+},
+{
+"text": "obra,",
+"start": 49.81,
+"end": 50.27
+},
+{
+"text": "ele",
+"start": 50.27,
+"end": 50.46
+},
+{
+"text": "vendeu",
+"start": 50.46,
+"end": 50.83
+},
+{
+"text": "a",
+"start": 50.83,
+"end": 50.95
+},
+{
+"text": "solução",
+"start": 50.95,
+"end": 51.39
+},
+{
+"text": "que",
+"start": 51.39,
+"end": 51.57
+},
+{
+"text": "melhoraria",
+"start": 51.57,
+"end": 52.19
+},
+{
+"text": "o",
+"start": 52.19,
+"end": 52.62
+},
+{
+"text": "negócio.",
+"start": 52.62,
+"end": 53.12
+},
+{
+"text": "E",
+"start": 53.68,
+"end": 53.84
+},
+{
+"text": "isto",
+"start": 53.84,
+"end": 54.08
+},
+{
+"text": "é",
+"start": 54.24,
+"end": 54.32
+},
+{
+"text": "o",
+"start": 54.32,
+"end": 54.4
+},
+{
+"text": "que",
+"start": 54.4,
+"end": 54.56
+},
+{
+"text": "separa",
+"start": 54.56,
+"end": 54.88
+},
+{
+"text": "um",
+"start": 54.96,
+"end": 55.04
+},
+{
+"text": "vendedor",
+"start": 55.12,
+"end": 55.52
+},
+{
+"text": "comum",
+"start": 55.52,
+"end": 55.76
+},
+{
+"text": "de",
+"start": 56.16,
+"end": 56.32
+},
+{
+"text": "um",
+"start": 56.33,
+"end": 56.41
+},
+{
+"text": "profissional",
+"start": 56.34,
+"end": 56.96
+},
+{
+"text": "estratégico.",
+"start": 56.96,
+"end": 57.92
+},
+{
+"text": "Não",
+"start": 57.92,
+"end": 58.08
+},
+{
+"text": "vendas",
+"start": 58.24,
+"end": 58.72
+},
+{
+"text": "soluções",
+"start": 58.96,
+"end": 59.44
+},
+{
+"text": "antes",
+"start": 59.68,
+"end": 59.84
+},
+{
+"text": "de",
+"start": 60.0,
+"end": 60.16
+},
+{
+"text": "compreenderes",
+"start": 60.16,
+"end": 60.48
+},
+{
+"text": "o",
+"start": 60.49,
+"end": 61.01
+},
+{
+"text": "real",
+"start": 61.04,
+"end": 61.36
+},
+{
+"text": "problema.",
+"start": 61.36,
+"end": 61.92
+},
+{
+"text": "E",
+"start": 62.08,
+"end": 62.32
+},
+{
+"text": "guarda",
+"start": 62.32,
+"end": 62.64
+},
+{
+"text": "isto,",
+"start": 62.8,
+"end": 63.2
+},
+{
+"text": "quem",
+"start": 63.2,
+"end": 63.52
+},
+{
+"text": "compreende",
+"start": 63.52,
+"end": 64.08
+},
+{
+"text": "melhor",
+"start": 64.08,
+"end": 64.4
+},
+{
+"text": "o",
+"start": 64.4,
+"end": 64.48
+},
+{
+"text": "problema",
+"start": 64.56,
+"end": 64.88
+},
+{
+"text": "tem",
+"start": 65.28,
+"end": 65.44
+},
+{
+"text": "vantagens",
+"start": 65.6,
+"end": 66.24
+},
+{
+"text": "enormes",
+"start": 66.24,
+"end": 66.8
+},
+{
+"text": "na",
+"start": 66.8,
+"end": 66.96
+},
+{
+"text": "hora",
+"start": 66.96,
+"end": 67.12
+},
+{
+"text": "da",
+"start": 67.2,
+"end": 67.28
+},
+{
+"text": "negociação.",
+"start": 67.36,
+"end": 67.76
+}
+]
