@@ -29,7 +29,7 @@ const KEYS: { at: number; cam: Cam; d: number }[] = [
   { at: 26.6, cam: CAM.rightClose, d: 0.7 }, // a pergunta
   { at: 30.35, cam: CAM.med, d: 0.5 }, // "E o cliente responde"
   { at: 31.4, cam: CORNER, d: 0.6 }, // freeze → canto
-  { at: 37.7, cam: CAM.med, d: 0.6 }, // volta
+  { at: 37.55, cam: CAM.med, d: 0.5 }, // volta (já ao vivo)
   { at: 39.2, cam: CAM.xcu, d: 0.35 }, // "percebes a diferença?"
   { at: 40.6, cam: CAM.splitL, d: 0.7 }, // split screen
   { at: 53.45, cam: CAM.close, d: 0.7 }, // clímax
@@ -46,7 +46,9 @@ const camAt = (to: number): Cam => {
   const p = MOVE(Math.min(1, Math.max(0, (to - M(cur.at)) / cur.d)));
   return { s: lerp(prev.s, cur.cam.s, p), fx: lerp(prev.fx, cur.cam.fx, p), fy: lerp(prev.fy, cur.cam.fy, p) };
 };
-const FREEZE: [number, number] = [31.4, 37.7];
+// o recorte descongela ainda no canto, no fim de "organizado", e só depois volta ao centro ao vivo
+// (os cortes deixaram só 0,1 s até "E então": uma transição cruzada a meio do movimento dava rosto duplo)
+const FREEZE: [number, number] = [31.4, 37.35];
 const PIPWIN: [number, number] = [11.4, 15.75];
 const inWin = (to: number, w: [number, number]) => to >= M(w[0]) && to < M(w[1]);
 
@@ -192,22 +194,12 @@ export const Video21: React.FC<Video21Props> = ({ music }) => {
   const pipP = win(to, PIPWIN[0] + 0.55, PIPWIN[1], 0.35, 0.3);
   const freezeF = Math.round(M(FREEZE[0]) * fps);
   const rim = win(to, FREEZE[0] + 0.2, FREEZE[1], 0.4, 0.3);
-  const unfreeze = interpolate(to, [M(FREEZE[1]), M(FREEZE[1]) + 0.25], [0, 1], clamp);
   return (
     <AbsoluteFill style={{ background: T.ink }}>
       <Background cam={cam} dark={dark} />
       <Climax to={to} layer="behind" />
-      {/* sujeito: ao vivo, ou congelado no freeze (com transição para o vivo ao voltar) */}
-      {inWin(to, FREEZE) ? (
-        <Subject cam={cam} frozen={freezeF} rim={rim} opacity={1} />
-      ) : unfreeze > 0 && unfreeze < 1 ? (
-        <>
-          <Subject cam={cam} frozen={freezeF} rim={0} opacity={1 - unfreeze} />
-          <Subject cam={cam} frozen={null} rim={0} opacity={unfreeze} />
-        </>
-      ) : (
-        <Subject cam={cam} frozen={null} rim={0} opacity={1 - pipP} />
-      )}
+      {/* sujeito: ao vivo, ou congelado no freeze */}
+      <Subject cam={cam} frozen={inWin(to, FREEZE) ? freezeF : null} rim={rim} opacity={1 - pipP} />
       <Pip p={pipP} />
       <Hook to={to} />
       <Chapter to={to} at={10.0} until={15.75} n="01" title="A situação" />
