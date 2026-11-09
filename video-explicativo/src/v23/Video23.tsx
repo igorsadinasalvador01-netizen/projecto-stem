@@ -100,10 +100,11 @@ const Person: React.FC<{ to: number; frame: number; bw: number }> = ({ to, frame
   const s = st.s;
   const FACE = faceAt(Math.min(frame, OUT_FRAMES - 2));
   const z = punch(to) * (1 + zoomAt(to));
-  const W = s * z;
+  // 6% de margem para o seguimento do rosto + a imagem nunca deixa de cobrir o quadrado
+  const W = s * z * 1.06;
   const H = (W * 1920) / 1080;
-  const left = s / 2 - (FACE.x / 1080) * W;
-  const top = 0.42 * s - (FACE.y / 1080) * W;
+  const left = Math.min(0, Math.max(s - W, s / 2 - (FACE.x / 1080) * W));
+  const top = Math.min(0, Math.max(s - H, 0.42 * s - (FACE.y / 1080) * W));
   const r = Math.max(16, s * 0.045);
   const last = OUT_FRAMES - 2;
   const v = <OffthreadVideo src={staticFile("v23/plate_c.mp4")} muted style={{ width: W, height: H }} />;
@@ -352,7 +353,6 @@ export const Video23: React.FC<Video23Props> = ({ music }) => {
     <AbsoluteFill style={{ background: C.night }}>
       <AbsoluteFill style={{ transform: `scale(${stage})`, transformOrigin: "50% 46%" }}>
         <Scenery to={to} px={px} bw={bw} />
-        <Person to={to} frame={frame} bw={bw} />
         <Hook to={to} />
         <Chapter
           to={to}
@@ -369,6 +369,8 @@ export const Video23: React.FC<Video23Props> = ({ music }) => {
         <ErrorScene to={to} />
         <Lesson to={to} />
         <Keep to={to} />
+        {/* a pessoa por cima dos painéis: ao mudar de sítio nunca passa por baixo do vidro fosco */}
+        <Person to={to} frame={frame} bw={bw} />
         <Ending to={to} fps={fps} />
       </AbsoluteFill>
       <Tracker to={to} />
