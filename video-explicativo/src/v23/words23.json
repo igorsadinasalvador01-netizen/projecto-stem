@@ -1,0 +1,752 @@
+[
+{
+"text": "Dois",
+"start": 0.6,
+"end": 0.85
+},
+{
+"text": "centímetros",
+"start": 0.88,
+"end": 1.6
+},
+{
+"text": "parecem",
+"start": 1.6,
+"end": 2.16
+},
+{
+"text": "insignificantes",
+"start": 2.16,
+"end": 2.88
+},
+{
+"text": "em",
+"start": 2.9,
+"end": 2.98
+},
+{
+"text": "uma",
+"start": 3.2,
+"end": 3.28
+},
+{
+"text": "obra,",
+"start": 3.44,
+"end": 3.92
+},
+{
+"text": "mas",
+"start": 4.0,
+"end": 4.08
+},
+{
+"text": "você",
+"start": 4.16,
+"end": 4.24
+},
+{
+"text": "sabe",
+"start": 4.32,
+"end": 4.4
+},
+{
+"text": "o",
+"start": 4.56,
+"end": 4.64
+},
+{
+"text": "quanto",
+"start": 4.64,
+"end": 4.72
+},
+{
+"text": "isso",
+"start": 4.88,
+"end": 4.96
+},
+{
+"text": "pode",
+"start": 5.12,
+"end": 5.2
+},
+{
+"text": "custar?",
+"start": 5.36,
+"end": 6.26
+},
+{
+"text": "Imagine,",
+"start": 6.86,
+"end": 7.12
+},
+{
+"text": "uma",
+"start": 7.56,
+"end": 7.64
+},
+{
+"text": "equipe",
+"start": 7.68,
+"end": 8.08
+},
+{
+"text": "entrou",
+"start": 8.16,
+"end": 8.32
+},
+{
+"text": "para",
+"start": 8.48,
+"end": 8.64
+},
+{
+"text": "fazer",
+"start": 8.64,
+"end": 8.8
+},
+{
+"text": "o",
+"start": 8.8,
+"end": 8.88
+},
+{
+"text": "trabalho",
+"start": 8.88,
+"end": 9.2
+},
+{
+"text": "de",
+"start": 9.2,
+"end": 9.36
+},
+{
+"text": "revestimento",
+"start": 9.36,
+"end": 10.16
+},
+{
+"text": "de",
+"start": 10.16,
+"end": 10.32
+},
+{
+"text": "uma",
+"start": 10.32,
+"end": 10.48
+},
+{
+"text": "casa",
+"start": 10.48,
+"end": 10.72
+},
+{
+"text": "de",
+"start": 10.72,
+"end": 10.88
+},
+{
+"text": "banho",
+"start": 10.88,
+"end": 11.44
+},
+{
+"text": "e",
+"start": 11.6,
+"end": 11.68
+},
+{
+"text": "as",
+"start": 11.68,
+"end": 11.84
+},
+{
+"text": "medições",
+"start": 11.84,
+"end": 12.24
+},
+{
+"text": "foram",
+"start": 12.4,
+"end": 12.64
+},
+{
+"text": "feitas",
+"start": 12.64,
+"end": 12.88
+},
+{
+"text": "às",
+"start": 12.89,
+"end": 13.08
+},
+{
+"text": "pressas.",
+"start": 13.15,
+"end": 13.84
+},
+{
+"text": "Ninguém",
+"start": 13.84,
+"end": 14.08
+},
+{
+"text": "confirmou",
+"start": 14.47,
+"end": 14.8
+},
+{
+"text": "devidamente",
+"start": 14.96,
+"end": 15.44
+},
+{
+"text": "as",
+"start": 15.77,
+"end": 15.92
+},
+{
+"text": "dimensões.",
+"start": 15.92,
+"end": 16.82
+},
+{
+"text": "Quando",
+"start": 18.06,
+"end": 18.16
+},
+{
+"text": "chega",
+"start": 18.16,
+"end": 18.48
+},
+{
+"text": "a",
+"start": 18.48,
+"end": 18.56
+},
+{
+"text": "fase",
+"start": 18.64,
+"end": 18.88
+},
+{
+"text": "da",
+"start": 18.88,
+"end": 19.04
+},
+{
+"text": "instalação,",
+"start": 19.04,
+"end": 19.68
+},
+{
+"text": "descobrem",
+"start": 19.84,
+"end": 20.4
+},
+{
+"text": "que",
+"start": 20.56,
+"end": 20.72
+},
+{
+"text": "existe",
+"start": 20.72,
+"end": 21.12
+},
+{
+"text": "incompatibilidade",
+"start": 21.12,
+"end": 21.92
+},
+{
+"text": "com",
+"start": 22.0,
+"end": 22.16
+},
+{
+"text": "os",
+"start": 22.16,
+"end": 22.32
+},
+{
+"text": "elementos",
+"start": 22.32,
+"end": 22.88
+},
+{
+"text": "previstos",
+"start": 23.0,
+"end": 23.6
+},
+{
+"text": "e",
+"start": 23.68,
+"end": 23.99
+},
+{
+"text": "agora",
+"start": 23.99,
+"end": 24.3
+},
+{
+"text": "é",
+"start": 24.3,
+"end": 24.42
+},
+{
+"text": "preciso",
+"start": 24.42,
+"end": 24.97
+},
+{
+"text": "cortar,",
+"start": 24.97,
+"end": 25.43
+},
+{
+"text": "adaptar,",
+"start": 25.81,
+"end": 26.32
+},
+{
+"text": "comprar",
+"start": 26.58,
+"end": 26.96
+},
+{
+"text": "materiais",
+"start": 26.96,
+"end": 27.36
+},
+{
+"text": "adicionais",
+"start": 27.52,
+"end": 28.16
+},
+{
+"text": "e",
+"start": 28.48,
+"end": 28.6
+},
+{
+"text": "corrigir",
+"start": 28.6,
+"end": 29.32
+},
+{
+"text": "todo",
+"start": 29.32,
+"end": 29.48
+},
+{
+"text": "o",
+"start": 29.48,
+"end": 29.56
+},
+{
+"text": "trabalho.",
+"start": 29.64,
+"end": 30.44
+},
+{
+"text": "O",
+"start": 31.02,
+"end": 31.099999999999998
+},
+{
+"text": "problema",
+"start": 31.08,
+"end": 31.4
+},
+{
+"text": "não",
+"start": 31.56,
+"end": 31.8
+},
+{
+"text": "começou",
+"start": 31.8,
+"end": 32.28
+},
+{
+"text": "na",
+"start": 32.28,
+"end": 32.44
+},
+{
+"text": "execução,",
+"start": 32.44,
+"end": 33.16
+},
+{
+"text": "começou",
+"start": 33.16,
+"end": 33.64
+},
+{
+"text": "muito",
+"start": 33.64,
+"end": 33.96
+},
+{
+"text": "antes,",
+"start": 33.96,
+"end": 34.36
+},
+{
+"text": "na",
+"start": 34.63,
+"end": 34.72
+},
+{
+"text": "falta",
+"start": 34.72,
+"end": 34.96
+},
+{
+"text": "de",
+"start": 34.96,
+"end": 35.12
+},
+{
+"text": "rigor",
+"start": 35.12,
+"end": 35.44
+},
+{
+"text": "da",
+"start": 35.67,
+"end": 35.75
+},
+{
+"text": "medição",
+"start": 35.84,
+"end": 36.32
+},
+{
+"text": "e",
+"start": 36.33,
+"end": 36.82
+},
+{
+"text": "na",
+"start": 36.82,
+"end": 36.93
+},
+{
+"text": "falta",
+"start": 36.96,
+"end": 37.28
+},
+{
+"text": "de",
+"start": 37.28,
+"end": 37.36
+},
+{
+"text": "verificação.",
+"start": 37.36,
+"end": 38.26
+},
+{
+"text": "E",
+"start": 38.67,
+"end": 38.730000000000004
+},
+{
+"text": "é",
+"start": 38.73,
+"end": 38.809999999999995
+},
+{
+"text": "aqui",
+"start": 38.88,
+"end": 39.04
+},
+{
+"text": "onde",
+"start": 39.05,
+"end": 39.66
+},
+{
+"text": "muitos",
+"start": 39.68,
+"end": 40.0
+},
+{
+"text": "profissionais",
+"start": 40.0,
+"end": 40.56
+},
+{
+"text": "cometem",
+"start": 40.72,
+"end": 41.2
+},
+{
+"text": "um",
+"start": 41.2,
+"end": 41.28
+},
+{
+"text": "erro,",
+"start": 41.28,
+"end": 41.6
+},
+{
+"text": "acreditam",
+"start": 41.83,
+"end": 42.32
+},
+{
+"text": "que",
+"start": 42.48,
+"end": 42.64
+},
+{
+"text": "a",
+"start": 42.79,
+"end": 42.87
+},
+{
+"text": "produtividade",
+"start": 42.8,
+"end": 43.52
+},
+{
+"text": "está",
+"start": 43.76,
+"end": 44.08
+},
+{
+"text": "em",
+"start": 44.25,
+"end": 44.4
+},
+{
+"text": "trabalhar",
+"start": 44.4,
+"end": 44.96
+},
+{
+"text": "depressa.",
+"start": 44.96,
+"end": 45.86
+},
+{
+"text": "Na",
+"start": 46.72,
+"end": 46.78
+},
+{
+"text": "engenharia",
+"start": 46.78,
+"end": 47.44
+},
+{
+"text": "civil,",
+"start": 47.44,
+"end": 47.84
+},
+{
+"text": "produtividade",
+"start": 48.05,
+"end": 48.64
+},
+{
+"text": "também",
+"start": 48.8,
+"end": 49.12
+},
+{
+"text": "significa",
+"start": 49.12,
+"end": 49.52
+},
+{
+"text": "evitar",
+"start": 49.9,
+"end": 50.3
+},
+{
+"text": "retrabalhos,",
+"start": 50.35,
+"end": 51.18
+},
+{
+"text": "porque",
+"start": 51.18,
+"end": 51.34
+},
+{
+"text": "uma",
+"start": 51.5,
+"end": 51.66
+},
+{
+"text": "medição",
+"start": 51.66,
+"end": 52.14
+},
+{
+"text": "bem",
+"start": 52.14,
+"end": 52.3
+},
+{
+"text": "feita",
+"start": 52.3,
+"end": 52.62
+},
+{
+"text": "pode",
+"start": 52.62,
+"end": 52.78
+},
+{
+"text": "poupar",
+"start": 52.94,
+"end": 53.42
+},
+{
+"text": "tempo,",
+"start": 53.42,
+"end": 53.82
+},
+{
+"text": "dinheiro",
+"start": 53.98,
+"end": 54.62
+},
+{
+"text": "e",
+"start": 54.73,
+"end": 54.86
+},
+{
+"text": "recursos.",
+"start": 54.86,
+"end": 55.76
+},
+{
+"text": "E",
+"start": 56.79,
+"end": 56.87
+},
+{
+"text": "guarda",
+"start": 56.8,
+"end": 57.12
+},
+{
+"text": "isto,",
+"start": 57.2,
+"end": 57.6
+},
+{
+"text": "às",
+"start": 57.8,
+"end": 58.0
+},
+{
+"text": "vezes,",
+"start": 58.0,
+"end": 58.48
+},
+{
+"text": "o",
+"start": 58.62,
+"end": 58.699999999999996
+},
+{
+"text": "maior",
+"start": 58.64,
+"end": 58.96
+},
+{
+"text": "custo",
+"start": 58.96,
+"end": 59.28
+},
+{
+"text": "de",
+"start": 59.28,
+"end": 59.4
+},
+{
+"text": "uma",
+"start": 59.4,
+"end": 59.52
+},
+{
+"text": "obra",
+"start": 59.52,
+"end": 59.84
+},
+{
+"text": "não",
+"start": 60.23,
+"end": 60.32
+},
+{
+"text": "são",
+"start": 60.32,
+"end": 60.56
+},
+{
+"text": "os",
+"start": 60.56,
+"end": 60.72
+},
+{
+"text": "materiais,",
+"start": 60.72,
+"end": 61.52
+},
+{
+"text": "mas",
+"start": 61.52,
+"end": 61.76
+},
+{
+"text": "sim",
+"start": 61.76,
+"end": 62.08
+},
+{
+"text": "um",
+"start": 62.23,
+"end": 62.32
+},
+{
+"text": "erro",
+"start": 62.32,
+"end": 62.72
+},
+{
+"text": "que",
+"start": 62.72,
+"end": 62.88
+},
+{
+"text": "ninguém",
+"start": 62.88,
+"end": 63.12
+},
+{
+"text": "detectou",
+"start": 63.12,
+"end": 63.68
+},
+{
+"text": "a",
+"start": 63.68,
+"end": 63.76
+},
+{
+"text": "tempo.",
+"start": 63.76,
+"end": 64.08
+}
+]

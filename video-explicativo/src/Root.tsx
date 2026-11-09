@@ -36,6 +36,7 @@ import { Video20, Video20Props } from "./v20/Video20";
 import { TOTAL21, Video21, Video21Props } from "./v21/Video21";
 import { TOTAL21B, Video21b, Video21bProps } from "./v21b/Video21b";
 import { TOTAL22, Video22, Video22Props } from "./v22/Video22";
+import { TOTAL23, Video23, Video23Props } from "./v23/Video23";
 
 const FPS = 30;
 
@@ -274,6 +275,15 @@ export const RemotionRoot: React.FC = () => (
     width={1920}
     height={1080}
     defaultProps={{ music: true } satisfies Video22Props}
+  />
+  <Composition
+    id="Video23"
+    component={Video23}
+    durationInFrames={Math.round(TOTAL23 * FPS)}
+    fps={FPS}
+    width={1920}
+    height={1080}
+    defaultProps={{ music: true } satisfies Video23Props}
   />
   </>
 );
