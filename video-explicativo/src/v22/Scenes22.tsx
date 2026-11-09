@@ -408,8 +408,14 @@ export const Fail: React.FC<P> = ({ to }) => {
           </div>
           <Orb d="tag" color={C.red} size={84} p={k(to, 43.31, 0.5)} />
         </div>
-        <div style={{ marginTop: 10 }}>
-          <Big text="PREOCUPADO" size={168} p={k(to, 42.8, 0.45)} mode="slam" />
+        {/* "O PRIMEIRO" ocupa o lugar até entrar PREOCUPADO */}
+        <div style={{ position: "relative", marginTop: 10, height: 168 }}>
+          <div style={{ position: "absolute", left: 0, top: 0, opacity: 1 - k(to, 42.8, 0.18), transform: `translateY(${-24 * k(to, 42.8, 0.25)}px)` }}>
+            <Big text="O PRIMEIRO" size={168} fill={C.ink2} p={k(to, 41.04, 0.45)} />
+          </div>
+          <div style={{ position: "absolute", left: 0, top: 0 }}>
+            <Big text="PREOCUPADO" size={168} p={k(to, 42.8, 0.45)} mode="slam" />
+          </div>
         </div>
         <Big text="EM VENDER" size={168} fill={C.red} p={k(to, 43.31, 0.45)} mode="slam" />
         <Wide size={30} color={C.ink2} p={k(to, 43.76)}>
@@ -450,10 +456,16 @@ export const Solution: React.FC<P> = ({ to }) => {
       <div style={{ position: "absolute", left: 56, top: 44, right: 56, display: "flex", flexDirection: "column" }}>
         <div style={{ display: "flex", gap: 26, alignItems: "center" }}>
           <Tag color={C.sky} text="VENDEDOR 02" p={k(to, 45.04)} />
-          <Mono p={k(to, 45.6)}>percebeu que o problema era a</Mono>
+          <Mono p={k(to, 46.24)}>que o problema era a</Mono>
         </div>
-        <div style={{ marginTop: 6 }}>
-          <Big text="PRODUTIVIDADE" size={190} fill={C.blue} p={k(to, 47.36, 0.5)} mode="slam" />
+        {/* "PERCEBEU" ocupa o lugar até entrar PRODUTIVIDADE (o painel nunca fica vazio) */}
+        <div style={{ position: "relative", marginTop: 6, height: 190 }}>
+          <div style={{ position: "absolute", left: 0, top: 0, opacity: 1 - k(to, 47.36, 0.18), transform: `translateY(${-24 * k(to, 47.36, 0.25)}px)` }}>
+            <Big text="PERCEBEU" size={190} fill={C.sky} p={k(to, 45.6, 0.45)} />
+          </div>
+          <div style={{ position: "absolute", left: 0, top: 0 }}>
+            <Big text="PRODUTIVIDADE" size={190} fill={C.blue} p={k(to, 47.36, 0.5)} mode="slam" />
+          </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 30, marginTop: 4 }}>
           <Mono p={k(to, 48.63)}>em vez de vender</Mono>

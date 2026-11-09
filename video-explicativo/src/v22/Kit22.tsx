@@ -41,7 +41,6 @@ export const Glass: React.FC<{
         width: w,
         height: h,
         borderRadius: r,
-        overflow: "hidden",
         opacity: op * (1 - 0.45 * dim),
         transform: `translateY(${(1 - p) * 30}px) scale(${0.93 + 0.07 * p})`,
         ...GLASS,
