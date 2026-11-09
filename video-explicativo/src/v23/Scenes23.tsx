@@ -1,7 +1,7 @@
 import React from "react";
 import { Easing, interpolate } from "remotion";
 import { clamp } from "../kit/Kit";
-import { C, OUT } from "../v22/theme22";
+import { C, OUT } from "./theme23";
 import { M } from "./cuts23";
 import { Big, Glass, Ico, k, kout, Mono, Orb, Tag, Wide, win } from "./Kit23";
 
@@ -29,12 +29,12 @@ const Ruler: React.FC<{ to: number }> = ({ to }) => {
   const PX = 150; // px por cm
   return (
     <svg width={400} height={150} viewBox="0 0 400 150" style={{ overflow: "visible" }}>
-      <rect x={10} y={56} width={380} height={64} rx={8} fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth={2} opacity={p} />
+      <rect x={10} y={56} width={380} height={64} rx={8} fill="none" stroke="rgba(11,24,48,0.39)" strokeWidth={2} opacity={p} />
       {Array.from({ length: 25 }).map((_, i) => {
         const x = 20 + i * (PX / 10);
         const L = i % 10 === 0 ? 30 : i % 5 === 0 ? 20 : 11;
         const show = Math.min(1, Math.max(0, p * 40 - i * 0.6));
-        return <line key={i} x1={x} y1={56} x2={x} y2={56 + L} stroke="rgba(255,255,255,0.8)" strokeWidth={i % 10 === 0 ? 2.2 : 1.4} opacity={show} />;
+        return <line key={i} x1={x} y1={56} x2={x} y2={56 + L} stroke="rgba(11,24,48,0.56)" strokeWidth={i % 10 === 0 ? 2.2 : 1.4} opacity={show} />;
       })}
       {[0, 1, 2].map((n) => (
         <text key={n} x={20 + n * PX} y={110} fill={C.ink2} fontFamily={C.mono} fontSize={16} textAnchor="middle" opacity={p}>
@@ -114,7 +114,7 @@ const Wall: React.FC<{ to: number; w: number; h: number; tilesAt: number; dims?:
   const eh = th * 2.4;
   return (
     <svg width={w + 80} height={h + 80} viewBox={`-40 -40 ${w + 80} ${h + 80}`} style={{ overflow: "visible" }}>
-      <rect x={0} y={0} width={w} height={h} fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth={2.4} />
+      <rect x={0} y={0} width={w} height={h} fill="none" stroke="rgba(11,24,48,0.42)" strokeWidth={2.4} />
       {Array.from({ length: COLS * ROWS }).map((_, i) => {
         const r = Math.floor(i / COLS);
         const c = i % COLS;
@@ -130,7 +130,7 @@ const Wall: React.FC<{ to: number; w: number; h: number; tilesAt: number; dims?:
             height={th - 8}
             rx={3}
             fill="none"
-            stroke={clash > 0.5 && c >= 2 && c <= 4 && r >= 2 && r <= 5 ? C.red : "rgba(255,255,255,0.75)"}
+            stroke={clash > 0.5 && c >= 2 && c <= 4 && r >= 2 && r <= 5 ? C.red : "rgba(11,24,48,0.52)"}
             strokeWidth={1.8}
             opacity={p}
             transform={`translate(0 ${(1 - p) * -12})`}
@@ -139,7 +139,7 @@ const Wall: React.FC<{ to: number; w: number; h: number; tilesAt: number; dims?:
       })}
       {element > 0 && (
         <g opacity={element}>
-          <rect x={ex} y={ey} width={ew} height={eh} rx={10} fill="rgba(5,10,20,0.85)" stroke={clash > 0.5 ? C.red : C.sky} strokeWidth={3} />
+          <rect x={ex} y={ey} width={ew} height={eh} rx={10} fill="rgba(255,255,255,0.95)" stroke={clash > 0.5 ? C.red : C.sky} strokeWidth={3} />
           <text x={ex + ew / 2} y={ey + eh / 2 + 8} fill={clash > 0.5 ? C.red : C.sky} fontFamily={C.mono} fontSize={18} textAnchor="middle" letterSpacing="2">
             ELEMENTO
           </text>
@@ -228,7 +228,7 @@ export const Confirm: React.FC<P> = ({ to }) => {
           devidamente
         </Wide>
         <div style={{ marginTop: 40, display: "flex", alignItems: "center", gap: 28, opacity: k(to, 15.77), transform: `translateX(${(1 - k(to, 15.77)) * 40}px)` }}>
-          <div style={{ position: "relative", width: 96, height: 96, borderRadius: 18, border: "3px solid rgba(255,255,255,0.7)" }}>
+          <div style={{ position: "relative", width: 96, height: 96, borderRadius: 18, border: "3px solid rgba(11,24,48,0.49)" }}>
             {x > 0 && <div style={{ position: "absolute", inset: -10, transform: `scale(${1.6 - 0.6 * x})`, opacity: Math.min(1, x * 2) }}><Ico d="x" size={116} color={C.red} sw={3.2} /></div>}
           </div>
           <Big text="AS DIMENSÕES" size={96} p={k(to, 15.77, 0.4)} />
@@ -280,7 +280,7 @@ export const Install: React.FC<P> = ({ to }) => {
             const p = interpolate(to, [M(at), M(at) + 0.42], [0, 1], { easing: Easing.out(Easing.back(1.4)), ...clamp });
             const last = i === REWORK.length - 1;
             return (
-              <div key={txt} style={{ display: "flex", alignItems: "center", gap: 22, height: 132, padding: "0 26px", borderRadius: 22, border: `1.5px solid ${last ? "rgba(255,75,75,0.55)" : "rgba(255,255,255,0.22)"}`, opacity: Math.min(1, p * 1.6), transform: `translateX(${(1 - p) * 120}px) scale(${0.9 + 0.1 * Math.min(1, p)})` }}>
+              <div key={txt} style={{ display: "flex", alignItems: "center", gap: 22, height: 132, padding: "0 26px", borderRadius: 22, border: `1.5px solid ${last ? "rgba(224,58,58,0.5)" : "rgba(11,24,48,0.15)"}`, opacity: Math.min(1, p * 1.6), transform: `translateX(${(1 - p) * 120}px) scale(${0.9 + 0.1 * Math.min(1, p)})` }}>
                 <Orb d={ic} color={C.red} size={72} p={Math.min(1, p)} />
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <Big text={txt} size={last ? 84 : 74} fill={last ? C.red : C.ink} p={1} />
@@ -326,11 +326,11 @@ export const Cause: React.FC<P> = ({ to }) => {
       {/* linha do processo */}
       <div style={{ position: "absolute", left: 0, top: 470, width: 900, height: 260 }}>
         <svg width={900} height={120} viewBox="0 0 900 120" style={{ position: "absolute", left: 0, top: 0 }}>
-          <path {...draw(prog(to, 31.3, 0.8))} d={`M${NX[0]} 60 H${NX[2]}`} stroke="rgba(255,255,255,0.45)" strokeWidth={3} />
+          <path {...draw(prog(to, 31.3, 0.8))} d={`M${NX[0]} 60 H${NX[2]}`} stroke="rgba(11,24,48,0.32)" strokeWidth={3} />
           {NX.map((x, i) => {
             const p = k(to, 31.3 + i * 0.12, 0.4);
-            const col2 = bad[i] > 0.5 ? C.red : "rgba(255,255,255,0.85)";
-            return <circle key={i} cx={x} cy={60} r={22 * p} fill="rgba(5,10,20,0.9)" stroke={col2} strokeWidth={3.5} />;
+            const col2 = bad[i] > 0.5 ? C.red : "rgba(11,24,48,0.59)";
+            return <circle key={i} cx={x} cy={60} r={22 * p} fill="rgba(255,255,255,0.95)" stroke={col2} strokeWidth={3.5} />;
           })}
           {mk > 0 && <circle cx={mx} cy={60} r={36 + 3 * Math.sin(to * 7)} fill="none" stroke={C.red} strokeWidth={3} opacity={mk} />}
         </svg>
@@ -397,7 +397,7 @@ export const Lesson: React.FC<P> = ({ to }) => {
           {SAVE.map(([at, txt, ic]) => {
             const p = interpolate(to, [M(at), M(at) + 0.42], [0, 1], { easing: Easing.out(Easing.back(1.5)), ...clamp });
             return (
-              <div key={txt} style={{ display: "flex", alignItems: "center", gap: 16, height: 112, padding: "0 28px 0 18px", borderRadius: 22, border: "1.5px solid rgba(46,219,127,0.5)", opacity: Math.min(1, p * 1.6), transform: `translateY(${(1 - p) * 40}px) scale(${0.88 + 0.12 * Math.min(1, p)})` }}>
+              <div key={txt} style={{ display: "flex", alignItems: "center", gap: 16, height: 112, padding: "0 28px 0 18px", borderRadius: 22, border: "1.5px solid rgba(18,163,90,0.45)", opacity: Math.min(1, p * 1.6), transform: `translateY(${(1 - p) * 40}px) scale(${0.88 + 0.12 * Math.min(1, p)})` }}>
                 <Orb d={ic} color={C.green} size={64} p={Math.min(1, p)} />
                 <Big text={txt} size={74} p={1} />
               </div>

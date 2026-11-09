@@ -3,7 +3,7 @@ import { AbsoluteFill, Audio, Easing, Freeze, Img, interpolate, OffthreadVideo, 
 import { PerfilCard } from "../components/PerfilFinal";
 import { loadFonts } from "../fonts";
 import { clamp } from "../kit/Kit";
-import { C, loadFonts22, MOVE, OUT } from "../v22/theme22";
+import { C, loadFonts22, MOVE, OUT } from "./theme23";
 import { M, OUT_FRAMES, OUT_LEN, punch } from "./cuts23";
 import HEAD from "./head23.json";
 import { Big, Glass, GLASS, k, Mono, Wide } from "./Kit23";
@@ -84,7 +84,7 @@ const Scenery: React.FC<{ to: number; px: number; bw: number }> = ({ to, px, bw 
   const sc = 1.0 + 0.015 * Math.sin(to * 0.031);
   return (
     <AbsoluteFill style={{ filter: bw > 0.001 ? `grayscale(${bw}) brightness(${1 - 0.12 * bw}) contrast(${1 + 0.1 * bw})` : undefined }}>
-      <Img src={staticFile("v22/scene.png")} style={{ position: "absolute", left: -96, top: -54, width: 2112, height: 1188, transform: `translate(${dx}px, ${dy}px) scale(${sc})` }} />
+      <Img src={staticFile("v23/scene_branco.png")} style={{ position: "absolute", left: -96, top: -54, width: 2112, height: 1188, transform: `translate(${dx}px, ${dy}px) scale(${sc})` }} />
     </AbsoluteFill>
   );
 };
@@ -133,9 +133,9 @@ const Person: React.FC<{ to: number; frame: number; bw: number }> = ({ to, frame
       }}
     >
       <div style={{ position: "absolute", left: 12, top: 12, width: s, height: s, borderRadius: r, overflow: "hidden", background: "#0B0F17" }}>
-        <div style={{ position: "absolute", left, top, filter: `contrast(${1.05 + 0.15 * bw}) saturate(${1.06 * (1 - bw)}) brightness(${1 - 0.04 * bw})` }}>{vid}</div>
+        <div style={{ position: "absolute", left, top, filter: `contrast(${1.05 + 0.15 * bw}) saturate(${1.06 * (1 - bw)}) brightness(${1.05 - 0.07 * bw})` }}>{vid}</div>
         {handle > 0.01 && (
-          <div style={{ position: "absolute", left: 26, bottom: 26, display: "flex", alignItems: "center", gap: 12, padding: "10px 20px 10px 14px", borderRadius: 99, background: "rgba(5,10,20,0.55)", border: "1px solid rgba(255,255,255,0.3)", opacity: handle, transform: `translateY(${(1 - handle) * 16}px)` }}>
+          <div style={{ position: "absolute", left: 26, bottom: 26, display: "flex", alignItems: "center", gap: 12, padding: "10px 20px 10px 14px", borderRadius: 99, background: "rgba(255,255,255,0.82)", border: "1px solid rgba(255,255,255,0.95)", boxShadow: "0 8px 20px -10px rgba(11,24,48,0.35)", opacity: handle, transform: `translateY(${(1 - handle) * 16}px)` }}>
             <div style={{ width: 12, height: 12, borderRadius: 6, background: C.blue }} />
             <span style={{ fontFamily: C.ui, fontWeight: 700, fontSize: 26, color: C.ink }}>@sergio_salvador10</span>
           </div>
@@ -272,7 +272,7 @@ const Flashes: React.FC<{ to: number }> = ({ to }) => {
   }
   return (
     <>
-      {dip > 0.01 && <AbsoluteFill style={{ background: "rgba(0,0,0,1)", opacity: 0.32 * dip }} />}
+      {dip > 0.01 && <AbsoluteFill style={{ background: "rgba(11,24,48,1)", opacity: 0.2 * dip }} />}
       {flash > 0.01 && <AbsoluteFill style={{ background: "radial-gradient(ellipse 70% 60% at 50% 45%, rgba(255,255,255,1), rgba(255,255,255,0.35) 55%, rgba(0,0,0,0) 85%)", opacity: 0.18 * Easing.in(Easing.quad)(flash) }} />}
     </>
   );
@@ -280,9 +280,9 @@ const Flashes: React.FC<{ to: number }> = ({ to }) => {
 
 const Finish: React.FC<{ frame: number; bw: number }> = ({ frame, bw }) => (
   <>
-    <AbsoluteFill style={{ background: "radial-gradient(ellipse 78% 72% at 50% 46%, rgba(0,0,0,0) 58%, rgba(0,0,0,0.42) 100%)" }} />
-    {bw > 0.01 && <AbsoluteFill style={{ background: "radial-gradient(ellipse 70% 65% at 50% 46%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.5) 100%)", opacity: bw }} />}
-    <Img src={staticFile(`v22/grain/g${String((frame * 7) % 24).padStart(2, "0")}.png`)} style={{ position: "absolute", left: 0, top: 0, width: 1920, height: 1080, mixBlendMode: "overlay", opacity: 0.1 }} />
+    <AbsoluteFill style={{ background: "radial-gradient(ellipse 80% 75% at 50% 46%, rgba(11,24,48,0) 62%, rgba(11,24,48,0.10) 100%)" }} />
+    {bw > 0.01 && <AbsoluteFill style={{ background: "radial-gradient(ellipse 70% 65% at 50% 46%, rgba(11,24,48,0) 55%, rgba(11,24,48,0.22) 100%)", opacity: bw }} />}
+    <Img src={staticFile(`v22/grain/g${String((frame * 7) % 24).padStart(2, "0")}.png`)} style={{ position: "absolute", left: 0, top: 0, width: 1920, height: 1080, mixBlendMode: "overlay", opacity: 0.07 }} />
   </>
 );
 
@@ -330,7 +330,7 @@ const Tracker: React.FC<{ to: number }> = ({ to }) => {
     <div style={{ position: "absolute", left: 0, right: 0, top: 14, display: "flex", justifyContent: "center", opacity: fade }}>
       <div style={{ position: "relative", display: "flex", alignItems: "center", gap: 14, padding: "8px 20px 10px", borderRadius: 99, ...GLASS, overflow: "hidden" }}>
         {CHAPS.slice(1).map((c, j) => (
-          <div key={j} style={{ width: 8, height: 8, borderRadius: 4, background: j + 1 === i ? C.blue : j + 1 < i ? "rgba(255,255,255,0.75)" : "rgba(255,255,255,0.25)" }} />
+          <div key={j} style={{ width: 8, height: 8, borderRadius: 4, background: j + 1 === i ? C.blue : j + 1 < i ? "rgba(11,24,48,0.6)" : "rgba(11,24,48,0.18)" }} />
         ))}
         <div style={{ fontFamily: C.mono, fontSize: 16, letterSpacing: "0.16em", textTransform: "uppercase", color: C.ink, opacity: p, transform: `translateY(${(1 - p) * 8}px)` }}>{CHAPS[i][1]}</div>
         <div style={{ position: "absolute", left: 0, bottom: 0, height: 2, width: `${fill * 100}%`, background: C.blue }} />

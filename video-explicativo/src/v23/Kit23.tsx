@@ -1,7 +1,7 @@
 import React from "react";
 import { interpolate } from "remotion";
 import { clamp } from "../kit/Kit";
-import { C, IN, OUT } from "../v22/theme22";
+import { C, IN, OUT } from "./theme23";
 import { M } from "./cuts23";
 
 // Vídeo 23 · peças de vidro e tipografia (evolução do vídeo 22). `to` = tempo da montagem;
@@ -10,11 +10,13 @@ export const k = (to: number, at: number, d = 0.42, e = OUT) => interpolate(to, 
 export const kout = (to: number, at: number, d = 0.26) => interpolate(to, [M(at), M(at) + d], [0, 1], { easing: IN, ...clamp });
 export const win = (to: number, a: number, b: number, din = 0.42, dout = 0.26) => k(to, a, din) * (1 - kout(to, b, dout));
 
-// ——— vidro VAZIO e transparente (sem cor, sem desfoque, sem brilhos) ———
+// ——— vidro FOSCO BRANCO: branco translúcido que desfoca o cenário por trás, aresta clara e
+// sombra suave azul-escura (sem cores no vidro) ———
 export const GLASS: React.CSSProperties = {
-  background: "rgba(255,255,255,0.035)",
-  border: "1.5px solid rgba(255,255,255,0.30)",
-  boxShadow: "0 40px 80px -44px rgba(0,0,0,0.7), inset 0 1.5px 0 rgba(255,255,255,0.40)",
+  background: "linear-gradient(160deg, rgba(255,255,255,0.78) 0%, rgba(255,255,255,0.62) 100%)",
+  backdropFilter: "blur(22px) saturate(130%)",
+  border: "1.5px solid rgba(255,255,255,0.95)",
+  boxShadow: "0 34px 70px -36px rgba(11,24,48,0.30), 0 3px 12px -6px rgba(11,24,48,0.10), inset 0 1.5px 0 rgba(255,255,255,1)",
 };
 // entrada em 3D: o painel roda ligeiramente sobre si e assenta (perspetiva real, sem distorção no fim)
 export const Glass: React.FC<{
@@ -170,7 +172,7 @@ export const Orb: React.FC<{ d: string; color: string; size?: number; p?: number
       alignItems: "center",
       justifyContent: "center",
       ...GLASS,
-      boxShadow: "inset 0 1.5px 0 rgba(255,255,255,0.40)",
+      boxShadow: "0 6px 14px -8px rgba(11,24,48,0.25), inset 0 1.5px 0 rgba(255,255,255,1)",
       transform: `scale(${0.6 + 0.4 * p}) rotate(${(1 - p) * -40}deg)`,
       opacity: Math.min(1, p * 1.6),
     }}
