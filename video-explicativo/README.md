@@ -794,4 +794,11 @@ python scripts/head-v23.py cabeca.json src/v23/cuts23.json src/v23/head23.json
 python scripts/gen-v23-audio.py public/narracao23c.wav src/v23/cuts23.json src/v23/timeline23.json src/v23/words23.json a23.wav 62.4333
 npx remotion render src/index.ts Video23 out/v23-video.mp4 --codec h264 --crf 16 --gl=angle --muted
 ```
-(O cenário e o grão vêm de `public/v22/`.)
+(O grão vem de `public/v22/`.)
+
+**Tema branco e fosco** (pedido do autor depois da 1.ª versão): o cenário passou a uma sala de
+vidro fosco branca (`python scripts/scene-v23-branco.py public/v23` → `scene_branco.png`) e todo o
+vidro — painéis, moldura do quadrado, legendas, indicador de capítulo — é vidro fosco branco
+(branco translúcido que desfoca o cenário, aresta clara, sombra suave). Texto principal em
+azul-escuro, destaques em azul, verde e vermelho (`src/v23/theme23.ts`). Master: `out/video-23b.mp4`;
+a versão noturna continua em `out/video-23.mp4` (e no commit 8a73c2d).
