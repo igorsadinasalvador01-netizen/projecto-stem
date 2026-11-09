@@ -758,3 +758,40 @@ python scripts/grain-v20.py public/v22/grain 960 540 24
 python scripts/gen-v22-audio.py public/narracao22c.wav src/v21/cuts21.json src/v22/timeline22.json src/v21/words21.json a22.wav 66.8667
 npx remotion render src/index.ts Video22 out/v22-video.mp4 --codec h264 --crf 16 --gl=angle --muted
 ```
+
+## Vídeo 23 — "Dois centímetros" (composição `Video23`, 1920×1080)
+
+A dinâmica do vídeo 22 (cenário original, quadrado com a imagem real, vidro vazio e transparente,
+só branco/azul/verde/vermelho, P&B nas falas trágicas, legendas tecladas) aplicada a um take novo
+e elevada em tudo:
+
+- **Transcrição palavra a palavra** (`src/v23/words23.json`): Parakeet + Whisper; onde o
+  reconhecimento falhou (28–34 s e o fim) foi refeito em blocos curtos, e o início de cada
+  palavra foi acertado à energia real do som — nenhuma animação ou som entra antes da palavra.
+- **O quadrado segue o rosto** (`scripts/prep-v23.py` + `scripts/head-v23.py`): o matte RVM dá o
+  topo e o centro da cabeça por fotograma; suavizado dentro de cada plano (num corte muda logo,
+  como um jump cut) e com seguimento parcial, como um operador de câmara.
+- **Detalhes de animação**: vidro com entrada em 3D (roda e assenta), palavras letra a letra em
+  cascata, desfoque de movimento quando o quadrado muda de sítio, indicador de capítulo no topo
+  (01 A situação · 02 A causa · 03 A lição) com barra de progresso, cada tecla das legendas "bate"
+  (nasce maior e assenta em 70 ms), painéis que nunca ficam vazios.
+- **Cenas de obra**: régua com a cota de 2 cm, parede de revestimento com os azulejos colocados um
+  a um, cotas "? cm", incompatibilidade com o elemento previsto (P&B), lista do retrabalho
+  (cortar, adaptar, comprar materiais, corrigir tudo), linha medição → verificação → execução com
+  o marcador a recuar, a lição (evitar retrabalhos → poupar tempo, dinheiro, recursos), "guarda
+  isto" com MATERIAIS riscado → UM ERRO.
+- **Som** (`scripts/gen-v23-audio.py`): partitura por secções em Lá menor, 88 BPM (abertura com piano
+  e tique de medição, situação com arpejo, P&B só drone + pulsação tipo coração, lição luminosa,
+  fecho resolvido), ~23 dB abaixo da voz; foley do tema — fita métrica, um toque cerâmico por cada
+  azulejo (no instante em que aparece), lápis nas cotas, cerâmica a rachar, corte, roquete,
+  carimbo, visto; entradas e transições colocadas no estéreo onde aparecem; teclado com barra de
+  espaço e "enter"; −16 LUFS.
+
+```bash
+python scripts/cut-pauses.py voz_proc.wav src.mp4 none <dir> src/v23/cuts23.json --narr-only --narr-out public/narracao23c.wav
+python scripts/prep-v23.py <video.mp4> rvm_mobilenetv3_fp32.onnx src/v23/cuts23.json public/v23/plate_c.mp4 cabeca.json
+python scripts/head-v23.py cabeca.json src/v23/cuts23.json src/v23/head23.json
+python scripts/gen-v23-audio.py public/narracao23c.wav src/v23/cuts23.json src/v23/timeline23.json src/v23/words23.json a23.wav 62.4333
+npx remotion render src/index.ts Video23 out/v23-video.mp4 --codec h264 --crf 16 --gl=angle --muted
+```
+(O cenário e o grão vêm de `public/v22/`.)
