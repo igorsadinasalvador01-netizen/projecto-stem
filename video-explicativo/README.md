@@ -695,3 +695,29 @@ python scripts/gen-v21-audio.py public/narracao21c.wav src/v21/cuts21.json a21.w
 npx remotion render src/index.ts Video21 out/v21-video.mp4 --codec h264 --crf 16 --gl=angle --muted
 ffmpeg -i out/v21-video.mp4 -i a21.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 320k out/video-21.mp4
 ```
+
+## Vídeo 21 v2 — estilo claro da referência (composição `Video21b`)
+
+O mesmo discurso, cortes e voz tratada do vídeo 21, remodelado no estilo da referência enviada pelo
+autor (vídeo 16:9 dele): tela quase branca com manchas pastel, cartão de cantos arredondados com a
+imagem REAL (cor natural, não escurecida), cartões de interface brancos, capítulos em pill, títulos
+em gradiente azul→verde e itálico serifado azul, fecho "Siga o perfil" + perfil original.
+
+- **Textos grandes por trás da pessoa** nos destaques: o fundo do cartão dissolve-se e revela o
+  recorte (mesma máscara RVM sobre a imagem natural, alinhado ao píxel) com palavras gigantes em
+  gradiente por trás — COMPREENDER, DIFERENÇA, PRODUTIVIDADE, COMUM (cinzento, riscado) →
+  ESTRATÉGICO, VANTAGEM.
+- **Legendas dinâmicas**: pill branca sobre o fundo do cartão, palavras a entrar à medida que são
+  ditas; azul sublinhado nas palavras-chave, vermelho nas negativas, verde nas positivas.
+- **Tempos de entrada**: cada cartão, linha, pill e texto entra no início EXATO da palavra
+  (entrada rápida que assenta, ~0,38 s; saída limpa antes do elemento seguinte).
+- **Sons de transição** (`scripts/gen-v21b-audio.py`): pops afinados nas entradas, swish suave nos
+  movimentos do cartão (com o movimento no estéreo), chime com grave nos textos grandes, batida
+  abafada em "comum"; música leve (Lá menor/Dó maior, 100 BPM); voz ~20 dB acima; −16 LUFS.
+
+```bash
+ffmpeg -i <video.mp4> -vf "scale=1080:1920:flags=lanczos,eq=contrast=1.05:saturation=1.04:brightness=0.01,unsharp=5:5:0.35:5:5:0" public/v21b/plate_n.mp4
+# placa natural e recorte natural (alfa do recorte do vídeo 21), já com os cortes de src/v21/cuts21.json
+python scripts/gen-v21b-audio.py public/narracao21c.wav src/v21/cuts21.json a21b.wav 66.8667
+npx remotion render src/index.ts Video21b out/v21b-video.mp4 --codec h264 --crf 16 --gl=angle --muted
+```
