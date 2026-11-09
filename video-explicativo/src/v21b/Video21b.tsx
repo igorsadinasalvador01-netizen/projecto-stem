@@ -90,11 +90,19 @@ const Person: React.FC<{ to: number; frame: number }> = ({ to, frame }) => {
   };
   const mask = "linear-gradient(to bottom, #000 72%, transparent 97%), linear-gradient(to right, transparent 0%, #000 9%, #000 91%, transparent 100%)";
   const op = 1 - st.gone;
+  // revelação em dois tempos: primeiro o fundo do cartão dissolve-se com o recorte ainda dentro do
+  // cartão; depois o recorte "abre" do retângulo arredondado até ao ecrã (os ombros estendem-se)
+  const W = 1080 * g.s;
+  const H = 1920 * g.s;
+  const e = Easing.bezier(0.33, 0, 0.2, 1)(Math.min(1, Math.max(0, (st.cut - 0.35) / 0.65)));
+  const x0 = g.cardLeft - g.imgLeft;
+  const y0 = CARD.top - g.imgTop;
+  const clip = `inset(${y0 * (1 - e)}px ${(W - x0 - CARD.w) * (1 - e)}px ${(H - y0 - CARD.h) * (1 - e)}px ${x0 * (1 - e)}px round ${CARD.r * (1 - e)}px)`;
   return (
     <div style={{ position: "absolute", inset: 0, opacity: op, transform: `scale(${sc * (1 - 0.05 * st.gone)})`, transformOrigin: `${st.cx}px 540px` }}>
       {st.cut > 0.001 && (
-        <div style={{ position: "absolute", left: g.imgLeft, top: g.imgTop, width: 1080 * g.s, height: 1920 * g.s, opacity: st.cut, WebkitMaskImage: mask, WebkitMaskComposite: "source-in", maskImage: mask, maskComposite: "intersect", filter: "drop-shadow(0 30px 40px rgba(14,17,22,0.18))" }}>
-          {vid("v21b/fg_c.webm", true)}
+        <div style={{ position: "absolute", left: g.imgLeft, top: g.imgTop, width: W, height: H, clipPath: clip, opacity: Math.min(1, st.cut * 3) }}>
+          <div style={{ width: W, height: H, WebkitMaskImage: mask, WebkitMaskComposite: "source-in", maskImage: mask, maskComposite: "intersect", filter: "drop-shadow(0 30px 40px rgba(14,17,22,0.18))" }}>{vid("v21b/fg_c.webm", true)}</div>
         </div>
       )}
       {st.cut < 0.999 && (
