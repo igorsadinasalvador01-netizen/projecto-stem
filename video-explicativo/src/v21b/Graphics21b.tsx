@@ -304,7 +304,7 @@ export const Chat: React.FC<{ to: number }> = ({ to }) => {
           <Bubble d="building" color={L.red} bg={L.redSoft} />
           <div>
             <div style={{ fontFamily: L.ui, fontWeight: 800, fontSize: 30, color: L.ink }}>Espaço mal organizado</div>
-            <Mono>o verdadeiro problema</Mono>
+            <Mono>segundo o cliente</Mono>
           </div>
         </Card>
       </div>
