@@ -721,3 +721,40 @@ ffmpeg -i <video.mp4> -vf "scale=1080:1920:flags=lanczos,eq=contrast=1.05:satura
 python scripts/gen-v21b-audio.py public/narracao21c.wav src/v21/cuts21.json a21b.wav 66.8667
 npx remotion render src/index.ts Video21b out/v21b-video.mp4 --codec h264 --crf 16 --gl=angle --muted
 ```
+
+## Vídeo 22 — "glass noir" (composição `Video22`, 1920×1080)
+
+Mesmo take do vídeo 21, exportado mais escuro (fala idêntica, desfasamento 0 ms): reaproveita a
+transcrição (`src/v21/words21.json`) e os cortes de pausa (`src/v21/cuts21.json`). Voz tratada de
+novo a partir deste ficheiro com a mesma cadeia.
+
+- **Cenário de fundo original** (`scripts/scene-v22.py`): sala de reunião noturna desenhada de
+  raiz — janelas de vidro com a cidade desfocada, paredes em ripas, calhas de luz, chão brilhante —
+  só em branco e azul, com paralaxe lenta (desliza ao contrário da pessoa).
+- **A pessoa nunca aparece recortada**: está sempre num quadrado (moldura de vidro) com a sala dela
+  — grande ao centro, à esquerda ou à direita — ou num quadrado pequeno nos cantos superiores
+  enquanto entram as ilustrações. O matte RVM serve só para graduar sujeito e sala em separado.
+- **Vidro vazio e transparente**: sem cor, sem desfoque, sem brilhos — só o contorno fino, o fio de
+  luz na aresta de cima e uma sombra discreta. Cores do texto: branco, azul, verde (positivo) e
+  vermelho (negativo). Tipografia dinâmica: Bebas Neue (entradas "slam", "rise", "wipe"),
+  Unbounded, Inter Tight e JetBrains Mono.
+- **Zooms estratégicos** (puxada rápida que segura e solta) nas palavras-chave, mais um micro-punch
+  do palco inteiro; **P&B** nas falas trágicas (resposta do cliente, "preocupado em vender",
+  "vendedor comum") com mergulho escuro na entrada e clarão quando a cor volta.
+- **Legendas escritas ao teclado**: cada palavra é teclada letra a letra no início exato em que é
+  dita; a barra de vidro cresce com o texto e tem cursor azul.
+- **Som** (`scripts/gen-v22-audio.py`): música baixa e nivelada (Ré menor, 92 BPM; só drone grave nas
+  partes a P&B), ~23 dB abaixo da voz; entradas e transições em destaque (vidro a entrar, pops,
+  impacto + puxada nos zooms, sopros com estéreo nas mudanças do quadrado, mergulho/brilho no P&B);
+  teclado com a mesma regra de tempo das legendas; −16 LUFS.
+
+Todas as marcas (posições do quadrado, zooms, P&B, legendas escondidas, gatilhos de som) estão em
+`src/v22/timeline22.json`, no tempo original da fala.
+
+```bash
+python scripts/prep-v22.py <video.mp4> rvm_mobilenetv3_fp32.onnx src/v21/cuts21.json public/v22/plate_c.mp4
+python scripts/scene-v22.py public/v22
+python scripts/grain-v20.py public/v22/grain 960 540 24
+python scripts/gen-v22-audio.py public/narracao22c.wav src/v21/cuts21.json src/v22/timeline22.json src/v21/words21.json a22.wav 66.8667
+npx remotion render src/index.ts Video22 out/v22-video.mp4 --codec h264 --crf 16 --gl=angle --muted
+```
