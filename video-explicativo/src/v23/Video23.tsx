@@ -360,7 +360,7 @@ export const Video23: React.FC<Video23Props> = ({ music }) => {
           b={8.16}
           num="01"
           label="a situação"
-          right={<Big text="IMAGINE" size={150} p={k(to, 6.86, 0.6)} mode="letters" />}
+          right={<Big text="IMAGINE" size={150} p={k(to, 6.98, 0.6)} mode="letters" />}
         />
         <Bathroom to={to} />
         <Confirm to={to} />

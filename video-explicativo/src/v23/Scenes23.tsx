@@ -52,7 +52,7 @@ const Ruler: React.FC<{ to: number }> = ({ to }) => {
   );
 };
 export const Hook: React.FC<P> = ({ to }) => {
-  const o = 1 - kout(to, 6.86, 0.24);
+  const o = 1 - kout(to, 6.86, 0.16);
   if (o <= 0) return null;
   return (
     <>
@@ -90,12 +90,12 @@ export const Chapter: React.FC<P & { a: number; b: number; num: string; label: s
   return (
     <>
       <div style={{ ...col(60, 460, "right", 300), ...exitStyle(o) }}>
-        <Big text={num} size={260} fill={C.blue} p={k(to, a, 0.5)} mode="slam" />
-        <Wide size={26} color={C.ink2} p={k(to, a + 0.15)}>
+        <Big text={num} size={260} fill={C.blue} p={k(to, a + 0.12, 0.5)} mode="slam" />
+        <Wide size={26} color={C.ink2} p={k(to, a + 0.27)}>
           {label}
         </Wide>
       </div>
-      <div style={{ ...col(1400, 470, "left", 340), ...exitStyle(o) }}>{right}</div>
+      <div style={{ ...col(1400, 470, "left", 340), ...exitStyle(o), opacity: o * (to >= M(a) + 0.12 ? 1 : 0) }}>{right}</div>
     </>
   );
 };
@@ -220,10 +220,10 @@ export const Confirm: React.FC<P> = ({ to }) => {
   const o = 1 - kout(to, 18.06, 0.26);
   const x = k(to, 15.92, 0.35);
   return (
-    <Glass x={940} y={130} w={880} h={700} o={o} p={k(to, 13.84, 0.55)} from="right">
+    <Glass x={940} y={130} w={880} h={700} o={o} p={k(to, 14.09, 0.55)} from="right">
       <div style={{ position: "absolute", left: 56, top: 50, right: 56, display: "flex", flexDirection: "column", gap: 4 }}>
-        <Big text="NINGUÉM" size={150} p={k(to, 13.84, 0.45)} mode="slam" />
-        <Big text="CONFIRMOU" size={150} fill={C.red} p={k(to, 14.47, 0.45)} />
+        <Big text="NINGUÉM" size={150} p={k(to, 14.09, 0.45)} mode="slam" />
+        <Big text="CONFIRMOU" size={150} fill={C.red} p={k(to, 14.5, 0.45)} />
         <Wide size={26} color={C.ink2} p={k(to, 14.96)}>
           devidamente
         </Wide>
@@ -311,10 +311,10 @@ export const Cause: React.FC<P> = ({ to }) => {
   const mx = NX[2] + (NX[0] - NX[2]) * back;
   const bad = [k(to, 35.12, 0.35), k(to, 37.36, 0.35), 0];
   return (
-    <Glass x={90} y={110} w={900} h={690} o={o} p={k(to, 31.02, 0.55)} from="left">
+    <Glass x={90} y={110} w={900} h={690} o={o} p={k(to, 31.27, 0.55)} from="left">
       <div style={{ position: "absolute", left: 50, top: 40, right: 50, display: "flex", flexDirection: "column", gap: 2 }}>
-        <Tag color={C.blue} text="02 · A CAUSA" p={k(to, 31.02)} />
-        <Big text="O PROBLEMA" size={120} p={k(to, 31.08, 0.6)} mode="letters" />
+        <Tag color={C.blue} text="02 · A CAUSA" p={k(to, 31.27)} />
+        <Big text="O PROBLEMA" size={120} p={k(to, 31.27, 0.6)} mode="letters" />
         <div style={{ display: "flex", alignItems: "flex-end", gap: 18 }}>
           <Wide size={24} color={C.ink2} p={k(to, 31.56)} style={{ paddingBottom: 14 }}>
             não começou na
@@ -326,16 +326,16 @@ export const Cause: React.FC<P> = ({ to }) => {
       {/* linha do processo */}
       <div style={{ position: "absolute", left: 0, top: 470, width: 900, height: 260 }}>
         <svg width={900} height={120} viewBox="0 0 900 120" style={{ position: "absolute", left: 0, top: 0 }}>
-          <path {...draw(prog(to, 31.08, 0.8))} d={`M${NX[0]} 60 H${NX[2]}`} stroke="rgba(255,255,255,0.45)" strokeWidth={3} />
+          <path {...draw(prog(to, 31.3, 0.8))} d={`M${NX[0]} 60 H${NX[2]}`} stroke="rgba(255,255,255,0.45)" strokeWidth={3} />
           {NX.map((x, i) => {
-            const p = k(to, 31.08 + i * 0.12, 0.4);
+            const p = k(to, 31.3 + i * 0.12, 0.4);
             const col2 = bad[i] > 0.5 ? C.red : "rgba(255,255,255,0.85)";
             return <circle key={i} cx={x} cy={60} r={22 * p} fill="rgba(5,10,20,0.9)" stroke={col2} strokeWidth={3.5} />;
           })}
           {mk > 0 && <circle cx={mx} cy={60} r={36 + 3 * Math.sin(to * 7)} fill="none" stroke={C.red} strokeWidth={3} opacity={mk} />}
         </svg>
         {NODES.map((n, i) => (
-          <div key={n} style={{ position: "absolute", left: NX[i] - 150, width: 300, top: 104, textAlign: "center", opacity: k(to, 31.08 + i * 0.12), display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+          <div key={n} style={{ position: "absolute", left: NX[i] - 150, width: 300, top: 104, textAlign: "center", opacity: k(to, 31.3 + i * 0.12), display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
             <Mono size={17} color={bad[i] > 0.5 ? C.red : C.ink2}>
               {n}
             </Mono>
@@ -362,17 +362,17 @@ export const Lesson: React.FC<P> = ({ to }) => {
   if (g <= 0) return null;
   const o = 1 - kout(to, 56.79, 0.26);
   return (
-    <Glass x={210} y={110} w={1320} h={660} o={o} p={k(to, 46.72, 0.6)} from="left">
+    <Glass x={210} y={110} w={1320} h={660} o={o} p={k(to, 47.02, 0.6)} from="left">
       <div style={{ position: "absolute", left: 56, top: 40, right: 56, display: "flex", flexDirection: "column", gap: 2 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
-          <Tag color={C.green} text="03 · A LIÇÃO" p={k(to, 46.72)} />
-          <Orb d="helmet" color={C.sky} size={50} p={k(to, 46.78, 0.5)} />
-          <Mono p={k(to, 46.72)}>na engenharia civil,</Mono>
+          <Tag color={C.green} text="03 · A LIÇÃO" p={k(to, 47.02)} />
+          <Orb d="helmet" color={C.sky} size={50} p={k(to, 47.02, 0.5)} />
+          <Mono p={k(to, 47.02)}>na engenharia civil,</Mono>
         </div>
         {/* "ENGENHARIA CIVIL" ocupa o lugar até entrar PRODUTIVIDADE (o painel nunca fica vazio) */}
         <div style={{ position: "relative", height: 150 }}>
           <div style={{ position: "absolute", left: 0, top: 0, opacity: 1 - k(to, 48.05, 0.18), transform: `translateY(${-24 * k(to, 48.05, 0.25)}px)` }}>
-            <Big text="ENGENHARIA CIVIL" size={150} fill={C.sky} p={k(to, 46.78, 0.6)} mode="letters" />
+            <Big text="ENGENHARIA CIVIL" size={150} fill={C.sky} p={k(to, 47.02, 0.6)} mode="letters" />
           </div>
           <div style={{ position: "absolute", left: 0, top: 0 }}>
             <Big text="PRODUTIVIDADE" size={150} fill={C.blue} p={k(to, 48.05, 0.5)} mode="slam" />
